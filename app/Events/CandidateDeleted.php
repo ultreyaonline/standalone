@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Events;
+
+use App\User;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
+
+class CandidateDeleted
+{
+    use Dispatchable, SerializesModels;
+
+    public $who;
+    public $by;
+
+    public function __construct($who, User $by)
+    {
+        $this->who = $who;
+        $this->by   = $by;
+    }
+}

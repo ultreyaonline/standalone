@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+        // Include details of the logged-in user in all views
+        view()->composer('*', function ($view) {
+            $view->with('user', auth()->user());
+        });
+    }
 }

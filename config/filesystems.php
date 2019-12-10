@@ -64,6 +64,33 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        's3-backups' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET_BACKUPS'),
+            'url' => env('AWS_URL'),
+        ],
+
+        's3-media' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET_MEDIA'),
+            'url' => env('AWS_URL'),
+        ],
+
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'authorizationToken' => env('DROPBOX_ACCESS_TOKEN'),
+            'key' => env('DROPBOX_APP_KEY'),
+            'secret' => env('DROPBOX_APP_SECRET'),
+            'app' => 'Ultreya Website Backups',
+            'root' => '/',
+        ],
+
     ],
 
 ];

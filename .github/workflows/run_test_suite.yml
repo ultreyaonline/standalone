@@ -1,0 +1,58 @@
+name: Laravel Test Suite
+
+on: [push]
+
+jobs:
+  tests-on-githubci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Show PHP version
+        run: php -v
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction --no-suggest --ignore-platform-reqs --prefer-dist --optimize-autoloader --no-ansi --no-scripts
+      - name: Prepare the application
+        run: |
+          cp .env.acceptance .env
+          # php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+      - name: Clear Any Cached Artisan Resources
+        run: php artisan optimize:clear
+
+      - name: Create SQLite testing db for Unit Tests
+        run: mkdir -p database && touch database/testing.sqlite
+      # - run: php artisan migrate:fresh --seed --force
+      - name: Run phpunit suite (unit tests and feature tests)
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/testing.sqlite
+        run: php vendor/bin/phpunit --printer="PHPUnit\TextUI\ResultPrinter"
+
+      # DUSK ACCEPTANCE TESTING
+      #- name: Install Latest Chrome Driver
+      #  run: php artisan dusk:chrome-driver
+      #- name: Start Chrome Driver
+      #  run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+      #- name: Run Laravel Server
+      #  run: php artisan serve > /dev/null 2>&1 &
+      #- name: Run Dusk Test Suite
+      #  run: php artisan dusk
+
+      - name: Trigger deploy webhook if DEPLOY_WEBHOOK_URL is configured in the Github Secrets settings for this repo
+        run: if [ -n "${{ secrets.DEPLOY_WEBHOOK_URL }}" ]; then wget -O - ${{ secrets.DEPLOY_WEBHOOK_URL }} ; fi
+
+        # ALTERNATIVELY:  a github Webhook can be set to listen to the "Check Suites" event and call the /api/deploy endpoint if "secret" matches the DEPLOY_SECRET_KEY in the .env file in production
+

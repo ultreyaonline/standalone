@@ -1,1 +1,50 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Merriweather%20Sans');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-whitebg-shadow {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+//@import "~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";
+
+// Font Awesome (requires the FA /fonts/ folder to be copied to the public/fonts location):
+@import "~font-awesome/scss/font-awesome";
+.fa-btn {
+  margin-right: 6px;
+}
+
+
+
+
+
+
+.nav-logo {
+	background: url(/images/tres-dias-logo-2x.png) no-repeat;
+	background-size: 70%;
+	text-indent: -999px;
+	display: block;
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+
+body.donate ol {
+	margin: inherit;
+	padding: inherit;
+	list-style: decimal;
+}
+
+
+
+//REUSABLE CLASSES TO EXTEND
+.hiddenText {
+	text-indent: -9999px;
+	display:block;
+}

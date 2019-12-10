@@ -1,0 +1,43 @@
+#!/bin/bash
+# /etc/init.d/laravel-reboot-helper
+
+### BEGIN INIT INFO
+# Provides:          laravel-reboot-helper
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Graceful Laravel queue shutdown before reboot
+# Description:       Graceful Laravel queue shutdown before reboot
+### END INIT INFO
+
+
+case "$1" in 
+    start)
+        cd /home/forge/INSERT_APP_DIRECTORY_HERE
+        echo "Starting Laravel (turning off maintenance mode)"
+        php artisan up
+        echo "Restarting Horizon queues ..."
+        php artisan horizon:continue
+        php artisan horizon:terminate
+        ;;
+    stop)
+        cd /home/forge/INSERT_APP_DIRECTORY_HERE
+        echo "Stopping Laravel and Queues (going into maintenance mode)"
+        php artisan horizon:pause
+        php artisan down --message="Server down for maintenance..." --retry=60
+        ;;
+    *)
+        echo "Usage: /etc/init.d/laravel-reboot-helper start|stop"
+        exit 1
+        ;;
+esac
+
+exit 0
+
+
+# NOTE: To register this helper, copy it to the /etc/init.d folder, 
+# and then run 
+#   sudo update-rc.d laravel-reboot-helper defaults
+# now when you poweroff or reboot it will first top the queues and put Laravel into maintenance mode; 
+# and on boot it will turn off maintenance mode

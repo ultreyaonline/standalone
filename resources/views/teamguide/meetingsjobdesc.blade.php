@@ -1,0 +1,8 @@
+<H2>Team Meeting Job Descriptions</H2>
+
+<P><B>Greeter</B> - As a Greeter you will need to be in place fifteen minutes prior to the commencement of the team meeting.  Please be prepared to greet your teammates with a smile and an "abrazzo" (hug)!  Help them locate and wear their nametags.  Check the Team Meeting Assignments to see if you are a Greeter and what time to be in place.  Thank you for willingly serving as a Greeter.
+<P><B>Opening Prayer</B> - When offering our Opening Prayer, simply yield your heart to the leading of the Holy Spirit.  Rest in Him for He will guide and direct your words.  Believe He will pray through you.  Check the Team Meeting Assignments to see if you will be offering the Opening Prayer.  Thank you for willingly serving.
+<P><B>Meditation</B> - Immediately following our time of worship, please be prepared to share what the Father has inspired you to speak.  Use the theme given to you by The Rector as a guide, and God will reveal Himself through your words.  Check the Team Meeting Assignments to see if you have been chosen by God to communicate His Meditation.  Thank you for willingly bringing this special blessing.
+<P><B>Candlelighter</B> - Just prior to the Rollo, light the candle on the Rollo table. Stand to greet Rollists as they enter the room. The Rector (or stand-in) will give the Rollista a cross and an "abrazzo" (hug). Thank you for serving.
+<P><B>Prayer Palanca</B> - Be prepared for a Gopher Cha to "pull" (escort) you for prayer prior to the Rollo.  Pray throughout the Rollo as God leads you.  Thank you for this unique intercessory prayer.
+

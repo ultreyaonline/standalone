@@ -1,78 +1,75 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+![](https://github.com/ultreyaonline/standalone/workflows/Laravel%20Test%20Suite/badge.svg?branch=master)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# Tres Dias Community Website
 
-## About Laravel
+## Manage your own Tres Dias community online
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Self-hosted PHP application built on the Laravel Framework
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+--
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Features:
 
-## Learning Laravel
+### Weekend Team Assembly and Team Correspondence
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Team Management: Rectors can build and assemble teams directly on the website, with pending/confirmed statuses and private notes-to-self.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Weekend Management: Keep track of arrival times, themes, visuals, banners, team photos all in one place.
 
-## Laravel Sponsors
+Section Heads can easily access real-time special requests/needs collected by Pre-Weekend, simplifying management of special diets, prayer requests, dorm needs, etc.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+### Members Database: Manage all your members in one place.
+Members can control visibility of their own information, as well as which email message types they want to receive. 
 
-## Contributing
+### Service History Tracking and Reports
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Reports and tools allow Rectors and Men's and Women's Leaders to view prior service history and interest, and to strategically plan for future Rectors.
 
-## Code of Conduct
+Additional reports include members interested in serving, inactive members, SD Service History, etc
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Handy reports allow for easy statistical understanding of community growth, and quick calculating for TDI dues payments.
 
-## Security Vulnerabilities
+### Pre-Weekend Tools
+Candidate registration data can be tracked online, with automated correspondence and data-verification from Sponsors, and automated messaging to registered candidates in advance of and following their Weekend. 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Tools to assist with Send-Off, including pronunciation keys of candidate names, are also manageable online.
 
-## License
+### Highly Customizable: Enable/Disable settings to suit your community needs. 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Security controls allow granting access to members holding certain responsibilities.
+
+### 72-Hour Prayer Wheel with Automated Reminders
+Community Members can sign up for multiple prayer wheels, and see notifications about their selections.
+
+Enable multiple signups for timeslots after a certain percentage are filled.
+
+### Events Calendar + Secuelas
+Community events can be listed as public or private. Locations and maps can be attached.
+
+
+### Payment Collection Online
+Accept Donations/Fees Online using PayPal or Stripe. Transaction details are automatically sent to the Accounting persons, and confirmations emailed to the payer/donor. All transactions are between you and your bank or PayPal. (Their usual fees may apply.)
+
+Accounting: Team and Candidate Fees Tracking, from both offline and online sources, can be managed and viewed by authorized persons.
+
+### Community Email Correspondence
+Email blasts can go to everyone or to just individual teams, groups, roles, etc ... with or without attachments.
+
+
+---
+
+
+# Documentation
+
+See the [HOSTING.md](HOSTING.md) file for guidance on server requirements and how to install on a server and to automate deployments.
+
+See the [DEVELOPERS.md](DEVELOPERS.md) file for Developer guidance and recommendations.
+
+
+---
+
+
+
+### Copyright and License
+The Ultreya standalone application was originally written by Chris Brown, and is licensed under the MIT license so can be freely used to drive any Tres Dias community website.

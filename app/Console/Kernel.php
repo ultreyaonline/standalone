@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Storage;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +25,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Daily Backups. (Runs clean/prune first to free up space)
+        $schedule->command('backup:clean')->daily()->at('03:40');
+        $schedule->command('backup:run')->daily()->at('03:50');
+
+        // Spatie Activity Log pruning - set number of days in config/activitylog.php file
+        $schedule->command('activitylog:clean')->daily();
+
+        // Prayer Wheel
+        $schedule->call(function () {
+            \App\Jobs\SendPrayerWheelAcknowledgements::dispatch();
+        })->everyTenMinutes();
+
+        $schedule->call(function () {
+            \App\Jobs\SendPrayerWheelReminderEmails::dispatch();
+        })->dailyAt('16:00:00');
     }
 
     /**
