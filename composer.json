@@ -35,7 +35,7 @@
         "spatie/laravel-newsletter": "^4.6",
         "spatie/laravel-permission": "^3.0",
         "stripe/stripe-php": "^7.14",
-        "yajra/laravel-datatables-editor": "^1.12",
+        "yajra/laravel-datatables-buttons": "^4.8",
         "yajra/laravel-datatables-oracle": "^9.6"
     },
     "require-dev": {

@@ -11,7 +11,6 @@ use App\Mail\CandidateBecomesPescador;
 use App\Mail\WebsiteLoginInstructions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class MembersController extends Controller
@@ -90,24 +89,15 @@ class MembersController extends Controller
     }
 
     /**
+     * Used for Member Directory ajax response
+     *
      * @param UsersDataTable $dataTable
      * @return mixed
      * @throws \Exception
      */
     public function datatables_index(UsersDataTable $dataTable)
     {
-        // @TODO - where did 'members.s' come from?
-        return $dataTable->render('members.s');
-    }
-
-    /**
-     * @param UsersDataTablesEditor $editor
-     * @return \Illuminate\Http\JsonResponse|mixed
-     * @throws \Yajra\DataTables\DataTablesEditorException
-     */
-    public function datatables_store(UsersDataTablesEditor $editor)
-    {
-        return $editor->process(request());
+        return $dataTable->render(null);
     }
 
     public function show($id, Request $request)

@@ -9,17 +9,14 @@ use Yajra\DataTables\Services\DataTable;
 class UsersDataTable extends DataTable
 {
     /**
-     * Build DataTable class.
+     * Build DataTable class for ajax response
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
-        // if not allowed to see other members, abort
-        if (!Auth::user()->can('view members')) {
-            abort(403, 'Unauthorized');
-        }
+        abort_unless(Auth::user()->can('view members'), '403', 'Unauthorized.');
 
         return datatables($query)
             ->editColumn('id', '{{ $id }}')
@@ -32,7 +29,6 @@ class UsersDataTable extends DataTable
             ->addColumn('membername', function ($member) {
                 return '<a href="'. url('members/' . $member->id) .'">' . $member->name . '</a>';
             })
-//            ->addColumn('action', 'members.action')
             ->rawColumns(['first', 'membername']);
     }
 
@@ -44,22 +40,9 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->select('id', 'first', 'last', 'email', 'weekend', 'community', 'cellphone', 'homephone', 'church')
+        return $model->newQuery()
+            ->select('id', 'first', 'last', 'email', 'weekend', 'community', 'cellphone', 'homephone', 'church')
             ->active();
-    }
-
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
-    public function html()
-    {
-        return $this->builder()
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
-                    ->parameters($this->getBuilderParameters());
     }
 
     /**

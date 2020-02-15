@@ -250,7 +250,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin|Super-Admin']], 
     Route::post('/email-how-to-sponsor', [CommunicationController::class, 'emailHowToSponsorToEveryone']);
 
     Route::get('/data/members', [AdminController::class, 'members_edit'])->name('admin.members_audit');
-    Route::post('/members_edit', [MembersController::class, 'datatables_store'])->name('api.members_edit');
     Route::get('/members_without_avatar', [ReportsController::class, 'membersWithoutAvatar'])->name('missing_avatars');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('admin-settings-edit');
