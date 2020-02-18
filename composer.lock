@@ -128,16 +128,16 @@
         },
         {
             "name": "arcanedev/support",
-            "version": "5.1.1",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/Support.git",
-                "reference": "cf731be18e7d0138223bd8e134f623a9d8c674d7"
+                "reference": "1845603e86d7fc705c7159612b87a278c971789f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/cf731be18e7d0138223bd8e134f623a9d8c674d7",
-                "reference": "cf731be18e7d0138223bd8e134f623a9d8c674d7",
+                "url": "https://api.github.com/repos/ARCANEDEV/Support/zipball/1845603e86d7fc705c7159612b87a278c971789f",
+                "reference": "1845603e86d7fc705c7159612b87a278c971789f",
                 "shasum": ""
             },
             "require": {
@@ -179,20 +179,20 @@
                 "laravel",
                 "support"
             ],
-            "time": "2019-10-02T18:20:38+00:00"
+            "time": "2020-02-14T16:40:44+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.133.14",
+            "version": "3.133.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "80e9763a2883f39cd684e8136e93aa9ab01c32af"
+                "reference": "6d0036fe1be474d2849dc990daaaa76215846966"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/80e9763a2883f39cd684e8136e93aa9ab01c32af",
-                "reference": "80e9763a2883f39cd684e8136e93aa9ab01c32af",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6d0036fe1be474d2849dc990daaaa76215846966",
+                "reference": "6d0036fe1be474d2849dc990daaaa76215846966",
                 "shasum": ""
             },
             "require": {
@@ -263,7 +263,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-02-13T19:12:30+00:00"
+            "time": "2020-02-18T19:11:24+00:00"
         },
         {
             "name": "bensampo/laravel-enum",
@@ -2153,16 +2153,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.15.1",
+            "version": "v6.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b7c152e3327c03428fb68d5abb63ca8b3eca8422"
+                "reference": "b47217e41868d3049ec545cbb713aa94c6f39e55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b7c152e3327c03428fb68d5abb63ca8b3eca8422",
-                "reference": "b7c152e3327c03428fb68d5abb63ca8b3eca8422",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b47217e41868d3049ec545cbb713aa94c6f39e55",
+                "reference": "b47217e41868d3049ec545cbb713aa94c6f39e55",
                 "shasum": ""
             },
             "require": {
@@ -2230,7 +2230,7 @@
                 "aws/aws-sdk-php": "^3.0",
                 "doctrine/dbal": "^2.6",
                 "filp/whoops": "^2.4",
-                "guzzlehttp/guzzle": "^6.3",
+                "guzzlehttp/guzzle": "^6.3|^7.0",
                 "league/flysystem-cached-adapter": "^1.0",
                 "mockery/mockery": "^1.3.1",
                 "moontoast/math": "^1.1",
@@ -2250,7 +2250,7 @@
                 "ext-redis": "Required to use the Redis cache and queue drivers.",
                 "filp/whoops": "Required for friendly error pages in development (^2.4).",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
-                "guzzlehttp/guzzle": "Required to use the Mailgun mail driver and the ping methods on schedules (^6.0).",
+                "guzzlehttp/guzzle": "Required to use the Mailgun mail driver and the ping methods on schedules (^6.0|^7.0).",
                 "laravel/tinker": "Required to use the tinker console command (^2.0).",
                 "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^1.0).",
                 "league/flysystem-cached-adapter": "Required to use the Flysystem cache (^1.0).",
@@ -2295,7 +2295,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-02-12T21:56:14+00:00"
+            "time": "2020-02-18T15:17:52+00:00"
         },
         {
             "name": "laravel/slack-notification-channel",
@@ -5248,16 +5248,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "3.6.0",
+            "version": "3.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "0a063ce206c7545737d19c1beda12003fc66e4e9"
+                "reference": "ce5d82fc5f5300575876c42131f9e9ae2e18f6aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/0a063ce206c7545737d19c1beda12003fc66e4e9",
-                "reference": "0a063ce206c7545737d19c1beda12003fc66e4e9",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/ce5d82fc5f5300575876c42131f9e9ae2e18f6aa",
+                "reference": "ce5d82fc5f5300575876c42131f9e9ae2e18f6aa",
                 "shasum": ""
             },
             "require": {
@@ -5312,7 +5312,7 @@
                 "security",
                 "spatie"
             ],
-            "time": "2020-01-17T16:18:51+00:00"
+            "time": "2020-02-17T17:06:57+00:00"
         },
         {
             "name": "spatie/pdf-to-image",
@@ -5466,16 +5466,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.24.0",
+            "version": "v7.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "98689fa7d69defe3d219c8578466108f40e584a7"
+                "reference": "b73fb353b89ccbeb99baf1c5b518ba48cccf47be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/98689fa7d69defe3d219c8578466108f40e584a7",
-                "reference": "98689fa7d69defe3d219c8578466108f40e584a7",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/b73fb353b89ccbeb99baf1c5b518ba48cccf47be",
+                "reference": "b73fb353b89ccbeb99baf1c5b518ba48cccf47be",
                 "shasum": ""
             },
             "require": {
@@ -5519,7 +5519,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-02-10T22:09:18+00:00"
+            "time": "2020-02-14T22:29:50+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7123,16 +7123,16 @@
         },
         {
             "name": "yajra/laravel-datatables-html",
-            "version": "v4.20.1",
+            "version": "v4.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-html.git",
-                "reference": "691427b9d554f5e3467217eaa64483de60de4bec"
+                "reference": "6ac575c1aa736a33e351cef6e8c6156ef611e9c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/691427b9d554f5e3467217eaa64483de60de4bec",
-                "reference": "691427b9d554f5e3467217eaa64483de60de4bec",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/6ac575c1aa736a33e351cef6e8c6156ef611e9c4",
+                "reference": "6ac575c1aa736a33e351cef6e8c6156ef611e9c4",
                 "shasum": ""
             },
             "require": {
@@ -7179,7 +7179,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2019-11-11T15:03:06+00:00"
+            "time": "2020-02-18T02:34:45+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",
@@ -9818,16 +9818,16 @@
         },
         {
             "name": "seld/phar-utils",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/phar-utils.git",
-                "reference": "84715761c35808076b00908a20317a3a8a67d17e"
+                "reference": "8800503d56b9867d43d9c303b9cbcc26016e82f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/84715761c35808076b00908a20317a3a8a67d17e",
-                "reference": "84715761c35808076b00908a20317a3a8a67d17e",
+                "url": "https://api.github.com/repos/Seldaek/phar-utils/zipball/8800503d56b9867d43d9c303b9cbcc26016e82f0",
+                "reference": "8800503d56b9867d43d9c303b9cbcc26016e82f0",
                 "shasum": ""
             },
             "require": {
@@ -9856,9 +9856,9 @@
             ],
             "description": "PHAR file format utilities, for when PHP phars you up",
             "keywords": [
-                "phra"
+                "phar"
             ],
-            "time": "2020-01-13T10:41:09+00:00"
+            "time": "2020-02-14T15:25:33+00:00"
         },
         {
             "name": "sensiolabs/security-checker",
