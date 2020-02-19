@@ -10,8 +10,10 @@ use App\Mail\SponsorAcknowledgeCandidate;
 use App\Mail\SponsorAcknowledgeCandidateReminder;
 use App\User;
 use App\Weekend;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -159,165 +161,175 @@ class CandidateController extends Controller
         $woman = null;
         $flash_message = [];
 
-        if ($request->filled('m_last')) {
-            $data            = [
-                'first'      => $request->input('m_first'),
-                'last'       => $request->input('m_last'),
-                'gender'     => strtoupper($request->input('m_gender')),
-                'cellphone'  => $request->input('m_cellphone'),
-                'email'      => $request->input('m_email'),
-                'username'   => $request->input('m_username'),
-                'address1'   => $request->input('address1'),
-                'address2'   => $request->input('address2'),
-                'city'       => $request->input('city'),
-                'state'      => $request->input('state'),
-                'postalcode' => $request->input('postalcode'),
-                'homephone'  => $request->input('homephone'),
-                'church'     => $request->input('church'),
-                'weekend'    => $request->input('weekend'),
-                'sponsorID'  => $request->input('m_sponsorID'),
-                'emergency_contact_details' => $request->input('m_emergency_name') . ' ' . $request->input('m_emergency_phone'),
-                'community' => config('site.community_acronym'),
+        DB::beginTransaction();
+
+        try {
+            if ($request->filled('m_last')) {
+                $data = [
+                    'first' => $request->input('m_first'),
+                    'last' => $request->input('m_last'),
+                    'gender' => strtoupper($request->input('m_gender')),
+                    'cellphone' => $request->input('m_cellphone'),
+                    'email' => $request->input('m_email'),
+                    'username' => $request->input('m_username'),
+                    'address1' => $request->input('address1'),
+                    'address2' => $request->input('address2'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'postalcode' => $request->input('postalcode'),
+                    'homephone' => $request->input('homephone'),
+                    'church' => $request->input('church'),
+                    'weekend' => $request->input('weekend'),
+                    'sponsorID' => $request->input('m_sponsorID'),
+                    'emergency_contact_details' => $request->input('m_emergency_name') . ' ' . $request->input('m_emergency_phone'),
+                    'community' => config('site.community_acronym'),
+                ];
+
+                if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
+                if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
+
+                $man = new User($data);
+
+                $man->created_by = $request->user()->name;
+
+                $man->okay_to_send_serenade_and_palanca_details = false;
+                $man->interested_in_serving = false;
+                $man->active = false;
+                $man->allow_address_share = false;
+                $man->receive_prayer_wheel_invites = false;
+                $man->receive_email_reunion = false;
+                $man->receive_email_sequela = false;
+                $man->receive_email_community_news = false;
+                $man->receive_email_weekend_general = false;
+
+                $man->save();
+                $request->merge(['m_user_id' => $man->id]);
+
+                $flash_message[] = $man->name . ' added.';
+                event(CandidateAdded::class, ['who' => $man->name, 'by' => $request->user()]);
+            }
+
+            if ($request->filled('w_last')) {
+                $data = [
+                    'first' => $request->input('w_first'),
+                    'last' => $request->input('w_last'),
+                    'gender' => strtoupper($request->input('w_gender')),
+                    'cellphone' => $request->input('w_cellphone'),
+                    'email' => $request->input('w_email'),
+                    'username' => $request->input('w_username'),
+                    'address1' => $request->input('address1'),
+                    'address2' => $request->input('address2'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'postalcode' => $request->input('postalcode'),
+                    'homephone' => $request->input('homephone'),
+                    'church' => $request->input('church'),
+                    'weekend' => $request->input('weekend'),
+                    'sponsorID' => $request->input('w_sponsorID'),
+                    'emergency_contact_details' => $request->input('w_emergency_name') . ' ' . $request->input('w_emergency_phone'),
+                    'community' => config('site.community_acronym'),
+                ];
+
+                if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
+                if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
+
+                $woman = new User($data);
+                if ($woman->gender == 'F') {
+                    $woman->gender = 'W';
+                }
+                $woman->created_by = $request->user()->name;
+                if ($man) {
+                    $woman->spouseID = $man->id;
+                }
+                $woman->okay_to_send_serenade_and_palanca_details = false;
+                $woman->interested_in_serving = false;
+                $woman->active = false;
+                $woman->allow_address_share = false;
+                $woman->receive_prayer_wheel_invites = false;
+                $woman->receive_email_reunion = false;
+                $woman->receive_email_sequela = false;
+                $woman->receive_email_community_news = false;
+                $woman->receive_email_weekend_general = false;
+
+                $woman->save();
+                $request->merge(['w_user_id' => $woman->id]);
+
+                $flash_message[] = $woman->name . ' added.';
+                event(CandidateAdded::class, ['who' => $woman->name, 'by' => $request->user()]);
+            }
+
+            if ($woman && $man) {
+                $man->spouseID = $woman->id;
+                $man->save();
+            }
+
+            flash()->success(implode('<br>', $flash_message));
+
+
+            $fields = [
+                'm_user_id',
+                'w_user_id',
+                'm_age',
+                'w_age',
+                'm_emergency_name',
+                'm_emergency_phone',
+                'w_emergency_name',
+                'w_emergency_phone',
+                'm_pronunciation',
+                'w_pronunciation',
+                'm_married',
+                'm_vocational_minister',
+                'w_married',
+                'w_vocational_minister',
+                'sponsor_confirmed_details',
+                'fees_paid',
+                'ready_to_mail',
+                'invitation_mailed',
+                'm_response_card_returned',
+                'm_special_dorm',
+                'm_special_diet',
+                'm_special_prayer',
+                'm_special_medications',
+                'm_smoker',
+                'w_response_card_returned',
+                'w_special_dorm',
+                'w_special_diet',
+                'w_special_prayer',
+                'w_special_medications',
+                'w_smoker',
+                'payment_details',
+                'm_arrival_poc_person',
+                'm_arrival_poc_phone',
+                'w_arrival_poc_person',
+                'w_arrival_poc_phone',
+                'm_special_notes',
+                'w_special_notes',
+                'weekend',
+                //            'completed',
             ];
+            $candidate = new Candidate($request->only($fields));
 
-            if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
-            if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
-
-            $man = new User($data);
-
-            $man->created_by = $request->user()->name;
-
-            $man->okay_to_send_serenade_and_palanca_details = false;
-            $man->interested_in_serving                     = false;
-            $man->active                                    = false;
-            $man->allow_address_share                       = false;
-            $man->receive_prayer_wheel_invites              = false;
-            $man->receive_email_reunion                     = false;
-            $man->receive_email_sequela                     = false;
-            $man->receive_email_community_news              = false;
-            $man->receive_email_weekend_general             = false;
-
-            $man->save();
-            $request->merge(['m_user_id' => $man->id]);
-
-            $flash_message[] = $man->name . ' added.';
-            event(CandidateAdded::class, ['who' => $man->name, 'by' => $request->user()]);
-        }
-
-        if ($request->filled('w_last')) {
-            $data  = [
-                'first'      => $request->input('w_first'),
-                'last'       => $request->input('w_last'),
-                'gender'     => strtoupper($request->input('w_gender')),
-                'cellphone'  => $request->input('w_cellphone'),
-                'email'      => $request->input('w_email'),
-                'username'   => $request->input('w_username'),
-                'address1'   => $request->input('address1'),
-                'address2'   => $request->input('address2'),
-                'city'       => $request->input('city'),
-                'state'      => $request->input('state'),
-                'postalcode' => $request->input('postalcode'),
-                'homephone'  => $request->input('homephone'),
-                'church'     => $request->input('church'),
-                'weekend'    => $request->input('weekend'),
-                'sponsorID'  => $request->input('w_sponsorID'),
-                'emergency_contact_details' => $request->input('w_emergency_name') . ' ' . $request->input('w_emergency_phone'),
-                'community' => config('site.community_acronym'),
-            ];
-
-            if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
-            if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
-
-            $woman = new User($data);
-            if ($woman->gender == 'F') {
-                $woman->gender = 'W';
+            if (!$candidate->hash_sponsor_confirm) {
+                $candidate->hash_sponsor_confirm = Str::random(12);
             }
-            $woman->created_by = $request->user()->name;
-            if ($man) {
-                $woman->spouseID = $man->id;
+
+            $candidate->save();
+
+            DB::commit();
+
+            if (config('site.notify_PreWeekend_of_NewCandidate_When') === 'initial_data_entry') {
+                $reply_to_email = config('site.email-preweekend-mailbox', config('site.email_general'));
+                if (!empty($reply_to_email)) {
+                    Mail::to(new User(['first' => 'Preweekend', 'last' => 'Committee', 'email' => config('site.email-preweekend-mailbox')]))
+                        ->send(new InternalCandidateRegistrationNotice($candidate, $reply_to_email));
+                }
             }
-            $woman->okay_to_send_serenade_and_palanca_details = false;
-            $woman->interested_in_serving                     = false;
-            $woman->active                                    = false;
-            $woman->allow_address_share                       = false;
-            $woman->receive_prayer_wheel_invites              = false;
-            $woman->receive_email_reunion                     = false;
-            $woman->receive_email_sequela                     = false;
-            $woman->receive_email_community_news              = false;
-            $woman->receive_email_weekend_general             = false;
+            return redirect('/candidates/' . preg_replace('/[^a-z0-9]/', '', strtolower($request->input('weekend'))));
 
-            $woman->save();
-            $request->merge(['w_user_id' => $woman->id]);
-
-            $flash_message[] = $woman->name . ' added.';
-            event(CandidateAdded::class, ['who' => $woman->name, 'by' => $request->user()]);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
         }
-
-        if ($woman && $man) {
-            $man->spouseID = $woman->id;
-            $man->save();
-        }
-
-        flash()->success(implode('<br>', $flash_message));
-
-
-        $fields    = [
-            'm_user_id',
-            'w_user_id',
-            'm_age',
-            'w_age',
-            'm_emergency_name',
-            'm_emergency_phone',
-            'w_emergency_name',
-            'w_emergency_phone',
-            'm_pronunciation',
-            'w_pronunciation',
-            'm_married',
-            'm_vocational_minister',
-            'w_married',
-            'w_vocational_minister',
-            'sponsor_confirmed_details',
-            'fees_paid',
-            'ready_to_mail',
-            'invitation_mailed',
-            'm_response_card_returned',
-            'm_special_dorm',
-            'm_special_diet',
-            'm_special_prayer',
-            'm_special_medications',
-            'm_smoker',
-            'w_response_card_returned',
-            'w_special_dorm',
-            'w_special_diet',
-            'w_special_prayer',
-            'w_special_medications',
-            'w_smoker',
-            'payment_details',
-            'm_arrival_poc_person',
-            'm_arrival_poc_phone',
-            'w_arrival_poc_person',
-            'w_arrival_poc_phone',
-            'm_special_notes',
-            'w_special_notes',
-            'weekend',
-            //            'completed',
-        ];
-        $candidate = new Candidate($request->only($fields));
-
-        if (!$candidate->hash_sponsor_confirm) {
-            $candidate->hash_sponsor_confirm = Str::random(12);
-        }
-
-        $candidate->save();
-
-        if (config('site.notify_PreWeekend_of_NewCandidate_When') === 'initial_data_entry') {
-            $reply_to_email = config('site.email-preweekend-mailbox', config('site.email_general'));
-            if (!empty($reply_to_email)) {
-                Mail::to(new User(['first' => 'Preweekend', 'last' => 'Committee', 'email' => config('site.email-preweekend-mailbox')]))
-                    ->send(new InternalCandidateRegistrationNotice($candidate, $reply_to_email));
-            }
-        }
-        return redirect('/candidates/' . preg_replace('/[^a-z0-9]/', '', strtolower($request->input('weekend'))));
     }
 
     /**
@@ -521,99 +533,109 @@ class CandidateController extends Controller
             $updates[$field] = $request->input($field, false);
         }
 
-        $candidate->update($updates);
+        DB::beginTransaction();
 
-        $man   = null;
-        $woman = null;
+        try {
+            $candidate->update($updates);
 
-        if ($request->filled('m_last')) {
-            $data = [
-                'first'      => $request->input('m_first'),
-                'last'       => $request->input('m_last'),
-                'gender'     => strtoupper($request->input('m_gender')),
-                'cellphone'  => $request->input('m_cellphone'),
-                'email'      => $request->input('m_email'),
-                'username'   => $request->input('m_username'),
-                'address1'   => $request->input('address1'),
-                'address2'   => $request->input('address2'),
-                'city'       => $request->input('city'),
-                'state'      => $request->input('state'),
-                'postalcode' => $request->input('postalcode'),
-                'homephone'  => $request->input('homephone'),
-                'church'     => $request->input('church'),
-                'weekend'    => $request->input('weekend'),
-                'sponsorID'  => $request->input('m_sponsorID'),
-            ];
+            $man = null;
+            $woman = null;
 
-            if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
-            if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
+            if ($request->filled('m_last')) {
+                $data = [
+                    'first' => $request->input('m_first'),
+                    'last' => $request->input('m_last'),
+                    'gender' => strtoupper($request->input('m_gender')),
+                    'cellphone' => $request->input('m_cellphone'),
+                    'email' => $request->input('m_email'),
+                    'username' => $request->input('m_username'),
+                    'address1' => $request->input('address1'),
+                    'address2' => $request->input('address2'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'postalcode' => $request->input('postalcode'),
+                    'homephone' => $request->input('homephone'),
+                    'church' => $request->input('church'),
+                    'weekend' => $request->input('weekend'),
+                    'sponsorID' => $request->input('m_sponsorID'),
+                ];
 
-            if ($candidate->man) {
-                $candidate->man->update($data);
-                $flash_message[] = $candidate->man->name . ' updated.';
-                event('UserUpdated', ['user' => $candidate->man, 'by' => $request->user()]);
-            } else {
-                $man = new User($data);
+                if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
+                if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
 
-                $man->created_by = $request->user()->name;
-                if ($candidate->woman) {
-                    $man->spouseID = $candidate->woman->id;
-                }
-                $man->save();
-                $flash_message[] = $man->name . ' added.';
-
-                $candidate->m_user_id = $man->id;
-                $candidate->save();
-            }
-        }
-
-        if ($request->filled('w_last')) {
-            $data = [
-                'first'      => $request->input('w_first'),
-                'last'       => $request->input('w_last'),
-                'gender'     => strtoupper($request->input('w_gender')),
-                'cellphone'  => $request->input('w_cellphone'),
-                'email'      => $request->input('w_email'),
-                'username'   => $request->input('w_username'),
-                'address1'   => $request->input('address1'),
-                'address2'   => $request->input('address2'),
-                'city'       => $request->input('city'),
-                'state'      => $request->input('state'),
-                'postalcode' => $request->input('postalcode'),
-                'homephone'  => $request->input('homephone'),
-                'church'     => $request->input('church'),
-                'weekend'    => $request->input('weekend'),
-                'sponsorID'  => $request->input('w_sponsorID'),
-            ];
-            if ($data['gender'] === 'F') {
-                $data['gender'] = 'W';
-            }
-
-            if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
-            if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
-
-            if ($candidate->woman) {
-                $candidate->woman->update($data);
-                $flash_message[] = $candidate->woman->name . ' updated.';
-                event('UserUpdated', ['user' => $candidate->woman, 'by' => $request->user()]);
-            } else {
-                $woman = new User($data);
-
-                $woman->created_by = $request->user()->name;
                 if ($candidate->man) {
-                    $woman->spouseID = $candidate->man->id;
+                    $candidate->man->update($data);
+                    $flash_message[] = $candidate->man->name . ' updated.';
+                    event('UserUpdated', ['user' => $candidate->man, 'by' => $request->user()]);
+                } else {
+                    $man = new User($data);
+
+                    $man->created_by = $request->user()->name;
+                    if ($candidate->woman) {
+                        $man->spouseID = $candidate->woman->id;
+                    }
+                    $man->save();
+                    $flash_message[] = $man->name . ' added.';
+
+                    $candidate->m_user_id = $man->id;
+                    $candidate->save();
                 }
-                $woman->save();
-                $flash_message[] = $woman->name . ' added.';
-
-                $candidate->w_user_id = $woman->id;
-                $candidate->save();
             }
+
+            if ($request->filled('w_last')) {
+                $data = [
+                    'first' => $request->input('w_first'),
+                    'last' => $request->input('w_last'),
+                    'gender' => strtoupper($request->input('w_gender')),
+                    'cellphone' => $request->input('w_cellphone'),
+                    'email' => $request->input('w_email'),
+                    'username' => $request->input('w_username'),
+                    'address1' => $request->input('address1'),
+                    'address2' => $request->input('address2'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'postalcode' => $request->input('postalcode'),
+                    'homephone' => $request->input('homephone'),
+                    'church' => $request->input('church'),
+                    'weekend' => $request->input('weekend'),
+                    'sponsorID' => $request->input('w_sponsorID'),
+                ];
+                if ($data['gender'] === 'F') {
+                    $data['gender'] = 'W';
+                }
+
+                if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
+                if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
+
+                if ($candidate->woman) {
+                    $candidate->woman->update($data);
+                    $flash_message[] = $candidate->woman->name . ' updated.';
+                    event('UserUpdated', ['user' => $candidate->woman, 'by' => $request->user()]);
+                } else {
+                    $woman = new User($data);
+
+                    $woman->created_by = $request->user()->name;
+                    if ($candidate->man) {
+                        $woman->spouseID = $candidate->man->id;
+                    }
+                    $woman->save();
+                    $flash_message[] = $woman->name . ' added.';
+
+                    $candidate->w_user_id = $woman->id;
+                    $candidate->save();
+                }
+            }
+
+            DB::commit();
+
+            flash()->success(implode('<br>', $flash_message));
+
+            return redirect('/candidates/' . preg_replace('/[^a-z0-9]/', '', strtolower($request->input('weekend'))));
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
         }
-
-        flash()->success(implode('<br>', $flash_message));
-
-        return redirect('/candidates/' . preg_replace('/[^a-z0-9]/', '', strtolower($request->input('weekend'))));
     }
 
     /**
@@ -637,24 +659,34 @@ class CandidateController extends Controller
             return redirect('/candidates');
         }
 
-        $messages = [];
-        if ($candidate->man) {
-            $man = User::find($candidate->man->id);
-            $messages[] = $man->name . ' deleted.';
-            event(CandidateDeleted::class, ['who' => $man->name, 'by' => $request->user()]);
-            $man->delete();
-        }
-        if ($candidate->woman) {
-            $woman = User::find($candidate->woman->id);
-            $messages[] = $woman->name . ' deleted.';
-            event(CandidateDeleted::class, ['who' => $woman->name, 'by' => $request->user()]);
-            $woman->delete();
-        }
-        $candidate->delete();
+        DB::beginTransaction();
 
-        flash(implode('<br>', $messages), 'success');
+        try {
+            $messages = [];
+            if ($candidate->man) {
+                $man = User::find($candidate->man->id);
+                $messages[] = $man->name . ' deleted.';
+                event(CandidateDeleted::class, ['who' => $man->name, 'by' => $request->user()]);
+                $man->delete();
+            }
+            if ($candidate->woman) {
+                $woman = User::find($candidate->woman->id);
+                $messages[] = $woman->name . ' deleted.';
+                event(CandidateDeleted::class, ['who' => $woman->name, 'by' => $request->user()]);
+                $woman->delete();
+            }
+            $candidate->delete();
 
-        return redirect('/candidates');
+            DB::commit();
+
+            flash(implode('<br>', $messages), 'success');
+
+            return redirect('/candidates');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
     }
 
     /**
