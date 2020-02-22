@@ -19,19 +19,19 @@
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto nav-tabs">
 @can('view members')
-          <li class="nav-item"><a class="nav-link {{ route_is('home') ? 'active' : '' }}" href="{{ route('home') }}" data-shortcut="home">Main</a></li>
+          <li class="nav-item"><a class="nav-link {{ \Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}" data-shortcut="home">Main</a></li>
 @endcan
 @can('view members')
-          <li class="nav-item"><a class="nav-link {{ route_is('calendar') ? 'active' : '' }}" href="{{ route('calendar') }}" data-shortcut="c">Calendar</a></li>
+          <li class="nav-item"><a class="nav-link {{ \Route::is('calendar') ? 'active' : '' }}" href="{{ route('calendar') }}" data-shortcut="c">Calendar</a></li>
 @endcan
 @can('view members')
-          <li class="nav-item"><a class="nav-link {{ route_is('weekend') ? 'active' : '' }}" href="{{ route('weekend') }}" data-shortcut="w">Weekends</a></li>
+          <li class="nav-item"><a class="nav-link {{ \Route::is('weekend') ? 'active' : '' }}" href="{{ route('weekend') }}" data-shortcut="w">Weekends</a></li>
 @endcan
 @can('view members')
-          <li class="nav-item"><a class="nav-link {{ route_is('directory') ? 'active' : '' }}" href="{{ route('directory') }}" data-shortcut="d">Directory</a></li>
+          <li class="nav-item"><a class="nav-link {{ \Route::is('directory') ? 'active' : '' }}" href="{{ route('directory') }}" data-shortcut="d">Directory</a></li>
 @endcan
 @can('menu-see-admin-pane')
-          <li class="nav-item"><a class="nav-link {{ route_is('admin') ? 'active' : '' }}" href="{{ route('admin') }}" data-shortcut="admin">Admin</a></li>
+          <li class="nav-item"><a class="nav-link {{ \Route::is('admin') ? 'active' : '' }}" href="{{ route('admin') }}" data-shortcut="admin">Admin</a></li>
 @endcan
         @guest
           <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" data-shortcut="home">Home</a></li>
