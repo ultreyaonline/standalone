@@ -83,7 +83,7 @@ class PaymentController extends Controller
                 'receipt_email' => $stripeEmail,
                 'description'   => $descriptions[$designation],
             ]);
-        } catch (\Stripe\Error\Card $e) {
+        } catch (\Stripe\Exception\CardException $e) {
             return response()->json(
                 ['status' => $e->getMessage()],
                 422
