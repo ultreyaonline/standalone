@@ -92,6 +92,7 @@ Route::get('/vocabulary', [PagesStaticController::class, 'vocabulary']);
 
 // team guide
 Route::get('/teamguide', [PagesStaticController::class, 'teamguide']);
+Route::get('/teambook', [PagesStaticController::class, 'teamguide']); // alias
 Route::get('/teamguide/cha_general_instructions', [PagesStaticController::class, 'cha_general_instructions']);
 Route::get('/teamguide/packinglist', [PagesStaticController::class, 'packinglist']);
 Route::get('/palanca-sample-general-letter', [PagesStaticController::class, 'palancaSampleGeneralLetter']);
@@ -234,9 +235,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin|Super-Admin']], 
     Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])->name('showAssignedRoles');
     Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])->name('assignRole');
     Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])->name('revokeRole');
-
+//----
     Route::get('/activitylog', [ActivitylogController::class, 'index'])->name('activitylog');
-
+//----
     Route::get('/service/create', [WeekendExternalController::class, 'create'])->name('service.create');
     Route::post('/service', [WeekendExternalController::class, 'store']);
     Route::get('/service/{id}/edit', [WeekendExternalController::class, 'edit'])->where(['id' => '\d+'])->name('service.edit');
