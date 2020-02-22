@@ -13,6 +13,7 @@
         "ext-redis": ">4.3",
         "arcanedev/log-viewer": "^5.0",
         "bensampo/laravel-enum": "^1.26",
+        "beyondcode/laravel-server-timing": "^1.1",
         "doctrine/dbal": "^2.9",
         "eluceo/ical": "^0.16.0",
         "facade/ignition": "^1.6",
