@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68ce3f5d5baa13cbc7b65bfc09118d6d",
+    "content-hash": "06992db6832e8ac29b62e9f3798ea815",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -2418,33 +2418,33 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v2.1.7",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "5aa2a29faebb0f27b2437292237f4e310a60d5ec"
+                "reference": "53c40e89f0de45d878665f17f2da02a05c18a394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/5aa2a29faebb0f27b2437292237f4e310a60d5ec",
-                "reference": "5aa2a29faebb0f27b2437292237f4e310a60d5ec",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/53c40e89f0de45d878665f17f2da02a05c18a394",
+                "reference": "53c40e89f0de45d878665f17f2da02a05c18a394",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "~5.8.0|^6.0|^7.0",
+                "laravel/framework": "^6.0|^7.0",
                 "moontoast/math": "^1.1",
-                "php": "^7.1.3",
-                "symfony/var-dumper": "^4.1|^5.0"
+                "php": "^7.2",
+                "symfony/var-dumper": "^4.4|^5.0"
             },
             "require-dev": {
                 "ext-gd": "*",
-                "orchestra/testbench": "^3.8|^4.0|^5.0"
+                "orchestra/testbench": "^4.0|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "3.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -2477,7 +2477,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2020-02-18T19:37:42+00:00"
+            "time": "2020-02-18T19:45:56+00:00"
         },
         {
             "name": "laravel/tinker",
