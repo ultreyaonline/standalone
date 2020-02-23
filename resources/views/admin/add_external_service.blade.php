@@ -62,11 +62,12 @@
 
             </form>
 
+@if($mode === 'edit')
             <form class="form-group row justify-content-center" role="form" method="POST" action="{{ action('WeekendExternalController@destroy', ['id' => $service->id]) }}" onsubmit="return ConfirmDelete();">
               @csrf @method('delete')
                   <button type="submit" class="btn btn-outline-danger float-right"><i class="fal fa-btn fa-trash-o"></i> Delete</button>
             </form>
-
+@endif
             <p class="mt-4 small">This form is used only for recording service on weekends not hosted by {{ config('site.community_acronym') }}</p>
 
           </div>

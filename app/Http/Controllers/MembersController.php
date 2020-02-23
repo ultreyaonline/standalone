@@ -461,7 +461,7 @@ class MembersController extends Controller
 
         if ($member->hasRole('Member')) {
             $result = $member->removeRole('Member');
-            if (!$result) {
+            if ($member->fresh()->hasRole('Member')) {
                 flash()->error('Error changing permission.');
                 return back();
             }

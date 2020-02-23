@@ -18,6 +18,7 @@ class AddSdHistoryPermToSa extends Migration
         try {
             $role = Role::findByName('Spiritual Advisor');
             Permission::create(['name' => 'view SD history']);
+            app(PermissionRegistrar::class)->forgetCachedPermissions();
             $role->givePermissionTo('view SD history');
             app(PermissionRegistrar::class)->forgetCachedPermissions();
         } catch (Spatie\Permission\Exceptions\RoleDoesNotExist $e) {

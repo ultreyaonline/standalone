@@ -19,7 +19,7 @@ class AddDeleteCandidatesPermissionToPreweekend extends Migration
             $role = Role::findByName('Pre-Weekend');
             $role->givePermissionTo('delete candidates');
             app(PermissionRegistrar::class)->forgetCachedPermissions();
-        } catch (Spatie\Permission\Exceptions\RoleDoesNotExist $e) {
+        } catch (\Throwable $e) {
             return;
         }
     }
