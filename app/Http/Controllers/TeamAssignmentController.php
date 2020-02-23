@@ -189,7 +189,6 @@ class TeamAssignmentController extends Controller
      * @param Weekend $weekend
      * @param WeekendRoles $oldposition
      * @param User $member
-     * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -319,8 +318,10 @@ class TeamAssignmentController extends Controller
      * Build dropdown list of authorized positions
      *
      * @param $weekend
+     *
+     * @return void
      */
-    protected function getPositionsDropdown($weekend)
+    protected function getPositionsDropdown(Weekend $weekend): void
     {
         // get all available positions
         $this->positions = $this->getAllowedWeekendPositions($weekend);
@@ -336,9 +337,10 @@ class TeamAssignmentController extends Controller
      * Get scoped list of authorized positions to be assigned
      *
      * @param $weekend
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    protected function getAllowedWeekendPositions($weekend)
+    protected function getAllowedWeekendPositions(Weekend $weekend)
     {
         if (auth()->user()->hasRole('Admin')) {
             return WeekendRoles::all();
@@ -369,9 +371,10 @@ class TeamAssignmentController extends Controller
      * build dropdown list of members
      *
      * @param $weekend
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    protected function getMembersDropdown($weekend)
+    protected function getMembersDropdown(Weekend $weekend)
     {
         $users = $this->getAvailableMembers($weekend);
 
@@ -389,9 +392,10 @@ class TeamAssignmentController extends Controller
      * Based on what permissions the logged-in user has, and what gender weekend, etc
      *
      * @param $weekend
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    protected function getAvailableMembers($weekend)
+    protected function getAvailableMembers(Weekend $weekend)
     {
         $query = User::active();
 

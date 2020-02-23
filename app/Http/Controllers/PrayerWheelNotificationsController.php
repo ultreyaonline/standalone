@@ -128,7 +128,7 @@ Have a blessed week
         return redirect('/home');
     }
 
-    public function emailPrayerWheelReminders(PrayerWheel $wheel)
+    public function emailPrayerWheelReminders(PrayerWheel $wheel): void
     {
         SendPrayerWheelReminderEmails::dispatch($wheel);
     }

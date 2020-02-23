@@ -122,7 +122,7 @@ class PrayerWheelController extends Controller
             ->withUsers($this->users);
     }
 
-    public function csvClean($val)
+    public function csvClean($val): string
     {
         $val = str_replace('"', ' ', $val);
         return $val;
@@ -256,8 +256,10 @@ class PrayerWheelController extends Controller
 
     /**
      * preload the collection of timeslots
+     *
+     * @return void
      */
-    protected function loadTimeslots()
+    protected function loadTimeslots(): void
     {
         $this->times = PrayerWheel::getTimeSlots();
     }

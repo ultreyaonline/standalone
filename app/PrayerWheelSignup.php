@@ -29,22 +29,22 @@ class PrayerWheelSignup extends Model
 //    $table->unsignedTinyInteger('timeslot');
 //    $table->unsignedInteger('memberID')->nullable();
 
-    public function wheel()
+    public function wheel(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(PrayerWheel::class, 'wheel_id', 'id');
     }
 
-    public function weekend()
+    public function weekend(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Weekend::class, 'weekendID', 'id');
     }
 
-    public function member()
+    public function member(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'memberID');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'memberID');
     }

@@ -22,7 +22,7 @@ class TeamGuideController extends Controller
     /**
      * Display the requested TeamGuide page
      *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($page, $id)
     {

@@ -38,7 +38,6 @@ class WeekendController extends Controller
     /**
      * Display a listing of Weekends.
      *
-     * @return Response
      */
     public function index(Request $request)
     {
@@ -62,7 +61,6 @@ class WeekendController extends Controller
      * @param  int $id
      * @param  Weekend $weekend
      * @param Request $request
-     * @return Response
      */
     public function show($id, $weekend = null, Request $request)
     {
@@ -140,7 +138,6 @@ class WeekendController extends Controller
      * Show the form for creating a new weekend.
      *
      * @param Request $request
-     * @return Response
      */
     public function create(Request $request)
     {
@@ -157,7 +154,6 @@ class WeekendController extends Controller
      * Store a newly created weekend to database
      *
      * @param WeekendRequest $request
-     * @return Response
      */
     public function store(WeekendRequest $request)
     {
@@ -191,7 +187,6 @@ class WeekendController extends Controller
      *
      * @param  Weekend $weekend
      * @param Request $request
-     * @return Response
      */
     public function edit(Weekend $weekend, Request $request)
     {

@@ -84,18 +84,18 @@ class User extends Authenticatable implements HasMedia
     }
 
 
-    public function isOnline()
+    public function isOnline(): bool
     {
         return Cache::has($this->getWhosOnlineKey());
     }
 
-    public function getWhosOnlineKey()
+    public function getWhosOnlineKey(): string
     {
         return 'user-is-online-' . $this->id;
     }
 
 
-    public function isMember()
+    public function isMember(): bool
     {
         return $this->hasRole('Member');
     }
@@ -522,10 +522,8 @@ class User extends Authenticatable implements HasMedia
     /**
      * Return true or false if the user can impersonate an other user.
      *
-     * @param   void
-     * @return  bool
      */
-    public function canImpersonate()
+    public function canImpersonate(): bool
     {
         return $this->hasRole('Admin') || $this->hasRole('Super-Admin');
     }
@@ -533,10 +531,8 @@ class User extends Authenticatable implements HasMedia
     /**
      * Return true or false if the user can be impersonated.
      *
-     * @param   void
-     * @return  bool
      */
-    public function canBeImpersonated()
+    public function canBeImpersonated(): bool
     {
         return $this->id != Auth::id();
     }

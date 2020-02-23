@@ -124,7 +124,7 @@ class TeamController extends Controller
             ->withTeam($team);
     }
 
-    public function csvClean($val)
+    public function csvClean($val): string
     {
         $val = str_replace(',', '', $val); // or instead of removing commas, wrap field in double-quotes
         // but if we start enclosing fields in double-quotes, then we must also escape double-quotes with another double-quote, ie: ""

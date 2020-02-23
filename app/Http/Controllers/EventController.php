@@ -261,7 +261,7 @@ class EventController extends Controller
         abort('404', 'Sorry, could not find that calendar entry.');
     }
 
-    protected function doCalendarEntryDownload(Event $event)
+    protected function doCalendarEntryDownload(Event $event): Response
     {
         $vCalendar = new \Eluceo\iCal\Component\Calendar(config('app.url') . '/calendar');
         $vEvent = new \Eluceo\iCal\Component\Event();

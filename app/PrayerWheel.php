@@ -19,18 +19,18 @@ class PrayerWheel extends Model
 //$table->unsignedInteger('weekendID')->nullable();
 //$table->string('customwheel_name')->nullable();
 
-    public function weekend()
+    public function weekend(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Weekend::class, 'weekendID', 'id');
     }
 
-    public function signups()
+    public function signups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(PrayerWheelSignup::class, 'wheel_id', 'id')->orderBy('timeslot');
     }
 
 
-    public static function getTimeSlots()
+    public static function getTimeSlots(): \Illuminate\Support\Collection
     {
         return collect([
             ['position' => 1, 'index' => 't18', 'day' => 'Thursday', 'hour' => '6:00pm', 'hour_to' => '6pm-7pm'],

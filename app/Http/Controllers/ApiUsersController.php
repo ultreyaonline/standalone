@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ApiUsersController extends Controller
 {
-    public function show(User $user)
+    public function show(User $user): MemberResource
     {
         return new MemberResource($user);
     }

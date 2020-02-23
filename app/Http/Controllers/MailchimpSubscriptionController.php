@@ -133,7 +133,7 @@ class MailchimpSubscriptionController extends Controller
         return response('Missing', 410);
     }
 
-    public function subscribeEveryone()
+    public function subscribeEveryone(): void
     {
         $users = User::onlyLocal()->active()->notUnsubscribed()->where('receive_email_community_news', 1)->get();
         foreach($users as $user) {
@@ -144,7 +144,7 @@ class MailchimpSubscriptionController extends Controller
 
     }
 
-    public function updateTagsForEveryone()
+    public function updateTagsForEveryone(): void
     {
         $users = User::onlyLocal()->active()->notUnsubscribed()->where('receive_email_community_news', 1)->get();
         foreach($users as $user) {

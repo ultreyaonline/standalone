@@ -197,7 +197,7 @@ class ReportsController extends Controller
     /**
      * "Rector List" is a list of Pescadores and the preferred positions they need to further their qualifications for rector.
      */
-    public function rectorsList(string $gender)
+    public function rectorsList(string $gender): void
     {
         /**
          * For example, in our community a man needs to serve as a Gopher (among other positions) to be qualified for rector.

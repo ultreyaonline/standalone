@@ -189,12 +189,12 @@ class Candidate extends Model
         return $text;
     }
 
-    public function man()
+    public function man(): BelongsTo
     {
         return $this->belongsTo(User::class, 'm_user_id');
     }
 
-    public function woman()
+    public function woman(): BelongsTo
     {
         return $this->belongsTo(User::class, 'w_user_id');
     }
