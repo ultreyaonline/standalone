@@ -5,7 +5,7 @@ namespace App;
 use App\Enums\WeekendVisibleTo;
 use App\Events\UserAdded;
 use App\Events\UserDeleted;
-use App\Helpers\UUID;
+use App\Helpers\UniqueId;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -256,7 +256,8 @@ class User extends Authenticatable implements HasMedia
 //        $faker = Factory::create(config('app.locale'));
 //        $val = $faker->uuid;
 
-        $hash = UUID::generate(10, $this, 'uidhash');
+        $hash = UniqueId::generate(10, $this, 'uidhash');
+
 //        DB::update('UPDATE ' . $this->getTable() . ' SET uidhash = "' . $hash . '" where id =' . (int)$this->id);
         $this->attributes['uidhash'] = $hash;
         // persist to db (only if exists, so that unit tests can run in memory)
