@@ -14,7 +14,7 @@
             <table width="100%">
             @foreach($members as $member)
               <tr>
-                <td>{{$member->name}}</td>
+                <td><a href="/members/{{$member->id}}">{{$member->name}}</a></td>
                 <td>{{$member->email}}</td>
                 {{--<td>{{$member->mailchimp ? 'OK' : 'MISSING'}}</td>--}}
                 <td><button type="button" id="mce{{$member->id}}" onclick="checkMc({{$member->id}});">Check</button></td>

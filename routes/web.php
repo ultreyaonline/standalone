@@ -235,9 +235,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin|Super-Admin']], 
     Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])->name('showAssignedRoles');
     Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])->name('assignRole');
     Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])->name('revokeRole');
-//----
+
     Route::get('/activitylog', [ActivitylogController::class, 'index'])->name('activitylog');
-//----
+
     Route::get('/service/create', [WeekendExternalController::class, 'create'])->name('service.create');
     Route::post('/service', [WeekendExternalController::class, 'store']);
     Route::get('/service/{id}/edit', [WeekendExternalController::class, 'edit'])->where(['id' => '\d+'])->name('service.edit');

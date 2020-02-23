@@ -269,7 +269,7 @@ class User extends Authenticatable implements HasMedia
     public function getInMailchimpAttribute()
     {
         if (!empty($this->attributes['email']) && config('newsletter.apiKey')) {
-            return \Spatie\Newsletter\NewsletterFacade::hasMember($this->attributes['email']);
+            return \Spatie\Newsletter\NewsletterFacade::isSubscribed($this->attributes['email'], config('newsletter.defaultListName'));
         }
         return null;
     }

@@ -14,7 +14,7 @@ class MailchimpSubscriptionController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        $this->mailchimp_master_list_name = 'community-master';
+        $this->mailchimp_master_list_name = config('newsletter.defaultListName');
     }
 
     public function index()
@@ -112,22 +112,6 @@ class MailchimpSubscriptionController extends Controller
             return redirect()->back();
         }
 
-// old way: check status of everyone first, and then display results
-// PROBLEM is that it times out
-        // $members  = \App\User::onlyLocal();
-        // $response = [];
-
-        // $members->each(function ($m, $key) use ($response) {
-        //     $response[$m->id] = [
-        //         'name'      => $m->name,
-        //         'email'     => $m->email,
-        //         'mailchimp' => (int)Mailchimp::hasMember($m->email, $this->mailchimp_master_list_name),
-        //     ];
-        // });
-
-        // return view('admin.mailchimp_audit', compact($response));
-
-// new way: list all members, and give a button to click to get status
         $results =
         $members  = \App\User::onlyLocal()->get();
         return view('admin.mailchimp_audit')->withMembers($results);
@@ -140,7 +124,7 @@ class MailchimpSubscriptionController extends Controller
         }
 
         if (!empty($id) && $member = User::find($id)) {
-            if (Mailchimp::hasMember($member->email, $this->mailchimp_master_list_name)) {
+            if (Mailchimp::isSubscribed($member->email, $this->mailchimp_master_list_name)) {
                 return response('Success', 200);
             } else {
                 return response('Not found', 404);
