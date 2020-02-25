@@ -27,7 +27,8 @@ use App\Http\Controllers\SpiritualAdvisorController;
 use App\Http\Controllers\TeamAssignmentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamFeePaymentsController;
-use App\Http\Controllers\WebhooksController;
+use App\Http\Controllers\Webhooks\MailchimpWebhooksController;
+use App\Http\Controllers\Webhooks\StripeWebhooksController;
 use App\Http\Controllers\WeekendController;
 use App\Http\Controllers\WeekendExternalController;
 use App\Http\Controllers\WeekendStatsController;
@@ -261,8 +262,6 @@ Route::get('/payment', [PaymentController::class, 'displayForm'])->name('stripe-
 Route::post('/payment', [PaymentController::class, 'create'])->name('stripe-payment');
 Route::get('/donate', [PaymentController::class, 'displayForm'])->name('donate');
 Route::get('/fees', [PaymentController::class, 'displayForm'])->name('fees');
-
-Route::post('stripe/webhook', [WebhooksController::class, 'handle']);
 /***********************************************/
 
 
@@ -285,12 +284,12 @@ Route::fallback(function () {
 
 
 /***********************************************/
-
 Route::prefix('webhooks')
-    ->namespace('\App\Http\Controllers\Webhooks')
     ->group(function () {
-        Route::match(['get', 'post'], 'mailchimp', 'MailchimpWebhooksController');
+        Route::match(['get', 'post'], 'mailchimp', [MailchimpWebhooksController::class]);
+        Route::post('stripe', [StripeWebhooksController::class]);
 });
 
+/***********************************************/
 
 
