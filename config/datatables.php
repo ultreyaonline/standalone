@@ -67,7 +67,7 @@ return [
      * Nulls last sql pattern for PostgreSQL & Oracle.
      * For MySQL, use 'CASE WHEN :column IS NULL THEN 1 ELSE 0 END, :column :direction'
      */
-    'nulls_last_sql' => '-%s %s',
+    'nulls_last_sql' => 'CASE WHEN :column IS NULL THEN 1 ELSE 0 END, :column :direction',
 
     /*
      * User friendly message to be displayed on user if error occurs.

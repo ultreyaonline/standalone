@@ -49,12 +49,12 @@ return [
     'responsive_images' => [
 
         /*
-        * This class is responsible for calculating the target widths of the responsive
-        * images. By default we optimize for filesize and create variations that each are 20%
-        * smaller than the previous one. More info in the documentation.
-        *
-        * https://docs.spatie.be/laravel-medialibrary/v7/advanced-usage/generating-responsive-images
-        */
+         * This class is responsible for calculating the target widths of the responsive
+         * images. By default we optimize for filesize and create variations that each are 20%
+         * smaller than the previous one. More info in the documentation.
+         *
+         * https://docs.spatie.be/laravel-medialibrary/v7/advanced-usage/generating-responsive-images
+         */
         'width_calculator' => Spatie\MediaLibrary\ResponsiveImages\WidthCalculator\FileSizeOptimizedWidthCalculator::class,
 
         /*
@@ -129,7 +129,7 @@ return [
      * The engine that should perform the image conversions.
      * Should be either `gd` or `imagick`.
      */
-    'image_driver' => 'gd',
+    'image_driver' => env('IMAGE_DRIVER', 'gd'),
 
     /*
      * FFMPEG & FFProbe binaries paths, only used if you try to generate video
