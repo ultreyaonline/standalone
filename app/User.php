@@ -77,13 +77,6 @@ class User extends Authenticatable implements HasMedia
     protected static $logOnlyDirty = true;
 
 
-    // TODO - revise $fillable and $hidden based on Role Permissions
-    public function getFillable()
-    {
-        return $this->fillable;
-    }
-
-
     public function isOnline(): bool
     {
         return Cache::has($this->getWhosOnlineKey());
@@ -495,19 +488,13 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-
     public function events()
     {
         return $this->hasMany(Event::class, 'posted_by')->orderBy('start_datetime');
     }
 
 
-    public function routeNotificationForSlack()
-    {
-        return config('notifications.slack.broadcast');
-    }
-
-    // Overloaded method (supersedes the Trait):
+    // Override method in Illuminate\Auth\Passwords\CanResetPassword trait
     /**
      * Send the password reset notification, using our App's custom notification object.
      *
@@ -520,7 +507,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
-     * Return true or false if the user can impersonate an other user.
+     * Return true or false if the user can impersonate another user.
      *
      */
     public function canImpersonate(): bool
@@ -530,7 +517,7 @@ class User extends Authenticatable implements HasMedia
 
     /**
      * Return true or false if the user can be impersonated.
-     *
+     * Here we deny impersonation of oneself as that would be pointless.
      */
     public function canBeImpersonated(): bool
     {
@@ -547,52 +534,6 @@ class User extends Authenticatable implements HasMedia
         $retVal = parent::toArray();
         $retVal['name'] = $this->name;
         return $retVal;
-    }
-
-    /**
-     * Scope the user query to certain permissions only.
-     *
-     * @param string|array|Permission|\Illuminate\Support\Collection $permissions
-     *
-     * @return bool
-     */
-    public function scopePermission($query, $permissions)
-    {
-        if ($permissions instanceof Collection) {
-            $permissions = $permissions->toArray();
-        }
-
-        if (! is_array($permissions)) {
-            $permissions = [$permissions];
-        }
-
-        $permissions = \array_map(function ($permission) {
-            if ($permission instanceof Permission) {
-                return $permission;
-            }
-
-            return app(Permission::class)->findByName($permission);
-        }, $permissions);
-
-        return $query->whereHas('permissions', function ($query) use ($permissions) {
-            $query->where(function ($query) use ($permissions) {
-                foreach ($permissions as $permission) {
-                    $query->orWhere(config('laravel-permission.table_names.permission').'.id', $permission->id);
-                }
-            });
-        });
-    }
-
-    /**
-     * Check if the user has clearance for a given route.
-     *
-     * @param  string  $routeName
-     * @return bool
-     */
-    public function hasPermissionForRoute($routeName): bool
-    {
-        // Check to see if this route requires permission. If so, see if the user has it.
-        return ! Permission::where('name', $routeName)->count() || $this->can($routeName);
     }
 
     /**
