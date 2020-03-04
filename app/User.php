@@ -6,7 +6,6 @@ use App\Enums\WeekendVisibleTo;
 use App\Events\UserAdded;
 use App\Events\UserDeleted;
 use App\Helpers\UniqueId;
-use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -493,21 +492,16 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Event::class, 'posted_by')->orderBy('start_datetime');
     }
 
-
-    // Override method in Illuminate\Auth\Passwords\CanResetPassword trait
     /**
-     * Send the password reset notification, using our App's custom notification object.
-     *
-     * @param  string  $token
-     * @return void
+     * override from CanResetPassword trait
      */
-    public function sendPasswordResetNotification($token)
+    public function getEmailForPasswordReset()
     {
-        $this->notify(new ResetPasswordNotification($token));
+        return Str::contains($this->username, ['@', '.']) ? $this->username : $this->email;
     }
 
     /**
-     * Return true or false if the user can impersonate another user.
+     * Return true or false whether the user can impersonate another user.
      *
      */
     public function canImpersonate(): bool
@@ -516,7 +510,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
-     * Return true or false if the user can be impersonated.
+     * Return true or false whether the user can be impersonated.
      * Here we deny impersonation of oneself as that would be pointless.
      */
     public function canBeImpersonated(): bool

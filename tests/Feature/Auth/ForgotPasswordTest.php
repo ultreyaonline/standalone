@@ -46,7 +46,7 @@ class ForgotPasswordTest extends TestCase {
         ]);
 
         $this->assertNotNull($token = DB::table('password_resets')->first());
-        Notification::assertSentTo($user, \App\Notifications\ResetPasswordNotification::class, function ($notification, $channels) use ($token) {
+        Notification::assertSentTo($user, \Illuminate\Auth\Notifications\ResetPassword::class, function ($notification, $channels) use ($token) {
             return Hash::check($notification->token, $token->token) === true;
         });
     }
@@ -62,7 +62,7 @@ class ForgotPasswordTest extends TestCase {
 
         $response->assertRedirect($this->passwordEmailGetRoute());
         $response->assertSessionHasErrors('username');
-        Notification::assertNotSentTo(factory(User::class)->make(['email' => 'nobody@example.com']), \App\Notifications\ResetPasswordNotification::class);
+        Notification::assertNotSentTo(factory(User::class)->make(['email' => 'nobody@example.com']), \Illuminate\Auth\Notifications\ResetPassword::class);
     }
 
     /** @test */
