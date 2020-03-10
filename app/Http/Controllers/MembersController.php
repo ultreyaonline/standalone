@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Weekend;
 use App\DataTables\UsersDataTable;
-use App\DataTables\UsersDataTablesEditor;
 use App\Mail\SponsorFollowup;
 use App\Mail\CandidateBecomesPescador;
 use App\Mail\WebsiteLoginInstructions;

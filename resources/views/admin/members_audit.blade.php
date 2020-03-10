@@ -56,12 +56,7 @@
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 }
             });
-            // Activate an inline edit on click of a table cell
-            $('#members-table').on('click', 'tbody td:not(:first-child)', function (e) {
-                editor.inline(this, {
-                    onBlur: 'submit'
-                });
-            }).DataTable({
+            $('#members-table').DataTable({
                 processing: true,
                 serverSide: true,
                 // dom: "Bfrtip",
