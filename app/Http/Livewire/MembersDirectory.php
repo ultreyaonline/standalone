@@ -46,7 +46,7 @@ class MembersDirectory extends Component
         ]);
     }
 
-    public function searchClear()
+    public function searchClear(): void
     {
         $this->reset('q');
     }
