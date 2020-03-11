@@ -252,6 +252,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin|Super-Admin']], 
     Route::post('/email-how-to-sponsor', [CommunicationController::class, 'emailHowToSponsorToEveryone']);
 
     Route::get('/data/members', [AdminController::class, 'members_edit'])->name('admin.members_audit');
+
     Route::get('/members_without_avatar', [ReportsController::class, 'membersWithoutAvatar'])->name('missing_avatars');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('admin-settings-edit');
@@ -264,10 +265,6 @@ Route::get('/donate', [PaymentController::class, 'displayForm'])->name('donate')
 Route::get('/fees', [PaymentController::class, 'displayForm'])->name('fees');
 /***********************************************/
 
-
-Route::group(['middleware' => ['role:Member']], function () {
-    Route::get('/members_search', [MembersController::class, 'datatables_index'])->name('api.members_search');
-});
 
 Route::resource('location', 'LocationController');
 

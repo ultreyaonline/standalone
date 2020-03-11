@@ -43,14 +43,14 @@
         </ul>
 
 
-
+@if(! \Route::is('directory') && ! \Route::is('admin.members_audit') && ! \Route::is('members.index'))
         @can('view members')
           <form action="/members" class="form-inline ml-auto my-2 my-lg-0" role="search">
             <input type="search" name="q" id="searchfield" class="form-control mr-sm-2" aria-label="Member Search" value="{{ Request::input('q') }}" placeholder="Member Search" accesskey="s">
             <button type="submit" class="btn btn-outline-secondary my-2 my-sm-0"><i class="fa fa-btn fa-search"></i>Search</button>
           </form>
         @endcan
-
+@endif
 
       <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">

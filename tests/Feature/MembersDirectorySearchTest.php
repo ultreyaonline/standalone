@@ -1,0 +1,86 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tests\TestCase;
+
+class MembersDirectorySearchTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    function membersdirectory_table_is_unreachable_if_not_a_member()
+    {
+        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
+        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+
+        $this->expectException(HttpException::class);
+
+        Livewire::test('members-directory')
+            ->assertDontSee('fizz');
+    }
+
+    /** @test */
+    function membersdirectory_table_is_searchable()
+    {
+        $this->seed();
+
+        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
+        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+        $user = factory(User::class)->states('active')
+            ->create(['first' => 'valid', 'last' => 'communitymember']);
+        $user->assignRole('Member');
+
+        Livewire::actingAs($user)
+            ->test('members-directory')
+            ->assertSee('foo')
+            ->assertSee('fizz')
+            ->set('q', 'foo')
+            ->assertSee('foo')
+            ->assertDontSee('fizz');
+    }
+
+
+
+    /** @test */
+    function membersaudit_table_is_unreachable_if_not_authorized()
+    {
+        $this->seed();
+
+        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
+        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+
+        $this->expectException(HttpException::class);
+
+        $user = factory(User::class)->states('active')
+            ->create(['first' => 'valid', 'last' => 'communitymember']);
+        $user->assignRole('Member');
+
+        Livewire::actingAs($user)
+            ->test('members-audit')
+            ->assertDontSee('fizz');
+    }
+
+    /** @test */
+    function membersaudit_table_is_reachable_if_authorized()
+    {
+        $this->seed();
+
+        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
+        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+
+        $user = factory(User::class)->states('active')
+            ->create(['first' => 'valid', 'last' => 'communitymember']);
+        $user->assignRole('Member');
+        $user->givePermissionTo('edit members');
+
+        Livewire::actingAs($user)
+            ->test('members-audit')
+            ->assertSee('foo')
+            ->assertSee('fizz');
+    }
+}

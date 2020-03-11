@@ -16,7 +16,6 @@ class UsersTableSeeder extends Seeder
         $w = factory(\App\User::class)->states('female')->create();
         $w->assignRole('Member');
 
-
         // now create some admin/dev dummy users
         $m = factory(\App\User::class)->states('male')->create([
             'email'=>'john@example.com',
@@ -90,18 +89,31 @@ class UsersTableSeeder extends Seeder
 
             $userM->assignRole('Member');
             $userF->assignRole('Member');
-
         }
 
         // a few more non-couples
+        factory(\App\User::class, 3)->states('generic')->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
         factory(\App\User::class, 3)->states('generic')->create(['sponsorID' => $this->getRandomSponsorID()]);
+
+        // Make some couples be from another Community
+        $sponsorID1 = \App\User::select('sponsorID')->where('sponsorID', '>', 1)->get()->random()['sponsorID'];
+        $sponsorID2 = \App\User::select('sponsorID')->where('sponsorID', '>', 1)->get()->random()['sponsorID'];
+        \App\User::whereIn('sponsorID', [$sponsorID1, $sponsorID2])
+            ->get()
+            ->each(function($user) {
+                $user->community='HOLA';
+                $user->weekend = str_replace(config('site.community_acronym'), 'HOLA', $user->weekend);
+                $user->save();
+            });
+
+
     }
 
     private function getRandomSponsorID()
     {
         $sponsorID = 0;
         // pick a random existing user to be the sponsor
-        $collection = \App\User::select('id')->take(20)->get();
+        $collection = \App\User::select('id')->where('active', 1)->take(20)->get();
         if ($collection) {
             $sponsorID = $collection->random()['id'];
         }

@@ -369,24 +369,27 @@ class User extends Authenticatable implements HasMedia
      * Fields included are: name, email, city, state, homephone, cellphone, workphone, church, weekend, skills
      *
      * @param Builder $query
-     * @param $searchString
-     *  @return Builder|static
+     * @param string $searchString
+     * @param bool $activeOnly
+     * @return Builder|static
      */
-    public function scopeSearch(Builder $query, $searchString)
+    public function scopeSearch(Builder $query, $searchString, $activeOnly=true)
     {
-        $slug = str_replace('-', ' ', strtolower($searchString));
-
+        // @TODO accommodate quoted searches for words that need to be kept together.
         $lookups = preg_split('/ /', $searchString);
 
-        $search = $query->where('active', 1);
+        $search = $query;
+
+        if ($activeOnly) {
+            $search = $query->where('active', 1);
+        }
 
         foreach ($lookups as $lookup) {
-            $search = $search->where(function ($query) use ($slug, $lookup) {
+            $search = $search->where(function ($query) use ($lookup) {
                 return $query->where('first', 'like', '%' . $lookup . '%')
                     ->orWhere('last', 'like', '%' . $lookup . '%')
-//              ->orWhere('name', 'like', '%' . $lookup . '%')
                     ->orWhere('email', 'like', '%' . $lookup . '%')
-                    ->orWhere('weekend', $lookup)
+                    ->orWhere('weekend', 'like', '%' . $lookup . '%')
                     ->orWhere('state', $lookup)
                     ->orWhere('country', $lookup)
                     ->orWhere('city', 'like', '%' . $lookup . '%')
@@ -397,7 +400,15 @@ class User extends Authenticatable implements HasMedia
                     ->orWhere('skills', 'like', '%' . $lookup . '%');
             });
         }
+
         return $search->orderBy('last', 'asc')->orderBy('first', 'asc');
+    }
+
+    // this static method exists for use by Livewire components
+    public static function datatableSearch($searchString)
+    {
+        return empty($searchString) ? static::query()
+            : (new static())->scopeSearch(static::query(), $searchString, false);
     }
 
     public function canViewUser($userIDToView): bool

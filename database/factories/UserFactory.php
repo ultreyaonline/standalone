@@ -31,7 +31,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'homephone'         => $faker->phoneNumber,
         'cellphone'         => $faker->phoneNumber,
         'workphone'         => $faker->phoneNumber,
-        'weekend'           => 'ZZZ #' . $faker->randomNumber(2),
+        'weekend'           => config('site.community_acronym'). ' #' . $faker->randomNumber(2),
         'church'            => $faker->sentence(3),
         'community'         => config('site.community_acronym'),
         'avatar'            => $faker->imageUrl(182, 110, 'nature', true),
@@ -84,6 +84,12 @@ $factory->state(App\User::class, 'female', function (Faker $faker) {
     return [
         'first'  => $faker->firstNameFemale,
         'gender' => 'W',
+        'active' => true,
+    ];
+});
+
+$factory->state(App\User::class, 'active', function (Faker $faker) {
+    return [
         'active' => true,
     ];
 });

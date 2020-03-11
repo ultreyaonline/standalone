@@ -26,9 +26,16 @@ class AdminController extends Controller
         return view('admin.main');
     }
 
-    public function members_edit()
+    public function members_edit(Request $request)
     {
-        return view('admin.members_audit');
+        abort_unless($request->user()->can('edit members'), 403, 'Only administrators can audit/edit members');
+
+        $users = \App\User::select('*')
+            ->orderBy('last')
+            ->orderBy('first')
+            ->get();
+
+        return view('admin.members_audit', ['users' => $users, 'scope_prefix'=> '', 'scope_title' => '']);
     }
 
 

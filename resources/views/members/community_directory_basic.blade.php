@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['robots_rules'=>'noindex'])
 
 @section('title')
     {{ $scope_title ?: config('site.community_acronym') . ' Community Directory' }}

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Weekend;
-use App\DataTables\UsersDataTable;
 use App\Mail\SponsorFollowup;
 use App\Mail\CandidateBecomesPescador;
 use App\Mail\WebsiteLoginInstructions;
@@ -60,7 +59,7 @@ class MembersController extends Controller
         return redirect('/members/' . $member->id);
     }
 
-    public function index(Request $request, $perPage = 0)
+    public function index(Request $request, $perPage = null)
     {
         // if not allowed to see other members, just show self
         if (!$request->user()->can('view members')) {
@@ -69,15 +68,15 @@ class MembersController extends Controller
 
         // check pagination defaults
         if (! $perPage) {
-            $perPage = $this->paginationThreshold;
+            $perPage = $request->get('perPage', $this->paginationThreshold);
         }
 
         // check for search query
-        $query = $request->q;
+        $query = $request->get('q');
 
         // apply search filter, or get all
         if ($query) {
-            $users = $this->user->search($query); // search() includes active()
+            $users = $this->user->search($query, $active=false);
         } else {
             $users = $this->user->onlyLocal()->orderBy('last', 'asc')->orderBy('first', 'asc');
 //            $users = $this->user->active()->orderBy('last', 'asc')->orderBy('first', 'asc');
@@ -85,18 +84,6 @@ class MembersController extends Controller
 
         // display
         return view('members.community_directory', ['users' => $users->paginate($perPage), 'scope_prefix'=> '', 'scope_title' => '']);
-    }
-
-    /**
-     * Used for Member Directory ajax response
-     *
-     * @param UsersDataTable $dataTable
-     * @return mixed
-     * @throws \Exception
-     */
-    public function datatables_index(UsersDataTable $dataTable)
-    {
-        return $dataTable->render(null);
     }
 
     public function show($id, Request $request)
