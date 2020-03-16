@@ -20,13 +20,6 @@ class MembersAudit extends Component
 
     protected $updatesQueryString = ['q', 'perPage', 'sortField', 'sortAsc'];
 
-    public function __construct($id)
-    {
-        parent::__construct($id);
-
-        abort_unless(Auth::check() && Auth::user()->can('edit members'), '403', 'Unauthorized.');
-    }
-
     public function mount($initialSearch = ''): void
     {
         $this->q = request('q', $initialSearch);
@@ -40,6 +33,8 @@ class MembersAudit extends Component
 
     public function render()
     {
+        abort_unless(Auth::check() && Auth::user()->can('edit members'), '403', 'Unauthorized.');
+
         return view('livewire.members-audit', [
             'users' => User::datatableSearch($this->q)
                 ->select($this->getColumns())

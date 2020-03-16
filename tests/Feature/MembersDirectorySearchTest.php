@@ -25,7 +25,7 @@ class MembersDirectorySearchTest extends TestCase
     }
 
     /** @test */
-    function membersdirectory_table_is_searchable()
+    function membersdirectory_table_is_searchable_by_members()
     {
         $this->seed();
 

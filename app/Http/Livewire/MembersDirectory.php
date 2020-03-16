@@ -20,13 +20,6 @@ class MembersDirectory extends Component
 
     protected $updatesQueryString = ['q', 'perPage'];
 
-    public function __construct($id)
-    {
-        parent::__construct($id);
-
-        abort_unless(Auth::check() && Auth::user()->can('view members'), '403', 'Unauthorized.');
-    }
-
     public function mount($initialSearch = ''): void
     {
         $this->q = request('q', $initialSearch);
@@ -36,6 +29,8 @@ class MembersDirectory extends Component
 
     public function render()
     {
+        abort_unless(Auth::check() && Auth::user()->can('view members'), '403', 'Unauthorized.');
+
         return view('livewire.members-directory', [
             'users' => User::datatableSearch($this->q)
                 ->active()
