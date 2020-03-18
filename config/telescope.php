@@ -99,7 +99,6 @@ return [
     'ignore_commands' => [
         'ide-helper:meta',
         'ide-helper:generate',
-        'help',
         //
     ],
 
