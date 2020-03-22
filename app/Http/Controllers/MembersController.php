@@ -120,8 +120,8 @@ class MembersController extends Controller
 
     public function store(Request $request)
     {
-            'email' => 'nullable|email|max:60',
         $data = $this->validate($request, [
+            'email' => 'nullable|email|max:60',
             'username' => 'required|unique:users,username|max:255',
             'gender' => 'required|in:M,W,m,w,f',
             'first' => 'required|string|max:45',
