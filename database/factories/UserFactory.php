@@ -93,3 +93,15 @@ $factory->state(App\User::class, 'active', function (Faker $faker) {
         'active' => true,
     ];
 });
+
+$factory->state(App\User::class, 'inactive', function (Faker $faker) {
+    return [
+        'active' => false,
+    ];
+});
+
+// @TODO - afterCreatingState can be incorporated only if Roles have been seeded
+//$factory->afterCreatingState(App\User::class, 'active', function ($user, $faker) {
+//    $user->assignRole('Member');
+//});
+

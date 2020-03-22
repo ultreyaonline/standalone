@@ -120,8 +120,8 @@ class MembersController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
             'email' => 'nullable|email|max:60',
+        $data = $this->validate($request, [
             'username' => 'required|unique:users,username|max:255',
             'gender' => 'required|in:M,W,m,w,f',
             'first' => 'required|string|max:45',
@@ -144,8 +144,6 @@ class MembersController extends Controller
             'spouseID' => 'nullable|integer',
             'sponsorID' => 'nullable|integer',
         ]);
-
-        $data = $request->all();
 
         if (isset($data['spouseID']) && $data['spouseID'] == 0) $data['spouseID'] = null;
         if (isset($data['sponsorID']) && $data['sponsorID'] == 0) $data['sponsorID'] = null;
