@@ -7,7 +7,18 @@ use Faker\Generator as Faker;
 $factory->define(App\Candidate::class, function (Faker $faker) {
     return [
         'm_user_id' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(\App\User::class)->states('male')->create([
+                'weekend' => 'FAKE2',
+                'okay_to_send_serenade_and_palanca_details' => false,
+                'interested_in_serving' => false,
+                'active' => false,
+                'allow_address_share' => false,
+                'receive_prayer_wheel_invites' => false,
+                'receive_email_reunion' => false,
+                'receive_email_sequela' => false,
+                'receive_email_community_news' => false,
+                'receive_email_weekend_general' => false,
+            ])->id;
         },
         'w_user_id' => function () {
             return factory(\App\User::class)->states('female')->create([
@@ -66,5 +77,24 @@ $factory->define(App\Candidate::class, function (Faker $faker) {
         'w_confirmation_email_sent' => $faker->dateTimeBetween(),
         'm_special_notes' => $faker->text,
         'w_special_notes' => $faker->text,
+    ];
+});
+
+$factory->state(App\Candidate::class, 'male', function (Faker $faker) {
+    return [
+        // default state generates a couple, so return null for other gender
+        'w_user_id' => null,
+    ];
+});
+
+$factory->state(App\Candidate::class, 'female', function (Faker $faker) {
+    return [
+        'm_user_id' => null,
+    ];
+});
+
+$factory->state(App\Candidate::class, 'couple', function (Faker $faker) {
+    return [
+        // default state generates a couple, so nothing special required here
     ];
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidate;
 use App\User;
 use App\Weekend;
 use App\Mail\SponsorFollowup;
@@ -347,7 +348,18 @@ class MembersController extends Controller
 
         $message = 'Member deleted: ' . $user->name;
 
+
+        // fetch corresponding candidate record that would be left blank after the user is deleted (foreign keys will set to null)
+        $candidateRecord = Candidate::where('m_user_id', $request->input('memberID'))->orWhere('w_user_id', $request->input('memberID'))->first();
+
         $user->delete();
+
+        // clean up orphaned candidate record, after first re-fetching it by original id
+        if ($candidate = $candidateRecord->find($candidateRecord->id)) {
+            if ($candidate->m_user_id === null && $candidate->w_user_id === null) {
+                $candidate->delete();
+            }
+        }
 
         flash()->success($message);
 
