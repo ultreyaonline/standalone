@@ -177,14 +177,14 @@ class MembersController extends Controller
     {
         $member = $this->user->find($id);
 
-        // if not allowed to see other members, just show self
-        if (!$request->user()->canEditUser($member->id)) {
-            $member = $request->user();
-        }
-
         if (!$member) {
             flash()->error('Requested member not found.');
             return redirect('/members');
+        }
+
+        // if not allowed to see other members, just show self
+        if (!$request->user()->canEditUser($member->id)) {
+            $member = $request->user();
         }
 
         $users = $this->active;
@@ -355,7 +355,7 @@ class MembersController extends Controller
         $user->delete();
 
         // clean up orphaned candidate record, after first re-fetching it by original id
-        if ($candidate = $candidateRecord->find($candidateRecord->id)) {
+        if ($candidateRecord && $candidate = $candidateRecord->find($candidateRecord->id)) {
             if ($candidate->m_user_id === null && $candidate->w_user_id === null) {
                 $candidate->delete();
             }
