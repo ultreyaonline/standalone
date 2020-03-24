@@ -164,7 +164,7 @@ class MembersController extends Controller
         if (empty(config('site.admin_must_approve_new_members'))) {
             $this->convertCandidateToPescador($member);
         } else {
-            // @TODO - send alert to Admin/moderator to approve
+            // @TODO - send alert to Admin/moderator to approve, if the UserAdded listener doesn't have an email address to send to
         }
 
         flash()->success($member->name . ' Added.');

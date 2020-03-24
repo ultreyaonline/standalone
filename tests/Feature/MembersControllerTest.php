@@ -47,7 +47,6 @@ class MembersControllerTest extends TestCase
     /** @test */
     public function a_member_with_no_candidate_record_can_be_deleted()
     {
-
         $user = factory(\App\User::class)->states('male')->create();
 
         $this->assertDatabaseHas('users', ['id' => $user->id]);
@@ -57,7 +56,6 @@ class MembersControllerTest extends TestCase
             ->delete(action('MembersController@destroy', ['memberID' => $user->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
-
     }
 
 }
