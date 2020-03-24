@@ -170,6 +170,13 @@ class ConfigServiceProvider extends ServiceProvider
                         'cast' => 'boolean',
                         'rules' => ['boolean'],
                     ],
+                    'site.rectors_can_add_new_members' => [
+                        'id' => 'rectors_can_add_new_members',
+                        'label' => 'Rectors can add new members?',
+                        'hint' => 'When a Rector is building their team, can they add new members to the database themselves? (If not, they must ask an Administrator to do the data-entry)',
+                        'cast' => 'boolean',
+                        'rules' => ['boolean'],
+                    ],
                     'site.weekend_shows_finished_for_x_days' => [
                         'id' => 'weekend_shows_finished_for_x_days',
                         'label' => 'Finished weekend shows for X days',

@@ -42,6 +42,7 @@ return [
     'features-emailtypes-reunion'   => true,
     'preweekend_sponsor_confirmations_enabled' => true,
     'admin_must_approve_new_members' => false,
+    'rectors_can_add_new_members'   => false,
 
     'map_url'                       => 'https://www.google.com/maps/preview?q=',
     'candidate_application_url'     => '/TD_Candidate_Application.pdf',

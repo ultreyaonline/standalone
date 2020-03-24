@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('add community member', function ($user) {
-            if ($user->isAnActiveRector($roverOrHeadToo = 'head')) {
+            if (config('site.rectors_can_add_new_members') && $user->isAnActiveRector($roverOrHeadToo = 'head')) {
                 return true;
             }
         });
