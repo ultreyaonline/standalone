@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\ImportMemberByRole;
 use App\User;
 use App\Weekend;
 use App\WeekendAssignments;
