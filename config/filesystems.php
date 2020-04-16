@@ -62,6 +62,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
         's3-backups' => [
@@ -71,6 +72,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET_BACKUPS'),
             'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
         's3-media' => [
@@ -80,6 +82,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET_MEDIA'),
             'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
         ],
 
         'dropbox' => [
