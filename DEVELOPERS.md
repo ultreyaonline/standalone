@@ -76,4 +76,4 @@ For testing emails during development, it’s ideal to not actually send real em
 
 To “trap” all the emails, [MailTrap.io](https://mailtrap.io) is a handy service. Simply configure MAIL_USERNAME and MAIL_PASSWORD in your local `.env` file with the SMTP settings from your Mailtrap account.
 
-
+If you're interested in a local/desktop application for email testing you may wish to try https://usehelo.com/ as a convenient tool.
