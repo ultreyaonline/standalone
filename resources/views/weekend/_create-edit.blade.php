@@ -308,8 +308,8 @@
 @endif
       <option value="2"{{ $weekend->visibility_flag === 2 ? 'selected' : '' }}>Theme NOT visible</option>
       <option value="3"{{ $weekend->visibility_flag === 3 ? 'selected' : '' }}>Theme visible, but no Team details</option>
-{{--      <option value="4"{{ $weekend->visibility_flag === 4 ? 'selected' : '' }}>Head Cha can see confirmed team roster</option>--}}
-{{--      <option value="5"{{ $weekend->visibility_flag === 5 ? 'selected' : '' }}>Section Heads can see team too</option>--}}
+      <option value="4"{{ $weekend->visibility_flag === 4 ? 'selected' : '' }}>Head Cha can see confirmed team roster</option>
+      <option value="5"{{ $weekend->visibility_flag === 5 ? 'selected' : '' }}>Section Heads can see team too</option>
       <option value="6"{{ $weekend->visibility_flag === 6 ? 'selected' : '' }}>Everyone can see all confirmed details</option>
     </select>
   </div>
