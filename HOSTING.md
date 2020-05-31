@@ -160,6 +160,10 @@ First put your app into a Github repository.
 - Enable a CRON job: `artisan schedule:run >> /dev/null 2>&1` (type: `PHP`, runs every minute, ie: all `*`s)
 - Set an actual Domain, and enable SSL
 
+## Other Hosting Options
+There are several other VPS offerings that can work well with Laravel. Some include:
+- https://moss.sh/manage-your-websites-and-servers-with-moss-free-plan/
+- https://runcloud.io/docs/guide/atomic-deployment/deployment-script
 
 
 ---
