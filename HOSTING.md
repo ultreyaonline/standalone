@@ -42,10 +42,10 @@ Most modern VPS servers do not run an email-delivery process. This is to avoid t
 
 Community size affects the number of emails processed. During the months leading up to when you are hosting a Weekend you will use an increased amount of email correspondence. (For example, a community of 800 local members might typically use 5K emails/mo in most months, but could use 13-15K emails in a month where they host a TD Weekend.)
 
-The Ultreya Application is ready-built for you to use Mailgun for the email-delivery service. But, you can of course use any SMTP service that Laravel supports. 
+The Ultreya Application is ready-built for you to use Mailgun for the email-delivery service. But you can use any SMTP service that Laravel supports. 
 
 ## Mailgun
-You can create a Mailgun account in just a couple minutes online at mailgun.com
+You can create a Mailgun account in just a couple minutes online at https://mailgun.com
 
 Mailgun offers 5K emails free per month for the first 3 months.
 
@@ -59,13 +59,19 @@ MAILGUN_DOMAIN=your_mailgun_domain_here
 MAILGUN_SECRET=key-abc12345678901234567890
 ```
 
-It is wise to occasionally monitor the account for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
+It is wise to occasionally monitor the Mailgun account for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
 
-In Mailgun you can optionally set up "receiving" email addresses which forward emails to certain community members. This is a convenient inexpensive way to set up some vanity emails for things like Palanca and Pre-Weekend, etc.
+In Mailgun you can optionally (with a paid upgrade) set up "receiving" email addresses which forward emails to certain community members. This is a convenient way to set up some vanity emails for things like Palanca and Pre-Weekend, etc.
 
 ## Alternate Email Providers
 
 You can use any SMTP service supported by Laravel. Consult the Laravel documentation for details.
+
+Some services which you might consider if your volume is low, include the following (but you may have to be more hands-on from a technical level):
+
+https://kingmailer.co/
+
+https://sendgrid.com/solutions/email-api/smtp-service/
 
 ---
 
