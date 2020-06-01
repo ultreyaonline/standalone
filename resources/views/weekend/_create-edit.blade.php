@@ -337,6 +337,94 @@
   </div>
 </div>
 
+<hr>
+<p class="small mx-1">The Rector and Administrator can specify some document-sharing URLs for weekend-specific files. Be sure to set proper sharing controls on those files/folders when obtaining the share links that you post here.</p>
+
+<div class="form-group row{{ ($errors->has('share_1_doc_label') || $errors->has('share_1_doc_url')) ? ' is-invalid' : '' }}">
+    <label class="col-2 col-form-label" for="share_1_doc_label">Name</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_1_doc_label" id="share_1_doc_label" maxlength="255" value="{{ old('share_1_doc_label') ?: $weekend->share_1_doc_label }}" placeholder="ie: shared folder for public weekend files">
+        @if ($errors->has('share_1_doc_label'))
+            <span class="form-text"> <strong>{{ $errors->first('share_1_doc_label') }}</strong> </span>
+        @endif
+    </div>
+    <label class="col-2 col-form-label" for="share_1_doc_url">Link URL</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_1_doc_url" id="share_1_doc_url" maxlength="255" value="{{ old('share_1_doc_url') ?: $weekend->share_1_doc_url }}" placeholder="ie: https://drive.google.com/hashcode12345">
+        @if ($errors->has('share_1_doc_url'))
+            <span class="form-text"> <strong>{{ $errors->first('share_1_doc_url') }}</strong> </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row{{ ($errors->has('share_2_doc_label') || $errors->has('share_2_doc_url')) ? ' is-invalid' : '' }}">
+    <label class="col-2 col-form-label" for="share_2_doc_label">Name</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_2_doc_label" id="share_2_doc_label" maxlength="255" value="{{ old('share_2_doc_label') ?: $weekend->share_2_doc_label }}" placeholder="ie: rector and head cha shared files">
+        @if ($errors->has('share_2_doc_label'))
+            <span class="form-text"> <strong>{{ $errors->first('share_2_doc_label') }}</strong> </span>
+        @endif
+    </div>
+    <label class="col-2 col-form-label" for="share_2_doc_url">Link URL</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_2_doc_url" id="share_2_doc_url" maxlength="255" value="{{ old('share_2_doc_url') ?: $weekend->share_2_doc_url }}" placeholder="ie: https://drive.google.com/hashcode4567">
+        @if ($errors->has('share_2_doc_url'))
+            <span class="form-text"> <strong>{{ $errors->first('share_2_doc_url') }}</strong> </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row{{ ($errors->has('share_3_doc_label') || $errors->has('share_3_doc_url')) ? ' is-invalid' : '' }}">
+    <label class="col-2 col-form-label" for="share_3_doc_label">Name</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_3_doc_label" id="share_3_doc_label" maxlength="255" value="{{ old('share_3_doc_label') ?: $weekend->share_3_doc_label }}" placeholder="ie: serenade songbook file link">
+        @if ($errors->has('share_3_doc_label'))
+            <span class="form-text"> <strong>{{ $errors->first('share_3_doc_label') }}</strong> </span>
+        @endif
+    </div>
+    <label class="col-2 col-form-label" for="share_3_doc_url">Link URL</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_3_doc_url" id="share_3_doc_url" maxlength="255" value="{{ old('share_3_doc_url') ?: $weekend->share_3_doc_url }}" placeholder="ie: https://drive.google.com/hashcode6789">
+        @if ($errors->has('share_3_doc_url'))
+            <span class="form-text"> <strong>{{ $errors->first('share_3_doc_url') }}</strong> </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row{{ ($errors->has('share_4_doc_label') || $errors->has('share_4_doc_url')) ? ' is-invalid' : '' }}">
+    <label class="col-2 col-form-label" for="share_4_doc_label">Name</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_4_doc_label" id="share_4_doc_label" maxlength="255" value="{{ old('share_4_doc_label') ?: $weekend->share_4_doc_label }}" placeholder="ie: shared folder for public weekend files">
+        @if ($errors->has('share_4_doc_label'))
+            <span class="form-text"> <strong>{{ $errors->first('share_4_doc_label') }}</strong> </span>
+        @endif
+    </div>
+    <label class="col-2 col-form-label" for="share_4_doc_url">Link URL</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_4_doc_url" id="share_4_doc_url" maxlength="255" value="{{ old('share_4_doc_url') ?: $weekend->share_4_doc_url }}" placeholder="ie: https://drive.google.com/hashcode0303">
+        @if ($errors->has('share_4_doc_url'))
+            <span class="form-text"> <strong>{{ $errors->first('share_4_doc_url') }}</strong> </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group row{{ ($errors->has('share_5_doc_label') || $errors->has('share_5_doc_url')) ? ' is-invalid' : '' }}">
+    <label class="col-2 col-form-label" for="share_5_doc_label">Name</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_5_doc_label" id="share_5_doc_label" maxlength="255" value="{{ old('share_5_doc_label') ?: $weekend->share_5_doc_label }}" placeholder="ie: shared folder for public weekend files">
+        @if ($errors->has('share_5_doc_label'))
+            <span class="form-text"> <strong>{{ $errors->first('share_5_doc_label') }}</strong> </span>
+        @endif
+    </div>
+    <label class="col-2 col-form-label" for="share_5_doc_url">Link URL</label>
+    <div class="col-10">
+        <input type="text" class="form-control" name="share_5_doc_url" id="share_5_doc_url" maxlength="255" value="{{ old('share_5_doc_url') ?: $weekend->share_5_doc_url }}" placeholder="ie: https://drive.google.com/hashcode0005">
+        @if ($errors->has('share_5_doc_url'))
+            <span class="form-text"> <strong>{{ $errors->first('share_5_doc_url') }}</strong> </span>
+        @endif
+    </div>
+</div>
+
 
 
 <div class="form-group text-center">

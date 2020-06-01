@@ -61,6 +61,16 @@ class Weekend extends Model implements HasMedia
         'emergency_poc_id',
         'visibility_flag',
         'teamphoto',
+        'share_1_doc_url',
+        'share_1_doc_label',
+        'share_2_doc_url',
+        'share_2_doc_label',
+        'share_3_doc_url',
+        'share_3_doc_label',
+        'share_4_doc_url',
+        'share_4_doc_label',
+        'share_5_doc_url',
+        'share_5_doc_label',
     ];
 
     protected $dates = [

@@ -54,6 +54,16 @@ class CreateWeekendsTable extends Migration
             $table->string('teamphoto')->nullable();
             $table->text('team_meetings')->nullable();
             $table->string('table_palanca_guideline_text',255)->nullable();
+            $table->string('share_1_doc_url',255)->nullable();
+            $table->string('share_1_doc_label',255)->nullable();
+            $table->string('share_2_doc_url',255)->nullable();
+            $table->string('share_2_doc_label',255)->nullable();
+            $table->string('share_3_doc_url',255)->nullable();
+            $table->string('share_3_doc_label',255)->nullable();
+            $table->string('share_4_doc_url',255)->nullable();
+            $table->string('share_4_doc_label',255)->nullable();
+            $table->string('share_5_doc_url',255)->nullable();
+            $table->string('share_5_doc_label',255)->nullable();
             $table->timestamps();
 
             $table->foreign('sendoff_couple_id1')->references('id')->on('users')->onDelete('SET NULL')->onUpdate('CASCADE');

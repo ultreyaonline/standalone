@@ -109,13 +109,36 @@
           </div>
         </div>
 
-
         @can('see weekend team roster', $weekend)
           <div class="card mb-3 d-print-none">
             <div class="card-body d-flex justify-content-around">
               <a href="/teamguide"><button class="btn btn-lg btn-primary m-2"><i class="fa fa-book"></i> Team Guide</button></a>
               <a href="/weekend/{{ $weekend->id }}/roster"><button class="btn btn-lg btn-primary m-2"><i class="fa fa-users"></i> Roster</button></a>
             </div>
+
+            @if(!empty($weekend->share_1_doc_url) || !empty($weekend->share_2_doc_url) || !empty($weekend->share_3_doc_url) || !empty($weekend->share_4_doc_url) || !empty($weekend->share_5_doc_url))
+              <div class="card-body">
+                  Shared Documents:
+                  <ul>
+                @if (!empty($weekend->share_1_doc_url))
+                <li><a href="{{ $weekend->share_1_doc_url }}" target="_blank" rel="noreferrer noopener" class="text-truncate">{{ $weekend->share_1_doc_label ?? $weekend->share_1_doc_url }}</a></li>
+                @endif
+                @if (!empty($weekend->share_2_doc_url))
+                <li><a href="{{ $weekend->share_2_doc_url }}" target="_blank" rel="noreferrer noopener" class="text-truncate">{{ $weekend->share_2_doc_label ?? $weekend->share_2_doc_url }}</a></li>
+                @endif
+                @if (!empty($weekend->share_3_doc_url))
+                <li><a href="{{ $weekend->share_3_doc_url }}" target="_blank" rel="noreferrer noopener" class="text-truncate">{{ $weekend->share_3_doc_label ?? $weekend->share_3_doc_url }}</a></li>
+                @endif
+                @if (!empty($weekend->share_4_doc_url))
+                <li><a href="{{ $weekend->share_4_doc_url }}" target="_blank" rel="noreferrer noopener" class="text-truncate">{{ $weekend->share_4_doc_label ?? $weekend->share_4_doc_url }}</a></li>
+                @endif
+                @if (!empty($weekend->share_5_doc_url))
+                <li><a href="{{ $weekend->share_5_doc_url }}" target="_blank" rel="noreferrer noopener" class="text-truncate">{{ $weekend->share_5_doc_label ?? $weekend->share_5_doc_url }}</a></li>
+                @endif
+                  </ul>
+              </div>
+            @endif
+
           </div>
         @endcan
 
