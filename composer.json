@@ -84,7 +84,6 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan vendor:publish --force --tag=telescope-assets --ansi",
             "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-root-package-install": [
@@ -95,6 +94,7 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan telescope:publish --ansi",
             "@php artisan ide-helper:meta",
             "@php artisan ide-helper:generate"
         ]
