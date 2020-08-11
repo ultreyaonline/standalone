@@ -23,7 +23,7 @@
         "intervention/image": "^2.5",
         "lab404/laravel-impersonate": "^1.4",
         "laracasts/flash": "^3.0",
-        "laravel/framework": "^6.18",
+        "laravel/framework": "^6.18.35",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/telescope": "^3.0",
         "laravel/tinker": "^2.0",
