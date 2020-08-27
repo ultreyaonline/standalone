@@ -20,10 +20,14 @@ A fully-managed VPS provider, such as the services offered by Cloudways, gives a
 
 The cost here is slightly higher than a self-managed VPS because you're paying a small fee for the Managed services.
 
+
 ## Self-managed VPS
 If your technical team has skills related to self-managing a VPS server such as a Digital Ocean droplet or AWS instance, then you will appreciate the automation and simplicity offered by using Laravel Forge to handle server provisioning and automated deployments; this way your server techs can simply do periodic server-software updates to keep it patched against security issues, etc.
 
 This is the optimal setup, as it automates the majority of the Laravel-related infrastructure with almost seamless convenience. The annual cost of the Forge service is not much different than the Managed-Server fees charged by Cloudways.
+
+Alternatively, if you wish to self-manage a Digital Ocean VPS without the deployment features of Forge, you might consider the preconfigured [Laravel install](https://marketplace.digitalocean.com/apps/laravel) option in the Digital Ocean marketplace. Remember: by using this approach you will need to MANUALLY handle all deployment of code updates yourself.
+
 
 ## Shared Server (Not Recommended)
 We do NOT recommend using a common "shared hosting" plan which runs cPanel or Plesk, as these servers often don't allow you to properly secure a Laravel application. It "can" be done, but your tech team will want to fully understand this before using it. None of the following documentation will address any of the concerns relevant to such an environment. 

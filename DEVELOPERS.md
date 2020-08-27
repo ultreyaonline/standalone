@@ -26,7 +26,7 @@ A database relations diagram can be found in the `/technical` folder.
 
 Documentation for the Laravel framework can be found at: [Laravel Documentation](https://laravel.com/docs)
 
-Handy training for Laravel can be obtained at [Laracasts.com](https://laracasts.com). There are several free series there explaining all the essential fundamentals for coding in and deploying Laravel applications.
+Handy training for Laravel can be obtained at [Laracasts.com](https://laracasts.com), where you will find several free series explaining all the essential fundamentals for coding in and deploying Laravel applications.
 
 
 ## Designer Guidance
@@ -60,11 +60,14 @@ That's it. Now you can use the name of the folder plus ".test" as the URL.
 
 For example, if you put this project's code in your `~/Sites/tresdias` folder, simply visit `http://tresdias.test` in your browser to view it. It's that simple.
 
+You could even run `cd ~/Sites/tresdias && valet secure` to make it work with https at `https://tresdias.test`
 
-### Vagrant via Homestead
 
-If you wish to use Vagrant, you can use Laravel Homestead for your development environment.
-You can find documentation for this approach at https://laravel.com/docs/homestead
+### Vagrant or Docker
+
+If you wish to use a Vagrant virtual machine, you can use [Laravel Homestead](https://laravel.com/docs/homestead) for your development environment.
+
+For Docker, check out [LaraDock](https://laradock.io) and/or [Takeout](https://github.com/tightenco/takeout).
 
 
 ## Database Inspection
