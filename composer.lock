@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c19f444625574cf2499a381491684f02",
+    "content-hash": "87b26fea4873977bb5b92a38df1ca9ad",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -145,30 +145,31 @@
         },
         {
             "name": "bensampo/laravel-enum",
-            "version": "v1.38.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BenSampo/laravel-enum.git",
-                "reference": "e3b6120602e6e98584cdee938dca71a8c6b8fab0"
+                "reference": "d48fc31b34303b1c959a2113646868beb07f447e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/e3b6120602e6e98584cdee938dca71a8c6b8fab0",
-                "reference": "e3b6120602e6e98584cdee938dca71a8c6b8fab0",
+                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/d48fc31b34303b1c959a2113646868beb07f447e",
+                "reference": "d48fc31b34303b1c959a2113646868beb07f447e",
                 "shasum": ""
             },
             "require": {
                 "hanneskod/classtools": "~1.0",
-                "illuminate/support": "5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0",
+                "illuminate/contracts": "^7.5",
+                "illuminate/support": "^7.5",
                 "laminas/laminas-code": "^3.4",
-                "php": "~7.1"
+                "php": "^7.2.5"
             },
             "require-dev": {
                 "doctrine/dbal": "^2.9",
-                "laravel/framework": "5.6.*|5.7.*|5.8.*|^6.0|^7.0",
-                "orchestra/testbench": "3.6.*|3.7.*|3.8.*|3.9.*|^4.0|^5.0",
+                "laravel/framework": "^7.5",
+                "orchestra/testbench": "^5.0",
                 "phpstan/phpstan": "^0.12.9",
-                "phpunit/phpunit": "^7.5|^8.5",
+                "phpunit/phpunit": "^8.5",
                 "squizlabs/php_codesniffer": "^3.0"
             },
             "type": "library",
@@ -212,7 +213,7 @@
                 "package",
                 "validation"
             ],
-            "time": "2020-06-07T12:26:17+00:00"
+            "time": "2020-08-30T16:30:59+00:00"
         },
         {
             "name": "beyondcode/laravel-server-timing",

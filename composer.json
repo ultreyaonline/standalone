@@ -11,7 +11,7 @@
     "require": {
         "php": "^7.3.3",
         "ext-redis": ">4.3",
-        "bensampo/laravel-enum": "^1.33",
+        "bensampo/laravel-enum": "^2.2",
         "beyondcode/laravel-server-timing": "^1.1",
         "doctrine/dbal": "^2.10",
         "eluceo/ical": "^0.16.0",
