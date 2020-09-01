@@ -34,7 +34,7 @@
         "spatie/flysystem-dropbox": "^1.2",
         "spatie/laravel-activitylog": "^3.11",
         "spatie/laravel-backup": "^6.8",
-        "spatie/laravel-medialibrary": "^7.19",
+        "spatie/laravel-medialibrary": "^8.0",
         "spatie/laravel-newsletter": "^4.8",
         "spatie/laravel-permission": "^3.11",
         "stripe/stripe-php": "^7.27"

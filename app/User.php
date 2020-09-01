@@ -21,8 +21,8 @@ use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
@@ -32,7 +32,7 @@ class User extends Authenticatable implements HasMedia
     use HasRoles;
     use CausesActivity;
     use LogsActivity;
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     protected $fillable = [
       'email','password', 'first', 'last', 'address1', 'address2', 'city', 'state', 'postalcode', 'country',
@@ -584,7 +584,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * Register Spatie Media-Library collections
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         // Avatar is a single image, so subsequent images replace prior ones
         $this

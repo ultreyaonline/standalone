@@ -10,12 +10,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Weekend extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use LogsActivity;
 
     protected static $logAttributes = ['*'];
@@ -678,7 +678,7 @@ class Weekend extends Model implements HasMedia
     /**
      * Register Spatie Media-Library collections
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         // Banner is a single image, so subsequent images replace prior ones
         $this
