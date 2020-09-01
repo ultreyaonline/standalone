@@ -61,7 +61,7 @@ class MembersOnlyTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Community Directory');
-        $response->assertSee(e($this->user->name));
+        $response->assertSee($this->user->name);
         $response->assertSee('Palanca');
     }
 

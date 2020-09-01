@@ -48,8 +48,8 @@ class WeekendTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSee('Candidate Names for ' . e($weekend->short_name . '-' . $weekend->weekend_MF));
-        $response->assertSee(e($candidate->last));
+        $response->assertSee('Candidate Names for ' . $weekend->short_name . '-' . $weekend->weekend_MF);
+        $response->assertSee($candidate->last);
         $response->assertViewIs('weekend.show');
     }
 }

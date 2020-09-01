@@ -53,10 +53,10 @@ class CommunityEmailsTest extends TestCase
         $user->assignRole('Secretariat');
 
         $this->actingAs($user)->get('/home')
-            ->assertSee(e('Communication / Email'));
+            ->assertSee('Communication / Email');
 
         $this->get('/email-everyone')
-            ->assertSee(e('Message all ' . config('site.community_acronym') . ' Community Members'))
+            ->assertSee(e('Message all ' . config('site.community_acronym') . ' Community Members'), false)
             ->assertViewIs('emails.community_message_compose');
     }
 

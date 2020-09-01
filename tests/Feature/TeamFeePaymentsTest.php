@@ -90,8 +90,8 @@ class TeamFeePaymentsTest extends TestCase
         $response = $this->actingAs($this->treasurer_user)
             ->get($url);
 
-        $response->assertSee(e($this->member->first));
-        $response->assertSee(e($this->member->last));
+        $response->assertSee($this->member->first);
+        $response->assertSee($this->member->last);
     }
 
     /** @test */

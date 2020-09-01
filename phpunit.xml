@@ -31,6 +31,6 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
     <listeners>
-        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />
+        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Printer" />
     </listeners>
 </phpunit>

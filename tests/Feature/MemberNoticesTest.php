@@ -75,8 +75,8 @@ class MemberNoticesTest extends TestCase
             ->get('/home');
 
         $response->assertStatus(200);
-        $response->assertSee('Candidate Confirmation Required for ' . e($member->name));
-        $response->assertSee('<li>' . e($candidate->name));
+        $response->assertSee('Candidate Confirmation Required for ' . e($member->name), false);
+        $response->assertSee('<li>' . e($candidate->name), false);
 
         // turn off and test that it doesn't display now
         Config::set('site.preweekend_sponsor_confirmations_enabled', false);
@@ -84,8 +84,8 @@ class MemberNoticesTest extends TestCase
             ->get('/home');
 
         $response->assertStatus(200);
-        $response->assertDontSee('Candidate Confirmation Required for ' . e($member->name));
-        $response->assertDontSee('<li>' . e($candidate->name));
+        $response->assertDontSee('Candidate Confirmation Required for ' . e($member->name), false);
+        $response->assertDontSee('<li>' . e($candidate->name), false);
 
     }
 }

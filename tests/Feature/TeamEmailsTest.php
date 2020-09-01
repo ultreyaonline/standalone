@@ -88,9 +88,9 @@ class TeamEmailsTest extends TestCase
 
 
         // section head can see "send email to entire team" dialog
-        $this->signIn($sectionHead)->get('/weekend/' . $weekend->id)->assertSee(e('Email the Team'));
+        $this->signIn($sectionHead)->get('/weekend/' . $weekend->id)->assertSee('Email the Team');
         $this->get('/team/' . $weekend->id . '/email')
-            ->assertSee(e('Message to Team'))
+            ->assertSee('Message to Team')
             ->assertViewIs('emails.team_message_compose');
 
         // section head sends email to team
@@ -119,7 +119,7 @@ class TeamEmailsTest extends TestCase
 
 
         // a Rollista shouldn't see the Email The Team option
-        $this->actingAs($user)->get('/weekend/' . $weekend->id)->assertDontSee(e('Email the Team'));
+        $this->actingAs($user)->get('/weekend/' . $weekend->id)->assertDontSee('Email the Team');
 
         // nor be able to send an email
         $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
@@ -193,7 +193,7 @@ class TeamEmailsTest extends TestCase
         // section head can see selection of sections
         $this->signIn($sectionHead)
             ->get('/team/' . $weekend->id . '/email')
-            ->assertSee(e('Table Cha'))
+            ->assertSee('Table Cha')
             ->assertViewIs('emails.team_message_compose');
 
         $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
@@ -281,9 +281,9 @@ class TeamEmailsTest extends TestCase
 
 
         // section head can see "send email to entire team" dialog
-        $this->signIn($sectionHead)->get('/weekend/' . $weekend->id)->assertSee(e('Email the Team'));
+        $this->signIn($sectionHead)->get('/weekend/' . $weekend->id)->assertSee('Email the Team');
         $this->get('/team/' . $weekend->id . '/email')
-            ->assertSee(e('Message to Team'))
+            ->assertSee('Message to Team')
             ->assertViewIs('emails.team_message_compose');
 
         // section head sends email to team

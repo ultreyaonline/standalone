@@ -148,25 +148,25 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // if the user signs in, they cannot see the assignment
-        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(e(WeekendRoles::where('id', 10)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(WeekendRoles::where('id', 10)->first()->RoleName);
         $this->actingAs($user)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e(WeekendRoles::where('id', 10)->first()->RoleName))
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(WeekendRoles::where('id', 10)->first()->RoleName)
+            ->assertDontSee(e($user->name) . '</a></td>', false);
 
         // But the rector may see the team-member assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
         $this->actingAs($rector)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(e($user->name) . '</a></td>', false);
 
         // And the rover may see the team-member assignment
-        $this->signIn($rover)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($rover)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
         $this->actingAs($rover)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(e($user->name) . '</a></td>', false);
 
         // And the head cha may see the team-member assignment
-        $this->signIn($headcha)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($headcha)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
         $this->actingAs($headcha)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(e($user->name) . '</a></td>', false);
     }
 
     /** @test */
@@ -197,14 +197,14 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // if the user signs in, they cannot see the assignment
-        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(e(WeekendRoles::where('id', 10)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(WeekendRoles::where('id', 10)->first()->RoleName);
         $this->actingAs($user)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e(WeekendRoles::where('id', 10)->first()->RoleName))
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(WeekendRoles::where('id', 10)->first()->RoleName)
+            ->assertDontSee(e($user->name) . '</a></td>', false);
 
         // But the rector may see the assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
         $this->actingAs($rector)->get('/weekend/' . $weekend->id . '/team')
-            ->assertDontSee(e($user->name) . '</a></td>');
+            ->assertDontSee(e($user->name) . '</a></td>', false);
     }
 }

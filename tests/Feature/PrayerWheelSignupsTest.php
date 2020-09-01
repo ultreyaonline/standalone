@@ -59,7 +59,7 @@ class PrayerWheelSignupsTest extends TestCase
 
         $response = $this->get('/prayerwheel/' . $this->wheel->id);
 
-        $response->assertSee('span id="spot-' . '18' . '-' . $this->user->id . '">' . e($this->user->name));
+        $response->assertSee('span id="spot-' . '18' . '-' . $this->user->id . '">' . e($this->user->name), false);
     }
 
     /** @test */
@@ -74,7 +74,7 @@ class PrayerWheelSignupsTest extends TestCase
             ->get('/home');
 
         $response->assertStatus(200);
-        $response->assertSee('Prayer Wheel Signups for ' . e($this->user->name));
+        $response->assertSee('Prayer Wheel Signups for ' . e($this->user->name), false);
     }
 
     /** @test */
@@ -88,7 +88,7 @@ class PrayerWheelSignupsTest extends TestCase
 
 //        Test that the signup actually shows:
 //        $response = $this->get('/prayerwheel/' . $this->wheel->id);
-//        $response->assertSee('span id="' . '18' . '-' . $this->user->id . '">' . $this->user->name);
+//        $response->assertSee('span id="' . '18' . '-' . $this->user->id . '">' . e($this->user->name), false);
 
         // trigger delete
         $response = $this->delete('/prayerwheel/' . $this->wheel->id, ['memberID' => $this->user->id, 'hour' => 18]);
@@ -96,7 +96,7 @@ class PrayerWheelSignupsTest extends TestCase
 
         // test that it's not seen
         $response = $this->get('/prayerwheel/' . $this->wheel->id);
-        $response->assertDontSee('span id="' . '18' . '-' . $this->user->id . '">' . e($this->user->name));
+        $response->assertDontSee('span id="' . '18' . '-' . $this->user->id . '">' . e($this->user->name), false);
     }
 
     /** @test */
@@ -111,9 +111,9 @@ class PrayerWheelSignupsTest extends TestCase
             ->get('/prayerwheel/' . $this->wheel->id);
 
         if (config('site.prayerwheel_names_visible_to_all')) {
-            $response->assertSee('id="spot-' . '18' . '-' . $otherUser->id . '">' . e($otherUser->name));
+            $response->assertSee('id="spot-' . '18' . '-' . $otherUser->id . '">' . e($otherUser->name), false);
         } else {
-            $response->assertSee('id="viewPosition-' . '18' . '" class="d-print-none">' . 'This spot is taken');
+            $response->assertSee('id="viewPosition-' . '18' . '" class="d-print-none">' . 'This spot is taken', false);
         }
     }
 }

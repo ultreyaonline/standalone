@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Utils\DeploymentController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

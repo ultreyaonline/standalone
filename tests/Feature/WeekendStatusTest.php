@@ -51,10 +51,10 @@ class WeekendStatusTest extends TestCase
 
         $responseUser = $this->signIn($user)
             ->get('/calendar')
-            ->assertDontSee(e($weekend->long_name_with_number));
+            ->assertDontSee($weekend->long_name_with_number);
 
         $responseAdmin = $this->signIn($admin)
-            ->get('/weekend/'.$weekend->id)->assertSee(e($weekend->weekend_full_name));
+            ->get('/weekend/'.$weekend->id)->assertSee($weekend->weekend_full_name);
     }
 
     /** @test */
@@ -69,14 +69,14 @@ class WeekendStatusTest extends TestCase
 
         $user = factory(\App\User::class)->states('female')->create();
 
-        $this->signIn($admin)->get('/calendar')->assertSee(e($weekend->long_name_with_number));
-        $this->actingAs($admin)->get('/weekend/'.$weekend->id)->assertSee(e($weekend->weekend_full_name));
+        $this->signIn($admin)->get('/calendar')->assertSee($weekend->long_name_with_number);
+        $this->actingAs($admin)->get('/weekend/'.$weekend->id)->assertSee($weekend->weekend_full_name);
 
-        $this->signIn($user)->get('/calendar')->assertSee(e($weekend->long_name_with_number));
-        $this->actingAs($user)->get('/weekend/'.$weekend->id)->assertSee(e($weekend->weekend_full_name));
+        $this->signIn($user)->get('/calendar')->assertSee($weekend->long_name_with_number);
+        $this->actingAs($user)->get('/weekend/'.$weekend->id)->assertSee($weekend->weekend_full_name);
 
         // @TODO - link a prayerwheel, and test visibility
-//        $this->actingAs($user)->get('/prayerwheel')->assertSee(e($weekend->weekend_full_name));
+//        $this->actingAs($user)->get('/prayerwheel')->assertSee($weekend->weekend_full_name);
     }
 
     /** @test */
@@ -100,10 +100,10 @@ class WeekendStatusTest extends TestCase
         $user = factory(\App\User::class)->states('female')->create();
 
         // if the user signs in, they cannot see the theme details
-        $this->signIn($user)->get('/weekend/' . $weekend->id)->assertDontSee(e($weekend->weekend_theme));
+        $this->signIn($user)->get('/weekend/' . $weekend->id)->assertDontSee($weekend->weekend_theme);
 
         // the rector may see the assignment
-        $this->signIn($rector)->get('/weekend/' . $weekend->id . '/edit')->assertSee(e($weekend->weekend_theme));
+        $this->signIn($rector)->get('/weekend/' . $weekend->id . '/edit')->assertSee($weekend->weekend_theme);
     }
 
     /** @test */
@@ -134,12 +134,12 @@ class WeekendStatusTest extends TestCase
         ]);
 
         // if the user signs in, they cannot see the assignment, even though it's confirmed, because of the weekend status
-        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(e(WeekendRoles::where('id', 10)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(WeekendRoles::where('id', 10)->first()->RoleName);
         // but they can still see the core details on the weekend page, without the Team links
         $this->get('/weekend/'.$weekend->id)->assertDontSee('Roster')->assertSee('Candidate Fee');
 
         // the rector may see the assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
     }
 
 
@@ -182,17 +182,17 @@ class WeekendStatusTest extends TestCase
         ]);
 
         // if the headcha signs in, they cannot see their personal assignment, even though it's confirmed, because of the weekend status
-        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(e(WeekendRoles::where('id', $user_role)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(WeekendRoles::where('id', $user_role)->first()->RoleName);
         // but they can still see the Team
         $this->get('/weekend/'.$weekend->id)->assertSee('Roster')->assertSee('Candidate Fee');
 
         // if the non-head user signs in, they cannot see the assignment, even though it's confirmed, because of the weekend status
-        $this->signIn($user2)->get('/members/' . $user2->id)->assertDontSee(e(WeekendRoles::where('id', $user2_role)->first()->RoleName));
+        $this->signIn($user2)->get('/members/' . $user2->id)->assertDontSee(WeekendRoles::where('id', $user2_role)->first()->RoleName);
         // but they can still see the core details on the weekend page, without the Team links
         $this->get('/weekend/'.$weekend->id)->assertDontSee('Roster')->assertSee('Candidate Fee');
 
         // the rector may see the assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user2->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user2->name);
     }
 
 
@@ -235,17 +235,17 @@ class WeekendStatusTest extends TestCase
         ]);
 
         // if the non-section-head user signs in, they cannot see the assignment, even though it's confirmed, because of the weekend status
-        $this->signIn($user2)->get('/members/' . $user2->id)->assertDontSee(e(WeekendRoles::where('id', $user2_role)->first()->RoleName));
+        $this->signIn($user2)->get('/members/' . $user2->id)->assertDontSee(WeekendRoles::where('id', $user2_role)->first()->RoleName);
         // but they can still see the core details on the weekend page, without the Team links
         $this->get('/weekend/'.$weekend->id)->assertDontSee('Roster')->assertSee('Candidate Fee');
 
         // if the user signs in, they cannot see their personal assignment, even though it's confirmed, because of the weekend status
-        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(e(WeekendRoles::where('id', $user_role)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertDontSee(WeekendRoles::where('id', $user_role)->first()->RoleName);
         // but they can still see the Team
         $this->get('/weekend/'.$weekend->id)->assertSee('Roster')->assertSee('Candidate Fee');
 
         // the rector may see the assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user2->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user2->name);
     }
 
     /** @test */
@@ -276,9 +276,9 @@ class WeekendStatusTest extends TestCase
         ]);
 
         // if the user signs in, they can see the assignment
-        $this->signIn($user)->get('/members/' . $user->id)->assertSee(e(WeekendRoles::where('id', 10)->first()->RoleName));
+        $this->signIn($user)->get('/members/' . $user->id)->assertSee(WeekendRoles::where('id', 10)->first()->RoleName);
 
         // the rector may see the assignment
-        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee(e($user->name));
+        $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user->name);
     }
 }
