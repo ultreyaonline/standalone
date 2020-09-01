@@ -37,9 +37,7 @@
         "spatie/laravel-medialibrary": "^7.19",
         "spatie/laravel-newsletter": "^4.8",
         "spatie/laravel-permission": "^3.11",
-        "stripe/stripe-php": "^7.27",
-        "yajra/laravel-datatables-buttons": "^4.9",
-        "yajra/laravel-datatables-oracle": "^9.9"
+        "stripe/stripe-php": "^7.27"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
