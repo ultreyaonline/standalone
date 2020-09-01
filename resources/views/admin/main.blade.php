@@ -132,11 +132,6 @@
                 <button class="btn btn-primary"><i class="fa fa-calculator" aria-hidden="true"></i> Mailchimp Subscription Audit</button>
               </a></p>
 @endif
-@if(false)
-            <p><a href="/log-viewer">
-                <button class="btn btn-lg btn-primary"><i class="fa fa-server" aria-hidden="true"></i> Server Logs</button>
-              </a></p>
-@endif
           </div>
         </div>
   @endif
