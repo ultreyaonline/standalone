@@ -2,14 +2,12 @@
 
 namespace App;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class WeekendRoles extends Model
 {
-    use Cachable;
     use LogsActivity;
 
     protected static $logAttributes = ['*'];

@@ -2,14 +2,11 @@
 
 namespace App;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Community extends Model
 {
-    use Cachable;
-
     protected $table = 'tresdias_communities';
 
     /**

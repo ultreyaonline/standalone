@@ -19,7 +19,6 @@
         "fideloper/proxy": "^4.2",
         "illuminatech/config": "^1.1",
         "fruitcake/laravel-cors": "^1.0",
-        "genealabs/laravel-model-caching": "^0.8.0",
         "guzzlehttp/guzzle": "^6.5",
         "intervention/image": "^2.5",
         "lab404/laravel-impersonate": "^1.6",

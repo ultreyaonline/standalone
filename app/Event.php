@@ -6,12 +6,10 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class Event extends Model
 {
     use LogsActivity;
-    use Cachable;
 
     protected $casts = [
         'is_enabled'   => 'boolean',
