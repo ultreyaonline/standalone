@@ -82,15 +82,6 @@ return [
             'endpoint' => env('AWS_URL'),
         ],
 
-        'dropbox' => [
-            'driver' => 'dropbox',
-            'authorizationToken' => env('DROPBOX_ACCESS_TOKEN'),
-            'key' => env('DROPBOX_APP_KEY'),
-            'secret' => env('DROPBOX_APP_SECRET'),
-            'app' => 'Ultreya Website Backups',
-            'root' => '/',
-        ],
-
     ],
 
     /*
