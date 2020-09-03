@@ -36,7 +36,7 @@ class SettingsController extends Controller
 
         $this->config->save($validatedData);
 
-        return back()->with('status', 'Settings Saved.');
+        return redirect(route('admin'))->with('status', 'Settings Saved.');
     }
 
     public function restoreDefaults()

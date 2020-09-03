@@ -18,7 +18,9 @@ class Settings extends StorageDb
     /**
      * {@inheritDoc}
      *
-     * This overload method adds Timestamps and ActivityLogger
+     * This overload method adds Timestamps and calls the ActivityLogger to record the changes
+     *
+     * @NOTE: Since this is overloading the default method, watch for changes in the core model whenever upgrades are performed
      */
     public function save(array $values): bool
     {
