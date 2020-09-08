@@ -18,14 +18,9 @@ class MembersDirectory extends Component
     public $sortField = 'first'; // initial sort field
     public $sortAsc = true; // used for query and icons
 
-    protected $updatesQueryString = ['q', 'perPage'];
+    protected $paginationTheme = 'bootstrap';
 
-    public function mount($initialSearch = ''): void
-    {
-        $this->q = request('q', $initialSearch);
-
-        $this->perPage = request('perPage', 10);
-    }
+    protected $queryString = ['q', 'perPage', 'sortField', 'sortAsc'];
 
     public function render()
     {

@@ -15,20 +15,16 @@ class MembersAudit extends Component
 
     public $perPage;
     public $q = ''; // query string for search
-    public $sortField = '';
+    public $sortField = 'last';
     public $sortAsc = true; // used for query and icons
 
-    protected $updatesQueryString = ['q', 'perPage', 'sortField', 'sortAsc'];
+    protected $paginationTheme = 'bootstrap';
 
-    public function mount($initialSearch = ''): void
+    protected $queryString = ['q', 'perPage', 'sortField', 'sortAsc'];
+
+    public function mount(): void
     {
-        $this->q = request('q', $initialSearch);
-
         $this->perPage = request('perPage', config('site.pagination_threshold', 25));
-
-        $this->sortField = request('sortField', 'last');
-
-        $this->sortAsc = request('sortAsc', true);
     }
 
     public function render()
