@@ -2,9 +2,9 @@
 
 namespace App\Reports;
 
-use App\Section;
-use App\User;
-use App\WeekendRoles;
+use App\Models\Section;
+use App\Models\User;
+use App\Models\WeekendRoles;
 use Illuminate\Support\Collection;
 
 class LeadersWorksheet

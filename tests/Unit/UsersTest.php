@@ -12,7 +12,7 @@ class UsersTest extends TestCase
     /** @test */
     public function it_can_return_a_unique_hashid_attribute()
     {
-        $user = factory(\App\User::class)->create(['uidhash' => null]);
+        $user = factory(\App\Models\User::class)->create(['uidhash' => null]);
 
         $this->assertNotNull($user->uidhash);
     }

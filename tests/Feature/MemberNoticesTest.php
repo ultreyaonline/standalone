@@ -43,15 +43,15 @@ class MemberNoticesTest extends TestCase
 
         Config::set('site.preweekend_sponsor_confirmations_enabled', true);
 
-        $weekend = factory(\App\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
+        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
 
-        $member = create(\App\User::class);
-        $spouse = create(\App\User::class, ['spouseID' => $member->id]);
+        $member = create(\App\Models\User::class);
+        $spouse = create(\App\Models\User::class, ['spouseID' => $member->id]);
         $member->spouseID = $spouse->id;
         $member->save();
 
         // add a candidate
-        $candidate = factory(\App\User::class)->states('female')->create([
+        $candidate = factory(\App\Models\User::class)->states('female')->create([
             'weekend' => $weekend->shortname,
             'okay_to_send_serenade_and_palanca_details' => false,
             'interested_in_serving' => false,
@@ -64,7 +64,7 @@ class MemberNoticesTest extends TestCase
             'receive_email_weekend_general' => false,
             'sponsorID' => $member->id,
         ]);
-        $candidate_model = factory(\App\Candidate::class)->create([
+        $candidate_model = factory(\App\Models\Candidate::class)->create([
             'weekend' => $weekend->shortname,
             'w_user_id' => $candidate->id,
             'sponsor_confirmed_details' => false,

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\User;
+use App\Models\User;
 use DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -18,7 +18,7 @@ class MembersControllerTest extends TestCase
         $this->seed(DatabaseSeeder::class);
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
-        $this->admin = factory(\App\User::class)->states('active')
+        $this->admin = factory(\App\Models\User::class)->states('active')
             ->create(['first' => 'admin', 'last' => 'user'])
             ->assignRole('Admin');
     }
@@ -47,7 +47,7 @@ class MembersControllerTest extends TestCase
     /** @test */
     public function a_member_with_no_candidate_record_can_be_deleted()
     {
-        $user = factory(\App\User::class)->states('male')->create();
+        $user = factory(\App\Models\User::class)->states('male')->create();
 
         $this->assertDatabaseHas('users', ['id' => $user->id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $user->id]);

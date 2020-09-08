@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
+use App\Models\Candidate;
 use App\Events\CandidateAdded;
 use App\Events\CandidateDeleted;
 use App\Mail\InternalCandidateRegistrationNotice;
 use App\Mail\SponsorAcknowledgeCandidate;
 use App\Mail\SponsorAcknowledgeCandidateReminder;
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -335,7 +335,7 @@ class CandidateController extends Controller
     /**
      * Display the form for editing the resource.
      *
-     * @param  \App\Candidate $candidate
+     * @param  \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
     public function edit($slug = null, Candidate $candidate)

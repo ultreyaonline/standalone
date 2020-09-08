@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\WeekendAssignments;
+use App\Models\WeekendAssignments;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -27,8 +27,8 @@ class SdAssignmentsTest extends TestCase
     {
         $this->seed(); // mainly to get the Roles and Permissions defined
 
-        $rector = factory(\App\User::class)->states('female')->create();
-        $weekend = factory(\App\Weekend::class)->states('womens')->create(['rectorID' => $rector->id]);
+        $rector = factory(\App\Models\User::class)->states('female')->create();
+        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['rectorID' => $rector->id]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -36,7 +36,7 @@ class SdAssignmentsTest extends TestCase
             'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
         ]);
 
-        $sd = factory(\App\User::class)->create([
+        $sd = factory(\App\Models\User::class)->create([
             'qualified_sd' => 1,
             'active' => 1,
         ]);

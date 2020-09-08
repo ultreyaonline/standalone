@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Enums\WeekendVisibleTo;
 use Illuminate\Support\Carbon;

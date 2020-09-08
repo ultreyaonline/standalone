@@ -19,7 +19,7 @@ class CalendarTest extends TestCase
         $this->withoutExceptionHandling();
 
         $date = Carbon::tomorrow();
-        factory(\App\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        factory(\App\Models\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
 
         $response = $this->get('/calendar');
 
@@ -49,7 +49,7 @@ class CalendarTest extends TestCase
         $this->seed();
 
         $date = Carbon::tomorrow();
-        factory(\App\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        factory(\App\Models\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
 
         $response = $this->signIn()
             ->get('/events');

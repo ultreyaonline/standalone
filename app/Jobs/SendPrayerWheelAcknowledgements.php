@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use Exception;
-use App\PrayerWheelSignup;
+use App\Models\PrayerWheelSignup;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrayerWheelAcknowledgementEmail;

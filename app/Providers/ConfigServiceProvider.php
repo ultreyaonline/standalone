@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Settings;
+use App\Models\Settings;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\ServiceProvider;
 use Illuminatech\Config\PersistentRepository;

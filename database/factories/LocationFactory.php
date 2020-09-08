@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Location::class, function (Faker $faker) {
+$factory->define(App\Models\Location::class, function (Faker $faker) {
     return [
         'location_name' => $location_name = $faker->text,
         'slug' => Str::slug($location_name),

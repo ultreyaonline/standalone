@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Weekend;
-use App\PrayerWheel;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\PrayerWheel;
 use Tests\TestCase;
-use App\PrayerWheelSignup;
+use App\Models\PrayerWheelSignup;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

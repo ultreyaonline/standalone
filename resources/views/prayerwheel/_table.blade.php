@@ -70,7 +70,7 @@ if ($countPositionsRemaining > 0 && $countPositionsRemaining < 15) $signupButton
           <span class="d-print-none">{{ __('Filled') }} {{ $count > 1 ? '(x'.$count.')' : '' }}</span> &nbsp;
         @endif
         @if($isMe)<strong @can('see prayer wheel names')class="normalprint" @endcan>@endif
-          <span id="spot-{{ $timeslot }}-{{ $current }}">{{ \App\User::firstOrNew(['id' => $current])->name }}</span>
+          <span id="spot-{{ $timeslot }}-{{ $current }}">{{ \App\Models\User::firstOrNew(['id' => $current])->name }}</span>
         @if($isMe)</strong>@endif
 
         {{-- allow delete --}}

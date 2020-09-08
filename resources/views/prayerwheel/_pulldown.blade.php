@@ -5,5 +5,5 @@
   <input type="hidden" name="old" value="{{ $current }}">
 </form>
 @if($canSeePrayerWheelNames)
-  <span class="d-print-inline d-none" id="spot-{{ $timeslot }}-{{ $current }}">{{ \App\User::firstOrNew(['id' => $current], ['first'=>'', 'last'=> ''])->name }}</span>
+  <span class="d-print-inline d-none" id="spot-{{ $timeslot }}-{{ $current }}">{{ \App\Models\User::firstOrNew(['id' => $current], ['first'=>'', 'last'=> ''])->name }}</span>
 @endif

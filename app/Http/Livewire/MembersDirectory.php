@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

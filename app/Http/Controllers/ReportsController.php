@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Reports\LeadersWorksheet;
-use App\User;
-use App\Weekend;
-use App\WeekendAssignments;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\WeekendAssignments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

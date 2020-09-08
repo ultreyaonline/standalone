@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Weekend;
+use App\Models\Weekend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

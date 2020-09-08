@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Weekend::class, function (Faker $faker) {
+$factory->define(App\Models\Weekend::class, function (Faker $faker) {
 
     $mf        = $faker->randomElement(['M', 'W']);
     $gender    = ($mf == 'M') ? "Men's" : "Women's";
@@ -25,7 +25,7 @@ $factory->define(App\Weekend::class, function (Faker $faker) {
         'sendoff_couple_name' => $faker->word,
         'sendoff_location'             => 'Demo Camp',
         'weekend_location'             => 'Demo Camp',
-        'rectorID'                     => factory(\App\User::class),
+        'rectorID'                     => factory(\App\Models\User::class),
         'weekend_verse_text'           => $faker->sentence,
         'weekend_verse_reference'      => $faker->word . $faker->numberBetween(2, 18) . ":" . $faker->numberBetween(5, 55),
         'weekend_theme'                => $faker->sentences(2, true),
@@ -38,14 +38,14 @@ $factory->define(App\Weekend::class, function (Faker $faker) {
         'emergency_poc_name'           => 'someone',
         'emergency_poc_email'          => 'mail@example.com',
         'emergency_poc_phone'          => '555-1212',
-        'emergency_poc_id'             => factory(\App\User::class),
+        'emergency_poc_id'             => factory(\App\Models\User::class),
         // 'id' => function () {
-        //     return factory(App\PrayerWheel::class)->create()->id;
+        //     return factory(App\Models\PrayerWheel::class)->create()->id;
         // },
     ];
 });
 
-$factory->state(App\Weekend::class, 'mens', function (Faker $faker) {
+$factory->state(App\Models\Weekend::class, 'mens', function (Faker $faker) {
 
     $mf        = 'M';
     $gender    = ($mf == 'M') ? "Men's" : "Women's";
@@ -58,7 +58,7 @@ $factory->state(App\Weekend::class, 'mens', function (Faker $faker) {
     ];
 });
 
-$factory->state(App\Weekend::class, 'womens', function (Faker $faker) {
+$factory->state(App\Models\Weekend::class, 'womens', function (Faker $faker) {
 
     $mf        = 'W';
     $gender    = ($mf == 'M') ? "Men's" : "Women's";

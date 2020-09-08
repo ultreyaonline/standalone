@@ -20,7 +20,7 @@ class CandidateControllerTest extends TestCase
         $this->seed(DatabaseSeeder::class);
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
-        $this->admin = factory(\App\User::class)->states('active')
+        $this->admin = factory(\App\Models\User::class)->states('active')
             ->create(['first' => 'admin', 'last' => 'user'])
             ->assignRole('Admin');
 
@@ -36,7 +36,7 @@ class CandidateControllerTest extends TestCase
     {
         // A. Single, deleted via Member Delete
 
-        $candidate = factory(\App\Candidate::class)->states('male')->create();
+        $candidate = factory(\App\Models\Candidate::class)->states('male')->create();
 
         $this->assertDatabaseHas('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('candidates', ['m_user_id' => $candidate->m_user_id]);
@@ -50,7 +50,7 @@ class CandidateControllerTest extends TestCase
 
         // B. Single, deleted via Candidate Delete
 
-        $candidate = factory(\App\Candidate::class)->states('male')->create();
+        $candidate = factory(\App\Models\Candidate::class)->states('male')->create();
 
         $this->assertDatabaseHas('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('candidates', ['m_user_id' => $candidate->m_user_id]);
@@ -64,7 +64,7 @@ class CandidateControllerTest extends TestCase
 
         // C. Couple - deleted as a pair via Candidate Delete
 
-        $candidate = factory(\App\Candidate::class)->states('couple')->create();
+        $candidate = factory(\App\Models\Candidate::class)->states('couple')->create();
 
         $this->assertDatabaseHas('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('users', ['id' => $candidate->w_user_id]);
@@ -84,7 +84,7 @@ class CandidateControllerTest extends TestCase
 
         // D. Couple - deleted individually via Member Delete
 
-        $candidate = factory(\App\Candidate::class)->states('couple')->create();
+        $candidate = factory(\App\Models\Candidate::class)->states('couple')->create();
 
         $this->assertDatabaseHas('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('users', ['id' => $candidate->w_user_id]);

@@ -4,13 +4,13 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\WeekendRoles::class, function (Faker $faker) {
+$factory->define(App\Models\WeekendRoles::class, function (Faker $faker) {
     return [
         'RoleName' => $faker->word,
         'ReportName' => $faker->word,
         'sortorder' => $faker->randomNumber(),
         'section_id' => function () {
-            return factory(App\Section::class)->create()->id;
+            return factory(App\Models\Section::class)->create()->id;
         },
         'head_id' => $faker->randomNumber(),
         'isCoreTalk' => $faker->boolean,

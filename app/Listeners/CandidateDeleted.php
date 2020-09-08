@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\CandidateDeletedNotification;
 

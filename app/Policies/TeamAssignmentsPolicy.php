@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use App\Enums\WeekendVisibleTo;
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
@@ -50,7 +50,7 @@ class TeamAssignmentsPolicy
     /**
      * Determine whether the user can make assignments
      *
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @param $weekend
      * @return mixed
      */
@@ -64,7 +64,7 @@ class TeamAssignmentsPolicy
      * Determine whether the user can update the Team
      * Restricted to Rector, Head Cha, Men/Women Leader
      *
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @param Weekend $weekend
      * @return mixed
      */
@@ -94,8 +94,8 @@ class TeamAssignmentsPolicy
     /**
      * Determine whether the user can delete the assignment.
      *
-     * @param  \App\User $user
-     * @param  \App\WeekendAssignments $assignment
+     * @param  \App\Models\User $user
+     * @param  \App\Models\WeekendAssignments $assignment
      *
      * @return mixed
      */

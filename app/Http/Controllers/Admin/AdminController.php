@@ -30,7 +30,7 @@ class AdminController extends Controller
     {
         abort_unless($request->user()->can('edit members'), 403, 'Only administrators can audit/edit members');
 
-        $users = \App\User::select('*')
+        $users = \App\Models\User::select('*')
             ->orderBy('last')
             ->orderBy('first')
             ->get();
@@ -59,7 +59,7 @@ class AdminController extends Controller
         $subject = $request->input('subject', 'Admin Email Test');
         $message = $request->input('message', 'This is just a simple test of the email subsystem. Things to check: to-address, from-address, replyTo-address, and whether it went to spam folder.');
 
-        $recipients = \App\User::active()
+        $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
             ->role('Admin')
             ->notunsubscribed();

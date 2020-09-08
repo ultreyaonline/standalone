@@ -29,6 +29,6 @@ class EventSeeder extends Seeder
             'contact_id'       => 1,
             'posted_by'        => 1,
         ];
-        App\Event::create($data);
+        App\Models\Event::create($data);
     }
 }

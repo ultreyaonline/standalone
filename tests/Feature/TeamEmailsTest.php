@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use DatabaseSeeder;
 use Tests\TestCase;
-use App\WeekendAssignments;
+use App\Models\WeekendAssignments;
 use Illuminate\Support\Carbon;
 use App\Enums\WeekendVisibleTo;
 use App\Mail\MessageToTeamMembers;
@@ -42,9 +42,9 @@ class TeamEmailsTest extends TestCase
         Mail::fake();
 
         // assign a rector to a weekend
-        $rector = factory(\App\User::class)->states('female')->create();
+        $rector = factory(\App\Models\User::class)->states('female')->create();
         $rector->assignRole('Member');
-        $weekend = factory(\App\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
+        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -53,7 +53,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a section head to that weekend
-        $sectionHead = factory(\App\User::class)->states('female')->create();
+        $sectionHead = factory(\App\Models\User::class)->states('female')->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 27, // head chapel
@@ -62,7 +62,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member to that weekend
-        $user = factory(\App\User::class)->states('female')->create($this->member_attributes);
+        $user = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
         $user->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -72,7 +72,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = factory(\App\User::class)->states('female')->create([
+        $candidate = factory(\App\Models\User::class)->states('female')->create([
             'weekend' => $weekend->shortname,
             'okay_to_send_serenade_and_palanca_details' => false,
             'interested_in_serving' => false,
@@ -84,7 +84,7 @@ class TeamEmailsTest extends TestCase
             'receive_email_community_news' => false,
             'receive_email_weekend_general' => false,
         ]);
-        $candidate_model = factory(\App\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
+        $candidate_model = factory(\App\Models\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
 
         // section head can see "send email to entire team" dialog
@@ -135,9 +135,9 @@ class TeamEmailsTest extends TestCase
         Mail::fake();
 
         // assign a rector to a weekend
-        $rector = factory(\App\User::class)->states('female')->create();
+        $rector = factory(\App\Models\User::class)->states('female')->create();
         $rector->assignRole('Member');
-        $weekend = factory(\App\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
+        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -146,7 +146,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a section head to that weekend
-        $sectionHead = factory(\App\User::class)->states('female')->create();
+        $sectionHead = factory(\App\Models\User::class)->states('female')->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 27, // head chapel
@@ -155,7 +155,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member in that same section
-        $user = factory(\App\User::class)->states('female')->create($this->member_attributes);
+        $user = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
         $user->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -165,7 +165,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member in that same section
-        $user2 = factory(\App\User::class)->states('female')->create($this->member_attributes);
+        $user2 = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
         $user2->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -175,7 +175,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = factory(\App\User::class)->states('female')->create([
+        $candidate = factory(\App\Models\User::class)->states('female')->create([
             'weekend' => $weekend->shortname,
             'okay_to_send_serenade_and_palanca_details' => false,
             'interested_in_serving' => false,
@@ -187,7 +187,7 @@ class TeamEmailsTest extends TestCase
             'receive_email_community_news' => false,
             'receive_email_weekend_general' => false,
         ]);
-        $candidate_model = factory(\App\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
+        $candidate_model = factory(\App\Models\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
 
         // section head can see selection of sections
@@ -229,9 +229,9 @@ class TeamEmailsTest extends TestCase
         Mail::fake();
 
         // assign a rector to a weekend
-        $rector = factory(\App\User::class)->states('female')->create();
+        $rector = factory(\App\Models\User::class)->states('female')->create();
         $rector->assignRole('Member');
-        $weekend = factory(\App\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
+        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['visibility_flag' => WeekendVisibleTo::Community]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -240,7 +240,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a section head to that weekend
-        $sectionHead = factory(\App\User::class)->states('female')->create();
+        $sectionHead = factory(\App\Models\User::class)->states('female')->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 27, // head chapel
@@ -249,7 +249,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = factory(\App\User::class)->states('female')->create([
+        $candidate = factory(\App\Models\User::class)->states('female')->create([
             'weekend' => $weekend->shortname,
             'okay_to_send_serenade_and_palanca_details' => false,
             'interested_in_serving' => false,
@@ -261,10 +261,10 @@ class TeamEmailsTest extends TestCase
             'receive_email_community_news' => false,
             'receive_email_weekend_general' => false,
         ]);
-        $candidate_model = factory(\App\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
+        $candidate_model = factory(\App\Models\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
         // add a 2nd candidate without an email address
-        $candidate2 = factory(\App\User::class)->states('female')->create([
+        $candidate2 = factory(\App\Models\User::class)->states('female')->create([
             'weekend' => $weekend->shortname,
             'email' => '',
             'okay_to_send_serenade_and_palanca_details' => false,
@@ -277,7 +277,7 @@ class TeamEmailsTest extends TestCase
             'receive_email_community_news' => false,
             'receive_email_weekend_general' => false,
         ]);
-        $candidate_model = factory(\App\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate2->id]);
+        $candidate_model = factory(\App\Models\Candidate::class)->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate2->id]);
 
 
         // section head can see "send email to entire team" dialog

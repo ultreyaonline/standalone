@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\PrayerWheelChangeNotification;
-use App\PrayerWheel;
-use App\PrayerWheelSignup;
-use App\User;
-use App\Weekend;
+use App\Models\PrayerWheel;
+use App\Models\PrayerWheelSignup;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -100,7 +100,7 @@ class PrayerWheelController extends Controller
                 }
                 $names = [];
                 foreach ($signups as $person_id) {
-                    $names[] = $person_id ? $this->csvClean(\App\User::firstOrNew(['id' => $person_id])->name) : ' ';
+                    $names[] = $person_id ? $this->csvClean(\App\Models\User::firstOrNew(['id' => $person_id])->name) : ' ';
                 }
                 $csvData[] = $spot + ['names' => '"' . implode(', ', $names) . '"'];
             }

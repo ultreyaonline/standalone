@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\User;
-use App\PrayerWheel;
+use App\Models\User;
+use App\Models\PrayerWheel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;

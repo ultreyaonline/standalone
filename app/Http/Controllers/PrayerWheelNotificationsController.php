@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Jobs\SendPrayerWheelReminderEmails;
 use App\Mail\PrayerWheelInviteEmail;
 use App\Mail\PrayerWheelReminderEmail;
-use App\PrayerWheel;
-use App\User;
-use App\Weekend;
+use App\Models\PrayerWheel;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -81,7 +81,7 @@ Have a blessed week
 
         // @TODO: Store $message into clipboard table, as default for next composed message
 
-        $recipients = \App\User::active()
+        $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
             ->where('receive_prayer_wheel_invites', true)
             ->role('Member')

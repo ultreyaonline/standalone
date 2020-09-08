@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MessageToSponsors;
-use App\User;
-use App\Weekend;
-use App\Candidate;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\Candidate;
 use App\Mail\CandidateReminderEmail;
 use App\Mail\WebsiteLoginInstructions;
 use App\Mail\CandidateConfirmationEmail;

@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use App\Permission;

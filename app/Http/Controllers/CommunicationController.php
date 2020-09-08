@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\HowToSponsor;
 use App\Mail\MessageToCommunity;
 use App\Mail\MessageToTeamMembers;
-use App\Section;
-use App\User;
-use App\Weekend;
-use App\WeekendRoles;
+use App\Models\Section;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\WeekendRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -123,7 +123,7 @@ class CommunicationController extends Controller
             $teamRecipients = $teamRecipients->whereIn('roleID', $sectionRoleIds);
         }
 
-        $team = \App\User::whereIn('id', $teamRecipients->pluck('memberID'))
+        $team = \App\Models\User::whereIn('id', $teamRecipients->pluck('memberID'))
             ->role('Member')
             ->where('email', '!=', '')// skip blank email addresses
             ->get();
@@ -236,7 +236,7 @@ class CommunicationController extends Controller
             }
         }
 
-        $recipients = \App\User::active()
+        $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
             ->role('Member')
             ->notunsubscribed();
@@ -295,7 +295,7 @@ class CommunicationController extends Controller
     {
         abort_unless(auth()->user()->hasRole('Admin'), 403, 'Only administrators can access this action.');
 
-        $recipients = \App\User::active()
+        $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
             ->notunsubscribed()
             ->onlyLocal()

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
-use App\Weekend;
+use App\Models\Candidate;
+use App\Models\Weekend;
 use Illuminate\Http\Request;
 
 class PreWeekendController extends Controller

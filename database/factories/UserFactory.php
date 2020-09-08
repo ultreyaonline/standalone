@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Models\User::class, function (Faker $faker) {
 //    static $password;
 
     $mf = $faker->randomElement(['M', 'W']);
@@ -43,11 +43,11 @@ $factory->define(App\User::class, function (Faker $faker) {
         'created_by'        => 'Faker',
 
         // 'spouseID' => function () {
-        //     return factory(App\User::class)->create()->id;
+        //     return factory(App\Models\User::class)->create()->id;
         // },
         'sponsor' => $faker->name,
         // 'sponsorID' => function () {
-        //     return factory(App\User::class)->create()->id;
+        //     return factory(App\Models\User::class)->create()->id;
         // },
 
         'interested_in_serving' => $faker->boolean(90),
@@ -68,11 +68,11 @@ $factory->define(App\User::class, function (Faker $faker) {
 
     ];
 });
-$factory->state(App\User::class, 'generic', function (Faker $faker) {
+$factory->state(App\Models\User::class, 'generic', function (Faker $faker) {
     return [];
 });
 
-$factory->state(App\User::class, 'male', function (Faker $faker) {
+$factory->state(App\Models\User::class, 'male', function (Faker $faker) {
     return [
         'first'  => $faker->firstNameMale,
         'gender' => 'M',
@@ -80,7 +80,7 @@ $factory->state(App\User::class, 'male', function (Faker $faker) {
     ];
 });
 
-$factory->state(App\User::class, 'female', function (Faker $faker) {
+$factory->state(App\Models\User::class, 'female', function (Faker $faker) {
     return [
         'first'  => $faker->firstNameFemale,
         'gender' => 'W',
@@ -88,20 +88,20 @@ $factory->state(App\User::class, 'female', function (Faker $faker) {
     ];
 });
 
-$factory->state(App\User::class, 'active', function (Faker $faker) {
+$factory->state(App\Models\User::class, 'active', function (Faker $faker) {
     return [
         'active' => true,
     ];
 });
 
-$factory->state(App\User::class, 'inactive', function (Faker $faker) {
+$factory->state(App\Models\User::class, 'inactive', function (Faker $faker) {
     return [
         'active' => false,
     ];
 });
 
 // @TODO - afterCreatingState can be incorporated only if Roles have been seeded
-//$factory->afterCreatingState(App\User::class, 'active', function ($user, $faker) {
+//$factory->afterCreatingState(App\Models\User::class, 'active', function ($user, $faker) {
 //    $user->assignRole('Member');
 //});
 

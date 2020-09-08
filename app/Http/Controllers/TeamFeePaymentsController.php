@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
+use App\Models\Candidate;
 use App\Mail\InternalCandidateRegistrationNotice;
 use App\Mail\SponsorAcknowledgeCandidate;
 use App\Notifications\TeamFeePaymentsNotification;
-use App\TeamFeePayments;
-use App\User;
-use App\Weekend;
-use App\WeekendAssignments;
+use App\Models\TeamFeePayments;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\WeekendAssignments;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;

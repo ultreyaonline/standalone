@@ -4,13 +4,13 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\TeamFeePayments::class, function (Faker $faker) {
+$factory->define(App\Models\TeamFeePayments::class, function (Faker $faker) {
     return [
         'weekendID' => function () {
-            return factory(App\Weekend::class)->create()->id;
+            return factory(App\Models\Weekend::class)->create()->id;
         },
         'memberID' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(App\Models\User::class)->create()->id;
         },
         'total_paid' => $faker->randomFloat(),
         'date_paid' => $faker->date(),

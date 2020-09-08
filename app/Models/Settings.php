@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Support\Facades\Date;
 use Illuminatech\Config\StorageDb;

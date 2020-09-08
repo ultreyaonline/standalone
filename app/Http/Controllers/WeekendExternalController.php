@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\WeekendAssignmentsExternal;
+use App\Models\User;
+use App\Models\WeekendAssignmentsExternal;
 use Illuminate\Http\Request;
 
 class WeekendExternalController extends Controller

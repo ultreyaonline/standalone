@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
-use App\User;
-use App\Weekend;
+use App\Models\Candidate;
+use App\Models\User;
+use App\Models\Weekend;
 use App\Mail\SponsorFollowup;
 use App\Mail\CandidateBecomesPescador;
 use App\Mail\WebsiteLoginInstructions;

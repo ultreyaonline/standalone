@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Weekend;
+use App\Models\Weekend;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

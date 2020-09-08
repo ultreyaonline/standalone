@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Section::class, function (Faker $faker) {
+$factory->define(App\Models\Section::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'sort_order' => $faker->randomNumber(),

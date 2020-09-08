@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Event::class, function (Faker $faker) {
+$factory->define(App\Models\Event::class, function (Faker $faker) {
     $type = $faker->randomElement(['secuela', 'reunion', 'secretariat', 'weekend']);
 
     return [
@@ -25,8 +25,8 @@ $factory->define(App\Event::class, function (Faker $faker) {
         'end_datetime'     => $start->add(new DateInterval('P1D')),
         'is_enabled'       => 1,
         'is_public'        => ($type == 'secuela' || $type == 'weekend') ? 1 : 0,
-        'contact_id'       => factory(\App\User::class),
-        'posted_by'        => factory(\App\User::class),
+        'contact_id'       => factory(\App\Models\User::class),
+        'posted_by'        => factory(\App\Models\User::class),
         'recurring_end_datetime' => null,
         'expiration_date' => null,
     ];

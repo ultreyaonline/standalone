@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PaymentOnline_Confirmation;
-use App\Secretariat;
-use App\User;
+use App\Models\Secretariat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 

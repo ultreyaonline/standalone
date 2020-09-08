@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Weekend;
-use App\WeekendAssignments;
-use App\WeekendRoles;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\WeekendAssignments;
+use App\Models\WeekendRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;

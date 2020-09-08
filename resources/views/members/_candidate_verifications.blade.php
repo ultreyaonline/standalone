@@ -2,7 +2,7 @@
 <?php
 $candidates = $ourCandidates->filter(function ($person) {
     // filter to display only unconfirmed candidates
-    $candidate = \App\Candidate::query()
+    $candidate = \App\Models\Candidate::query()
         ->where('m_user_id', $person->id)
         ->orWhere('w_user_id', $person->id)
         ->first();

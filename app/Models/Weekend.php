@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Enums\WeekendVisibleTo;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
@@ -544,7 +544,7 @@ class Weekend extends Model implements HasMedia
      * Determine who can "see" the team, even if it's not released yet
      * NOTE: c/f the \App\Policies\TeamAssignmentsPolicy for EDIT rights.
      *
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @return bool
      */
     public function teamCanBeViewedBy(User $user)

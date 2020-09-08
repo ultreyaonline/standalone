@@ -26,6 +26,6 @@ class SecretariatSeeder extends Seeder
             'pastpresident' => 1,
             'sadvisor'      => 1,
         ];
-        App\Secretariat::create($data);
+        App\Models\Secretariat::create($data);
     }
 }

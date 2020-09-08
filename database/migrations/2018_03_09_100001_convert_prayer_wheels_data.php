@@ -1,8 +1,8 @@
 <?php
 
 //use App\OldPrayerWheel;
-//use App\PrayerWheel;
-//use App\PrayerWheelSignup;
+//use App\Models\PrayerWheel;
+//use App\Models\PrayerWheelSignup;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

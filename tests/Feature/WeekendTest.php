@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Enums\WeekendVisibleTo;
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use Tests\TestCase;
-use App\PrayerWheel;
+use App\Models\PrayerWheel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;

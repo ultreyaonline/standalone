@@ -33,10 +33,10 @@
                 <div title="{{ $logItem->changes() }}">{!! $logItem->description !!}</div>
               </td>
               <td>@if($logItem->causer)
-                  {{ $logItem->causer_type !== 'App\User' ? $logItem->causer_type : '' }}
+                  {{ $logItem->causer_type !== 'App\Models\User' ? $logItem->causer_type : '' }}
                   <a href="{!! action('MembersController@show', [$logItem->causer->id]) !!}">{{ $logItem->causer->name }}</a>
                   @endif
-                @if($logItem->subject_type === 'App\FailedLoginAttempt')
+                @if($logItem->subject_type === 'App\Models\FailedLoginAttempt')
                   <span class="small">{{ $logItem->changes()['attributes']['username'] ?? '' }}</span>
                 @endif
                 &nbsp;</td>

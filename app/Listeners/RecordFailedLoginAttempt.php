@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\FailedLoginAttempt;
+use App\Models\FailedLoginAttempt;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;

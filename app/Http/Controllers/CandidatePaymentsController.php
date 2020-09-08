@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Candidate;
+use App\Models\Candidate;
 use App\Mail\InternalCandidateRegistrationNotice;
 use App\Mail\SponsorAcknowledgeCandidate;
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -68,7 +68,7 @@ class CandidatePaymentsController extends Controller
     /**
      * Display the form for editing candidate payments
      *
-     * @param  \App\Candidate $candidate
+     * @param  \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
     public function edit($slug = null, Candidate $candidate)

@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\TeamFeePayments;
-use App\User;
+use App\Models\TeamFeePayments;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;

@@ -3,7 +3,7 @@
 namespace Tests;
 
 use App\Http\Middleware\VerifyCsrfToken;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
@@ -62,7 +62,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signInAsGuest($user = null)
     {
-        $this->user = $user ?: $this->user ?: create(\App\User::class);
+        $this->user = $user ?: $this->user ?: create(\App\Models\User::class);
         $this->actingAs($this->user);
 
         return $this;
@@ -70,7 +70,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signIn($user = null)
     {
-        $this->user = $user ?: $this->user ?: create(\App\User::class);
+        $this->user = $user ?: $this->user ?: create(\App\Models\User::class);
         $this->user->assignRole('Member');
         $this->actingAs($this->user);
 

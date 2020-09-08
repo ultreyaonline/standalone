@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Spatie\Newsletter\NewsletterFacade as Mailchimp;
 
 class MailchimpSubscriptionController extends Controller
@@ -113,7 +113,7 @@ class MailchimpSubscriptionController extends Controller
         }
 
         $results =
-        $members  = \App\User::onlyLocal()->get();
+        $members  = \App\Models\User::onlyLocal()->get();
         return view('admin.mailchimp_audit')->withMembers($results);
     }
 

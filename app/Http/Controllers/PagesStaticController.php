@@ -30,7 +30,7 @@ class PagesStaticController extends Controller
 
     public function secretariat()
     {
-        $secretariat = \App\Secretariat::first();
+        $secretariat = \App\Models\Secretariat::first();
 
         return view('pages.static.secretariat', ['s' => $secretariat]);
     }

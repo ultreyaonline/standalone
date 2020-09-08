@@ -4,10 +4,10 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Candidate::class, function (Faker $faker) {
+$factory->define(App\Models\Candidate::class, function (Faker $faker) {
     return [
         'm_user_id' => function () {
-            return factory(\App\User::class)->states('male')->create([
+            return factory(\App\Models\User::class)->states('male')->create([
                 'weekend' => 'FAKE2',
                 'okay_to_send_serenade_and_palanca_details' => false,
                 'interested_in_serving' => false,
@@ -21,7 +21,7 @@ $factory->define(App\Candidate::class, function (Faker $faker) {
             ])->id;
         },
         'w_user_id' => function () {
-            return factory(\App\User::class)->states('female')->create([
+            return factory(\App\Models\User::class)->states('female')->create([
                 'weekend' => 'FAKE2',
                 'okay_to_send_serenade_and_palanca_details' => false,
                 'interested_in_serving' => false,
@@ -80,20 +80,20 @@ $factory->define(App\Candidate::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(App\Candidate::class, 'male', function (Faker $faker) {
+$factory->state(App\Models\Candidate::class, 'male', function (Faker $faker) {
     return [
         // default state generates a couple, so return null for other gender
         'w_user_id' => null,
     ];
 });
 
-$factory->state(App\Candidate::class, 'female', function (Faker $faker) {
+$factory->state(App\Models\Candidate::class, 'female', function (Faker $faker) {
     return [
         'm_user_id' => null,
     ];
 });
 
-$factory->state(App\Candidate::class, 'couple', function (Faker $faker) {
+$factory->state(App\Models\Candidate::class, 'couple', function (Faker $faker) {
     return [
         // default state generates a couple, so nothing special required here
     ];

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TeamAssignmentStatus;
-use App\User;
-use App\Weekend;
-use App\WeekendAssignments;
-use App\WeekendRoles;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\WeekendAssignments;
+use App\Models\WeekendRoles;
 use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -167,7 +167,7 @@ class TeamAssignmentController extends Controller
 
         if (! $assignment) {
             flash()->error(
-                'Error: It appears you were trying to edit the [' . $position->RoleName . '] assignment for [' . $member->name . '], but that assignment no longer exists.   
+                'Error: It appears you were trying to edit the [' . $position->RoleName . '] assignment for [' . $member->name . '], but that assignment no longer exists.
                  This sometimes happens if you click the [Back] button but unexpectedly get an old list.
                  The latest list is now shown below.
                  Please try your edit again.'

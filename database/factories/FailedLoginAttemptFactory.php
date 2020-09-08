@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\FailedLoginAttempt::class, function (Faker $faker) {
+$factory->define(App\Models\FailedLoginAttempt::class, function (Faker $faker) {
     return [
         'user_id' => $faker->randomNumber(),
         'username' => $faker->userName,

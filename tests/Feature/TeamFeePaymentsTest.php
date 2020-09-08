@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Enums\WeekendVisibleTo;
-use App\User;
-use App\Weekend;
-use App\TeamFeePayments;
-use App\WeekendAssignments;
+use App\Models\User;
+use App\Models\Weekend;
+use App\Models\TeamFeePayments;
+use App\Models\WeekendAssignments;
 use DatabaseSeeder;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -35,13 +35,13 @@ class TeamFeePaymentsTest extends TestCase
             'active'   => true,
         ];
 
-        $rector = factory(\App\User::class)->states('male')->create();
+        $rector = factory(\App\Models\User::class)->states('male')->create();
         $rector->assignRole('Member');
 
         // make a weekend
         $this->weekend = factory(Weekend::class)->create([
             'weekend_MF' => 'M',
-            'visibility_flag' => WeekendVisibleTo::Community, 
+            'visibility_flag' => WeekendVisibleTo::Community,
             'rectorID' => $rector->id
         ]);
         WeekendAssignments::create([

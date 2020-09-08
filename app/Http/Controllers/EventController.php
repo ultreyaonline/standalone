@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Location;
-use App\User;
-use App\Weekend;
+use App\Models\Event;
+use App\Models\Location;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;

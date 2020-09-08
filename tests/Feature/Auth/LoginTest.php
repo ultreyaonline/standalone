@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;

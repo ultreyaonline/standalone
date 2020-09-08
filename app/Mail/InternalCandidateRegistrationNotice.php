@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
-use App\Candidate;
-use App\User;
-use App\Weekend;
+use App\Models\Candidate;
+use App\Models\User;
+use App\Models\Weekend;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

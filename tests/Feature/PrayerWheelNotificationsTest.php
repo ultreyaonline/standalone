@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Weekend;
+use App\Models\User;
+use App\Models\Weekend;
 use DatabaseSeeder;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
-use App\PrayerWheel;
-use App\PrayerWheelSignup;
+use App\Models\PrayerWheel;
+use App\Models\PrayerWheelSignup;
 use App\Mail\PrayerWheelInviteEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrayerWheelReminderEmail;
