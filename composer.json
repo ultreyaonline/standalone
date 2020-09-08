@@ -25,7 +25,6 @@
         "laracasts/flash": "^3.1",
         "laravel/framework": "^7.27",
         "laravel/slack-notification-channel": "^2.2",
-        "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.4",
         "laravel/ui": "^2.2",
         "league/flysystem-aws-s3-v3": "^1.0",
@@ -94,7 +93,6 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "@php artisan telescope:publish --ansi",
             "@php artisan ide-helper:meta",
             "@php artisan ide-helper:generate"
         ]
