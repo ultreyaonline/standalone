@@ -28,6 +28,7 @@
           @include('members._prayerwheel_signups')
           @includeWhen(config('site.preweekend_sponsor_confirmations_enabled'), 'members._candidate_verifications')
 
+        @can('view members')
         <div class="card my-2">
           <div class="card-header card-title">Community</div>
           <div class="card-body">
@@ -51,6 +52,7 @@
             <p><a href="{{ url('/secretariat') }}"><i class="fa fa-university"></i> Secretariat</a></p>
           </div>
         </div>
+        @endcan
 
         @can('view members')
         <div class="card my-2">
@@ -137,6 +139,7 @@
         @endcan
 
 
+      @can('view members')
         <div class="card my-2">
           <div class="card-header card-title">Fees {{ config('site.payments_accepts_donations', false) === 'fees and donations' ? 'and Donations' : '' }}</div>
           <div class="card-body">
@@ -153,6 +156,7 @@
             @endcan
           </div>
         </div>
+      @endcan
 
 
       </div>
