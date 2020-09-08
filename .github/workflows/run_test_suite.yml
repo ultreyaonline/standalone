@@ -39,7 +39,7 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/testing.sqlite
-        run: php vendor/bin/phpunit --printer="PHPUnit\TextUI\ResultPrinter"
+        run: php vendor/bin/phpunit
 
       # DUSK ACCEPTANCE TESTING
       #- name: Install Latest Chrome Driver
