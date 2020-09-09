@@ -73,7 +73,7 @@ class SponsorAcknowledgeCandidate extends Mailable
         $this->candidate = $candidate;
         $this->weekends = Weekend::activeDescending()->get();
         $this->weekend  = Weekend::nextWeekend()->first() ?? Weekend::activeDescending()->where('weekend_MF', 'M')->first();
-        $this->confirm_url = action('CandidateController@confirm', ['candidate' => $candidate->id, 'hash' => $candidate->hash_sponsor_confirm]);
+        $this->confirm_url = action('App\Http\Controllers\CandidateController@confirm', ['candidate' => $candidate->id, 'hash' => $candidate->hash_sponsor_confirm]);
 
         $title = 'Sponsorship Acknowledgement';
         if (config('site.preweekend_sponsor_confirmations_enabled')) {

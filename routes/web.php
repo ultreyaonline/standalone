@@ -15,6 +15,7 @@ use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailchimpSubscriptionController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\PagesStaticController;
@@ -76,7 +77,7 @@ Route::delete('/members/{user}/mailchimp/unsubscribe', [MailchimpSubscriptionCon
 Route::delete('/members/{user}/mailchimp/archive', [MailchimpSubscriptionController::class, 'archive']);
 Route::delete('/members/{user}/mailchimp/deletePermanently', [MailchimpSubscriptionController::class, 'deletePermanently']);
 
-Route::resource('/members', 'MembersController');
+Route::resource('/members', MembersController::class);
 Route::get('/directory', [MembersController::class, 'index'])->name('directory'); // alias
 Route::permanentRedirect('/community', '/directory');
 
@@ -104,7 +105,7 @@ Route::get('/teamguide/meditation', [PagesStaticController::class, 'meditation']
 Route::get('/teamguide/decolores', [PagesStaticController::class, 'decolores']);
 
 
-Route::resource('/events', 'EventController');
+Route::resource('/events', EventController::class);
 Route::get('/events/{event_id}/ical', [EventController::class, 'download'])->where(['event_id' => 'w?[\d]+']);
 
 Route::get('weekend/{weekend}/team', [TeamController::class, 'show']); // alias
@@ -116,7 +117,7 @@ Route::get('weekend/{weekend}/roster/candidatecsv-download', [TeamController::cl
 Route::get('weekend/{weekend}/roster/team-emails', [TeamController::class, 'show']);
 Route::get('weekend/{weekend}/roster/team-email-positions', [TeamController::class, 'show']);
 
-Route::resource('weekend', 'WeekendController')->name('index', 'weekend');
+Route::resource('weekend', WeekendController::class)->name('index', 'weekend');
 Route::patch('weekend/{weekend}/updatephoto', [WeekendController::class, 'updateTeamPhoto']);
 Route::delete('weekend/{weekend}/deletephoto', [WeekendController::class, 'deleteTeamPhoto']);
 Route::patch('weekend/{weekend}/updatebanner', [WeekendController::class, 'updateBannerPhoto']);
@@ -266,7 +267,7 @@ Route::get('/fees', [PaymentController::class, 'displayForm'])->name('fees');
 /***********************************************/
 
 
-Route::resource('location', 'LocationController');
+Route::resource('location', LocationController::class);
 
 Route::impersonate();
 

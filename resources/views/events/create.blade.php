@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-header">Add Community Event</div>
           <div class="card-body">
-            <form class="form-horizontal row" role="form" method="POST" action="{{ action('EventController@store') }}">
+            <form class="form-horizontal row" role="form" method="POST" action="{{ action('App\Http\Controllers\EventController@store') }}">
               @csrf
 
               @include('events._input_fields')

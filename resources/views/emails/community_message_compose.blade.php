@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="card">
-          <form class="form-horizontal" role="form" method="POST" action="{{ action('CommunicationController@emailEntireCommunity') }}" enctype="multipart/form-data">
+          <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\CommunicationController@emailEntireCommunity') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-header"><strong>Message to Community</strong></div>
             <div class="card-header text-danger"><strong>NOTE: This will go to EVERYONE as soon as you click Send!</strong></div>

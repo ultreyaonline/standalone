@@ -31,7 +31,7 @@
           <div class="card-header"><strong>Message to Team</strong></div>
           <div class="card-body">
 
-            <form class="form-horizontal" role="form" method="POST" action="{{ action('CommunicationController@emailTeamMembers', $weekend) }}" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend) }}" enctype="multipart/form-data">
               @csrf
 
               <div class="form-group row">

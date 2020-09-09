@@ -34,7 +34,7 @@
               </td>
               <td>@if($logItem->causer)
                   {{ $logItem->causer_type !== 'App\Models\User' ? $logItem->causer_type : '' }}
-                  <a href="{!! action('MembersController@show', [$logItem->causer->id]) !!}">{{ $logItem->causer->name }}</a>
+                  <a href="{!! action('App\Http\Controllers\MembersController@show', [$logItem->causer->id]) !!}">{{ $logItem->causer->name }}</a>
                   @endif
                 @if($logItem->subject_type === 'App\Models\FailedLoginAttempt')
                   <span class="small">{{ $logItem->changes()['attributes']['username'] ?? '' }}</span>

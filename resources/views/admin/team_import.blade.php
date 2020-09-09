@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-header">Import Team List</div>
           <div class="card-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ action('TeamController@import') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\TeamController@import') }}">
               @csrf
 
               <div class="form-group row">

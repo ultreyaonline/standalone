@@ -11,7 +11,7 @@ Change Person: {{ $weekend->weekend_full_name }}
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
         <div class="card">
-          <form class="form-horizontal" role="form" method="POST" action="{{ action('TeamAssignmentController@update', ['weekend'=>$weekend->id, 'oldposition'=>$assignment->roleID, 'member'=>$assignment->user->id]) }}">
+          <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\TeamAssignmentController@update', ['weekend'=>$weekend->id, 'oldposition'=>$assignment->roleID, 'member'=>$assignment->user->id]) }}">
             @csrf @method('patch')
 
           <div class="card-header card-title">{{ $weekend->weekend_full_name }}</div>

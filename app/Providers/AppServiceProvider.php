@@ -60,5 +60,7 @@ class AppServiceProvider extends ServiceProvider
 
             return 'data:attachment/csv;charset=utf-8,' . $encodedCsvString;
         });
+
+        Paginator::useBootstrap();
     }
 }

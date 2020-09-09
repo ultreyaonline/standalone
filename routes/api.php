@@ -15,9 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::fallback(function () {
-    return response()->json(['message' => 'Not Found.'], 404);
-})->name('api.fallback.404');
-
 // This is for triggering deployments from a CI service like Github Actions after tests have passed
 Route::post('deploy', [DeploymentController::class, 'handle']);

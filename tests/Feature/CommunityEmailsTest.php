@@ -74,7 +74,7 @@ class CommunityEmailsTest extends TestCase
         $member->assignRole('Member');
 
         $this->actingAs($user)
-            ->post(action('CommunicationController@emailEntireCommunity'), [
+            ->post(action('App\Http\Controllers\CommunicationController@emailEntireCommunity'), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
         ]);
@@ -139,7 +139,7 @@ class CommunityEmailsTest extends TestCase
 
         $this->actingAs($user)
             ->withoutExceptionHandling()
-            ->post(action('CommunicationController@emailEntireCommunity'), [
+            ->post(action('App\Http\Controllers\CommunicationController@emailEntireCommunity'), [
                 'subject' => 'TheSubject',
                 'message' => 'TheMessage',
                 'mail_to_gender' => 'W',

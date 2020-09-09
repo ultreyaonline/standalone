@@ -27,7 +27,7 @@
                         @endif
                       @endif
                       @can('delete candidates')
-                          <form action="{{ action('CandidateController@destroy', ['candidate' => $candidate->id]) }}" role="form" method="POST" class="form-inline float-right d-print-none" onsubmit="return ConfirmDelete();">
+                          <form action="{{ action('App\Http\Controllers\CandidateController@destroy', ['candidate' => $candidate->id]) }}" role="form" method="POST" class="form-inline float-right d-print-none" onsubmit="return ConfirmDelete();">
                               @csrf @method('delete')
                           <button type="submit" class="btn btn-danger"><i class="fa fa-btn fa-times"></i> Delete</button>&nbsp;
                           </form>
@@ -39,21 +39,21 @@
                     </div>
                     <div class="card-body d-print-none">
                       @if($candidate->man)
-                        <form action="{{ action('CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->man->id]) }}" role="form" method="POST" class="form-inline float-right">
+                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->man->id]) }}" role="form" method="POST" class="form-inline float-right">
                             @csrf
                           <button class="btn btn-primary"><i class="fa fa-envelope"></i> Man - {{ $candidate->m_confirmation_email_sent ? 'RE-' : '' }}Send Welcome Email</button>
                         </form>
                         <br style="clear:both;">
                       @endif
                       @if($candidate->woman)
-                        <form action="{{ action('CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->woman->id]) }}" role="form" method="POST" class="form-inline float-right">
+                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->woman->id]) }}" role="form" method="POST" class="form-inline float-right">
                             @csrf
                           <button class="btn btn-primary"><i class="fa fa-envelope"></i> Woman - {{ $candidate->w_confirmation_email_sent ? 'RE-' : '' }}Send Welcome Email</button>
                         </form>
                       @endif
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('CandidateController@update', ['candidate' => $candidate->id] ) }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\CandidateController@update', ['candidate' => $candidate->id] ) }}">
                             @csrf @method('patch')
 
                                     <div class="form-group row">

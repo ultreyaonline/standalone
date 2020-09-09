@@ -42,7 +42,7 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseHas('candidates', ['m_user_id' => $candidate->m_user_id]);
 
         $this->actingAs($this->admin)
-            ->delete(action('MembersController@destroy', ['memberID' => $candidate->m_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->m_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $candidate->m_user_id]);
@@ -56,7 +56,7 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseHas('candidates', ['m_user_id' => $candidate->m_user_id]);
 
         $this->actingAs($this->admin)
-            ->delete(action('CandidateController@destroy', ['candidate' => $candidate->id]));
+            ->delete(action('App\Http\Controllers\CandidateController@destroy', ['candidate' => $candidate->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $candidate->m_user_id]);
@@ -73,7 +73,7 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseHas('candidates', ['id' => $candidate->id]);
 
         $this->actingAs($this->admin)
-            ->delete(action('CandidateController@destroy', ['candidate' => $candidate->id]));
+            ->delete(action('App\Http\Controllers\CandidateController@destroy', ['candidate' => $candidate->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('users', ['id' => $candidate->w_user_id]);
@@ -94,7 +94,7 @@ class CandidateControllerTest extends TestCase
 
         // delete man only
         $this->actingAs($this->admin)
-            ->delete(action('MembersController@destroy', ['memberID' => $candidate->m_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->m_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('users', ['id' => $candidate->w_user_id]);
@@ -104,7 +104,7 @@ class CandidateControllerTest extends TestCase
 
         // and now delete woman too
         $this->actingAs($this->admin)
-            ->delete(action('MembersController@destroy', ['memberID' => $candidate->w_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->w_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('users', ['id' => $candidate->w_user_id]);

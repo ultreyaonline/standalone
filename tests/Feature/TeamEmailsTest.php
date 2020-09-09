@@ -94,7 +94,7 @@ class TeamEmailsTest extends TestCase
             ->assertViewIs('emails.team_message_compose');
 
         // section head sends email to team
-        $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
+        $this->post(action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
 // 0 means not sent;  We can "test" the tests by setting this to 1 and expecting the "NotQueued" below to fail.
@@ -122,7 +122,7 @@ class TeamEmailsTest extends TestCase
         $this->actingAs($user)->get('/weekend/' . $weekend->id)->assertDontSee('Email the Team');
 
         // nor be able to send an email
-        $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
+        $this->post(action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
         ])->assertRedirect();
@@ -196,7 +196,7 @@ class TeamEmailsTest extends TestCase
             ->assertSee('Table Cha')
             ->assertViewIs('emails.team_message_compose');
 
-        $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
+        $this->post(action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
             'section' => '5', // 5 = Chapel
@@ -287,7 +287,7 @@ class TeamEmailsTest extends TestCase
             ->assertViewIs('emails.team_message_compose');
 
         // section head sends email to team
-        $this->post(action('CommunicationController@emailTeamMembers', $weekend), [
+        $this->post(action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
             'include_candidates' => '1',

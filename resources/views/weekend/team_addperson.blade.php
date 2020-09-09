@@ -11,7 +11,7 @@ Add Person: {{ $weekend->weekend_full_name }}
     <div class="row">
       <div class="col-lg-8 offset-lg-2">
         <div class="card">
-          <form class="form-horizontal" role="form" method="POST" action="{{ action('TeamAssignmentController@store', $weekend->id) }}">
+          <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id) }}">
             @csrf
 
           <div class="card-header">{{ $weekend->weekend_full_name }}</div>

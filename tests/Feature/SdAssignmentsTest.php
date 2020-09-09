@@ -42,7 +42,7 @@ class SdAssignmentsTest extends TestCase
         ]);
 
         $response = $this->signIn($rector)
-            ->post(action('TeamAssignmentController@store', $weekend->id), [
+            ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
                 'memberID' => $sd->id,
                 'roleID' => 6, // 6 = Head SD; 7 = SD
                 'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,

@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-header">Add A Community Meeting Location</div>
           <div class="card-body">
-            <form class="form-horizontal row" role="form" method="POST" action="{{ action('LocationController@store') }}">
+            <form class="form-horizontal row" role="form" method="POST" action="{{ action('App\Http\Controllers\LocationController@store') }}">
               @csrf
 
               @include('locations._input_fields')

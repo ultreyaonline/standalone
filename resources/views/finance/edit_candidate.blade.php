@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-header">Candidate Payment</div>
           <div class="card-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ action('CandidatePaymentsController@update', ['candidate' => $candidate->id] ) }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\CandidatePaymentsController@update', ['candidate' => $candidate->id] ) }}">
               @csrf @method('patch')
 
 

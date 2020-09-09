@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Add New Candidates</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('CandidateController@store') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\CandidateController@store') }}">
                             @csrf
 
                             <div class="form-group row">

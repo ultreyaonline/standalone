@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Add New Candidate or Community Member</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('MembersController@store') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@store') }}">
                             @csrf
 
 

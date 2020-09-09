@@ -13,7 +13,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                 <div class="card border-primary">
                     <div class="card-header alert-primary">Editing Weekend: {{$weekend->weekend_full_name}}</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendController@update', $weekend->id) }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@update', $weekend->id) }}">
                             @csrf @method('patch')
 
                             @include('weekend._create-edit', ['submitButtonText' => 'Save Weekend'])
@@ -30,7 +30,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                 <div class="card border-primary">
                     <div class="card-header alert-primary">Theme/Visual/Banner Image</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendController@updateBannerPhoto', $weekend->id) }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@updateBannerPhoto', $weekend->id) }}" enctype="multipart/form-data">
                             @csrf @method('patch')
 
                             @include('weekend._banner_image_field')
@@ -43,7 +43,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                         </form>
                         @if ($weekend->banner_url)
                         <div class="text-center">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendController@deleteBannerPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@deleteBannerPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
                                 @csrf @method('delete')
                                 <div class="form-group row d-inline">
                                     <button type="submit" class="btn alert-danger"><i class="fa fa-btn fa-trash"></i> Delete Photo</button>
@@ -63,7 +63,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                     @endunless
                     <div class="card-header alert-success">Team Photo (taken on the weekend)</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendController@updateTeamPhoto', $weekend->id) }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@updateTeamPhoto', $weekend->id) }}" enctype="multipart/form-data">
                             @csrf @method('patch')
 
                             @include('weekend._teamphoto_field')
@@ -76,7 +76,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                         </form>
                         @if ($weekend->team_photo)
                             <div class="text-center">
-                                <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendController@deleteTeamPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
+                                <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@deleteTeamPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
                                     @csrf @method('delete')
                                     <div class="form-group row d-inline">
                                         <button type="submit" class="btn alert-danger m-2"><i class="fa fa-btn fa-trash"></i> Delete Photo</button>

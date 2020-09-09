@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-header">Add EXTERNAL Service History</div>
           <div class="card-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ action('WeekendExternalController@' . ($mode === 'edit' ? 'update' : 'store'), $service->id) }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendExternalController@' . ($mode === 'edit' ? 'update' : 'store'), $service->id) }}">
               @csrf
               @if($mode === 'edit')
                 @method('patch')
@@ -63,7 +63,7 @@
             </form>
 
 @if($mode === 'edit')
-            <form class="form-group row justify-content-center" role="form" method="POST" action="{{ action('WeekendExternalController@destroy', ['id' => $service->id]) }}" onsubmit="return ConfirmDelete();">
+            <form class="form-group row justify-content-center" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendExternalController@destroy', ['id' => $service->id]) }}" onsubmit="return ConfirmDelete();">
               @csrf @method('delete')
                   <button type="submit" class="btn btn-outline-danger float-right"><i class="fal fa-btn fa-trash-o"></i> Delete</button>
             </form>

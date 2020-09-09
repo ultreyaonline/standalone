@@ -42,7 +42,7 @@ class TeamAssignmentsTest extends TestCase
         $user = factory(\App\Models\User::class)->states('female')->create();
 
         $response = $this->signIn($rector)
-            ->post(action('TeamAssignmentController@store', $weekend->id), [
+            ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
                 'memberID' => $user->id,
                 'roleID' => 10,
                 'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
@@ -86,7 +86,7 @@ class TeamAssignmentsTest extends TestCase
         $user = factory(\App\Models\User::class)->states('female')->create();
 
         $response = $this->signIn($headcha)
-            ->post(action('TeamAssignmentController@store', $weekend->id), [
+            ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
                 'memberID' => $user->id,
                 'roleID' => 10,
                 'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,

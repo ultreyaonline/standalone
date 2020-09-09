@@ -72,7 +72,7 @@ class SponsorAcknowledgeCandidateReminder extends Mailable
         $this->candidate = $candidate;
         $this->weekends = Weekend::activeDescending()->get();
         $this->weekend  = Weekend::nextWeekend()->first() ?? Weekend::activeDescending()->where('weekend_MF', 'M')->first();
-        $this->confirm_url = action('CandidateController@confirm', ['candidate' => $candidate->id, 'hash' => $candidate->hash_sponsor_confirm]);
+        $this->confirm_url = action('App\Http\Controllers\CandidateController@confirm', ['candidate' => $candidate->id, 'hash' => $candidate->hash_sponsor_confirm]);
 
         $this->subject_line = '[' . config('site.community_acronym') . '] Sponsor Please Verify Details for: ' . $candidate->names;
         $this->reply_to = $reply_to;

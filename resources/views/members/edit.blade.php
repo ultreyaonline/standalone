@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">{{$member->name}}  ({{$member->weekend}}-{{$member->gender}})</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('MembersController@update', $member->id) }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@update', $member->id) }}">
                             @csrf @method('patch')
 
                             @include('members._input_fields')
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header">&nbsp;</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('MembersController@updateAvatar', $member->id) }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@updateAvatar', $member->id) }}" enctype="multipart/form-data">
                             @csrf @method('patch')
 
                             @include('members._avatar_field')
@@ -53,7 +53,7 @@
                     <div class="card-body">
                         Warning: Deletion is irreversible!<br>
                         <p class="small">The member will INSTANTLY be removed from ALL weekend assignments, prayer wheels, history, etc.</p>
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('MembersController@destroy', ['memberID' => $member->id]) }}" onsubmit="return ConfirmDelete();">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@destroy', ['memberID' => $member->id]) }}" onsubmit="return ConfirmDelete();">
                             @csrf @method('delete')
                             <div class="form-group row">
                                 <div class="col-md-12">

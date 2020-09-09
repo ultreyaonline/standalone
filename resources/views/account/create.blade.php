@@ -7,7 +7,7 @@
 
     <div class="main-content">
 
-        <form action="{{ action('MembersController@store') }}" method="post" role="form">
+        <form action="{{ action('App\Http\Controllers\MembersController@store') }}" method="post" role="form">
             @csrf
 
             @include('account.member_form_partial')

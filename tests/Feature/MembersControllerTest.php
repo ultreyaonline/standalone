@@ -30,7 +30,7 @@ class MembersControllerTest extends TestCase
 
         $response = $this->actingAs($this->admin)
 //            ->withoutExceptionHandling()
-            ->post(action('MembersController@store'), $attributes = [
+            ->post(action('App\Http\Controllers\MembersController@store'), $attributes = [
                 'first' => 'valid',
                 'last' => 'testMemberFound',
                 'email' => 'valid@example.com',
@@ -53,7 +53,7 @@ class MembersControllerTest extends TestCase
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $user->id]);
 
         $this->actingAs($this->admin)
-            ->delete(action('MembersController@destroy', ['memberID' => $user->id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $user->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
     }
