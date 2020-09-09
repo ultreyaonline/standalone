@@ -1,15 +1,32 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\WeekendAssignmentsExternal;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(App\Models\WeekendAssignmentsExternal::class, function (Faker $faker) {
-    return [
-        'memberID' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'WeekendName' => $faker->word,
-        'RoleName' => $faker->word,
-    ];
-});
+class WeekendAssignmentsExternalFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = WeekendAssignmentsExternal::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'memberID' => function () {
+                return App\Models\User::factory();
+            },
+            'WeekendName' => $this->faker->word,
+            'RoleName' => $this->faker->word,
+        ];
+    }
+}

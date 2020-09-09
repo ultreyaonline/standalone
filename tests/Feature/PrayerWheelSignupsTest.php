@@ -23,8 +23,8 @@ class PrayerWheelSignupsTest extends TestCase
         parent::setUp();
 
         $this->seed();
-        $this->weekend = factory(Weekend::class)->create();
-        $this->wheel   = factory(PrayerWheel::class)->create(['weekendID' => $this->weekend->id]);
+        $this->weekend = Weekend::factory()->create();
+        $this->wheel   = PrayerWheel::factory()->create(['weekendID' => $this->weekend->id]);
     }
 
     /** @test */
@@ -104,7 +104,7 @@ class PrayerWheelSignupsTest extends TestCase
     {
         Mail::fake();
 
-        $otherUser = factory(User::class)->create();
+        $otherUser = User::factory()->create();
         PrayerWheelSignup::create(['memberID' => $otherUser->id, 'timeslot' => 18, 'wheel_id' => $this->wheel->id]);
 
         $response = $this->signIn()

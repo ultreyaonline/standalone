@@ -51,20 +51,20 @@ class PrayerWheelNotificationsTest extends TestCase
         Mail::fake();
 
         // make a prayer wheel to send invites for
-        $weekend = factory(Weekend::class)->create();
-        $wheel   = factory(PrayerWheel::class)->create(['weekendID' => $weekend->id]);
+        $weekend = Weekend::factory()->create();
+        $wheel   = PrayerWheel::factory()->create(['weekendID' => $weekend->id]);
 
         // make a member for testing
-        $member = factory(User::class)->states('male')->create($this->member_attributes);
+        $member = User::factory()->male()->create($this->member_attributes);
         $member->assignRole('Member');
 
         // make a member for testing blank email addresses
-        $member2 = factory(User::class)->states('male')->create($this->member_attributes);
+        $member2 = User::factory()->male()->create($this->member_attributes);
         $member2->update(['email' => '']);
         $member2->assignRole('Member');
 
         // make a user who is authorized to send invites
-        $user = create(User::class);
+        $user = User::factory()->create();
         $user->assignRole('PrayerWheel Coordinator');
         $this->signIn($user);
 
@@ -96,12 +96,12 @@ class PrayerWheelNotificationsTest extends TestCase
     {
         Mail::fake();
 
-        $weekend = factory(Weekend::class)->create();
-        $wheel   = factory(PrayerWheel::class)->create(['weekendID' => $weekend->id]);
+        $weekend = Weekend::factory()->create();
+        $wheel   = PrayerWheel::factory()->create(['weekendID' => $weekend->id]);
 
-        $memberA = factory(User::class)->states('male')->create();
+        $memberA = User::factory()->male()->create();
         $memberA->assignRole('Member');
-        $memberB = factory(User::class)->states('female')->create();
+        $memberB = User::factory()->female()->create();
         $memberB->update(['email' => '']);
         $memberB->assignRole('Member');
 
@@ -132,12 +132,12 @@ class PrayerWheelNotificationsTest extends TestCase
     {
         Mail::fake();
 
-        $weekend = factory(Weekend::class)->create();
-        $wheel   = factory(PrayerWheel::class)->create(['weekendID' => $weekend->id]);
+        $weekend = Weekend::factory()->create();
+        $wheel   = PrayerWheel::factory()->create(['weekendID' => $weekend->id]);
 
-        $memberA = factory(User::class)->states('male')->create();
+        $memberA = User::factory()->male()->create();
         $memberA->assignRole('Member');
-        $memberB = factory(User::class)->states('female')->create();
+        $memberB = User::factory()->female()->create();
         $memberB->assignRole('Member');
 
         // sign the person up for a timeslot
@@ -167,12 +167,12 @@ class PrayerWheelNotificationsTest extends TestCase
     {
         Mail::fake();
 
-        $weekend = factory(Weekend::class)->create();
-        $wheel   = factory(PrayerWheel::class)->create(['weekendID' => $weekend->id]);
+        $weekend = Weekend::factory()->create();
+        $wheel   = PrayerWheel::factory()->create(['weekendID' => $weekend->id]);
 
-        $memberA = factory(User::class)->states('male')->create();
+        $memberA = User::factory()->male()->create();
         $memberA->assignRole('Member');
-        $memberB = factory(User::class)->states('female')->create();
+        $memberB = User::factory()->female()->create();
         $memberB->assignRole('Member');
 
         // sign up 2 people for combos of acknowledged timeslots
@@ -215,18 +215,18 @@ class PrayerWheelNotificationsTest extends TestCase
     {
         Mail::fake();
 
-        $weekend = factory(Weekend::class)->create();
-        $wheel   = factory(PrayerWheel::class)->create(['weekendID' => $weekend->id]);
+        $weekend = Weekend::factory()->create();
+        $wheel   = PrayerWheel::factory()->create(['weekendID' => $weekend->id]);
 
         Carbon::setTestNow($weekend->start_date);
 
-        $memberA = factory(User::class)->states('male')->create(\array_merge($this->member_attributes, ['email' => 'john@example.com']));
+        $memberA = User::factory()->male()->create(\array_merge($this->member_attributes, ['email' => 'john@example.com']));
         $memberA->assignRole('Member');
-        $memberB = factory(User::class)->states('female')->create(\array_merge($this->member_attributes, ['email' => 'nobody@example.com', 'receive_prayer_wheel_reminders' => false]));
+        $memberB = User::factory()->female()->create(\array_merge($this->member_attributes, ['email' => 'nobody@example.com', 'receive_prayer_wheel_reminders' => false]));
         $memberB->assignRole('Member');
-        $memberC = factory(User::class)->states('female')->create(\array_merge($this->member_attributes, ['email' => 'jane@example.com']));
+        $memberC = User::factory()->female()->create(\array_merge($this->member_attributes, ['email' => 'jane@example.com']));
         $memberC->assignRole('Member');
-        $memberD = factory(User::class)->states('female')->create(\array_merge($this->member_attributes, ['email' => '']));
+        $memberD = User::factory()->female()->create(\array_merge($this->member_attributes, ['email' => '']));
         $memberD->update(['email' => '']);
         $memberD->assignRole('Member');
 

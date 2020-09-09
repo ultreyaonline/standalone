@@ -19,7 +19,7 @@ class AdminConfigSettingsTest extends TestCase
         $this->seed(DatabaseSeeder::class);
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
-        $this->admin = factory(\App\Models\User::class)->states('active')
+        $this->admin = \App\Models\User::factory()->active()
             ->create(['first' => 'admin', 'last' => 'user'])
             ->assignRole('Admin');
 

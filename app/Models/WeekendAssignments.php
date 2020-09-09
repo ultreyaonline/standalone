@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\WeekendVisibleTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class WeekendAssignments extends Model
 {
     use LogsActivity;
+    use HasFactory;
 
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;

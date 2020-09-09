@@ -83,7 +83,7 @@ class MembersOnlyTest extends TestCase
     public function members_can_see_profile_page()
     {
         $this->seed();
-        $user = create(\App\Models\User::class, ['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
+        $user = \App\Models\User::factory()->create(['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
         $response = $this->signIn($user)
             ->get('/members/'.$user->id);
         $response->assertSee('Bob Smith')

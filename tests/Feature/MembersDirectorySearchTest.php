@@ -15,8 +15,8 @@ class MembersDirectorySearchTest extends TestCase
     /** @test */
     function membersdirectory_table_is_unreachable_if_not_a_member()
     {
-        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
-        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+        User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
+        User::factory()->active()->create(['first' => 'fizz', 'last' => 'buzz']);
 
         $this->expectException(HttpException::class);
 
@@ -29,9 +29,9 @@ class MembersDirectorySearchTest extends TestCase
     {
         $this->seed();
 
-        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
-        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
-        $user = factory(User::class)->states('active')
+        User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
+        User::factory()->active()->create(['first' => 'fizz', 'last' => 'buzz']);
+        $user = User::factory()->active()
             ->create(['first' => 'valid', 'last' => 'communitymember']);
         $user->assignRole('Member');
 
@@ -51,12 +51,12 @@ class MembersDirectorySearchTest extends TestCase
     {
         $this->seed();
 
-        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
-        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+        User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
+        User::factory()->active()->create(['first' => 'fizz', 'last' => 'buzz']);
 
         $this->expectException(HttpException::class);
 
-        $user = factory(User::class)->states('active')
+        $user = User::factory()->active()
             ->create(['first' => 'valid', 'last' => 'communitymember']);
         $user->assignRole('Member');
 
@@ -70,10 +70,10 @@ class MembersDirectorySearchTest extends TestCase
     {
         $this->seed();
 
-        factory(User::class)->states('active')->create(['first' => 'foo', 'last' => 'bar']);
-        factory(User::class)->states('active')->create(['first' => 'fizz', 'last' => 'buzz']);
+        User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
+        User::factory()->active()->create(['first' => 'fizz', 'last' => 'buzz']);
 
-        $user = factory(User::class)->states('active')
+        $user = User::factory()->active()
             ->create(['first' => 'valid', 'last' => 'communitymember']);
         $user->assignRole('Member');
         $user->givePermissionTo('edit members');

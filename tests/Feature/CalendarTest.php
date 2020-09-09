@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Event;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
@@ -19,7 +20,7 @@ class CalendarTest extends TestCase
         $this->withoutExceptionHandling();
 
         $date = Carbon::tomorrow();
-        factory(\App\Models\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        Event::factory()->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
 
         $response = $this->get('/calendar');
 
@@ -49,14 +50,14 @@ class CalendarTest extends TestCase
         $this->seed();
 
         $date = Carbon::tomorrow();
-        factory(\App\Models\Event::class)->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        Event::factory()->create(['type' => 'secretariat', 'name' => 'Secretariat Test Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
 
         $response = $this->signIn()
             ->get('/events');
 
         $response->assertStatus(200);
 
-        $response->assertSee('Secretariat Meeting');
+        $response->assertSee('Secretariat Test Meeting');
         $response->assertViewIs('events.index');
     }
 }

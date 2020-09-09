@@ -1,23 +1,41 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\WeekendRoles;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(App\Models\WeekendRoles::class, function (Faker $faker) {
-    return [
-        'RoleName' => $faker->word,
-        'ReportName' => $faker->word,
-        'sortorder' => $faker->randomNumber(),
-        'section_id' => function () {
-            return factory(App\Models\Section::class)->create()->id;
-        },
-        'head_id' => $faker->randomNumber(),
-        'isCoreTalk' => $faker->boolean,
-        'isBasicTalk' => $faker->boolean,
-        'excludeAsFormerRector' => $faker->boolean,
-        'requiredForRector' => $faker->boolean,
-        'isDeptHead' => $faker->boolean,
-        'canEmailEntireTeam' => $faker->boolean,
-    ];
-});
+class WeekendRolesFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = WeekendRoles::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'RoleName' => $this->faker->word,
+            'ReportName' => $this->faker->word,
+            'sortorder' => $this->faker->randomNumber(),
+            'section_id' => function () {
+                return App\Models\Section::factory();
+            },
+            'head_id' => $this->faker->randomNumber(),
+            'isCoreTalk' => $this->faker->boolean,
+            'isBasicTalk' => $this->faker->boolean,
+            'excludeAsFormerRector' => $this->faker->boolean,
+            'requiredForRector' => $this->faker->boolean,
+            'isDeptHead' => $this->faker->boolean,
+            'canEmailEntireTeam' => $this->faker->boolean,
+        ];
+    }
+}

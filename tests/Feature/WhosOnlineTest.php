@@ -29,7 +29,7 @@ class WhosOnlineTest extends TestCase
     /** @test */
     public function unloggedin_users_should_not_show_online()
     {
-        $user = create(\App\Models\User::class, ['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
+        $user = \App\Models\User::factory()->create(['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
         $this->assertFalse($user->isOnline());
     }
 

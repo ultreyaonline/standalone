@@ -35,11 +35,11 @@ class TeamFeePaymentsTest extends TestCase
             'active'   => true,
         ];
 
-        $rector = factory(\App\Models\User::class)->states('male')->create();
+        $rector = \App\Models\User::factory()->male()->create();
         $rector->assignRole('Member');
 
         // make a weekend
-        $this->weekend = factory(Weekend::class)->create([
+        $this->weekend = Weekend::factory()->create([
             'weekend_MF' => 'M',
             'visibility_flag' => WeekendVisibleTo::Community,
             'rectorID' => $rector->id
@@ -52,11 +52,11 @@ class TeamFeePaymentsTest extends TestCase
         ]);
 
         // make member for testing
-        $this->member = factory(User::class)->states('male')->create($this->member_attributes);
+        $this->member = User::factory()->male()->create($this->member_attributes);
         $this->member->assignRole('Member');
 
         // assign to the weekend
-        factory(WeekendAssignments::class)->create([
+        WeekendAssignments::factory()->create([
             'weekendID' => $this->weekend->id,
             'memberID'  => $this->member->id,
             'roleID'    => 10,
@@ -67,7 +67,7 @@ class TeamFeePaymentsTest extends TestCase
         $this->weekend = $this->weekend->fresh();
 
         // make a user who is authorized to access/record payments
-        $this->treasurer_user = create(User::class, ['active' => true]);
+        $this->treasurer_user = User::factory()->active()->create();
         $this->treasurer_user->assignRole('Member');
 //        $this->treasurer_user->assignRole('Treasurer');
         $this->treasurer_user->givePermissionTo('record team fees paid');

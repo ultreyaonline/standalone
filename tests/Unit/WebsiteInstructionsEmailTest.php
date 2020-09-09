@@ -13,7 +13,7 @@ class WebsiteInstructionsEmailTest extends TestCase
     /** @test */
     public function the_login_username_is_included_in_the_email()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = \App\Models\User::factory()->create();
 
         $email = new \App\Mail\WebsiteLoginInstructions($user);
         $html = $email->render();

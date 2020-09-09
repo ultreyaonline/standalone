@@ -13,7 +13,7 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Location::class)->create([
+        \App\Models\Location::factory()->create([
             'location_name'    => 'First Baptist Church',
             'slug'             => 'first-baptist',
             'location_url'     => 'http://example.com/firstchurch/',

@@ -9,17 +9,17 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // first create a few generic users, which are separately assigned as rectors to demo weekends
-        $m = factory(\App\Models\User::class)->states('male')->create();
+        $m = \App\Models\User::factory()->male()->create();
         $m->assignRole('Member');
-        $m = factory(\App\Models\User::class)->states('male')->create();
+        $m = \App\Models\User::factory()->male()->create();
         $m->assignRole('Member');
-        $w = factory(\App\Models\User::class)->states('female')->create();
+        $w = \App\Models\User::factory()->female()->create();
         $w->assignRole('Member');
-        $w = factory(\App\Models\User::class)->states('female')->create();
+        $w = \App\Models\User::factory()->female()->create();
         $w->assignRole('Member');
 
         // now create some admin/dev dummy users
-        $m = factory(\App\Models\User::class)->states('male')->create([
+        $m = \App\Models\User::factory()->male()->create([
             'email'=>'john@example.com',
             'username'=>'john@example.com',
             'first' => 'John',
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $m->assignRole('Admin');
         $m->assignRole('Super-Admin');
 
-        $u = factory(\App\Models\User::class)->states('male')->create([
+        $u = \App\Models\User::factory()->male()->create([
             'email'=>'james@example.com',
             'username'=>'james@example.com',
             'first' => 'James',
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
 
         // create a wife record from shared properties of the man's record
         $clone = \App\Models\User::find($m->id);
-        $w = factory(\App\Models\User::class)->states('female')->create([
+        $w = \App\Models\User::factory()->female()->create([
             'email'=>'jane@example.com',
             'username'=>'jane@example.com',
             'gender' => 'F',
@@ -71,10 +71,10 @@ class UsersTableSeeder extends Seeder
             $sponsorID = $this->getRandomSponsorID();
 
             // build a couple
-            $userM           = factory(\App\Models\User::class)->states('male')->create([
+            $userM           = \App\Models\User::factory()->male()->create([
                 'sponsorID' => $sponsorID,
             ]);
-            $userF           = factory(\App\Models\User::class)->states('female')->create([
+            $userF           = \App\Models\User::factory()->female()->create([
                 'spouseID'   => $userM->id,
                 'church'     => $userM->church,
                 'weekend'    => $userM->weekend,
@@ -94,8 +94,8 @@ class UsersTableSeeder extends Seeder
         }
 
         // a few more non-couples
-        factory(\App\Models\User::class, 3)->states('generic')->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
-        factory(\App\Models\User::class, 3)->states('generic')->create(['sponsorID' => $this->getRandomSponsorID()]);
+        \App\Models\User::factory()-generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
+        \App\Models\User::factory()-generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID()]);
 
         // Make some couples be from another Community
         $sponsorID1 = \App\Models\User::select('sponsorID')->where('sponsorID', '>', 1)->get()->random()['sponsorID'];

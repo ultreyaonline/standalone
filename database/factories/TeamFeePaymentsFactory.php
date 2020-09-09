@@ -1,21 +1,39 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\TeamFeePayments;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(App\Models\TeamFeePayments::class, function (Faker $faker) {
-    return [
-        'weekendID' => function () {
-            return factory(App\Models\Weekend::class)->create()->id;
-        },
-        'memberID' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'total_paid' => $faker->randomFloat(),
-        'date_paid' => $faker->date(),
-        'complete' => $faker->randomNumber(),
-        'comments' => $faker->text,
-        'recorded_by' => $faker->word,
-    ];
-});
+class TeamFeePaymentsFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = TeamFeePayments::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'weekendID' => function () {
+                return App\Models\Weekend::factory();
+            },
+            'memberID' => function () {
+                return App\Models\User::factory();
+            },
+            'total_paid' => $this->faker->randomFloat(),
+            'date_paid' => $this->faker->date(),
+            'complete' => $this->faker->randomNumber(),
+            'comments' => $this->faker->text,
+            'recorded_by' => $this->faker->word,
+        ];
+    }
+}

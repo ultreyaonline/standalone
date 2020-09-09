@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -10,6 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class PrayerWheelSignup extends Model
 {
     use LogsActivity;
+    use HasFactory;
 
     protected static $logAttributes = ['*'];
 

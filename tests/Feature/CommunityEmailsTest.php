@@ -48,7 +48,7 @@ class CommunityEmailsTest extends TestCase
     {
         Mail::fake();
 
-        $user = factory(\App\Models\User::class)->create($this->member_attributes);
+        $user = \App\Models\User::factory()->create($this->member_attributes);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
@@ -65,12 +65,12 @@ class CommunityEmailsTest extends TestCase
     {
         Mail::fake();
 
-        $user = factory(\App\Models\User::class)->create($this->member_attributes);
+        $user = \App\Models\User::factory()->create($this->member_attributes);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
         // add a community member
-        $member = factory(\App\Models\User::class)->create($this->member_attributes);
+        $member = \App\Models\User::factory()->create($this->member_attributes);
         $member->assignRole('Member');
 
         $this->actingAs($user)
@@ -90,46 +90,46 @@ class CommunityEmailsTest extends TestCase
     {
         Mail::fake();
 
-        $user = factory(\App\Models\User::class)->create($this->member_attributes);
+        $user = \App\Models\User::factory()->create($this->member_attributes);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
         // active member, for sanity check that emails actually "do" get queued
-        $active_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $active_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $active_member->assignRole('Member');
 
-        $blank_email_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $blank_email_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $blank_email_member->email = '';
         $blank_email_member->assignRole('Member');
 
-        $non_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $non_member = \App\Models\User::factory()->female()->create($this->member_attributes);
 
-        $inactive_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $inactive_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $inactive_member->assignRole('Member');
         $inactive_member->active = false;
         $inactive_member->save();
 
-        $unsubscribed_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $unsubscribed_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $unsubscribed_member->assignRole('Member');
         $unsubscribed_member->unsubscribe = true;
         $unsubscribed_member->save();
 
-        $other_gender_member = factory(\App\Models\User::class)->states('male')->create($this->member_attributes);
+        $other_gender_member = \App\Models\User::factory()->male()->create($this->member_attributes);
         $other_gender_member->assignRole('Member');
         $other_gender_member->receive_email_community_news = false;
         $other_gender_member->save();
 
-        $other_community_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $other_community_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $other_community_member->assignRole('Member');
         $other_community_member->community = 'OTHERCMTY';
         $other_community_member->save();
 
-        $no_news_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $no_news_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $no_news_member->assignRole('Member');
         $no_news_member->receive_email_community_news = false;
         $no_news_member->save();
 
-        $no_surprises_member = factory(\App\Models\User::class)->states('female')->create($this->member_attributes);
+        $no_surprises_member = \App\Models\User::factory()->female()->create($this->member_attributes);
         $no_surprises_member->assignRole('Member');
         $no_surprises_member->okay_to_send_serenade_and_palanca_details = false;
         $no_surprises_member->save();

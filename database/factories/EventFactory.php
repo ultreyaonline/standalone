@@ -1,33 +1,51 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Event::class, function (Faker $faker) {
-    $type = $faker->randomElement(['secuela', 'reunion', 'secretariat', 'weekend']);
+use App\Models\Event;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-    return [
-        'event_key'        => $faker->uuid,
-        'type'             => $type,
-        'name'             => $faker->sentence,
-        'description'      => $faker->paragraph,
-        'location_name'    => $faker->word,
-        'location_url'     => $faker->url,
-        'address_street'   => $faker->streetAddress,
-        'address_city'     => $faker->city,
-        'address_province' => $faker->word,
-        'address_postal'   => $faker->postcode,
-        'map_url_link'     => $faker->url,
-        'contact_name'     => $faker->name,
-        'contact_email'    => $faker->freeEmail,
-        'contact_phone'    => $faker->phoneNumber,
-        'start_datetime'   => $start = $faker->dateTimeBetween('now', '3 months'),
-        'end_datetime'     => $start->add(new DateInterval('P1D')),
-        'is_enabled'       => 1,
-        'is_public'        => ($type == 'secuela' || $type == 'weekend') ? 1 : 0,
-        'contact_id'       => factory(\App\Models\User::class),
-        'posted_by'        => factory(\App\Models\User::class),
-        'recurring_end_datetime' => null,
-        'expiration_date' => null,
-    ];
-});
+class EventFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Event::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $type = $this->faker->randomElement(['secuela', 'reunion', 'secretariat', 'weekend']);
+
+        return [
+            'event_key' => $this->faker->uuid,
+            'type' => $type,
+            'name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'location_name' => $this->faker->word,
+            'location_url' => $this->faker->url,
+            'address_street' => $this->faker->streetAddress,
+            'address_city' => $this->faker->city,
+            'address_province' => $this->faker->word,
+            'address_postal' => $this->faker->postcode,
+            'map_url_link' => $this->faker->url,
+            'contact_name' => $this->faker->name,
+            'contact_email' => $this->faker->freeEmail,
+            'contact_phone' => $this->faker->phoneNumber,
+            'start_datetime' => $start = $this->faker->dateTimeBetween('now', '3 months'),
+            'end_datetime' => $start->add(new \DateInterval('P1D')),
+            'is_enabled' => 1,
+            'is_public' => ($type == 'secuela' || $type == 'weekend') ? 1 : 0,
+            'contact_id' => \App\Models\User::factory(),
+            'posted_by' => \App\Models\User::factory(),
+            'recurring_end_datetime' => null,
+            'expiration_date' => null,
+        ];
+    }
+}

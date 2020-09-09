@@ -20,7 +20,10 @@ class WeekendTest extends TestCase
     {
         $this->seed();
 
-        $weekend = create(Weekend::class, ['weekend_theme'=>'Times of Refreshing', 'visibility_flag' => WeekendVisibleTo::ThemeVisible]);
+        $weekend = Weekend::factory([
+            'weekend_theme'=>'Times of Refreshing',
+            'visibility_flag' => WeekendVisibleTo::ThemeVisible]
+        )->create();
         PrayerWheel::create(['weekendID' => $weekend->id]);
 
         $response = $this->signIn()
@@ -38,10 +41,10 @@ class WeekendTest extends TestCase
     {
         $this->seed();
 
-        $weekend = create(Weekend::class, ['weekend_MF'=>'W', 'weekend_theme'=>'Times of Refreshing', 'visibility_flag' => WeekendVisibleTo::ThemeVisible]);
+        $weekend = Weekend::factory(['weekend_MF'=>'W', 'weekend_theme'=>'Times of Refreshing', 'visibility_flag' => WeekendVisibleTo::ThemeVisible])->create();
         PrayerWheel::create(['weekendID' => $weekend->id]);
 
-        $candidate = create(User::class, ['gender'=>'W', 'weekend'=>$weekend->short_name]);
+        $candidate = User::factory(['gender'=>'W', 'weekend'=>$weekend->short_name])->create();
 
         $response = $this->signIn()
             ->get('/weekend/'.$weekend->id);

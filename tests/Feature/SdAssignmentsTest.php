@@ -27,8 +27,8 @@ class SdAssignmentsTest extends TestCase
     {
         $this->seed(); // mainly to get the Roles and Permissions defined
 
-        $rector = factory(\App\Models\User::class)->states('female')->create();
-        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['rectorID' => $rector->id]);
+        $rector = \App\Models\User::factory()->female()->create();
+        $weekend = \App\Models\Weekend::factory()->womens()->create(['rectorID' => $rector->id]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -36,7 +36,7 @@ class SdAssignmentsTest extends TestCase
             'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
         ]);
 
-        $sd = factory(\App\Models\User::class)->create([
+        $sd = \App\Models\User::factory()->create([
             'qualified_sd' => 1,
             'active' => 1,
         ]);

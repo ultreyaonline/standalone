@@ -30,8 +30,8 @@ class TeamAssignmentsTest extends TestCase
     {
         $this->seed(); // mainly to get the Roles and Permissions defined
 
-        $rector = factory(\App\Models\User::class)->states('female')->create();
-        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create(['rectorID' => $rector->id]);
+        $rector = \App\Models\User::factory()->female()->create();
+        $weekend = \App\Models\Weekend::factory()->womens()->create(['rectorID' => $rector->id]);
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 1,
@@ -39,7 +39,7 @@ class TeamAssignmentsTest extends TestCase
             'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
         ]);
 
-        $user = factory(\App\Models\User::class)->states('female')->create();
+        $user = \App\Models\User::factory()->female()->create();
 
         $response = $this->signIn($rector)
             ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
@@ -63,8 +63,8 @@ class TeamAssignmentsTest extends TestCase
     {
         $this->seed(); // mainly to get the Roles and Permissions defined
 
-        $rector = factory(\App\Models\User::class)->states('female')->create();
-        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create([
+        $rector = \App\Models\User::factory()->female()->create();
+        $weekend = \App\Models\Weekend::factory()->womens()->create([
             'rectorID' => $rector->id,
             'visibility_flag' => WeekendVisibleTo::HeadChas,
             ]);
@@ -75,7 +75,7 @@ class TeamAssignmentsTest extends TestCase
             'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
         ]);
         // assign a head cha to that weekend
-        $headcha = factory(\App\Models\User::class)->states('female')->create();
+        $headcha = \App\Models\User::factory()->female()->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 2,
@@ -83,7 +83,7 @@ class TeamAssignmentsTest extends TestCase
             'confirmed' => \App\Enums\TeamAssignmentStatus::Accepted,
         ]);
 
-        $user = factory(\App\Models\User::class)->states('female')->create();
+        $user = \App\Models\User::factory()->female()->create();
 
         $response = $this->signIn($headcha)
             ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
@@ -108,8 +108,8 @@ class TeamAssignmentsTest extends TestCase
         $this->seed(); // mainly to get the Roles and Permissions defined
 
         // assign a rector to a weekend
-        $rector = factory(\App\Models\User::class)->states('female')->create();
-        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create([
+        $rector = \App\Models\User::factory()->female()->create();
+        $weekend = \App\Models\Weekend::factory()->womens()->create([
             'visibility_flag' => WeekendVisibleTo::Calendar,
             'rectorID' => $rector->id,
             ]);
@@ -121,7 +121,7 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // assign a head cha to that weekend
-        $headcha = factory(\App\Models\User::class)->states('female')->create();
+        $headcha = \App\Models\User::factory()->female()->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 2,
@@ -130,7 +130,7 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // assign a rover to that weekend
-        $rover = factory(\App\Models\User::class)->states('female')->create();
+        $rover = \App\Models\User::factory()->female()->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 5,
@@ -139,7 +139,7 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // assign a team member to that weekend
-        $user = factory(\App\Models\User::class)->states('female')->create();
+        $user = \App\Models\User::factory()->female()->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 10,
@@ -175,8 +175,8 @@ class TeamAssignmentsTest extends TestCase
         $this->seed(); // mainly to get the Roles and Permissions defined
 
         // assign a rector to a weekend
-        $rector = factory(\App\Models\User::class)->states('female')->create();
-        $weekend = factory(\App\Models\Weekend::class)->states('womens')->create([
+        $rector = \App\Models\User::factory()->female()->create();
+        $weekend = \App\Models\Weekend::factory()->womens()->create([
             'visibility_flag' => WeekendVisibleTo::Calendar,
             'rectorID' => $rector->id,
             ]);
@@ -188,7 +188,7 @@ class TeamAssignmentsTest extends TestCase
         ]);
 
         // assign a team member to that weekend
-        $user = factory(\App\Models\User::class)->states('female')->create();
+        $user = \App\Models\User::factory()->female()->create();
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
             'roleID' => 10,

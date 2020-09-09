@@ -36,7 +36,7 @@ class ResetPasswordTest extends TestCase {
 
     /** @test */
     function user_can_view_a_password_reset_form() {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->get($this->passwordResetGetRoute($token = $this->getValidToken($user)));
 
@@ -48,7 +48,7 @@ class ResetPasswordTest extends TestCase {
     /** @test */
     function user_can_reset_password_with_valid_token() {
         Event::fake();
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->post($this->passwordResetPostRoute(), [
             'token' => $this->getValidToken($user),
@@ -68,7 +68,7 @@ class ResetPasswordTest extends TestCase {
 
     /** @test */
     function user_cannot_reset_password_with_invalid_token() {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => Hash::make('old-password'),
         ]);
 
@@ -87,7 +87,7 @@ class ResetPasswordTest extends TestCase {
 
     /** @test */
     function user_cannot_reset_password_without_providing_a_new_password() {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => Hash::make('old-password'),
         ]);
 
@@ -111,7 +111,7 @@ class ResetPasswordTest extends TestCase {
 
     /** @test */
     function user_cannot_reset_password_without_providing_a_username() {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => Hash::make('old-password'),
         ]);
 

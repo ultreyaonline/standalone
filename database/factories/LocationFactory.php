@@ -1,21 +1,39 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Location;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(App\Models\Location::class, function (Faker $faker) {
-    return [
-        'location_name' => $location_name = $faker->text,
-        'slug' => Str::slug($location_name),
-        'location_url' => $faker->url,
-        'address_street' => $faker->streetAddress,
-        'address_city' => $faker->city,
-        'address_province' => $faker->state,
-        'address_postal' => $faker->postcode,
-        'map_url_link' => $faker->imageUrl(),
-        'contact_name' => $faker->name,
-        'contact_email' => $faker->email,
-        'contact_phone' => $faker->phoneNumber,
-    ];
-});
+class LocationFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Location::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'location_name' => $location_name = $this->faker->text,
+            'slug' => Str::slug($location_name),
+            'location_url' => $this->faker->url,
+            'address_street' => $this->faker->streetAddress,
+            'address_city' => $this->faker->city,
+            'address_province' => $this->faker->state,
+            'address_postal' => $this->faker->postcode,
+            'map_url_link' => $this->faker->imageUrl(),
+            'contact_name' => $this->faker->name,
+            'contact_email' => $this->faker->email,
+            'contact_phone' => $this->faker->phoneNumber,
+        ];
+    }
+}

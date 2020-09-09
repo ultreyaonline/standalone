@@ -62,7 +62,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signInAsGuest($user = null)
     {
-        $this->user = $user ?: $this->user ?: create(\App\Models\User::class);
+        $this->user = $user ?: $this->user ?: \App\Models\User::factory()->create();
         $this->actingAs($this->user);
 
         return $this;
@@ -70,7 +70,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signIn($user = null)
     {
-        $this->user = $user ?: $this->user ?: create(\App\Models\User::class);
+        $this->user = $user ?: $this->user ?: \App\Models\User::factory()->create();
         $this->user->assignRole('Member');
         $this->actingAs($this->user);
 

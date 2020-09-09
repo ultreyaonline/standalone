@@ -7,6 +7,7 @@ use App\Events\UserAdded;
 use App\Events\UserDeleted;
 use App\Helpers\UniqueId;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,6 +30,7 @@ class User extends Authenticatable implements HasMedia
 {
     use Impersonate;
     use Notifiable;
+    use HasFactory;
     use HasRoles;
     use CausesActivity;
     use LogsActivity;
