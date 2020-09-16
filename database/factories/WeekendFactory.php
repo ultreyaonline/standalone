@@ -63,7 +63,6 @@ class WeekendFactory extends Factory
 
     public function mens()
     {
-        if (null === $this->faker) $this->faker = $this->withFaker();
         $this->faker = $this->withFaker();
         $mf = 'M';
         $gender = ($mf == 'M') ? "Men's" : "Women's";
@@ -78,7 +77,6 @@ class WeekendFactory extends Factory
 
     public function womens()
     {
-        if (null === $this->faker) $this->faker = $this->withFaker();
         $mf = 'W';
         $gender = ($mf == 'M') ? "Men's" : "Women's";
         $number = $this->faker->numberBetween(50, 75);

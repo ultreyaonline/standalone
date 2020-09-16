@@ -95,7 +95,6 @@ class UserFactory extends Factory
 
     public function male()
     {
-        if (null === $this->faker) $this->faker = $this->withFaker();
         return $this->state([
             'first' => $this->faker->firstNameMale,
             'gender' => 'M',
@@ -105,7 +104,6 @@ class UserFactory extends Factory
 
     public function female()
     {
-        if (null === $this->faker) $this->faker = $this->withFaker();
         return $this->state([
             'first' => $this->faker->firstNameFemale,
             'gender' => 'W',
