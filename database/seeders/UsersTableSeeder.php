@@ -94,8 +94,8 @@ class UsersTableSeeder extends Seeder
         }
 
         // a few more non-couples
-        \App\Models\User::factory()-generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
-        \App\Models\User::factory()-generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID()]);
+        \App\Models\User::factory()->generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
+        \App\Models\User::factory()->generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID()]);
 
         // Make some couples be from another Community
         $sponsorID1 = \App\Models\User::select('sponsorID')->where('sponsorID', '>', 1)->get()->random()['sponsorID'];

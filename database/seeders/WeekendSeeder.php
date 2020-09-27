@@ -34,7 +34,7 @@ class WeekendSeeder extends Seeder
             'banner_url' => 'http://lorempixel.com/600/400/sports/1',
             'visibility_flag' => 6,
         ];
-        App\Models\Weekend::create($data);
+        \App\Models\Weekend::create($data);
 
 
         $data = [
@@ -60,7 +60,7 @@ class WeekendSeeder extends Seeder
             'banner_url' => 'http://lorempixel.com/600/400/sports/2',
             'visibility_flag' => 6,
         ];
-        App\Models\Weekend::create($data);
+        \App\Models\Weekend::create($data);
 
         $data = [
             'weekend_full_name'  => "ANYTD Men's #2",
@@ -85,7 +85,7 @@ class WeekendSeeder extends Seeder
             'banner_url' => 'http://lorempixel.com/600/400/sports/3',
             'visibility_flag' => 6,
         ];
-        App\Models\Weekend::create($data);
+        \App\Models\Weekend::create($data);
 
 
         $data = [
@@ -111,7 +111,7 @@ class WeekendSeeder extends Seeder
             'banner_url' => 'http://lorempixel.com/600/400/sports/4',
             'visibility_flag' => 6,
         ];
-        App\Models\Weekend::create($data);
+        \App\Models\Weekend::create($data);
 
     }
 }
