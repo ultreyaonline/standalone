@@ -201,7 +201,7 @@ Route::group(['middleware' => ['permission:email candidates']], function () {
 });
 Route::get('/confirm/candidate/{candidate}/{hash}', [CandidateController::class, 'confirm']);
 
-Route::group(['middleware' => ['permission:email candidates,webmaster-email-how-to-login-msg']], function () {
+Route::group(['middleware' => ['permission:email candidates|webmaster-email-how-to-login-msg']], function () {
     Route::post('reminders/websiteaccess/{member}', [MembersController::class, 'sendWebsiteLoginInstructionsEmail'])->name('website_access_reminder');
     Route::post('candidates/websiteaccess/{weekend}', [CandidateEmailsController::class, 'sendWebsiteWelcomeToCandidatesForWeekend'])->name('website_access_to_candidates');
 });
