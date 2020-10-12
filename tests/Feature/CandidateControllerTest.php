@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CandidateControllerTest extends TestCase
@@ -18,7 +17,6 @@ class CandidateControllerTest extends TestCase
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
         $this->admin = \App\Models\User::factory()->active()
             ->create(['first' => 'admin', 'last' => 'user'])
@@ -32,7 +30,7 @@ class CandidateControllerTest extends TestCase
      *
      * @test
      */
-    public function deleting_candidates_also_cleans_up_empty_records()
+    public function deleting_single_candidate_as_member_also_cleans_up_empty_records()
     {
         // A. Single, deleted via Member Delete
 
@@ -47,7 +45,10 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $candidate->m_user_id]);
 
+    }
 
+    public function deleting_single_candidate_also_cleans_up_empty_records()
+    {
         // B. Single, deleted via Candidate Delete
 
         $candidate = \App\Models\Candidate::factory()->male()->create();
@@ -61,7 +62,10 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $candidate->m_user_id]);
 
+    }
 
+    public function deleting_candidate_couple_also_cleans_up_empty_records()
+    {
         // C. Couple - deleted as a pair via Candidate Delete
 
         $candidate = \App\Models\Candidate::factory()->couple()->create();
@@ -81,7 +85,10 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseMissing('candidates', ['w_user_id' => $candidate->w_user_id]);
         $this->assertDatabaseMissing('candidates', ['id' => $candidate->id]);
 
+    }
 
+    public function deleting_candidate_couple_via_member_also_cleans_up_empty_records()
+    {
         // D. Couple - deleted individually via Member Delete
 
         $candidate = \App\Models\Candidate::factory()->couple()->create();

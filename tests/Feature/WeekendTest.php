@@ -15,11 +15,16 @@ class WeekendTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed();
+    }
+
     /** @test */
     public function members_can_see_weekend_page()
     {
-        $this->seed();
-
         $weekend = Weekend::factory([
             'weekend_theme'=>'Times of Refreshing',
             'visibility_flag' => WeekendVisibleTo::ThemeVisible]
@@ -39,9 +44,11 @@ class WeekendTest extends TestCase
     /** @test */
     public function members_can_see_weekend_candidate_list()
     {
-        $this->seed();
-
-        $weekend = Weekend::factory(['weekend_MF'=>'W', 'weekend_theme'=>'Times of Refreshing', 'visibility_flag' => WeekendVisibleTo::ThemeVisible])->create();
+        $weekend = Weekend::factory([
+            'weekend_MF' => 'W',
+            'weekend_theme' => 'Times of Refreshing',
+            'visibility_flag' => WeekendVisibleTo::ThemeVisible
+        ])->create();
         PrayerWheel::create(['weekendID' => $weekend->id]);
 
         $candidate = User::factory(['gender'=>'W', 'weekend'=>$weekend->short_name])->create();

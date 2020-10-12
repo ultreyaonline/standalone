@@ -3,13 +3,8 @@
 namespace Tests\Feature;
 
 use App\Mail\MessageToCommunity;
-use App\Models\User;
-use App\Models\Weekend;
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Tests\TestCase;
-use App\Models\WeekendAssignments;
-use Illuminate\Support\Carbon;
-use App\Enums\WeekendVisibleTo;
 use App\Mail\MessageToTeamMembers;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -20,35 +15,19 @@ class CommunityEmailsTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $member_attributes;
-
     public function setUp(): void
     {
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-
-        // now re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
-
-        $this->member_attributes = [
-            'active' => true,
-            'unsubscribe' => false,
-            'receive_prayer_wheel_invites' => true,
-            'receive_email_reunion' => true,
-            'receive_email_sequela' => true,
-            'receive_email_community_news' => true,
-            'receive_email_weekend_general' => true,
-            'community' => config('site.local_community_filter'),
-        ];
     }
 
     /** @test */
-    public function secretariat_member_can_see_button_and_form_to_email_entire_community()
+    public function secretariat_member_can_see_button_and_form_to_email_entire_community(): void
     {
         Mail::fake();
 
-        $user = \App\Models\User::factory()->create($this->member_attributes);
+        $user = \App\Models\User::factory()->allEmailFlagsEnabled()->create([]);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
@@ -61,16 +40,16 @@ class CommunityEmailsTest extends TestCase
     }
 
     /** @test */
-    public function secretariat_member_can_send_email_to_email_entire_community()
+    public function secretariat_member_can_send_email_to_email_entire_community(): void
     {
         Mail::fake();
 
-        $user = \App\Models\User::factory()->create($this->member_attributes);
+        $user = \App\Models\User::factory()->allEmailFlagsEnabled()->create([]);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
         // add a community member
-        $member = \App\Models\User::factory()->create($this->member_attributes);
+        $member = \App\Models\User::factory()->allEmailFlagsEnabled()->create([]);
         $member->assignRole('Member');
 
         $this->actingAs($user)
@@ -86,53 +65,40 @@ class CommunityEmailsTest extends TestCase
     }
 
     /** @test */
-    public function emails_to_entire_community_exclude_non_members_and_unsubscribes()
+    public function emails_to_entire_community_exclude_non_members_and_unsubscribes(): void
     {
         Mail::fake();
 
-        $user = \App\Models\User::factory()->create($this->member_attributes);
+        $user = \App\Models\User::factory()->allEmailFlagsEnabled()->create([]);
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
         // active member, for sanity check that emails actually "do" get queued
-        $active_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $active_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create([]);
         $active_member->assignRole('Member');
 
-        $blank_email_member = \App\Models\User::factory()->female()->create($this->member_attributes);
-        $blank_email_member->email = '';
+        $blank_email_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create(['email' => '']);
         $blank_email_member->assignRole('Member');
 
-        $non_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $non_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create([]);
 
-        $inactive_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $inactive_member = \App\Models\User::factory()->inactive()->female()->allEmailFlagsEnabled()->create([]);
         $inactive_member->assignRole('Member');
-        $inactive_member->active = false;
-        $inactive_member->save();
 
-        $unsubscribed_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $unsubscribed_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create(['unsubscribe' => true]);
         $unsubscribed_member->assignRole('Member');
-        $unsubscribed_member->unsubscribe = true;
-        $unsubscribed_member->save();
 
-        $other_gender_member = \App\Models\User::factory()->male()->create($this->member_attributes);
+        $other_gender_member = \App\Models\User::factory()->male()->allEmailFlagsEnabled()->create(['receive_email_community_news' => false]);
         $other_gender_member->assignRole('Member');
-        $other_gender_member->receive_email_community_news = false;
-        $other_gender_member->save();
 
-        $other_community_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $other_community_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create(['community' => 'OTHERCMTY']);
         $other_community_member->assignRole('Member');
-        $other_community_member->community = 'OTHERCMTY';
-        $other_community_member->save();
 
-        $no_news_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $no_news_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create(['receive_email_community_news' => false]);
         $no_news_member->assignRole('Member');
-        $no_news_member->receive_email_community_news = false;
-        $no_news_member->save();
 
-        $no_surprises_member = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $no_surprises_member = \App\Models\User::factory()->female()->allEmailFlagsEnabled()->create(['okay_to_send_serenade_and_palanca_details' => false]);
         $no_surprises_member->assignRole('Member');
-        $no_surprises_member->okay_to_send_serenade_and_palanca_details = false;
-        $no_surprises_member->save();
 
         // @TODO - test spouse of non-attended member, using same and different email addresses
         // @TODO - restrict attachment handling, and only process attachments if authorized

@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 
 trait InitializeDatabaseTrait
 {

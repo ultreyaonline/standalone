@@ -2,12 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Weekend;
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Tests\TestCase;
 use App\Models\WeekendAssignments;
-use Illuminate\Support\Carbon;
 use App\Enums\WeekendVisibleTo;
 use App\Mail\MessageToTeamMembers;
 use Illuminate\Support\Facades\Mail;
@@ -19,21 +16,11 @@ class TeamEmailsTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $member_attributes;
-
     public function setUp(): void
     {
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-
-        // now re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
-
-        $this->member_attributes = [
-            'active' => true,
-            'unsubscribe' => false,
-        ];
     }
 
     /** @test */
@@ -62,7 +49,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member to that weekend
-        $user = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $user = \App\Models\User::factory()->female()->create();
         $user->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -72,17 +59,8 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = \App\Models\User::factory()->female()->create([
+        $candidate = \App\Models\User::factory()->female()->asCandidate()->create([
             'weekend' => $weekend->shortname,
-            'okay_to_send_serenade_and_palanca_details' => false,
-            'interested_in_serving' => false,
-            'active' => false,
-            'allow_address_share' => false,
-            'receive_prayer_wheel_invites' => false,
-            'receive_email_reunion' => false,
-            'receive_email_sequela' => false,
-            'receive_email_community_news' => false,
-            'receive_email_weekend_general' => false,
         ]);
         $candidate_model = \App\Models\Candidate::factory()->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
@@ -155,7 +133,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member in that same section
-        $user = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $user = \App\Models\User::factory()->female()->create();
         $user->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -165,7 +143,7 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // assign a confirmed team member in that same section
-        $user2 = \App\Models\User::factory()->female()->create($this->member_attributes);
+        $user2 = \App\Models\User::factory()->female()->create();
         $user2->assignRole('Member');
         WeekendAssignments::create([
             'weekendID' => $weekend->id,
@@ -175,17 +153,8 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = \App\Models\User::factory()->female()->create([
+        $candidate = \App\Models\User::factory()->female()->asCandidate()->create([
             'weekend' => $weekend->shortname,
-            'okay_to_send_serenade_and_palanca_details' => false,
-            'interested_in_serving' => false,
-            'active' => false,
-            'allow_address_share' => false,
-            'receive_prayer_wheel_invites' => false,
-            'receive_email_reunion' => false,
-            'receive_email_sequela' => false,
-            'receive_email_community_news' => false,
-            'receive_email_weekend_general' => false,
         ]);
         $candidate_model = \App\Models\Candidate::factory()->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
@@ -249,33 +218,15 @@ class TeamEmailsTest extends TestCase
         ]);
 
         // add a candidate
-        $candidate = \App\Models\User::factory()->female()->create([
+        $candidate = \App\Models\User::factory()->female()->asCandidate()->create([
             'weekend' => $weekend->shortname,
-            'okay_to_send_serenade_and_palanca_details' => false,
-            'interested_in_serving' => false,
-            'active' => false,
-            'allow_address_share' => false,
-            'receive_prayer_wheel_invites' => false,
-            'receive_email_reunion' => false,
-            'receive_email_sequela' => false,
-            'receive_email_community_news' => false,
-            'receive_email_weekend_general' => false,
         ]);
         $candidate_model = \App\Models\Candidate::factory()->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate->id]);
 
         // add a 2nd candidate without an email address
-        $candidate2 = \App\Models\User::factory()->female()->create([
+        $candidate2 = \App\Models\User::factory()->female()->asCandidate()->create([
             'weekend' => $weekend->shortname,
             'email' => '',
-            'okay_to_send_serenade_and_palanca_details' => false,
-            'interested_in_serving' => false,
-            'active' => false,
-            'allow_address_share' => false,
-            'receive_prayer_wheel_invites' => false,
-            'receive_email_reunion' => false,
-            'receive_email_sequela' => false,
-            'receive_email_community_news' => false,
-            'receive_email_weekend_general' => false,
         ]);
         $candidate_model = \App\Models\Candidate::factory()->create(['weekend' => $weekend->shortname, 'w_user_id' => $candidate2->id]);
 

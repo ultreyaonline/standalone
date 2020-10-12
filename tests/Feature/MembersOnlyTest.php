@@ -39,7 +39,6 @@ class MembersOnlyTest extends TestCase
     public function nonmembers_cannot_see_restricted_content()
     {
         $this->seed();
-        $this->clearPermissionsCache();
 
         $response = $this->withoutExceptionHandling()
             ->signInAsGuest()
@@ -53,7 +52,6 @@ class MembersOnlyTest extends TestCase
     public function members_can_see_restricted_content()
     {
         $this->seed();
-        $this->clearPermissionsCache();
 
         $response = $this->withoutExceptionHandling()
             ->signIn()
@@ -69,7 +67,6 @@ class MembersOnlyTest extends TestCase
     public function members_can_see_vocabulary()
     {
         $this->seed();
-        $this->clearPermissionsCache();
 
         $response = $this->withoutExceptionHandling()
             ->signIn()
@@ -83,6 +80,7 @@ class MembersOnlyTest extends TestCase
     public function members_can_see_profile_page()
     {
         $this->seed();
+
         $user = \App\Models\User::factory()->create(['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
         $response = $this->signIn($user)
             ->get('/members/'.$user->id);
@@ -94,6 +92,7 @@ class MembersOnlyTest extends TestCase
     public function it_can_show_secretariat_page()
     {
         $this->seed();
+
         $response = $this->signIn()
             ->get('/secretariat');
 

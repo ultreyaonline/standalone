@@ -22,14 +22,17 @@ class TeamAssignmentsTest extends TestCase
      * - assignments are not visible if weekend is not Active
      */
 
+    public function setUp(): void
+    {
+        parent::setUp();
 
+        $this->seed(); // mainly to get the Roles and Permissions defined
+    }
 
 
     /** @test */
     public function rector_can_make_team_assignments()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create(['rectorID' => $rector->id]);
         WeekendAssignments::create([
@@ -61,8 +64,6 @@ class TeamAssignmentsTest extends TestCase
     /** @test */
     public function head_cha_can_make_team_assignments()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
             'rectorID' => $rector->id,
@@ -105,8 +106,6 @@ class TeamAssignmentsTest extends TestCase
     /** @test */
     public function an_unconfirmed_assignment_is_only_visible_to_the_rector_and_headcha_and_rover()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
@@ -172,8 +171,6 @@ class TeamAssignmentsTest extends TestCase
     /** @test */
     public function a_confirmed_assignment_is_visible_to_all_if_the_weekend_is_visible_to_community()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([

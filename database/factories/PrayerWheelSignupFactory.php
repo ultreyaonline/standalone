@@ -24,14 +24,14 @@ class PrayerWheelSignupFactory extends Factory
     {
         return [
             'weekendID' => function () {
-                return App\Models\Weekend::factory();
+                return \App\Models\Weekend::factory();
             },
             'timeslot' => $this->faker->numberBetween(1, 72),
             'memberID' => function () {
-                return App\Models\User::factory();
+                return \App\Models\User::factory();
             },
             'wheel_id' => function () {
-                return App\Models\PrayerWheel::factory();
+                return \App\Models\PrayerWheel::factory();
             },
             'acknowledged_at' => $this->faker->dateTimeBetween(),
             'reminded_at' => $this->faker->dateTimeBetween(),

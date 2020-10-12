@@ -51,7 +51,6 @@ class MembersDirectorySearchTest extends TestCase
     {
         $this->seed();
 
-        User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
         User::factory()->active()->create(['first' => 'fizz', 'last' => 'buzz']);
 
         $this->expectException(HttpException::class);

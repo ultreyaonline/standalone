@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +16,6 @@ class MembersControllerTest extends TestCase
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
         $this->admin = User::factory()->active()
             ->create(['first' => 'admin', 'last' => 'user'])

@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Weekend;
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use App\Models\PrayerWheel;
@@ -30,9 +30,6 @@ class PrayerWheelNotificationsTest extends TestCase
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-
-        // now re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
         $this->member_attributes = [
             'email'                          => 'john@example.com',

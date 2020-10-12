@@ -36,13 +36,16 @@ class WeekendStatusTest extends TestCase
     // - team member assignment history list on their profile page
     // - that weekend's rector's service history list
 
+    public function setUp(): void
+    {
+        parent::setUp();
 
+        $this->seed();
+    }
 
     /** @test */
     public function a_new_weekend_is_visible_to_admin()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         $weekend = \App\Models\Weekend::factory()->womens()->create(['visibility_flag' => WeekendVisibleTo::AdminOnly]);
 
         $user = \App\Models\User::factory()->female()->create();
@@ -60,8 +63,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function a_calendar_only_weekend_is_visible_on_calendar_and_for_admins_but_not_other_dropdowns()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         $weekend = \App\Models\Weekend::factory()->womens()->create(['visibility_flag' => WeekendVisibleTo::Calendar]);
 
         $admin = \App\Models\User::factory()->female()->create();
@@ -82,8 +83,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function a_hidden_weekends_theme_details_are_only_visible_to_rector()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
@@ -109,8 +108,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function a_hidden_weekends_team_assignments_are_only_visible_to_rector()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
@@ -146,8 +143,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function a_weekends_team_assignments_are_only_visible_to_headchas_when_status_is_headchas()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
@@ -199,8 +194,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function a_weekends_team_assignments_are_only_visible_to_section_heads_when_status_is_sectionheads()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([
@@ -251,8 +244,6 @@ class WeekendStatusTest extends TestCase
     /** @test */
     public function the_team_of_a_weekend_set_to_community_visible_status_can_be_seen_by_members()
     {
-        $this->seed(); // mainly to get the Roles and Permissions defined
-
         // assign a rector to a weekend
         $rector = \App\Models\User::factory()->female()->create();
         $weekend = \App\Models\Weekend::factory()->womens()->create([

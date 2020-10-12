@@ -42,10 +42,29 @@ class EventFactory extends Factory
             'end_datetime' => $start->add(new \DateInterval('P1D')),
             'is_enabled' => 1,
             'is_public' => ($type == 'secuela' || $type == 'weekend') ? 1 : 0,
-            'contact_id' => \App\Models\User::factory(),
-            'posted_by' => \App\Models\User::factory(),
+            'contact_id' => function () {
+                return \App\Models\User::factory();
+            },
+            'posted_by' => function () {
+                return \App\Models\User::factory();
+            },
             'recurring_end_datetime' => null,
             'expiration_date' => null,
         ];
     }
+
+    public function enabled()
+    {
+        return $this->state([
+            'is_enabled' => true,
+        ]);
+    }
+
+    public function notPublic()
+    {
+        return $this->state([
+            'is_public' => false,
+        ]);
+    }
+
 }

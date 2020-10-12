@@ -41,7 +41,6 @@ class UsersTableSeeder extends Seeder
         $u->assignRole('Admin');
 
         // create a wife record from shared properties of the man's record
-        $clone = \App\Models\User::find($m->id);
         $w = \App\Models\User::factory()->female()->create([
             'email'=>'jane@example.com',
             'username'=>'jane@example.com',
@@ -71,10 +70,10 @@ class UsersTableSeeder extends Seeder
             $sponsorID = $this->getRandomSponsorID();
 
             // build a couple
-            $userM           = \App\Models\User::factory()->male()->create([
+            $userM           = \App\Models\User::factory()->male()->randomlyInactive()->create([
                 'sponsorID' => $sponsorID,
             ]);
-            $userF           = \App\Models\User::factory()->female()->create([
+            $userF           = \App\Models\User::factory()->female()->randomlyInactive()->create([
                 'spouseID'   => $userM->id,
                 'church'     => $userM->church,
                 'weekend'    => $userM->weekend,
@@ -94,7 +93,7 @@ class UsersTableSeeder extends Seeder
         }
 
         // a few more non-couples
-        \App\Models\User::factory()->generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID(), 'active'=>false]);
+        \App\Models\User::factory()->generic()->randomlyInactive()->count(5)->create(['sponsorID' => $this->getRandomSponsorID()]);
         \App\Models\User::factory()->generic()->count(3)->create(['sponsorID' => $this->getRandomSponsorID()]);
 
         // Make some couples be from another Community

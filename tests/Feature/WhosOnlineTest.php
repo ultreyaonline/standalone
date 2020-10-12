@@ -11,14 +11,15 @@ class WhosOnlineTest extends TestCase
 {
     use RefreshDatabase;
 
-
-        // @TODO -- need to switch to taggable cache so this can be properly tested, and cache resets done without destroying production
-        // @TODO -- ideally be able to override cache key for testing purposes
+    // @TODO -- should switch to taggable cache so this can be properly tested, and cache resets done without destroying production
+    // @TODO -- ideally be able to override cache key for testing purposes
 
     public function setUp(): void
     {
         parent::setUp();
         $this->seed();
+
+        // ensure everything is reset before this set of tests, since it is focused on cache
         $this->clearPermissionsCache();
         Cache::forget('user-is-online-1');
         Cache::forget('user-is-online-2');

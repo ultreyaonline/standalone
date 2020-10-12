@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Event;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,12 +14,17 @@ class CalendarTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_can_display_public_calendar()
+    public function it_can_display_public_calendar(): void
     {
         $this->withoutExceptionHandling();
 
         $date = Carbon::tomorrow();
-        Event::factory()->create(['type' => 'secretariat', 'name' => 'Secretariat Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        Event::factory()->enabled()->notPublic()->create([
+            'type' => 'secretariat',
+            'name' => 'Secretariat Meeting',
+            'start_datetime' => $date,
+            'end_datetime' => $date->addHours(3),
+        ]);
 
         $response = $this->get('/calendar');
 
@@ -31,7 +35,7 @@ class CalendarTest extends TestCase
     }
 
     /** @test */
-    public function members_can_see_member_events()
+    public function members_can_see_member_events(): void
     {
         $this->seed();
 
@@ -45,12 +49,17 @@ class CalendarTest extends TestCase
     }
 
     /** @test */
-    public function members_can_see_secretariat_meetings()
+    public function members_can_see_secretariat_meetings(): void
     {
         $this->seed();
 
         $date = Carbon::tomorrow();
-        Event::factory()->create(['type' => 'secretariat', 'name' => 'Secretariat Test Meeting', 'start_datetime' => $date, 'end_datetime' => $date->addHours(3), 'is_public' => 0, 'is_enabled' => 1]);
+        Event::factory()->enabled()->notPublic()->create([
+            'type' => 'secretariat',
+            'name' => 'Secretariat Test Meeting',
+            'start_datetime' => $date,
+            'end_datetime' => $date->addHours(3),
+        ]);
 
         $response = $this->signIn()
             ->get('/events');

@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Weekend;
 use App\Models\TeamFeePayments;
 use App\Models\WeekendAssignments;
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,9 +25,6 @@ class TeamFeePaymentsTest extends TestCase
         parent::setUp();
 
         $this->seed(DatabaseSeeder::class);
-
-        // now re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
         $this->member_attributes = [
             'email'    => 'john@example.com',
@@ -67,7 +64,7 @@ class TeamFeePaymentsTest extends TestCase
         $this->weekend = $this->weekend->fresh();
 
         // make a user who is authorized to access/record payments
-        $this->treasurer_user = User::factory()->active()->create();
+        $this->treasurer_user = User::factory()->create();
         $this->treasurer_user->assignRole('Member');
 //        $this->treasurer_user->assignRole('Treasurer');
         $this->treasurer_user->givePermissionTo('record team fees paid');

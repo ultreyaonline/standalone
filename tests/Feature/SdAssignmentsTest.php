@@ -38,7 +38,6 @@ class SdAssignmentsTest extends TestCase
 
         $sd = \App\Models\User::factory()->create([
             'qualified_sd' => 1,
-            'active' => 1,
         ]);
 
         $response = $this->signIn($rector)

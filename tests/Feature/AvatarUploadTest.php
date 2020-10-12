@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use DatabaseSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;

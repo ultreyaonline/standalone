@@ -57,7 +57,7 @@ class UserFactory extends Factory
             //imageUrl($width = 640, $height = 480, $category = null, $randomize = true)
             'skills' => $this->faker->sentence,
             'qualified_sd' => $this->faker->boolean(10),
-            'active' => $this->faker->boolean(90),
+            'active' => true,
             'inactive_comments' => null,
             'created_by' => 'Faker',
 
@@ -122,6 +122,45 @@ class UserFactory extends Factory
     {
         return $this->state([
             'active' => false,
+        ]);
+    }
+
+    public function randomlyInactive()
+    {
+        return $this->state([
+            'active' => $active = $this->faker->boolean(90),
+            'inactive_comments' => $active ? null : $this->faker->sentence(4),
+        ]);
+    }
+
+    public function allEmailFlagsEnabled()
+    {
+        return $this->state([
+            'active' => true,
+            'unsubscribe' => false,
+            'receive_prayer_wheel_invites' => true,
+            'receive_email_reunion' => true,
+            'receive_email_sequela' => true,
+            'receive_email_community_news' => true,
+            'receive_email_weekend_general' => true,
+            'community' => config('site.local_community_filter'),
+        ]);
+    }
+
+    public function asCandidate()
+    {
+        // @NOTE: Must still set `weekend` and `sponsorID` separately
+        return $this->state([
+            'okay_to_send_serenade_and_palanca_details' => false,
+            'interested_in_serving' => false,
+            'active' => false,
+            'allow_address_share' => false,
+            'receive_prayer_wheel_invites' => false,
+            'receive_email_reunion' => false,
+            'receive_email_sequela' => false,
+            'receive_email_community_news' => false,
+            'receive_email_weekend_general' => false,
+            'community' => config('site.local_community_filter'),
         ]);
     }
 }
