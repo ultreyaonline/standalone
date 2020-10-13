@@ -15,12 +15,12 @@ class MembersDirectory extends Component
 
     public $perPage;
     public $q; // query string for search
-    public $sortField = 'first'; // initial sort field
+    public $sortBy = 'first'; // initial sort field
     public $sortAsc = true; // used for query and icons
 
     protected $paginationTheme = 'bootstrap';
 
-    protected $queryString = ['q', 'perPage', 'sortField', 'sortAsc'];
+    protected $queryString = ['q', 'perPage', 'sortBy', 'sortAsc'];
 
     public function render()
     {
@@ -31,7 +31,7 @@ class MembersDirectory extends Component
                 ->active()
                 //->onlyLocal()
                 ->select($this->getColumns())
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->orderBy($this->sortBy, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage),
         ]);
     }
@@ -43,13 +43,13 @@ class MembersDirectory extends Component
 
     public function sortBy($field): void
     {
-        if ($this->sortField === $field) {
+        if ($this->sortBy === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
 
-        $this->sortField = $field;
+        $this->sortBy = $field;
     }
 
     /**

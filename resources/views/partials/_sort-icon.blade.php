@@ -1,4 +1,4 @@
-@if ($sortField !== $field)
+@if ($sortBy !== $field)
     <i class="text-muted fa fa-sort"></i>
 @elseif ($sortAsc)
     <i class="fa fa-sort-up"></i>

@@ -15,12 +15,12 @@ class MembersAudit extends Component
 
     public $perPage;
     public $q = ''; // query string for search
-    public $sortField = 'last';
+    public $sortBy = 'last';
     public $sortAsc = true; // used for query and icons
 
     protected $paginationTheme = 'bootstrap';
 
-    protected $queryString = ['q', 'perPage', 'sortField', 'sortAsc'];
+    protected $queryString = ['q', 'perPage', 'sortBy', 'sortAsc'];
 
     public function mount(): void
     {
@@ -34,7 +34,7 @@ class MembersAudit extends Component
         return view('livewire.members-audit', [
             'users' => User::datatableSearch($this->q)
                 ->select($this->getColumns())
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->orderBy($this->sortBy, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage),
         ]);
     }
@@ -46,13 +46,13 @@ class MembersAudit extends Component
 
     public function sortBy($field): void
     {
-        if ($this->sortField === $field) {
+        if ($this->sortBy === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
 
-        $this->sortField = $field;
+        $this->sortBy = $field;
     }
 
     /**
