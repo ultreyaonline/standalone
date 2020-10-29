@@ -9,4 +9,4 @@ CHANGELOG.md export-ignore
 /.gitignore export-ignore
 /.php_cs export-ignore
 /.editorconfig export-ignore
-/README.md export-ignore
+*.md export-ignore
