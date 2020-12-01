@@ -6,39 +6,56 @@ jobs:
   tests-on-githubci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: '7.4'
+            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+            coverage: none
       - name: Show PHP version
         run: php -v
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Create SQLite testing db for Unit Tests
+        run: mkdir -p database && touch database/testing.sqlite
+
+      # - name: Create MySQL database
+      #   run: |
+      #       sudo /etc/init.d/mysql start
+      #       mysql  -u root -proot -e 'CREATE DATABASE IF NOT EXISTS app_tests;'
+
+
+      # - name: Validate composer.json and composer.lock
+      #   run: composer validate
       - name: Cache composer dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+            path: vendor
+            key: composer-${{ hashFiles('composer.lock') }}
       - name: Install Composer dependencies
         run: composer install --no-progress --no-interaction --no-suggest --ignore-platform-reqs --prefer-dist --optimize-autoloader --no-ansi --no-scripts
+        # env:
+        #   COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+
+
       - name: Prepare the application
         run: |
           cp .env.acceptance .env
           # php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
+
       - name: Clear Any Cached Artisan Resources
         run: php artisan optimize:clear
 
-      - name: Create SQLite testing db for Unit Tests
-        run: mkdir -p database && touch database/testing.sqlite
       # - run: php artisan migrate:fresh --seed --force
+
       - name: Run phpunit suite (unit tests and feature tests)
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/testing.sqlite
+          # DB_PASSWORD: root
         run: php vendor/bin/phpunit
 
       # DUSK ACCEPTANCE TESTING
@@ -55,4 +72,3 @@ jobs:
         run: if [ -n "${{ secrets.DEPLOY_WEBHOOK_URL }}" ]; then wget -O - ${{ secrets.DEPLOY_WEBHOOK_URL }} ; fi
 
         # ALTERNATIVELY:  a github Webhook can be set to listen to the "Check Suites" event and call the /api/deploy endpoint if "secret" matches the DEPLOY_SECRET_KEY in the .env file in production
-
