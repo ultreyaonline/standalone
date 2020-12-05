@@ -14,16 +14,13 @@ class Event extends Model
     use HasFactory;
 
     protected $casts = [
-        'is_enabled'   => 'boolean',
-        'is_public'    => 'boolean',
+        'is_enabled' => 'boolean',
+        'is_public' => 'boolean',
         'is_recurring' => 'boolean',
-    ];
-
-    protected $dates = [
-        'start_datetime',
-        'end_datetime',
-        'recurring_end_datetime',
-        'expiration_date',
+        'start_datetime' => 'datetime',
+        'end_datetime' => 'datetime',
+        'recurring_end_datetime' => 'datetime',
+        'expiration_date' => 'datetime',
     ];
 
     /**

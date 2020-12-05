@@ -128,20 +128,20 @@ class EventController extends Controller
         // build new event in memory
         $event = new Event($request->except($dateFields));
 
-        // avoid saving null dates
-        foreach ($dateFields as $theField) {
-            if (Str::endsWith($theField, '_at')) {
-                continue;
-            }
-            if ($request->filled($theField)) {
-                $event->$theField = $request->input($theField) . (strlen($request->input($theField)) === 16 ? ':00' : '');
-            }
-        }
-
-        // handle checkboxes
         foreach ($event->getCasts() as $theField => $itsType) {
+            // handle checkboxes
             if ($itsType === 'boolean') {
                 $request->merge([$theField => $request->filled($theField)]);
+                continue;
+            }
+            // avoid saving null dates
+            if ($itsType === 'datetime') {
+                if (Str::endsWith($theField, '_at')) {
+                    continue;
+                }
+                if ($request->filled($theField)) {
+                    $event->$theField = $request->input($theField) . (strlen($request->input($theField)) === 16 ? ':00' : '');
+                }
             }
         }
 
@@ -192,28 +192,30 @@ class EventController extends Controller
             return redirect('/events/' . $event->id, 403);
         }
 
-        $this->validate($request, [
+        $validated = $this->validate($request, [
             'name' => 'required',
             'type' => Rule::in(collect(Event::TYPES)->keys()),
             'start_datetime' => 'required',
             'end_datetime' => 'required',
         ]);
 
-        // handle checkboxes
         foreach ($event->getCasts() as $theField => $itsType) {
+            // handle checkboxes
             if ($itsType === 'boolean') {
-                $request->merge([$theField => $request->filled($theField)]);
+                $validated->merge([$theField => $validated->filled($theField)]);
+                continue;
+            }
+
+            // handle null dates
+            if ($itsType === 'datetime') {
+                $event->$theField = $validated->filled($theField)
+                    ? $validated->input($theField) . (strlen($validated->input($theField)) === 16 ? ':00' : '')
+                    : null;
             }
         }
 
-        // handle null dates
-        foreach ($event->getDates() as $theField) {
-            $event->$theField = $request->filled($theField)
-                ? $request->input($theField) . (strlen($request->input($theField)) === 16 ? ':00' : '')
-                : null;
-        }
         // save by applying Request data (except date fields, handled above)
-        $event->update($request->except($event->getDates()));
+        $event->update($validated);
 
         flash()->success('Event: ' . $event->name . ' updated.');
         event('EventUpdated', ['event' => $event, 'by' => $request->user()]);

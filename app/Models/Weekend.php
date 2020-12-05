@@ -75,18 +75,15 @@ class Weekend extends Model implements HasMedia
         'share_5_doc_label',
     ];
 
-    protected $dates = [
-        'start_date',
-        'end_date',
-        'candidate_arrival_time',
-        'sendoff_start_time',
-        'closing_arrival_time',
-        'closing_scheduled_start_time',
-        'serenade_arrival_time',
-        'serenade_scheduled_start_time',
-    ];
-
     protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+        'candidate_arrival_time' => 'datetime',
+        'sendoff_start_time' => 'datetime',
+        'closing_arrival_time' => 'datetime',
+        'closing_scheduled_start_time' => 'datetime',
+        'serenade_arrival_time' => 'datetime',
+        'serenade_scheduled_start_time' => 'datetime',
         'visibility_flag' => 'integer',
     ];
 

@@ -49,20 +49,17 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $casts = [
-        'active'                                    => 'boolean',
-        'qualified_sd'                              => 'boolean',
-        'interested_in_serving'                     => 'boolean',
-        'receive_prayer_wheel_invites'              => 'boolean',
-        'receive_prayer_wheel_reminders'            => 'boolean',
-        'receive_email_weekend_general'             => 'boolean',
-        'receive_email_community_news'              => 'boolean',
+        'active'                         => 'boolean',
+        'qualified_sd'                   => 'boolean',
+        'interested_in_serving'          => 'boolean',
+        'receive_prayer_wheel_invites'   => 'boolean',
+        'receive_prayer_wheel_reminders' => 'boolean',
+        'receive_email_weekend_general'  => 'boolean',
+        'receive_email_community_news'   => 'boolean',
         'okay_to_send_serenade_and_palanca_details' => 'boolean',
-        'unsubscribe'                               => 'boolean',
-    ];
-
-    protected $dates = [
-        'last_login_at',
-        'unsubscribe_date',
+        'unsubscribe'      => 'boolean',
+        'last_login_at'    => 'timestamp',
+        'unsubscribe_date' => 'datetime',
     ];
 
     /**

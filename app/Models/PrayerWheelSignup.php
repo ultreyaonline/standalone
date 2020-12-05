@@ -22,9 +22,9 @@ class PrayerWheelSignup extends Model
     // This is used for optimal querying for reminders, and for wheel-display
     protected $with = ['weekend', 'user', 'wheel', 'wheel.weekend'];
 
-    protected $dates = [
-        'acknowledged_at',
-        'reminded_at',
+    protected $casts = [
+        'acknowledged_at' => 'datetime',
+        'reminded_at' => 'datetime',
     ];
 
 //    $table->unsignedInteger('wheel_id');
