@@ -140,6 +140,7 @@ First put your app into a Github repository.
 - Add the Site
 - Connect it to your Github repository
 - You might want to update the Environment file with custom settings
+- Tell Forge Scheduler to run a job every minute so that prayer wheel notifications get sent out properly. Something like: `php /home/forge/insert_directory_here/artisan schedule:run`
 - You might want to update the Deploy script in Forge using steps found in the `/deploy-laravel.sh` file in your app.
 - If you want the tests suite to run successfully before new deployments, use the Deployment instructions above. However, if you just want Forge to always push every new commit directly to your site without running any tests, you can enable the Auto Deploy option in Forge.
 

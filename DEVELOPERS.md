@@ -9,7 +9,7 @@
 
 Be sure to configure the application using `.env` and set any special needs in the `/config/*.php` files where no `.env` settings are available. Of critical note are mysql db credentials, smtp credentials, backup-notifications-email-address, backup passwords, AWS buckets if used.
 
-Also set up a cron job to fire the `artisan` scheduler and enable any desired jobs in `/app/Console/Kernel.php` so that things like backups and prayer-wheel notifications are automatically sent.
+For a production server, be sure to set up a cron job to fire the `artisan schedule:run` and enable any desired jobs in `/app/Console/Kernel.php` so that things like backups and prayer-wheel notifications are automatically sent.
 
 ## Demo Data
 
@@ -41,9 +41,18 @@ Webpack: To compile **Front-End Assets** See Laravel-Mix docs: https://laravel.c
 
 ## Local PC Setup / Environment
 
-It's recommended to run a local LAMP environment for development and testing.
+You will need a LAMP environment for development and testing.
 
-With Laravel there are two standard options:
+With Laravel there are three standard options:
+
+### Sail (using Docker)
+
+For Windows/Mac/Linux, you can use Sail to quickly set up a dev environment and work with the application. You don't need to be a Docker expert to use Sail! 
+
+You can find full documentation on using Sail at: https://laravel.com/docs/8.x/sail
+
+Sail is probably the fastest/easiest setup option.
+
 
 ### Valet
 For Mac users a lightweight tool called "Valet" uses Homebrew to configure local PHP/MySQL/Webserver apps and provide 90% of the same environment as the live server. In 5 minutes you can have a dev environment up and running with Valet. Instructions for setting up Valet can be found at: https://laravel.com/docs/valet
@@ -63,11 +72,9 @@ For example, if you put this project's code in your `~/Sites/tresdias` folder, s
 You could even run `cd ~/Sites/tresdias && valet secure` to make it work with https at `https://tresdias.test`
 
 
-### Vagrant or Docker
+### Homestead (using Vagrant)
 
 If you wish to use a Vagrant virtual machine, you can use [Laravel Homestead](https://laravel.com/docs/homestead) for your development environment.
-
-For Docker, check out [LaraDock](https://laradock.io) and/or [Takeout](https://github.com/tightenco/takeout).
 
 
 ## Database Inspection
@@ -77,6 +84,8 @@ You can use tools like https://tableplus.com or http://www.sequelpro.com to insp
 ## Email Testing
 For testing emails during development, it’s ideal to not actually send real emails to real inboxes. 
 
-To “trap” all the emails, [MailTrap.io](https://mailtrap.io) is a handy service. Simply configure MAIL_USERNAME and MAIL_PASSWORD in your local `.env` file with the SMTP settings from your Mailtrap account.
+To “trap” all the emails, [MailHog](https://github.com/mailhog/MailHog), [MailTrap.io](https://mailtrap.io) and [HELO](https://usehelo.com/) are handy options.
 
-If you're interested in a local/desktop application for email testing you may wish to try https://usehelo.com/ as a convenient tool.
+MailHog is installed and available within Sail already. All emails sent by the dockerized application will be sent to Mailhog.
+
+For Mailtrap, once you've created your free account, simply configure MAIL_USERNAME and MAIL_PASSWORD in your local `.env` file with the SMTP settings from your Mailtrap account.
