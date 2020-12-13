@@ -84,7 +84,11 @@ If you are hosting with Cloudways, you can use their automated daily backup serv
 
 You may optionally wish to enable timed backups within the application: You can configure the timing of the backups in the `/App/Console/Kernal.php`, which is set to 3am by default.
 
-If you are having the application do its own backups, you must first specify where you want those backups stored. Out-of-the-box it is ready to use AWS for storing your backups. To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file.
+If you are having the application do its own backups, you must first specify where you want those backups stored. 
+
+Out-of-the-box it is ready to use AWS for storing your backups. (You can get your first year free with a new AWS account.)
+
+To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the other 3 AWS keys for your AWS credentials.
 
 You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUPS_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
 
@@ -136,13 +140,30 @@ If you are using Laravel Forge, you will give Github the token URL from Forge, i
 First put your app into a Github repository.
 
 ## Laravel Forge
+In the Forge portal:
+- link your own SSH key to Forge for new deploys
+- link your github account within Forge
+- link DigitalOcean (or other) Provider account
 - Provision a new server with Forge
-- Add the Site
-- Connect it to your Github repository
-- You might want to update the Environment file with custom settings
+- Add a Site to that Server (delete the "default" site afterward)
+- Connect the site to your Github repository and do a Deploy
+- edit Environment file via Forge
+  - set keys for:
+      - Mailgun (outgoing mail)
+      - Mailchimp (keeping mailing list in sync)
+      - AWS (for daily site backups)
+      - Stripe (if you're collecting payments online via the website)
+  - also adjust timezone and App URL
+- add SSL via LetsEncrypt
 - Tell Forge Scheduler to run a job every minute so that prayer wheel notifications get sent out properly. Something like: `php /home/forge/insert_directory_here/artisan schedule:run`
+- start queue worker, so emails can send. Or enable Horizon instead. 
 - You might want to update the Deploy script in Forge using steps found in the `/deploy-laravel.sh` file in your app.
 - If you want the tests suite to run successfully before new deployments, use the Deployment instructions above. However, if you just want Forge to always push every new commit directly to your site without running any tests, you can enable the Auto Deploy option in Forge.
+
+Be sure to do regular Linux maintenance on your server, applying regular security patches and rebooting from time to time.
+
+Consider linking up an error-reporting service like Sentry.io or Rollbar.com or Honeybadger.com to be notified of problems users may be encountering with the site. Honeybadger includes an "uptime" monitor to let you know if the site becomes unavailable unexpectedly.
+
 
 ## Cloudways
 - Provision a new server
