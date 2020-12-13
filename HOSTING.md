@@ -154,11 +154,14 @@ In the Forge portal:
       - AWS (for daily site backups)
       - Stripe (if you're collecting payments online via the website)
   - also adjust timezone and App URL
-- add SSL via LetsEncrypt
 - Tell Forge Scheduler to run a job every minute so that prayer wheel notifications get sent out properly. Something like: `php /home/forge/insert_directory_here/artisan schedule:run`
 - start queue worker, so emails can send. Or enable Horizon instead. 
 - You might want to update the Deploy script in Forge using steps found in the `/deploy-laravel.sh` file in your app.
 - If you want the tests suite to run successfully before new deployments, use the Deployment instructions above. However, if you just want Forge to always push every new commit directly to your site without running any tests, you can enable the Auto Deploy option in Forge.
+
+Then in your Domain Registrar's NameServer DNS settings, point the domain's A record to the server's IP address so the domain becomes live.
+
+Then in Forge add SSL to the domain via LetsEncrypt.
 
 Be sure to do regular Linux maintenance on your server, applying regular security patches and rebooting from time to time.
 
