@@ -126,6 +126,7 @@ class CommunicationController extends Controller
         $team = \App\Models\User::whereIn('id', $teamRecipients->pluck('memberID'))
             ->role('Member')
             ->where('email', '!=', '')// skip blank email addresses
+            ->whereNotNull('email')
             ->get();
 
         if ($request->input('exclude_rector', 0) === '1') {
@@ -238,6 +239,7 @@ class CommunicationController extends Controller
 
         $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
+            ->whereNotNull('email')
             ->role('Member')
             ->notunsubscribed();
 
@@ -297,6 +299,7 @@ class CommunicationController extends Controller
 
         $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
+            ->whereNotNull('email')
             ->notunsubscribed()
             ->onlyLocal()
             ->where('okay_to_send_serenade_and_palanca_details', 1)

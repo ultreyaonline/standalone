@@ -61,6 +61,7 @@ class AdminController extends Controller
 
         $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
+            ->whereNotNull('email')
             ->role('Admin')
             ->notunsubscribed();
 

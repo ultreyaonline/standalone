@@ -83,6 +83,7 @@ Have a blessed week
 
         $recipients = \App\Models\User::active()
             ->where('email', '!=', '')// skip blank email addresses
+            ->whereNotNull('email')
             ->where('receive_prayer_wheel_invites', true)
             ->role('Member')
             ->notunsubscribed();
