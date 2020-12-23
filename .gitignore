@@ -24,3 +24,5 @@ yarn-error.log
 # don't really need to have package-lock.json in VCS unless generating front-end assets on every build
 package-lock.json
 
+# in your deployed app you SHOULD commit composer.lock to VCS according to dependencies consistent with your server; so comment-out the following line for your own repo
+composer.lock
