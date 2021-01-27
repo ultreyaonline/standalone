@@ -86,7 +86,7 @@ class TeamAssignmentsTest extends TestCase
 
         $user = \App\Models\User::factory()->female()->create();
 
-        $response = $this->signIn($headcha)
+        $response = $this->withExceptionHandling()->signIn($headcha)
             ->post(action('App\Http\Controllers\TeamAssignmentController@store', $weekend->id), [
                 'memberID' => $user->id,
                 'roleID' => 10,
