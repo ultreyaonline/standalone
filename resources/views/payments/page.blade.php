@@ -19,6 +19,14 @@
                 Please mark on your @lang('locale.cheque') how the payment is to be allocated.
               </li>
 
+@if( config('site.payments_email_transfer_address') || config('ultreya.paypal-donations-enabled') || config('services.stripe.key') )
+                <hr>
+                <p>NOTE: the following payments will also reach us but <strong>will incur a 2-3% service charge to
+                    {{ config('site.community_acronym') }}</strong>. Please consider adding a small extra amount to offset these fees.</p>
+                <hr>
+@endif
+
+
 @includeWhen(config('site.payments_email_transfer_address'), 'payments.email_transfer_canada')
 
 @includeWhen(config('ultreya.paypal-donations-enabled'), 'payments.paypal_hosted_button')
