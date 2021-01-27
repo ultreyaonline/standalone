@@ -57,7 +57,7 @@ class WeekendSeeder extends Seeder
             'weekend_verse_text' => 'Jesus Wept',
             'weekend_verse_reference' => 'John 11',
             'weekend_theme' => 'Refreshing in Christ',
-            'banner_url' => 'http://lorempixel.com/600/400/sports/2',
+            'banner_url' => 'https://placekitten.com/601/401',
             'visibility_flag' => 6,
         ];
         \App\Models\Weekend::create($data);
@@ -108,7 +108,7 @@ class WeekendSeeder extends Seeder
             'weekend_verse_text' => 'It is by Grace you are saved, a gift from God',
             'weekend_verse_reference' => 'Ephesians 2:8',
             'weekend_theme' => 'Graciously Saved, Abiding by Faith',
-            'banner_url' => 'http://lorempixel.com/600/400/sports/4',
+            'banner_url' => 'https://placekitten.com/602/402',
             'visibility_flag' => 6,
         ];
         \App\Models\Weekend::create($data);
