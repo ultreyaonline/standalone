@@ -249,7 +249,6 @@ class User extends Authenticatable implements HasMedia
 
         $hash = UniqueId::generate(10, $this, 'uidhash');
 
-//        DB::update('UPDATE ' . $this->getTable() . ' SET uidhash = "' . $hash . '" where id =' . (int)$this->id);
         $this->attributes['uidhash'] = $hash;
         // persist to db (only if exists, so that unit tests can run in memory)
         if ($this->exists) {
