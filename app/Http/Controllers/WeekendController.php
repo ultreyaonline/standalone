@@ -62,7 +62,7 @@ class WeekendController extends Controller
      * @param  Weekend $weekend
      * @param Request $request
      */
-    public function show($id, $weekend = null, Request $request)
+    public function show(Request $request, $id, $weekend = null)
     {
         if (null === $weekend) {
             if ($request->user()->can('create a weekend') || $request->user()->can('edit weekends')) {

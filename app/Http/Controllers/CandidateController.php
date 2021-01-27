@@ -335,10 +335,11 @@ class CandidateController extends Controller
     /**
      * Display the form for editing the resource.
      *
-     * @param  \App\Models\Candidate $candidate
+     * @param \App\Models\Candidate $candidate
+     * @param string|null $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug = null, Candidate $candidate)
+    public function edit(Candidate $candidate, $slug = null)
     {
         $weekend = null;
         // retrieve Candidate record using route-model-binding

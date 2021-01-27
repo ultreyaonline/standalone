@@ -28,9 +28,9 @@ class RecordFailedLoginAttempt
     public function handle(Failed $event)
     {
         FailedLoginAttempt::record(
-            $event->user,
             $event->credentials['username'],
-            request()->ip()
+            request()->ip(),
+            $event->user
         );
     }
 }

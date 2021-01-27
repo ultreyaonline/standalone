@@ -17,12 +17,12 @@ class FailedLoginAttempt extends Model
 
     protected static $logFillable = true;
 
-    public static function record($user = null, $username, $ip)
+    public static function record($username, $ip, $user = null)
     {
         return static::create([
-            'user_id' => is_null($user) ? null : $user->id,
             'username' => $username,
-            'ip_address' => $ip
+            'ip_address' => $ip,
+            'user_id' => is_null($user) ? null : $user->id,
         ]);
     }
 }
