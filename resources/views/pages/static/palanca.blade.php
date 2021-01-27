@@ -39,6 +39,15 @@
 </ul>
 <p>(The amounts/quantities listed here are generalized. Please contact the Palanca Committee Chair for specific numbers for a particular weekend.)</p>
                     </div>
+                    <div class="card-footer d-print-none">
+                        <div class="text-center">Community Banner Archives</div>
+                        <div class="text-center">
+                            <a href="/palanca-banners/general" role="button" class="btn btn-info btn-sm">General Banners</a>
+                            <a href="/palanca-banners/men" role="button" class="btn btn-info btn-sm">Men's Weekend Banners</a>
+                            <a href="/palanca-banners/women" role="button" class="btn btn-info btn-sm">Women's Weekend Banners</a>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>

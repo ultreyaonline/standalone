@@ -19,6 +19,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailchimpSubscriptionController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\PagesStaticController;
+use App\Http\Controllers\PalancaBannersController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PrayerWheelController;
 use App\Http\Controllers\PrayerWheelNotificationsController;
@@ -81,7 +82,9 @@ Route::resource('/members', MembersController::class);
 Route::get('/directory', [MembersController::class, 'index'])->name('directory'); // alias
 Route::permanentRedirect('/community', '/directory');
 
-Route::get('/palanca', [PagesStaticController::class, 'palanca']);
+Route::get('/palanca-banners/{type?}', [PalancaBannersController::class, 'show'])->where(['type' => '(men|women|general)']);
+
+Route::get('/palanca', [PagesStaticController::class, 'palanca'])->name('palanca');
 Route::get('/preweekend', [PagesStaticController::class, 'preweekend']);
 Route::get('/postweekend', [PagesStaticController::class, 'postweekend']);
 Route::get('/reuniongroups', [PagesStaticController::class, 'reuniongroups']);
