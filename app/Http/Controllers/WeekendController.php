@@ -288,7 +288,7 @@ class WeekendController extends Controller
         }
 
         $this->validate($request, [
-            'avatar' => 'mimes:jpg,jpeg,png,gif,bmp'
+            'banner_url' => 'mimes:jpg,jpeg,png,gif,bmp'
         ], [
             'image' => 'The photo must be a valid image file (PNG JPG GIF formats allowed)',
         ]);
@@ -334,7 +334,7 @@ class WeekendController extends Controller
         }
 
         $this->validate($request, [
-            'avatar' => 'mimes:jpg,jpeg,png,gif,bmp'
+            'teamphoto' => 'mimes:jpg,jpeg,png,gif,bmp'
         ], [
             'image' => 'The photo must be a valid image file (PNG JPG GIF formats allowed)',
         ]);
