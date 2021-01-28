@@ -79,7 +79,8 @@ If you wish to use a Vagrant virtual machine, you can use [Laravel Homestead](ht
 
 ## Database Inspection
 
-You can use tools like https://tableplus.com or http://www.sequelpro.com to inspect the local database.
+You can use tools like https://tableplus.com , https://dbngin.com or http://www.sequelpro.com to inspect the local database.
+
 
 ## Email Testing
 For testing emails during development, it’s ideal to not actually send real emails to real inboxes. 
