@@ -39,7 +39,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5.1",
         "barryvdh/laravel-ide-helper": "^2.8.1",
-        "beyondcode/laravel-er-diagram-generator": "^1.4",
         "brianium/paratest": "^6.1",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
