@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RolesAndPermissionsController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateEmailsController;
 use App\Http\Controllers\CandidatePaymentsController;
@@ -19,7 +20,6 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailchimpSubscriptionController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\PagesStaticController;
-use App\Http\Controllers\PalancaBannersController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PrayerWheelController;
 use App\Http\Controllers\PrayerWheelNotificationsController;
@@ -31,6 +31,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamFeePaymentsController;
 use App\Http\Controllers\Webhooks\MailchimpWebhooksController;
 use App\Http\Controllers\Webhooks\StripeWebhooksController;
+use App\Http\Controllers\WeekendBannersController;
 use App\Http\Controllers\WeekendController;
 use App\Http\Controllers\WeekendExternalController;
 use App\Http\Controllers\WeekendStatsController;
@@ -82,7 +83,8 @@ Route::resource('/members', MembersController::class);
 Route::get('/directory', [MembersController::class, 'index'])->name('directory'); // alias
 Route::permanentRedirect('/community', '/directory');
 
-Route::get('/palanca-banners/{type?}', [PalancaBannersController::class, 'show'])->where(['type' => '(men|women|general)']);
+Route::get('/palanca-banners/{type}', [WeekendBannersController::class, 'show'])->where(['type' => '(men|women)']);
+Route::get('/palanca-banners/{type?}', [BannerController::class, 'index'])->where(['type' => 'general']);
 
 Route::get('/palanca', [PagesStaticController::class, 'palanca'])->name('palanca');
 Route::get('/preweekend', [PagesStaticController::class, 'preweekend']);
@@ -123,8 +125,8 @@ Route::get('weekend/{weekend}/roster/team-email-positions', [TeamController::cla
 Route::resource('weekend', WeekendController::class)->name('index', 'weekend');
 Route::patch('weekend/{weekend}/updatephoto', [WeekendController::class, 'updateTeamPhoto']);
 Route::delete('weekend/{weekend}/deletephoto', [WeekendController::class, 'deleteTeamPhoto']);
-Route::patch('weekend/{weekend}/updatebanner', [WeekendController::class, 'updateBannerPhoto']);
-Route::delete('weekend/{weekend}/deletebanner', [WeekendController::class, 'deleteBannerPhoto']);
+Route::patch('weekend/{weekend}/updatebanner', [WeekendBannersController::class, 'updateBannerPhoto']);
+Route::delete('weekend/{weekend}/deletebanner', [WeekendBannersController::class, 'deleteBannerPhoto']);
 
 // Leaders-access only
 Route::group(['middleware' => ['role:Member']], function () {
@@ -261,6 +263,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:Admin|Super-Admin']], 
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('admin-settings-edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('admin-settings-update');
+
+    Route::resource('/banners', BannerController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 /***********************************************/
 Route::get('/payment', [PaymentController::class, 'displayForm'])->name('stripe-payment-form');

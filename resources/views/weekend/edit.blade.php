@@ -30,7 +30,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                 <div class="card border-primary">
                     <div class="card-header alert-primary">Theme/Visual/Banner Image</div>
                     <div class="card-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@updateBannerPhoto', $weekend->id) }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendBannersController@updateBannerPhoto', $weekend->id) }}" enctype="multipart/form-data">
                             @csrf @method('patch')
 
                             @include('weekend._banner_image_field')
@@ -43,7 +43,7 @@ Edit Weekend: {{ $weekend->weekend_full_name }}
                         </form>
                         @if ($weekend->banner_url)
                         <div class="text-center">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendController@deleteBannerPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\WeekendBannersController@deleteBannerPhoto', $weekend->id) }}" onsubmit="return ConfirmDelete();">
                                 @csrf @method('delete')
                                 <div class="form-group row d-inline">
                                     <button type="submit" class="btn alert-danger"><i class="fa fa-btn fa-trash"></i> Delete Photo</button>

@@ -271,53 +271,6 @@ class WeekendController extends Controller
         return redirect('/weekend/');
     }
 
-
-    /**
-     * @param Request $request
-     * @param Weekend $weekend
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function updateBannerPhoto(Request $request, Weekend $weekend)
-    {
-        if (!$weekend) {
-            return redirect('/weekend/'. $weekend);
-        }
-
-        if (! $request->user()->can('edit weekends') && ! $weekend->rectorID == $request->user()->id) {
-            abort(404);
-        }
-
-        $this->validate($request, [
-            'banner_url' => 'mimes:jpg,jpeg,png,gif,bmp'
-        ], [
-            'image' => 'The photo must be a valid image file (PNG JPG GIF formats allowed)',
-        ]);
-
-        $file = request()->file('banner_url');
-        if ($file) {
-            $weekend->addMedia($file)->toMediaCollection('banner');
-            flash()->success('Photo updated.');
-        }
-        return redirect('/weekend/'. $weekend->id);
-    }
-
-    public function deleteBannerPhoto(Request $request, Weekend $weekend)
-    {
-        if (!$weekend) {
-            return redirect('/weekend/'. $weekend);
-        }
-
-        if (! $request->user()->can('edit weekends') && ! $weekend->rectorID == $request->user()->id) {
-            abort(404);
-        }
-
-        $weekend->clearMediaCollection('banner');
-
-        flash()->success('Photo deleted.');
-
-        return redirect('/weekend/'. $weekend->id);
-    }
-
     /**
      * @param Request $request
      * @param Weekend $weekend

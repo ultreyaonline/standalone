@@ -16,6 +16,7 @@ class DemoSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(EventSeeder::class);
         $this->call(WeekendSeeder::class);
+        $this->call(BannerSeeder::class);
         $this->call(LocationSeeder::class);
     }
 }

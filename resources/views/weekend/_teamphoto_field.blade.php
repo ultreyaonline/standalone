@@ -6,4 +6,4 @@
   @endif
 </div>
 <br>
-<input type="file" name="teamphoto" aria-label="Upload a team photo">
+<input type="file" name="teamphoto" aria-label="Upload a team photo" accept=".png,.jpg,.jpeg,.gif,.bmp,image/*;capture=camera" required>

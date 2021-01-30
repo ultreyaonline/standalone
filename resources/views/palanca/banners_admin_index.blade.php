@@ -1,26 +1,26 @@
 @extends ('layouts.app')
 
-@section('title', config('site.community_acronym') . ' ' . $title_banner_type . ' Banners')
+@section('title', 'Manage General Banners')
 
 @section('body-class', 'banners')
 
 @section('content')
     <div class="container">
 
-        <div class="row">
+        <div class="row border-bottom mb-4">
             <div class="col mb-4">
-                <nav class="text-center d-print-none">
-                    <a href="/palanca-banners/general" role="button" class="btn btn-info btn-sm">General Banners</a>
-                    <a href="/palanca-banners/men" role="button" class="btn btn-info btn-sm">Men's Weekend Banners</a>
-                    <a href="/palanca-banners/women" role="button" class="btn btn-info btn-sm">Women's Weekend Banners</a>
+                <h2>Manage General Banners</h2>
+                <p class="small text-left pb-3">Note: Weekend-specific banners are added/edited via each weekend's Edit screen.</p>
+
+                <nav class="text-left">
+                    <a href="{{ route('banners.create') }}" role="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add New (Non-Weekend) Banner</a>
                 </nav>
-                <h2>{{ $title_banner_type }} Banners</h2>
             </div>
         </div>
 
         @if ($banners->count())
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
 
                 @foreach ($banners as $banner)
 
@@ -32,6 +32,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $banner->title }}</h5>
                             </div>
+
+                            @if(auth()->user()->can('manage banners'))
+                            <div class="card-footer text-right">
+                                <a href="{{ route('banners.edit', ['banner' => $banner->id]) }}" role="button" class="btn btn-primary ml-3"><i class="fa fa-edit"></i> Edit/Delete</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach
@@ -41,7 +47,7 @@
             <div class="col-md-10 offset-md-1">
                 <div class="card">
                     <div class="card-body">
-                        <p>Sorry, no banners found.</p>
+                        <p>No general banners found.</p>
                     </div>
                 </div>
             </div>

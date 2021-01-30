@@ -9,10 +9,12 @@
 
         <div class="row">
             <div class="col mb-4">
-                <nav class="text-center d-print-none">
-                    <a href="/palanca-banners/general" role="button" class="btn btn-info btn-sm">General Banners</a>
+                <nav class="text-center d-print-none mb-4">
                     <a href="/palanca-banners/men" role="button" class="btn btn-info btn-sm">Men's Weekend Banners</a>
                     <a href="/palanca-banners/women" role="button" class="btn btn-info btn-sm">Women's Weekend Banners</a>
+                    @if(!empty(\App\Models\Banner::first()))
+                        <a href="/palanca-banners/general" role="button" class="btn btn-info btn-sm">General Banners</a>
+                    @endif
                 </nav>
                 <h2>{{ $title_banner_type }} Banners</h2>
             </div>
@@ -20,7 +22,7 @@
 
         @if ($banners->count())
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 
                 @foreach ($banners as $banner)
 
@@ -30,8 +32,14 @@
                                 <img src="{{ $banner->banner_url }}" class="card-img-top img-fluid rounded mx-auto" alt="{{ $banner->weekend_full_name }}">
                             </a>
                             <div class="card-body">
+                                @if(auth()->user()->can('manage banners'))
+                                    <div class="text-right d-print-none">
+                                    <a href="/weekend/{{ $banner->id }}/edit" class="badge badge-pill badge-secondary ml-3"> Edit </a>
+                                    </div>
+                                @endif
                                 <h5 class="card-title">{{ $banner->weekend_full_name }}</h5>
-                                <p class="card-text">{{ $banner->weekend_theme }}</p>
+                                <p class="card-text small"><em>Rector: {{ $banner->rector->name }}</em></p>
+                                <p class="card-text text-primary">{{ $banner->weekend_theme }}</p>
                                 <p class="card-text small">
                                     <em>
                                         {{ $banner->weekend_verse_text }}<br>
@@ -48,8 +56,8 @@
             <div class="col-md-10 offset-md-1">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Sorry, no banners found.</h3>
-                        <p>Banners will appear here after they've been uploaded to individual weekends.</p>
+                        <h3>No weekend banners found.</h3>
+                        <p>Banners will appear here after they've been uploaded to individual weekends by the Rector or an Administrator.</p>
                     </div>
                 </div>
             </div>

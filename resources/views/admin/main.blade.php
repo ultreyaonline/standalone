@@ -42,6 +42,9 @@
             <p><a href="{{ route('location.index') }}">
                 <button class="btn btn-lg btn-primary"><i class="fa fa-bars" aria-hidden="true"></i> Edit Locations</button>
             </a></p>
+            <p><a href="{{ route('banners.index') }}">
+                <button class="btn btn-lg btn-outline-info mr-2"><i class="fa fa-photo" aria-hidden="true"></i> Edit Banners</button> (General Community Banners)
+            </a></p>
             {{--<p><a href="/team/import">--}}
                 {{--<button class="btn btn-lg btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> Weekend Import Roster</button>--}}
               {{--</a></p>--}}

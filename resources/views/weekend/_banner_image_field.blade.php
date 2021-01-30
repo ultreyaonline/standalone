@@ -6,4 +6,4 @@
   @endif
 </div>
 <br>
-<input type="file" name="banner_url" aria-label="Upload a weekend banner image">
+<input type="file" name="banner_url" aria-label="Upload a weekend banner image" accept=".png,.jpg,.jpeg,.gif,.bmp,image/*;capture=camera" required>
