@@ -31,7 +31,7 @@
         "roave/security-advisories": "dev-master",
         "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-backup": "^6.11",
-        "spatie/laravel-medialibrary": "^8.7",
+        "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-newsletter": "^4.8",
         "spatie/laravel-permission": "^3.16",
         "stripe/stripe-php": "^7.50"
