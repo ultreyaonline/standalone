@@ -52,15 +52,15 @@ class WeekendController extends Controller
             ->first();
         }
 
-        return $this->show(null, $weekend, $request);
+        return $this->show($request, null, $weekend);
     }
 
     /**
      * Display the specified weekend.
      *
+     * @param Request $request
      * @param  int $id
      * @param  Weekend $weekend
-     * @param Request $request
      */
     public function show(Request $request, $id, $weekend = null)
     {
