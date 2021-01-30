@@ -28,7 +28,6 @@
         "laravel/ui": "^2.2",
         "league/flysystem-aws-s3-v3": "^1.0",
         "livewire/livewire": "^2.0",
-        "roave/security-advisories": "dev-master",
         "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-backup": "^6.11",
         "spatie/laravel-medialibrary": "^9.4",
@@ -44,6 +43,7 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
+        "roave/security-advisories": "dev-latest",
         "sensiolabs/security-checker": "^6.0"
     },
     "config": {

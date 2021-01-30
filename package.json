@@ -14,7 +14,7 @@
         "bootstrap": "^4.6.0",
         "font-awesome": "^4",
         "jquery": "^3.5.1",
-        "laravel-mix": "^6.0.1",
+        "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "mousetrap": "^1.6.5",
         "popper.js": "^1.16.1",
