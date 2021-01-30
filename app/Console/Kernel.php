@@ -30,7 +30,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run')->daily()->at('03:50');
 
         // Spatie Activity Log pruning - set number of days in config/activitylog.php file
-        $schedule->command('activitylog:clean')->daily();
+        $schedule->command('activitylog:clean logout --days=15')->daily();
+        $schedule->command('activitylog:clean login-success --days=90')->daily();
+        $schedule->command('activitylog:clean login-failures --days=90')->daily();
+        $schedule->command('activitylog:clean passwords --days=180')->daily();
 
         // Prayer Wheel
         $schedule->call(function () {
