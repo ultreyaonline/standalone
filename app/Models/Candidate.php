@@ -13,6 +13,7 @@ class Candidate extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'pre-weekend';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 

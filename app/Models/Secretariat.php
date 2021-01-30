@@ -11,6 +11,7 @@ class Secretariat extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'secretariat';
     protected static $logAttributes = ['*'];
 
     protected $table = 'secretariat';

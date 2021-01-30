@@ -70,9 +70,11 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
+    protected static $logName = 'members';
     protected static $logAttributes = ['*'];
     protected static $logAttributesToIgnore = [ 'password', 'remember_token'];
     protected static $logOnlyDirty = true;
+    protected static $submitEmptyLogs = false;
 
 
     public function isOnline(): bool

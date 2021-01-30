@@ -26,6 +26,6 @@ class LogLockout
      */
     public function handle(Lockout $event)
     {
-        activity()->log('Login failures caused account lockout.');
+        activity('login-failures')->log('Login failures caused account lockout.');
     }
 }

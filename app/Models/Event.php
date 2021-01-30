@@ -13,6 +13,8 @@ class Event extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'calendar';
+
     protected $casts = [
         'is_enabled' => 'boolean',
         'is_public' => 'boolean',

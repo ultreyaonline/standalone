@@ -12,6 +12,7 @@ class Section extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'config-sections';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 

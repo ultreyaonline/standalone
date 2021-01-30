@@ -9,14 +9,9 @@ use App\Models\Weekend;
 use App\Models\WeekendAssignments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class WeekendController extends Controller
 {
-    use LogsActivity;
-
     protected $weekend;
     protected $users;
 

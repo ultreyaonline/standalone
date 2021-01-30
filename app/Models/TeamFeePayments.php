@@ -11,6 +11,7 @@ class TeamFeePayments extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'teamfees';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 

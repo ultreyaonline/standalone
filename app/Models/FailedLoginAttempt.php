@@ -15,6 +15,7 @@ class FailedLoginAttempt extends Model
         'user_id', 'username', 'ip_address',
     ];
 
+    protected static $logName = 'login-failures';
     protected static $logFillable = true;
 
     public static function record($username, $ip, $user = null)

@@ -11,7 +11,7 @@ class LogAuthenticationAttempt
     public function handle(Attempting $event)
     {
         if (config('site.log_login_attempts', false)) {
-            activity()->withProperty('username', $event->credentials['username'])
+            activity('login-attempts')->withProperty('username', $event->credentials['username'])
                 ->log('Login attempted: ' . $event->credentials['username']);
         }
     }

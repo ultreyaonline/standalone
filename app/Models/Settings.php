@@ -38,7 +38,7 @@ class Settings extends StorageDb
                     ->update([$this->valueColumn => $value, 'updated_at' => Date::now()]);
 
                 $logger = app(ActivityLogger::class)->withProperties(['attributes'=> [$key => $value], 'old' => [$key => $existingValues[$key]]]);
-                $logger->log('Updated Setting: ' . $key);
+                $logger->useLog('config')->log('Updated Setting: ' . $key);
 
             } else {
                 $this->connection->table($this->table)
@@ -53,7 +53,7 @@ class Settings extends StorageDb
                     ));
 
                 $logger = app(ActivityLogger::class)->withProperties(['attributes' => [$key => $value]]);
-                $logger->log('Added Setting: ' . $key);
+                $logger->useLog('config')->log('Added Setting: ' . $key);
             }
         }
 

@@ -299,7 +299,7 @@ class MembersController extends Controller
             // newly unsubscribed
             if (! $flag_pre_unsubscribe) {
                 $member->unsubscribe_date = Carbon::now();
-                activity()->log('Member unsubscribed: ' . $member->name);
+                activity('unsubscribe')->log('Member unsubscribed: ' . $member->name);
             }
         }
 

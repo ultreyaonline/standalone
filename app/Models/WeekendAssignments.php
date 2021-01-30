@@ -15,6 +15,7 @@ class WeekendAssignments extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'team-assignments';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 

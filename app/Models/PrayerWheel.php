@@ -11,6 +11,7 @@ class PrayerWheel extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'prayer-wheels';
     protected static $logAttributes = ['*'];
 
     protected $table = 'prayer_wheels';

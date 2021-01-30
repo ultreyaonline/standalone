@@ -21,6 +21,7 @@ class Weekend extends Model implements HasMedia
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'weekends';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
 

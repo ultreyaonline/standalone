@@ -12,6 +12,7 @@ class WeekendRoles extends Model
     use LogsActivity;
     use HasFactory;
 
+    protected static $logName = 'config-weekend-roles';
     protected static $logAttributes = ['*'];
 
     protected $casts = [
