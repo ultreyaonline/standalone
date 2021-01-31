@@ -77,12 +77,13 @@ https://kingmailer.co/
 
 https://sendgrid.com/solutions/email-api/smtp-service/
 
+You could also use the SMTP Relay features of GSuite or Office365 if your account has them enabled and is allowed to set application-specific passwords for a specific mailbox, in which case use those credentials in your .env file for MAIL configs.
+
 ---
 
 # Backups
-If you are hosting with Cloudways, you can use their automated daily backup service to take a copy of your site files and database.
 
-You may optionally wish to enable timed backups within the application: You can configure the timing of the backups in the `/App/Console/Kernal.php`, which is set to 3am by default.
+You may enable timed backups within the application: You can configure the timing of the backups in the `/App/Console/Kernal.php`, which is set to 3am by default.
 
 If you are having the application do its own backups, you must first specify where you want those backups stored. 
 
@@ -92,6 +93,8 @@ To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the 
 
 You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUPS_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
 
+If you are hosting with Cloudways or another provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
+
 
 ---
 
@@ -100,10 +103,13 @@ The ideal workflow for maintaining the site and pushing updates to your server i
 
 If you are using Laravel Forge, it provides an automated deployment process which you can use out-of-the-box. (You may want to update the deploy script to also restart the queues, etc, if you are using them.)
 
+
 ## Optimal Workflow
 Ideally you will have your site's files in a private Github repository.
 
 When you make a commit to Github, the Github Actions scripts will be triggered and run the test suite.
+
+If you have Laravel Forge configured to auto-deploy on new commits to that branch, it will take care of deployment and none of the following steps are required. You could still use the Webhook URL to trigger deploys at the end of the test suite.
 
 If you have configured a Github Secret for `DEPLOY_WEBHOOK_URL` then after the tests pass Github will use that URL to tell your server to apply the updates by running the deployment script there.
 
@@ -170,11 +176,17 @@ Consider linking up an error-reporting service like Sentry.io or Rollbar.com or 
 
 ## Amazon Lightsail
 Provision your server using a base Ubuntu 20.x instance, without other software installed.
+
 IMPORTANT: Under Networking, add a Static IP. This will be the IP that's used for your server's DNS. (If you don't do this, your IP address will change repeatedly, which is unsuitable for a live website.)
+
 Now use Laravel Forge to provision your server using "Custom VPS" option. Provide the Static IP address.
+
 When Forge gives you the provisioning bash script to run on your server, go to Lightsail and click on the orange Terminal icon. Run `sudo -i`, press Enter, and then paste the script from Forge, press Enter, and let it run. It will take about 10 minutes.
+
 While waiting for provisioning, in Lightsail under Networking, add a DNS Zone, linking your domain to your IP address, and do any Nameserver changes Lightsail directs you to make with your Registrar.
+
 After provisioning, in Forge set up Site for your domain name, add the github app, do a Deploy, set Environment and Scheduler and Daemons as per the Forge steps above.
+
 If you are continuing to use Forge with your server, set up LetsEncrypt via Forge.  If you're disconnecting Forge, then set up Certbot on the server via the command line and set a cron job for it to run weekly to check for updates to your SSL certificate.
 
 
