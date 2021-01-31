@@ -31,10 +31,6 @@ class ConfigServiceProvider extends ServiceProvider
 //                        'cast' => '',// string, native type for the value to be cast to.
 //                        'encrypt' => false,// bool, whether to encrypt value for the storage or not.
 //                    ],
-//                    'mail.contact.address' => [
-//                        'label' => 'Email address receiving contact messages',
-//                        'rules' => ['sometimes', 'required'],
-//                    ],
                     'site.community_acronym' => [
                         'id' => 'community_acronym',
                         'label' => 'Community Acronym (ie: ANYTD)',
@@ -369,6 +365,37 @@ class ConfigServiceProvider extends ServiceProvider
                         'rules' => ['string', 'nullable'],
                         'encrypt' => true,
                     ],
+//                    'mail.mailers.smtp.host' => [
+//                        'id' => 'smtp_host',
+//                        'label' => 'SMTP Host Server',
+//                        'hint' => 'SMTP Relay Host domain name, eg: smtp-relay.gmail.com (We already use TLS and port 587)',
+//                        'rules' => ['string', 'nullable'],
+//                    ],
+//                    'mail.mailers.smtp.username' => [
+//                        'id' => 'smtp_username',
+//                        'label' => 'SMTP Mailbox Username',
+//                        'hint' => 'SMTP Username',
+//                        'rules' => ['string', 'nullable'],
+//                    ],
+//                    'mail.mailers.smtp.password' => [
+//                        'id' => 'smtp_password',
+//                        'label' => 'SMTP Mailbox Password',
+//                        'hint' => 'SMTP Password',
+//                        'rules' => ['string', 'nullable'],
+//                        'encrypt' => true,
+//                    ],
+//                    'mail.from.address' => [
+//                        'id' => 'website_email_from_address',
+//                        'label' => 'Website Email From Address',
+//                        'hint' => 'This will be shown as the [From] (and sometimes the [Reply-To]) address of emails being sent from the website. (Usually this should be the same as the SMTP Mailbox Username above.)',
+//                        'rules' => ['string', 'nullable'],
+//                    ],
+//                    'mail.from.name' => [
+//                        'id' => 'website_email_from_name',
+//                        'label' => 'Website Email From Name',
+//                        'hint' => 'This will be shown as the Name of the sender when the website sends general emails. Usually you will set this to be the Community Abbreviation such as ANYTD.',
+//                        'rules' => ['string', 'nullable'],
+//                    ],
                 ]);
 
             return $newConfig;
