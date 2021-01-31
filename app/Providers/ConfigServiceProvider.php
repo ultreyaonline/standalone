@@ -155,13 +155,13 @@ class ConfigServiceProvider extends ServiceProvider
                         'id' => 'emergency_contact_text',
                         'label' => 'Emergency Contact Name/Text',
                         'hint' => 'If no weekend-specific Emergency Contact person is assigned, provide a generic name here. Something like "Camp Office" or "Our On Call Person"',
-                        'rules' => ['string'],
+                        'rules' => ['string', 'nullable'],
                     ],
                     'site.emergency_contact_number' => [
                         'id' => 'emergency_contact_number',
                         'label' => 'Emergency Contact Phone Number',
                         'hint' => 'The phone number to call if no weekend-specific person has been assigned.',
-                        'rules' => ['string'],
+                        'rules' => ['string', 'nullable'],
                     ],
                     'site.admin_must_approve_new_members' => [
                         'id' => 'admin_must_approve_new_members',
