@@ -142,8 +142,8 @@ First put your app into a Github repository.
 ## Laravel Forge
 In the Forge portal:
 - link your own SSH key to Forge for new deploys
-- link your github account within Forge
-- link DigitalOcean (or other) Provider account
+- link your Github account within Forge under Source Control
+- link DigitalOcean (or other Server Provider) account using Manage Providers
 - Provision a new server with Forge
 - Add a Site to that Server (delete the "default" site afterward)
 - Connect the site to your Github repository and do a Deploy
@@ -155,17 +155,27 @@ In the Forge portal:
       - Stripe (if you're collecting payments online via the website)
   - also adjust timezone and App URL
 - Tell Forge Scheduler to run a job every minute so that prayer wheel notifications get sent out properly. Something like: `php /home/forge/insert_directory_here/artisan schedule:run`
-- start queue worker, so emails can send. Or enable Horizon instead. 
+- start queue worker, so emails can send. Or switch to Laravel Horizon instead (don't start any queue workers, instead start a Daemon to run php artisan horizon, and add php artisan horizon:terminate to the deploy script). 
 - You might want to update the Deploy script in Forge using steps found in the `/deploy-laravel.sh` file in your app.
 - If you want the tests suite to run successfully before new deployments, use the Deployment instructions above. However, if you just want Forge to always push every new commit directly to your site without running any tests, you can enable the Auto Deploy option in Forge.
 
 Then in your Domain Registrar's NameServer DNS settings, point the domain's A record to the server's IP address so the domain becomes live.
 
-Then in Forge add SSL to the domain via LetsEncrypt.
+Then in Forge go to your Site config and add SSL to the domain via LetsEncrypt.
 
 Be sure to do regular Linux maintenance on your server, applying regular security patches and rebooting from time to time.
 
 Consider linking up an error-reporting service like Sentry.io or Rollbar.com or Honeybadger.com to be notified of problems users may be encountering with the site. Honeybadger includes an "uptime" monitor to let you know if the site becomes unavailable unexpectedly.
+
+
+## Amazon Lightsail
+Provision your server using a base Ubuntu 20.x instance, without other software installed.
+IMPORTANT: Under Networking, add a Static IP. This will be the IP that's used for your server's DNS. (If you don't do this, your IP address will change repeatedly, which is unsuitable for a live website.)
+Now use Laravel Forge to provision your server using "Custom VPS" option. Provide the Static IP address.
+When Forge gives you the provisioning bash script to run on your server, go to Lightsail and click on the orange Terminal icon. Run `sudo -i`, press Enter, and then paste the script from Forge, press Enter, and let it run. It will take about 10 minutes.
+While waiting for provisioning, in Lightsail under Networking, add a DNS Zone, linking your domain to your IP address, and do any Nameserver changes Lightsail directs you to make with your Registrar.
+After provisioning, in Forge set up Site for your domain name, add the github app, do a Deploy, set Environment and Scheduler and Daemons as per the Forge steps above.
+If you are continuing to use Forge with your server, set up LetsEncrypt via Forge.  If you're disconnecting Forge, then set up Certbot on the server via the command line and set a cron job for it to run weekly to check for updates to your SSL certificate.
 
 
 ## Cloudways
