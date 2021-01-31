@@ -10,6 +10,7 @@ class LocationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['index', 'show']);
     }
 
     /**

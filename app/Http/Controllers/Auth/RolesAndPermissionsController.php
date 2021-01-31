@@ -13,6 +13,7 @@ class RolesAndPermissionsController extends Controller
 
     public function __construct() {
         parent::__construct();
+        $this->middleware('password.confirm')->except(['index']);
 
         Gate::define('can delete admins', function ($user) {
             return $user->hasAnyRole('Super-Admin', 'Admin');

@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Mail;
 
 class PrayerWheelNotificationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['emailPrayerWheelReminders']);
+    }
 
     /**
      * Display form

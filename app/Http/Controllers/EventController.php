@@ -20,6 +20,7 @@ class EventController extends Controller
     {
         parent::__construct();
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('password.confirm')->except(['index', 'show']);
 
         // build types list for pulldown
         $this->types = collect(Event::TYPES);

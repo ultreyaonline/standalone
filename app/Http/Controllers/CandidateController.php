@@ -26,6 +26,8 @@ class CandidateController extends Controller
     {
         parent::__construct();
         $this->middleware('auth')->except(['confirm']);
+        $this->middleware('password.confirm')->only(['destroy']);
+
         $this->user = $user;
 
         // build list for pulldowns

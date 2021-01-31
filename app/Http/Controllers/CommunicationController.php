@@ -18,6 +18,7 @@ class CommunicationController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('password.confirm');
     }
 
     public function index()

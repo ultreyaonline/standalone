@@ -10,6 +10,7 @@ class WeekendBannersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['show']);
     }
 
     public function show(Request $request, string $type = null)

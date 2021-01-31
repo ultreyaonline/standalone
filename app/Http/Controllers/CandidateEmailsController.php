@@ -21,6 +21,7 @@ class CandidateEmailsController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('password.confirm');
         $this->user = $user;
     }
 

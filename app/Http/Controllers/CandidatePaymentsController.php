@@ -19,6 +19,7 @@ class CandidatePaymentsController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['index']);
         $this->middleware('permission:record candidate fee payments');
         $this->user = $user;
     }

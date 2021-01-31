@@ -22,6 +22,8 @@ class MembersController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['myProfile', 'index', 'show']);
+
         $this->user = $user;
 
         // build lists for pulldowns

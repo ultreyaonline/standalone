@@ -13,6 +13,7 @@ class MailchimpSubscriptionController extends Controller
     {
         parent::__construct();
         $this->middleware('auth');
+        $this->middleware('password.confirm')->except(['index', 'checkStatus']);
 
         $this->mailchimp_master_list_name = config('newsletter.defaultListName');
     }

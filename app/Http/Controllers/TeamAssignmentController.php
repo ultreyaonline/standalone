@@ -23,6 +23,7 @@ class TeamAssignmentController extends Controller
 
         $this->middleware('auth');
         $this->middleware('role:Member');
+        $this->middleware('password.confirm')->except(['show']);
 
         Gate::define('teamassignment.view', 'App\Policies\TeamAssignmentsPolicy@view');
         Gate::define('teamassignment.create', 'App\Policies\TeamAssignmentsPolicy@create');

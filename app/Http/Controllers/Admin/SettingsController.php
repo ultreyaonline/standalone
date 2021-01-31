@@ -15,10 +15,10 @@ class SettingsController extends Controller
 
     public function __construct(Container $app)
     {
-        $this->middleware('auth');
-        $this->middleware('role:Admin|Super-Admin');
-
         parent::__construct();
+
+        $this->middleware(['auth', 'password.confirm']);
+        $this->middleware('role:Admin|Super-Admin');
 
         $this->config = $app->get('config');
     }
@@ -45,5 +45,4 @@ class SettingsController extends Controller
 
         return back()->with('status', 'Settings Restored from Defaults');
     }
-
 }

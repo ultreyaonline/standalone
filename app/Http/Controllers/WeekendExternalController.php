@@ -13,6 +13,7 @@ class WeekendExternalController extends Controller
         parent::__construct();
         $this->middleware('auth');
         $this->middleware('role:Admin|Super-Admin');
+        $this->middleware('password.confirm')->only(['destroy']);
     }
 
     public function create(Request $request)
