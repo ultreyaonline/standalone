@@ -97,7 +97,7 @@ class TeamEmailsTest extends TestCase
 
 
         // a Rollista shouldn't see the Email The Team option
-        $this->actingAs($user)->get('/weekend/' . $weekend->id)->assertDontSee('Email the Team');
+        $this->signIn($user)->get('/weekend/' . $weekend->id)->assertDontSee('Email the Team');
 
         // nor be able to send an email
         $this->post(action('App\Http\Controllers\CommunicationController@emailTeamMembers', $weekend), [

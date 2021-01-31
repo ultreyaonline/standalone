@@ -27,7 +27,7 @@ class MembersControllerTest extends TestCase
     {
         User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']); // generic
 
-        $response = $this->actingAs($this->admin)
+        $response = $this->signIn($this->admin)
 //            ->withoutExceptionHandling()
             ->post(action('App\Http\Controllers\MembersController@store'), $attributes = [
                 'first' => 'valid',
@@ -51,7 +51,7 @@ class MembersControllerTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $user->id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $user->id]);
 
-        $this->actingAs($this->admin)
+        $this->signIn($this->admin)
             ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $user->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);

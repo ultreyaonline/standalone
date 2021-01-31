@@ -31,7 +31,7 @@ class CommunityEmailsTest extends TestCase
         $user->assignRole('Member');
         $user->assignRole('Secretariat');
 
-        $this->actingAs($user)->get('/home')
+        $this->signIn($user)->get('/home')
             ->assertSee('Communication / Email');
 
         $this->get('/email-everyone')
@@ -52,7 +52,7 @@ class CommunityEmailsTest extends TestCase
         $member = \App\Models\User::factory()->allEmailFlagsEnabled()->create([]);
         $member->assignRole('Member');
 
-        $this->actingAs($user)
+        $this->signIn($user)
             ->post(action('App\Http\Controllers\CommunicationController@emailEntireCommunity'), [
             'subject' => 'TheSubject',
             'message' => 'TheMessage',
@@ -103,7 +103,7 @@ class CommunityEmailsTest extends TestCase
         // @TODO - test spouse of non-attended member, using same and different email addresses
         // @TODO - restrict attachment handling, and only process attachments if authorized
 
-        $this->actingAs($user)
+        $this->signIn($user)
             ->withoutExceptionHandling()
             ->post(action('App\Http\Controllers\CommunicationController@emailEntireCommunity'), [
                 'subject' => 'TheSubject',

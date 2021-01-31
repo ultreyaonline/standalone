@@ -79,7 +79,7 @@ class CalendarTest extends TestCase
         $user->assignRole('Member');
         $user->assignRole('Admin');
 
-        $response = $this->actingAs($user)
+        $response = $this->signIn($user)
             ->post(route('events.store'), [
                 'name' => 'TestEvent#1',
                 'type' => 'secretariat',

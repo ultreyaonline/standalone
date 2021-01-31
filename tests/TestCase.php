@@ -73,6 +73,7 @@ abstract class TestCase extends BaseTestCase
         $this->user = $user ?: $this->user ?: \App\Models\User::factory()->create();
         $this->user->assignRole('Member');
         $this->actingAs($this->user);
+        $this->session(['auth.password_confirmed_at' => time()]);
 
         return $this;
     }

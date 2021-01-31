@@ -102,7 +102,7 @@ class TeamFeePaymentsTest extends TestCase
         // @TODO -- add tests for Head Cha and Asst Head Cha, instead of just TreasurerUser
 // @TODO: test that emails are sent
 
-        $response = $this->actingAs($this->treasurer_user)
+        $response = $this->signIn($this->treasurer_user)
             ->post($url, $this->simple_payment_attributes);
 
         // and verify it contains the submitted information
