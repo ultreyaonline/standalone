@@ -43,8 +43,7 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
-        "roave/security-advisories": "dev-latest",
-        "sensiolabs/security-checker": "^6.0"
+        "roave/security-advisories": "dev-latest"
     },
     "config": {
         "optimize-autoloader": true,
