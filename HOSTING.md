@@ -12,6 +12,17 @@ To run the Ultreya application, you will need the following:
 - backups location (optional)
 
 
+# Tech Stack Summary
+- Server: minimum 1 GB RAM, 20 GB SSD
+- Git: private repo for software version-control
+- AWS S3 for backups - 4GB, used for DB backups; Optionally, profile and team-photo and banner images can be hosted on S3 as well.
+- SMTP provider. Recommend Mailgun's pay-as-you-go plan. Tres Dias communities of 300-3000 members average $2-7/mo in Mailgun fees
+- DNS: best if this is API-accessible via your hosting provider, to allow for LetsEncrypt certificate automation
+- CI/Build Pipeline - Laravel Forge is recommended. Their "Hobby" plan would suffice.
+- DevOps person who groks deploy scripts, security patching and monthly server OS patching, certbot for LetsEncrypt, and the following software components:
+- Server Software will include: Ubuntu 20, Nginx, PHP 8, MySQL/MariaDB, Redis.
+
+
 # Hosting
 Your website needs a server to run on. There are 2 considerations: fully-managed, or self-managed.
 
@@ -26,11 +37,12 @@ If your technical team has skills related to self-managing a VPS server such as 
 
 This is the optimal setup, as it automates the majority of the Laravel-related infrastructure with almost seamless convenience. The annual cost of the Forge service is not much different than the Managed-Server fees charged by Cloudways.
 
-Alternatively, if you wish to self-manage a Digital Ocean VPS without the deployment features of Forge, you might consider the preconfigured [Laravel install](https://marketplace.digitalocean.com/apps/laravel) option in the Digital Ocean marketplace. Remember: by using this approach you will need to MANUALLY handle all deployment of code updates yourself.
+Alternatively, if you wish to self-manage a Digital Ocean VPS without the deployment features of Forge, you might consider the preconfigured [Laravel install](https://marketplace.digitalocean.com/apps/laravel) option in the Digital Ocean marketplace. Remember: by using this approach you will need to MANUALLY handle all deployment of code updates yourself, as well as software patching and updates.
 
+Using AWS Lightsail is an option to consider as well, but again you will need to manually implement all the deployment features yourself, and still manage the server yourself. See later in this document for basic steps to set up Lightsail via Laravel Forge.
 
-## Shared Server (Not Recommended)
-We do NOT recommend using a common "shared hosting" plan which runs cPanel or Plesk, as these servers often don't allow you to properly secure a Laravel application. It "can" be done, but your tech team will want to fully understand this before using it. None of the following documentation will address any of the concerns relevant to such an environment. 
+## Shared Hosting (Not Recommended, Nor Supported)
+We do NOT recommend using a common "shared hosting" plan which runs cPanel or Plesk, as these servers often don't allow you to properly secure a Laravel application. While it "can" be done, it is a bad idea. Your tech team will want to fully understand this outdated approach before embracing it. None of the following documentation will address any of the concerns relevant to such an environment. 
 
 ---
 
