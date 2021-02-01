@@ -214,6 +214,7 @@ class CommunicationController extends Controller
         $this->validate($request, [
             'subject' => 'required',
             'message' => 'required',
+            // @TODO validate attachment filetypes if we want to be more specific
         ]);
 
         $sender = auth()->user();
@@ -223,8 +224,9 @@ class CommunicationController extends Controller
         $subject = $request->input('subject');
         $message = $request->input('message');
         $attachment = null;
+        $attachment2 = null;
 
-        // UploadedFile
+        // UploadedFiles
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
 
@@ -232,6 +234,19 @@ class CommunicationController extends Controller
                 $original_filename = $file->getClientOriginalName();
                 $stored_filename = $file->storeAs('attachments', $original_filename, 'local');
                 $attachment = [
+                    'file' => $stored_filename,
+                    'name' => $original_filename,
+                ];
+            }
+        }
+
+        if ($request->hasFile('attachment2')) {
+            $file = $request->file('attachment2');
+
+            if ($file->isValid()) {
+                $original_filename = $file->getClientOriginalName();
+                $stored_filename = $file->storeAs('attachments', $original_filename, 'local');
+                $attachment2 = [
                     'file' => $stored_filename,
                     'name' => $original_filename,
                 ];
@@ -277,8 +292,8 @@ class CommunicationController extends Controller
 
         $recipients = $recipients->get();
 
-        $recipients->each(function ($recipient, $key) use ($subject, $message, $attachment, $sender) {
-            Mail::to($recipient)->queue(new MessageToCommunity($subject, $message, $sender, $attachment));
+        $recipients->each(function ($recipient, $key) use ($subject, $message, $attachment, $attachment2, $sender) {
+            Mail::to($recipient)->queue(new MessageToCommunity($subject, $message, $sender, $attachment, $attachment2));
 //            echo $recipient->name . ' - ' . $recipient->weekend . "\n<br>";
         });
 

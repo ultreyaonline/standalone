@@ -14,6 +14,7 @@ class MessageToCommunity extends Mailable
 
     public $message_text, $subject;
     public $attachment;
+    public $attachment2;
     protected $sender;
 
     /**
@@ -21,12 +22,13 @@ class MessageToCommunity extends Mailable
      *
      * @return void
      */
-    public function __construct($subject, $message_text, $sender, $attachment = null)
+    public function __construct($subject, $message_text, $sender, $attachment = null, $attachment2 = null)
     {
         $this->subject = $subject;
         $this->message_text = $message_text;
         $this->sender = $sender;
         $this->attachment = $attachment;
+        $this->attachment2 = $attachment2;
     }
 
     /**
@@ -45,6 +47,10 @@ class MessageToCommunity extends Mailable
 
         if ($this->attachment) {
             $file = Storage::disk('local')->path($this->attachment['file']);
+            $message = $message->attach($file);
+        }
+        if ($this->attachment2) {
+            $file = Storage::disk('local')->path($this->attachment2['file']);
             $message = $message->attach($file);
         }
 

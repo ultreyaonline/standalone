@@ -122,9 +122,10 @@
 
               <hr>
               <div class="form-group row">
-                <label for="attachment" class="col-md-5 col-lg-3 offset-lg-3 control-label">Optional Attachment? (PDFs&nbsp;only)</label>
+                <label for="attachment" class="col-md-5 col-lg-3 offset-lg-3 control-label">Optional Attachments? (PDFs&nbsp;only)</label>
                 <div class="col-md-7 col-lg-6">
-                  <input id="attachment" type="file" class="form-control" name="attachment">
+                  <input id="attachment" type="file" class="form-control" name="attachment" aria-label="first attachment" accept=".pdf,.doc,.docx,.xlsx,.csv,.png,.jpg,.jpeg,.gif,image/*;capture=camera">
+                  <input id="attachment2" type="file" class="form-control" name="attachment2" aria-label="second attachment" accept=".pdf,.doc,.docx,.xlsx,.csv,.png,.jpg,.jpeg,.gif,image/*;capture=camera">
                 </div>
               </div>
 
