@@ -150,7 +150,9 @@ If you are using Cloudways hosting, you will give Github the following URL: `htt
 
 If you are using Laravel Forge, you will give Github the token URL from Forge, in the `Deployment Trigger URL` section of your Site Details page. It will look like: `https://forge.laravel.com/servers/0123123/sites/0789789/deploy/http?token=abc123456def`
 
-
+## Alternate Workflow
+If you are using multiple servers and want to explore a zero-downtime-deploy approach, see:
+https://philo.dev/how-to-use-github-actions-build-matrix-to-deploy-artifacts-to-multiple-servers/
 
 ---
 
