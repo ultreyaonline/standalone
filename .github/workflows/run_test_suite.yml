@@ -5,14 +5,27 @@ on: [push]
 jobs:
   tests-on-githubci:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.0, 7.4, 7.3]
+        laravel: [8.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+        include:
+          - laravel: 8.*
+            testbench: 6.*
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-            php-version: '7.4'
+            php-version: ${{ matrix.php }}
             extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
             coverage: none
       - name: Show PHP version
