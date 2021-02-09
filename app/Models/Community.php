@@ -20,7 +20,7 @@ class Community extends Model
             return $abbreviation;
         }
 
-        $community = self::where('abbreviation', $abbreviation)->first();
+        $community = self::firstWhere('abbreviation', $abbreviation);
 
         if ($community) {
             return $community->community_name;
@@ -42,7 +42,7 @@ class Community extends Model
         }
 
         if (preg_match('/([A-Za-z ]{3,})[\s#]*(\d+)?/', $weekendName, $matches)) {
-            $community = self::where('abbreviation', $matches[1])->first();
+            $community = self::firstWhere('abbreviation', $matches[1]);
 
             if ($community) {
                 return $community->community_name . (isset($matches[2]) ? ' #' . $matches[2] : '');

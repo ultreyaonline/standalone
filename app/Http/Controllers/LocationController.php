@@ -77,7 +77,7 @@ class LocationController extends Controller
         if (\is_numeric($id)) {
             $location = Location::find($id);
         } else {
-            $location = Location::where('slug', $id)->first();
+            $location = Location::firstWhere('slug', $id);
         }
 
         \abort_if($location === null, '404', 'Sorry, that page could not be found.');
@@ -97,7 +97,7 @@ class LocationController extends Controller
         if (\is_numeric($id)) {
             $location = Location::find($id);
         } else {
-            $location = Location::where('slug', $id)->first();
+            $location = Location::firstWhere('slug', $id);
         }
 
         return view('locations.edit', \compact('location'));
@@ -116,7 +116,7 @@ class LocationController extends Controller
         if (\is_numeric($id)) {
             $location = Location::find($id);
         } else {
-            $location = Location::where('slug', $id)->first();
+            $location = Location::firstWhere('slug', $id);
         }
 
         $validated = $this->validate($request, [

@@ -211,7 +211,7 @@ class TeamController extends Controller
             }
 
             // read imported role and match with WeekendRoles table (fuzzy match due to different spellings)
-            $role = WeekendRoles::where('RoleName', 'like', substr($entry->rolename, 0, 23) . '%')->first();
+            $role = WeekendRoles::firstWhere('RoleName', 'like', substr($entry->rolename, 0, 23) . '%');
 
             if (!$role) {
                 $errors[] = $row;

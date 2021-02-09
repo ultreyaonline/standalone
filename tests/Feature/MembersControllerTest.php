@@ -36,7 +36,7 @@ class MembersControllerTest extends TestCase
                 'username' => 'ValidExample',
                 'gender' => 'M',
             ]);
-        $member = User::where($attributes)->first();
+        $member = User::firstWhere($attributes);
 
         $response
             ->assertSessionHasNoErrors()
