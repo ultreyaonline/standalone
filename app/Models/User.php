@@ -24,6 +24,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
@@ -589,15 +590,19 @@ class User extends Authenticatable implements HasMedia
         // Avatar is a single image, so subsequent images replace prior ones
         $this
             ->addMediaCollection('avatar')
-            ->singleFile()
-            ->registerMediaConversions(function (Media $media) {
-                $this
-                    ->addMediaConversion('avatar')
-                    ->width(800)
-                    ->height(600)
-//                    ->orientation(Manipulations::ORIENTATION_AUTO)
-                    ;
-            });
+            ->singleFile();
+    }
+
+    /**
+     * Register standardized media resizing conversion
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('avatar')
+             ->width(800)
+             ->height(600)
+             //->orientation(Manipulations::ORIENTATION_AUTO)
+             ;
     }
 
 

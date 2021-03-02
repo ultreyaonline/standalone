@@ -684,29 +684,26 @@ class Weekend extends Model implements HasMedia
         // Banner is a single image, so subsequent images replace prior ones
         $this
             ->addMediaCollection('banner')
-            ->singleFile()
-            ->registerMediaConversions(function (Media $media) {
-                $this
-                    ->addMediaConversion('resized')
-                    ->width(800)
-                    ->height(600)
-//                    ->orientation(Manipulations::ORIENTATION_AUTO)
-                ;
-            });
+            ->singleFile();
 
         // Team Photo is a single image, so subsequent images replace prior ones
         $this
             ->addMediaCollection('teamphoto')
-            ->singleFile()
-            ->registerMediaConversions(function (Media $media) {
-                $this
-                    ->addMediaConversion('resized')
-                    ->width(800)
-                    ->height(600)
-//                    ->orientation(Manipulations::ORIENTATION_AUTO)
-                ;
-            });
+            ->singleFile();
     }
+
+    /**
+     * Register standardized media resizing conversion
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('resized')
+            ->width(800)
+            ->height(600)
+            //->orientation(Manipulations::ORIENTATION_AUTO)
+        ;
+    }
+
 
     /**
      * Delete media collections on Delete
