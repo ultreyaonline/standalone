@@ -38,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Authentication Web Routes
-Auth::routes(['login', 'logout', 'reset', 'confirm']);
+Auth::routes(['login', 'logout', 'reset', 'confirm', 'register'=>false]);
 
 // allow legacy GET as well
 Route::get('logout', [LoginController::class, 'logout']);
