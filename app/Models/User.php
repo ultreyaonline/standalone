@@ -58,7 +58,7 @@ class User extends Authenticatable implements HasMedia
         'receive_email_community_news'   => 'boolean',
         'okay_to_send_serenade_and_palanca_details' => 'boolean',
         'unsubscribe'      => 'boolean',
-        'last_login_at'    => 'timestamp',
+        'last_login_at'    => 'datetime',
         'unsubscribe_date' => 'datetime',
     ];
 
