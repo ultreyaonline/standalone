@@ -23,6 +23,7 @@
         "lab404/laravel-impersonate": "^1.7.1",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.22.1",
+        "laravel/horizon": "^5.7",
         "laravel/slack-notification-channel": "^2.2",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
@@ -87,7 +88,8 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan ide-helper:meta",
-            "@php artisan ide-helper:generate"
+            "@php artisan ide-helper:generate",
+            "@php artisan horizon:publish --ansi"
         ]
     }
 }

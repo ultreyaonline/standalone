@@ -140,6 +140,18 @@
   @endif
         @endcan
 
+        @if(Route::has('horizon.index'))
+          @can('manage queues')
+          <div class="card mb-2">
+            <div class="card-header card-title">Queues</div>
+            <div class="card-body pb-0">
+                <a role="button" href="{{ route('horizon.index') }}" target="_blank" rel="noopener"><button class="btn btn-outline-primary"><i class="fa fa-database" aria-hidden="true"></i> Queue Status</button></a>
+                <p class="small pt-2 pb-0">Queues are used for all email-sending (profile-related, prayer wheel-related, team/community blasts, etc) and for resizing uploaded images for profiles, teams and weekend visuals and banners. If emails aren't sending properly then it's possible the queues aren't running or things are failing. You can check status using the button above.</p>
+            </div>
+          </div>
+          @endcan
+        @endif
+
         @can('view activity logs')
         <div class="card mb-2">
           <div class="card-header card-title">Logs</div>

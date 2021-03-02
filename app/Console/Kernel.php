@@ -42,6 +42,11 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             \App\Jobs\SendPrayerWheelReminderEmails::dispatch();
         })->dailyAt('16:00:00');
+
+        // Horizon Queue statistics collection, if installed
+        if (\Route::has('horizon.index')) {
+            $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        }
     }
 
     /**
