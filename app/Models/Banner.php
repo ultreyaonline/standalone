@@ -61,7 +61,6 @@ class Banner extends Model implements HasMedia
         ;
     }
 
-
     /**
      * Delete media collections on Delete
      */
