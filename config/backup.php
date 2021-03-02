@@ -10,8 +10,6 @@ return [
          */
         'name' => env('APP_NAME', 'laravel-backup'),
 
-        'password' => env('BACKUPS_PASSWORD'),
-
         'source' => [
 
             'files' => [
@@ -130,6 +128,18 @@ return [
          * The directory where the temporary files will be stored.
          */
         'temporary_directory' => storage_path('app/backup-temp'),
+
+        /*
+         * The password to be used for archive encryption.
+         * Set to `null` to disable encryption.
+         */
+        'password' => env('BACKUP_ARCHIVE_PASSWORD'),
+
+        /*
+         * The encryption algorithm to be used for archive encryption.
+         * You can set it to `null` or `false` to disable encryption.
+         */
+        'encryption' => \ZipArchive::EM_AES_256,
     ],
 
     /*

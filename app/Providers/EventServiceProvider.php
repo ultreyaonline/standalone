@@ -33,8 +33,6 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserDeleted::class            => [\App\Listeners\UserDeleted::class],
         \App\Events\CandidateDeleted::class       => [\App\Listeners\CandidateDeleted::class],
         \App\Events\CandidateAdded::class         => [\App\Listeners\CandidateAdded::class],
-
-        \Spatie\Backup\Events\BackupZipWasCreated::class         => [\App\Listeners\EncryptBackupZip::class],
     ];
 
     /**

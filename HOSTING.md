@@ -103,7 +103,7 @@ Out-of-the-box it is ready to use AWS for storing your backups. (You can get you
 
 To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the other 3 AWS keys for your AWS credentials.
 
-You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUPS_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
+You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUP_ARCHIVE_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
 
 If you are hosting with Cloudways or another provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
 
