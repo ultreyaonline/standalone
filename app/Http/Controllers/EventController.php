@@ -193,30 +193,33 @@ class EventController extends Controller
             return redirect('/events/' . $event->id, 403);
         }
 
-        $validated = $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required',
             'type' => Rule::in(collect(Event::TYPES)->keys()),
             'start_datetime' => 'required',
             'end_datetime' => 'required',
         ]);
 
+        $dateFields = [];
+
         foreach ($event->getCasts() as $theField => $itsType) {
             // handle checkboxes
             if ($itsType === 'boolean') {
-                $validated->merge([$theField => $validated->filled($theField)]);
+                $request->merge([$theField => $request->filled($theField)]);
                 continue;
             }
 
             // handle null dates
             if ($itsType === 'datetime') {
-                $event->$theField = $validated->filled($theField)
-                    ? $validated->input($theField) . (strlen($validated->input($theField)) === 16 ? ':00' : '')
+                $event->$theField = $request->filled($theField)
+                    ? $request->input($theField) . (strlen($request->input($theField)) === 16 ? ':00' : '')
                     : null;
+                $dateFields[] = $theField;
             }
         }
 
         // save by applying Request data (except date fields, handled above)
-        $event->update($validated);
+        $event->update($request->except($dateFields));
 
         flash()->success('Event: ' . $event->name . ' updated.');
         event('EventUpdated', ['event' => $event, 'by' => $request->user()]);
