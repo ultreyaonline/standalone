@@ -29,9 +29,9 @@
 
 @includeWhen(config('site.payments_email_transfer_address'), 'payments.email_transfer_canada')
 
-@includeWhen(config('ultreya.paypal-donations-enabled'), 'payments.paypal_hosted_button')
+@includeWhen(config('site.payments_paypal_hosted_button_id'), 'payments.paypal_hosted_button')
 
-@includeWhen(config('ultreya.stripe-payments-enabled'), 'payments.stripe_form')
+@includeWhen(config('services.stripe.key'), 'payments.stripe_form')
 
             </ol>
           </div>

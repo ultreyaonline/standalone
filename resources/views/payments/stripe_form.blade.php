@@ -3,7 +3,7 @@
     //$key = $key !== 'demo' ? $key : config('services.stripe.key');
     $key = config('services.stripe.key');
 @endphp
-@if(config('ultreya.stripe-payments-enabled') && !empty($key))
+@if(!empty($key))
 <li class="pb-3"><strong>Credit Card: </strong>
     <form action="{{route('stripe-payment')}}" method="POST" id="donateForm" class="form-inline row">
         @csrf
