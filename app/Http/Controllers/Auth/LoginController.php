@@ -70,4 +70,18 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        // Set "password_confirmed_at" if they've actually logged in so that we don't prompt them again too soon
+        $request->session()->passwordConfirmed();
+//        $request->session()->put('auth.password_confirmed_at', time());
+    }
 }
