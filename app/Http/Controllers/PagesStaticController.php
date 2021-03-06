@@ -10,7 +10,7 @@ class PagesStaticController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('auth', ['except' => 'index']);
+        $this->middleware('auth', ['except' => ['sponsoring']]);
     }
 
     public function palanca()

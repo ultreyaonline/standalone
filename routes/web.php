@@ -89,6 +89,7 @@ Route::get('/secretariat', [PagesStaticController::class, 'secretariat']);
 Route::get('/secuelas', [PagesStaticController::class, 'secuelas']);
 Route::permanentRedirect('/secuela', '/secuelas'); // alias
 Route::get('/sponsoring', [PagesStaticController::class, 'sponsoring']);
+Route::get('/nominate', [PagesStaticController::class, 'sponsoring']);
 Route::get('/weekendcommittee', [PagesStaticController::class, 'weekendcommittee']);
 Route::get('/vocabulary', [PagesStaticController::class, 'vocabulary']);
 
