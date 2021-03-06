@@ -140,6 +140,15 @@
   @endif
         @endcan
 
+        @can('view activity logs')
+        <div class="card mb-2">
+          <div class="card-header card-title">Activity Logs</div>
+          <div class="card-body">
+              <a role="button" href="{{ route('activitylog') }}"><button class="btn btn-outline-primary"><i class="fa fa-signal" aria-hidden="true"></i> Site Activity</button></a>
+          </div>
+        </div>
+        @endcan
+
         @if(Route::has('horizon.index'))
           @can('manage queues')
           <div class="card mb-2">
@@ -151,15 +160,6 @@
           </div>
           @endcan
         @endif
-
-        @can('view activity logs')
-        <div class="card mb-2">
-          <div class="card-header card-title">Logs</div>
-          <div class="card-body">
-              <a role="button" href="{{ route('activitylog') }}"><button class="btn btn-outline-primary"><i class="fa fa-signal" aria-hidden="true"></i> Site Activity</button></a>
-          </div>
-        </div>
-        @endcan
 
 
         @include('admin._support_options')
