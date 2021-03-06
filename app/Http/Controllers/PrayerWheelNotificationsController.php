@@ -39,6 +39,10 @@ Hello Brothers and Sisters,
 
 Our upcoming weekends begin in just a couple days, and there are still a number of open time slots on the Prayer Wheel.
 
+Prayer is a vital part of what makes a Tres Dias Weekend happen. Without it, we cannot even start planning or preparing, because otherwise it would be what we want and not what He wants. 
+
+You have the opportunity to partner with the Candidates attending a Weekend by praying for them over a 72 hour time span. The entire Weekend is covered in prayer because of our Community. Don't you want to be a part of that? Do you remember what it was like to hear and see that people you didn't even know were praying for you by name and constantly?
+
 Would you consider blessing the Candidates and Team by signing up for one or more open times!
 (Note: If you're serving on a given weekend team, we suggest signing up for the other Weekend instead of for the one you're serving on.)
 
@@ -49,7 +53,7 @@ IF YOU NEED HELP LOGGING IN:
 You may request a password or a password-reset at " . config('app.url') . "/pescadore by supplying your email address.
 Then, once you've set a password you may login and proceed with prayer wheel signups.
 
-Have a blessed week
+Thank you for partnering with us in this!
 
 " . (auth()->check() ? auth()->user()->name : '');
 

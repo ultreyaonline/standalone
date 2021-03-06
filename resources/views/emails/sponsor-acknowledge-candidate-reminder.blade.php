@@ -34,7 +34,7 @@ Church: {{ $candidate->church }}
 @endcomponent
 
 
-##1. Confirm the above information.
+## 1. Confirm the above information.
 
  Please confirm that the above information is correct, as we will be mailing an
 invitation to your candidate at this address, and we will be sending a reminder email a couple days
@@ -50,14 +50,14 @@ No, there are errors
 @endcomponent
 
 
-##2. Palanca Letters
+## 2. Palanca Letters
 
  Attached is a sample letter you can adapt (copy/paste its contents into an email, or edit the document and
 print it to send by mail) when requesting palanca letters for your candidate from their family and friends.
 Consider sending to their: friends, parents, children, siblings, pastor, coworkers, prayer meeting friends.
 Doesn't have to be Christian necessarily, but should be someone who would write something encouraging and positive.
 
-##3. Sponsor Responsibilities
+## 3. Sponsor Responsibilities
 
  Also attached is a "Sponsor Responsibilities" document which outlines things like these letters, helping their
 family with needs they might have during their absence for the weekend, praying for them, and encouraging them

@@ -29,9 +29,7 @@ You may also add this reminder to your calendar using the attached calendar invi
 We will send reminders at 4:00pm each day of the Weekend.
 
 
-Blessings,
-
-Palanca Committee
+Thank you for praying!
 
 
 ---
