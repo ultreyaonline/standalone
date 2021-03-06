@@ -39,14 +39,14 @@
                     </div>
                     <div class="card-body d-print-none">
                       @if($candidate->man)
-                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->man->id]) }}" role="form" method="POST" class="form-inline float-right">
+                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['candidate_user' => $candidate->man->id]) }}" role="form" method="POST" class="form-inline float-right">
                             @csrf
                           <button class="btn btn-primary"><i class="fa fa-envelope"></i> Man - {{ $candidate->m_confirmation_email_sent ? 'RE-' : '' }}Send Welcome Email</button>
                         </form>
                         <br style="clear:both;">
                       @endif
                       @if($candidate->woman)
-                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['user' => $candidate->woman->id]) }}" role="form" method="POST" class="form-inline float-right">
+                        <form action="{{ action('App\Http\Controllers\CandidateEmailsController@sendCandidateConfirmationEmail', ['candidate_user' => $candidate->woman->id]) }}" role="form" method="POST" class="form-inline float-right">
                             @csrf
                           <button class="btn btn-primary"><i class="fa fa-envelope"></i> Woman - {{ $candidate->w_confirmation_email_sent ? 'RE-' : '' }}Send Welcome Email</button>
                         </form>
@@ -57,7 +57,7 @@
                             @csrf @method('patch')
 
                                     <div class="form-group row">
-                                        <label class="col-md-4 control-label" for="weekend">Weekend</label>
+                            <label class="col-md-4 control-label text-right" for="weekend">Weekend:</label>
                                         <div class="col-md-6">
                                             @include('weekend.pulldown_only', ['fieldname' => 'weekend', 'use'=>'name', 'class' => 'btn-secondary', 'nametype' => 'short', 'current_selected' => $candidate->weekend])
                                         </div>

@@ -193,7 +193,7 @@ Route::group(['middleware' => ['permission:add candidates|add community member']
     Route::post('demote/{member}', [MembersController::class, 'demotePescadoreToRestrictedMember']);
     Route::get('reports/sendoff-couples', [PreWeekendController::class, 'sendOffCoupleHistoryReport']);
     Route::get('preweekend/invitations', [PreWeekendController::class, 'invitationPreparationWorksheet']);
-    Route::post('/candidates/{candidate_user?}/invite', [CandidateEmailsController::class, 'sendCandidateConfirmationEmail'])->where(['candidate_user' => '\d+'])->name('candidate_welcome_confirmation_email');
+    Route::post('candidates/invite/{candidate_user?}', [CandidateEmailsController::class, 'sendCandidateConfirmationEmail'])->where(['candidate_user' => '\d+'])->name('candidate_welcome_confirmation_email');
 });
 Route::group(['middleware' => ['permission:email candidates']], function () {
     Route::get('reminders/c/{user}', [CandidateEmailsController::class, 'sendCandidateReminderToOnePerson']);
@@ -220,7 +220,7 @@ Route::group(['middleware' => ['permission:delete members']], function () {
 // Accounting
 Route::group(['middleware' => ['permission:record candidate fee payments']], function () {
     Route::get('finance/candidates/{slug?}', [CandidatePaymentsController::class, 'index'])->where(['slug' => '[a-z]{4}[0-9]+']);
-    Route::get('finance/candidates/{slug?}/{candidate}', [CandidatePaymentsController::class, 'edit'])->where(['slug' => '[a-z]{4}[0-9]+', 'candidate' => '[0-9]+']);
+    Route::get('finance/candidates/{slug}/{candidate}', [CandidatePaymentsController::class, 'edit'])->where(['slug' => '[a-z]{4}[0-9]+', 'candidate' => '[0-9]+']);
     Route::patch('finance/candidates/{candidate}', [CandidatePaymentsController::class, 'update'])->where(['candidate' => '[0-9]+']);
 });
 Route::group(['middleware' => ['role:Member']], function () {

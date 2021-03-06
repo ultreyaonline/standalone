@@ -69,18 +69,13 @@ class CandidatePaymentsController extends Controller
     /**
      * Display the form for editing candidate payments
      *
-     * @param \App\Models\Candidate $candidate
      * @param string|null $slug
+     * @param \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Candidate $candidate, $slug = null)
+    public function edit($slug, Candidate $candidate)
     {
         $weekend = null;
-
-        // retrieve Candidate record using route-model-binding
-//        if ($candidate === null) {
-//            $candidate = new Candidate();
-//        }
 
         $weekends = Weekend::activeDescending()->where('weekend_MF', 'M')->get();
 
