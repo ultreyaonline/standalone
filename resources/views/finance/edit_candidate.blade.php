@@ -35,6 +35,7 @@
                       <div class="col-md-10 offset-md-2">
                         <div class="checkbox">
                           <label for="fees_paid">
+                            <input type="hidden" name="fees_paid" value="0">
                             <input type="checkbox" name="fees_paid" id="fees_paid"
                                    value="1" {{($candidate->fees_paid ?? old('fees_paid')) ? 'checked' : ''}}{{ $user->can('record candidate fee payments') ? '' : ' disabled' }}> Fees Paid?
                           </label>
