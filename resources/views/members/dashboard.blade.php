@@ -38,7 +38,7 @@
 
             @can('view members')
 @unless(empty(config('site.newsletter_archive_url')))
-            <p class="bg-success" style="padding:1.5rem; border-radius: 3rem"><a href="{{ config('site.newsletter_archive_url') }}"><strong><i class="fa fa-newspaper-o"></i> Latest Newsletter Issue!</strong></a></p>
+            <p class="alert alert-success" style="padding:1.5rem; border-radius: 3rem"><a href="{{ config('site.newsletter_archive_url') }}"><strong><i class="fa fa-newspaper-o"></i> Latest Newsletter Issue!</strong></a></p>
 @endunless
 @if(config('site.facebook_page'))
             <p><a href="{{ config('site.facebook_page') }}"><i class="fa fa-facebook"></i> {{config('site.community_acronym')}} Facebook Group</a></p>

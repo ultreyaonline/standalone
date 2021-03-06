@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-header card-title">Pre-Weekend Controls</div>
       <div class="card-body alert-success">
 
