@@ -25,7 +25,7 @@
             <p><strong>Rector:</strong> <a href="/members/{{ $weekend->rector->id }}">{{ $weekend->rector->name }}</a></p>
 @endif
 
-@if($weekend->visibility_flag >= \App\Enums\WeekendVisibleTo::ThemeVisible)
+@if($weekend->visibility_flag >= \App\Enums\WeekendVisibleTo::ThemeVisible && !empty($weekend->weekend_theme))
             <p><strong>Theme: </strong>{{ $weekend->weekend_theme ?? '(Coming soon!)'}}</p>
             <p>{{$weekend->weekend_verse_reference}}<br>{{$weekend->weekend_verse_text}}</p>
     @if($weekend->banner_url)
@@ -61,7 +61,7 @@
         @endunless
 @endif
 
-@if($weekend->visibility_flag >= \App\Enums\WeekendVisibleTo::ThemeVisible || auth()->user()->can('see weekend team roster', $weekend))
+@if(($weekend->visibility_flag >= \App\Enums\WeekendVisibleTo::ThemeVisible && !empty($weekend->weekend_theme)) || auth()->user()->can('see weekend team roster', $weekend))
         <div class="card mb-3">
           <div class="card-body">
             <p><strong>Location:</strong>
