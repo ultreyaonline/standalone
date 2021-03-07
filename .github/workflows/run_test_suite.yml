@@ -81,6 +81,11 @@ jobs:
       #- name: Run Dusk Test Suite
       #  run: php artisan dusk
 
+  deploy: # deploy when all tests are successful
+    runs-on: ubuntu-latest
+    needs:
+      - tests-on-githubci
+    steps:
       - name: Trigger deploy webhook if DEPLOY_WEBHOOK_URL is configured in the Github Secrets settings for this repo
         run: if [ -n "${{ secrets.DEPLOY_WEBHOOK_URL }}" ]; then wget -O - ${{ secrets.DEPLOY_WEBHOOK_URL }} ; fi
 
