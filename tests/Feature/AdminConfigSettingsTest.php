@@ -60,11 +60,11 @@ class AdminConfigSettingsTest extends TestCase
         $new_value_to_test_for = 'changed for testing';
         $this->attributes['retreat_name_for_email_subject'] = $new_value_to_test_for;
 
-        $response = $this->signIn($this->admin)
+        $response = $this->withExceptionHandling()->signIn($this->admin)
             ->patch(route('admin-settings-update', $this->attributes));
 
-        $response->assertRedirect(route('admin'));
         $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('admin'));
 
         $response = $this->signIn($this->admin)
             ->get(route('admin-settings-edit'));
