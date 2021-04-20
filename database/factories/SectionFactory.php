@@ -22,9 +22,9 @@ class SectionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'sort_order' => $this->faker->randomNumber(),
-            'enabled' => $this->faker->boolean,
+            'enabled' => $this->faker->boolean(),
         ];
     }
 }

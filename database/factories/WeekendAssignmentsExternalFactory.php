@@ -25,8 +25,8 @@ class WeekendAssignmentsExternalFactory extends Factory
             'memberID' => function () {
                 return App\Models\User::factory();
             },
-            'WeekendName' => $this->faker->word,
-            'RoleName' => $this->faker->word,
+            'WeekendName' => $this->faker->word(),
+            'RoleName' => $this->faker->word(),
         ];
     }
 }

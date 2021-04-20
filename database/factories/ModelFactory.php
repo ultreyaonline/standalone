@@ -20,7 +20,7 @@ use Faker\Generator as Faker;
 //        'description'    => $faker->sentences(3, true),
 //        'status'         => $faker->randomElement(['Active', 'Pending', 'Sold']),
 //        'expiration'     => $faker->dateTimeBetween('-2 months', '+2 years'),
-//        'gps'            => $faker->longitude . ',' . $faker->latitude,
+//        'gps'            => $faker->longitude() . ',' . $faker->latitude(),
 //        'soil_type'      => implode(',', $faker->randomElements(['loam', 'silt', 'rock'], 2)),
 //        'heat_units'     => $faker->randomNumber(3),
 //        'beds'           => $faker->numberBetween(1, 5),

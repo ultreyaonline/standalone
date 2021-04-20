@@ -23,17 +23,17 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'location_name' => $location_name = $this->faker->text,
+            'location_name' => $location_name = $this->faker->text(),
             'slug' => Str::slug($location_name),
-            'location_url' => $this->faker->url,
-            'address_street' => $this->faker->streetAddress,
-            'address_city' => $this->faker->city,
-            'address_province' => $this->faker->state,
-            'address_postal' => $this->faker->postcode,
+            'location_url' => $this->faker->url(),
+            'address_street' => $this->faker->streetAddress(),
+            'address_city' => $this->faker->city(),
+            'address_province' => $this->faker->state(),
+            'address_postal' => $this->faker->postcode(),
             'map_url_link' => $this->faker->imageUrl(),
-            'contact_name' => $this->faker->name,
-            'contact_email' => $this->faker->email,
-            'contact_phone' => $this->faker->phoneNumber,
+            'contact_name' => $this->faker->name(),
+            'contact_email' => $this->faker->email(),
+            'contact_phone' => $this->faker->phoneNumber(),
         ];
     }
 }

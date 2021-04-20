@@ -248,7 +248,7 @@ class User extends Authenticatable implements HasMedia
         }
 
 //        $faker = Factory::create(config('app.locale'));
-//        $val = $faker->uuid;
+//        $val = $faker->uuid();
 
         $hash = UniqueId::generate(10, $this, 'uidhash');
 

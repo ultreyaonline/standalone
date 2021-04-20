@@ -33,7 +33,7 @@ class WeekendAssignmentsFactory extends Factory
                 return App\Models\WeekendRoles::factory();
             },
             'confirmed' => $this->faker->numberBetween(0, 5),
-            'comments' => $this->faker->word,
+            'comments' => $this->faker->word(),
         ];
 
     }

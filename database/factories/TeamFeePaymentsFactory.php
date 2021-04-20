@@ -32,8 +32,8 @@ class TeamFeePaymentsFactory extends Factory
             'total_paid' => $this->faker->randomFloat(),
             'date_paid' => $this->faker->date(),
             'complete' => $this->faker->randomNumber(),
-            'comments' => $this->faker->text,
-            'recorded_by' => $this->faker->word,
+            'comments' => $this->faker->text(),
+            'recorded_by' => $this->faker->word(),
         ];
     }
 }
