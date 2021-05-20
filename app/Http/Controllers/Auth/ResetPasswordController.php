@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
+
 
 class ResetPasswordController extends Controller
 {
@@ -78,7 +79,7 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required|string',
             $this->username => 'required|string|exists:users,'.$this->username,
-            'password' => 'required|string|confirmed|min:7',
+            'password' => ['required', 'string', 'confirmed', Password::defaults()],
         ];
     }
 

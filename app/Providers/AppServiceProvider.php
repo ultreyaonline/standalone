@@ -6,6 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Password::defaults(function () {
+            return Password::min(7);
+        });
+
         Validator::extend('currency', function ($attribute, $value, $parameters) {
             return preg_match("/^[\d.,]+$/", $value);
         });
