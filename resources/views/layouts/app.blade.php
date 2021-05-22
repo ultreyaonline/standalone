@@ -61,6 +61,7 @@
 
 {{--Google Analytics--}}
 @includeWhen(config('google_analytics.google'), 'partials.analytics')
+@includeIf('system.tenant_analytics')
 
 <script>
     function ConfirmDelete(){
