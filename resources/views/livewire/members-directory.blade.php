@@ -7,6 +7,15 @@
             <span wire:click="searchClear()" id="searchClear"><i class="fa fa-times-circle"></i></span>
         </div>
 
+        @can('export member data')
+            <div class="col-1 d-print-none form-inline justify-content-center">
+                <form action="{{ route('MembersExport') }}" method="post" class="form-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary btn-sm">Export&nbsp;All</button>
+                </form>
+            </div>
+        @endcan
+
         <div class="col form-inline justify-content-end">
             Per Page: &nbsp;
             <select wire:model="perPage" class="form-control">

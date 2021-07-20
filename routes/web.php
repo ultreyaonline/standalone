@@ -12,6 +12,7 @@ use App\Http\Controllers\CandidateEmailsController;
 use App\Http\Controllers\CandidatePaymentsController;
 use App\Http\Controllers\CandidateReportsController;
 use App\Http\Controllers\CommunicationController;
+use App\Http\Controllers\DataExportController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
@@ -160,6 +161,9 @@ Route::group(['middleware' => ['role:Member']], function () {
     Route::match(['get', 'post'], '/reports/byposition', [ReportsController::class, 'serviceByPosition']);
     Route::get('/reports/sd-history', [SpiritualAdvisorController::class, 'serviceHistoryForSpiritualDirectors']);
     Route::get('/inactive-members', [ReportsController::class, 'inactive']);
+
+    Route::get('/export/members', [DataExportController::class, 'membersExportSelection'])->name('SelectMembersToExport');
+    Route::post('/export/members', [DataExportController::class, 'memberDataAsCsv'])->name('MembersExport');
 
     // Sponsor Emails
     Route::get('/sponsors/{weekend}/email', [CandidateEmailsController::class, 'composeSponsorsEmail']);

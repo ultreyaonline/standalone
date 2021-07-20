@@ -161,8 +161,17 @@
           @endcan
         @endif
 
-
         @include('admin._support_options')
+
+        @can('export member data')
+            <div class="card mb-2">
+                <div class="card-header card-title">Export Data</div>
+                <div class="card-body justify-content-between">
+                    <a role="button" href="{{ route('SelectMembersToExport') }}"><button class="btn btn-outline-secondary"><i class="fa fa-database" aria-hidden="true"></i> Export Members</button></a>
+                </div>
+            </div>
+        @endcan
+
 
       </div>
     </div>

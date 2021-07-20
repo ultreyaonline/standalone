@@ -63,6 +63,8 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'menu-see-admin-pane']);
         Permission::create(['name' => 'webmaster-email-how-to-login-msg']);
         Permission::create(['name' => 'manage queues']);
+        Permission::create(['name' => 'export member data']);
+        Permission::create(['name' => 'export weekend history']);
 
 
         // assign to roles
@@ -90,6 +92,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo('assign rectors');
         $role->givePermissionTo('view past community service');
         $role->givePermissionTo('use leaders worksheet');
+        $role->givePermissionTo('export member data');
 
         $role = Role::create(['name' => 'Financial Secretary']);
         $role->givePermissionTo('record team fees paid');
@@ -134,6 +137,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo('view past community service');
         $role->givePermissionTo('edit members');
         $role->givePermissionTo('use leaders worksheet');
+        $role->givePermissionTo('export member data');
 
         $role = Role::create(['name' => 'Womens Leader']);
         $role->givePermissionTo('use rector tools');
@@ -145,6 +149,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo('view past community service');
         $role->givePermissionTo('edit members');
         $role->givePermissionTo('use leaders worksheet');
+        $role->givePermissionTo('export member data');
 
 
         $role = Role::create(['name' => 'Palanca']);
@@ -222,6 +227,8 @@ class RolesAndPermissionsSeeder extends Seeder
 //        $role->givePermissionTo('email community about candidates');
 //        $role->givePermissionTo('edit prayer wheel');
 //        $role->givePermissionTo('see prayer wheel names');
+//        $role->givePermissionTo('export member data');
+//        $role->givePermissionTo('export weekend history');
 //        // admin-only roles
 //        $role->givePermissionTo('manage queues');
 //        $role->givePermissionTo('edit weekends');
