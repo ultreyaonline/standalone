@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use App\Permission;
 
-class AddPermissionToDeleteCandidate extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,4 +16,4 @@ class AddPermissionToDeleteCandidate extends Migration
     {
         // this was temporary, and is now in another migration file
     }
-}
+};

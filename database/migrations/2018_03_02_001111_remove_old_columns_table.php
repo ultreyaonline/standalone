@@ -3,8 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveOldColumnsTable extends Migration
-{
+return new class extends Migration {
 
     /**
      * Run the migrations.
@@ -15,4 +14,4 @@ class RemoveOldColumnsTable extends Migration
     {
         // this was temporary, and is now in another migration file
     }
-}
+};

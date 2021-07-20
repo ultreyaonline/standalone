@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFailedLoginAttemptsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -33,4 +32,4 @@ class CreateFailedLoginAttemptsTable extends Migration
     {
         Schema::dropIfExists('failed_login_attempts');
     }
-}
+};

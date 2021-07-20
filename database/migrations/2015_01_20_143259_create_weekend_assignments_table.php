@@ -3,9 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWeekendAssignmentsTable extends Migration
-{
-
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -39,4 +37,4 @@ class CreateWeekendAssignmentsTable extends Migration
     {
         Schema::drop('weekend_assignments');
     }
-}
+};

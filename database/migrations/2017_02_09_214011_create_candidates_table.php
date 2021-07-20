@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCandidatesTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -77,4 +76,4 @@ class CreateCandidatesTable extends Migration
     {
         Schema::dropIfExists('candidates');
     }
-}
+};

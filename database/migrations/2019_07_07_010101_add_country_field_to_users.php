@@ -3,8 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCountryFieldToUsers extends Migration
-{
+return new class extends Migration {
 
     /**
      * Run the migrations.
@@ -32,4 +31,4 @@ class AddCountryFieldToUsers extends Migration
     //         ]);
     //     });
     }
-}
+};

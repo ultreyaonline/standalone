@@ -3,8 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -53,4 +52,4 @@ class CreateEventsTable extends Migration
     {
         Schema::drop('events');
     }
-}
+};

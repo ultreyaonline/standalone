@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CleanActivityLogCategories extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations to rename old logs to new categories, for easier maintenance
      *
@@ -27,4 +26,4 @@ class CleanActivityLogCategories extends Migration
         DB::statement("UPDATE activity_log SET log_name='prayer-wheels' WHERE log_name='default' AND subject_type ='App\\PrayerWheel'");
         DB::statement("UPDATE activity_log SET log_name='secretariat' WHERE log_name='default' AND subject_type ='App\\Secretariat'");
     }
-}
+};
