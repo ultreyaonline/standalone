@@ -142,6 +142,7 @@
           </div>
         @endcan
 
+        @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
         <div class="card mb-3">
           <div class="card-body">
             <p class="mb-0">
@@ -165,6 +166,7 @@
 
           </div>
         </div>
+        @endif
 
 @unless($weekend->ended_over_a_month_ago)
   @if(auth()->user()->can('see section heads tools', $weekend) || auth()->user()->hasRole('Secretariat'))
@@ -213,6 +215,7 @@
               @endif
               <span class="p-2 m-1 badge badge-danger">Total People: {{ $weekend->totalteamandcandidates }}</span>
             </p>
+              @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
               <hr>
               <p><strong>Team fees:</strong>
                   <a class="" href="{{ url('/fees') }}"><span class="p-2 m-1 badge badge-primary">{{ config('site.community_acronym') }} Team Paid: {{ $stats['local_percent'] }}%</span></a>
@@ -220,6 +223,7 @@
                   <a class="" href="{{ url('/fees') }}"><span class="p-2 m-1 badge badge-primary">Extended Team Paid: {{ $stats['extended_percent'] }}%</span></a>
                   @endif
               </p>
+              @endif
           </div>
         </div>
 

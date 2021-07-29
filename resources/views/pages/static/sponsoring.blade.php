@@ -34,10 +34,17 @@
                     </ul>
                     </li>
                     <li>If your candidate says 'OK', have them complete and sign their portion of the registration form and return it to you. A scan or photo is fine.</li>
-                    <li>You fill out the Sponsor portion and send it in with a payment ({{ config('site.candidate_fee_text_for_emails') }}).<br>
+                    <li>
+                        @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
+                        You fill out the Sponsor portion and send it in with a payment ({{ config('site.candidate_fee_text_for_emails') }}).<br>
+                        @else
+                        You fill out the Sponsor portion.<br>
+                        @endif
                         Submit it by sending in the mail (see the address on the bottom of the application), or by emailing a scanned copy (or a clear photo from your phone) to {{ config('site.email-preweekend-mailbox') }}<br>
+                        @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
                         You can mail a cheque when you send the candidate form by mail, or you can send an email-money-transfer.<br>
                         All the details for paying fees, including online options, are viewable at: <a href="{{route('fees')}}">{{ route('fees') }}</a> .
+                        @endif
                     </li>
                     <li>Start collecting Palanca letters, letting friends know that your candidate will
                         be attending a Tres Dias weekend, and enlisting their prayers.<br>

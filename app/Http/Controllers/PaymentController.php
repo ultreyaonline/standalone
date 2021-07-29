@@ -62,12 +62,21 @@ class PaymentController extends Controller
         // amount must be in cents
         $amount = $request->get('amount') * 100;
 
-        $descriptions = collect([
-            'donation'       => 'Donation to ' . config('site.community_long_name'),
-            'fees-team'      => 'Team Fees',
-            'fees-candidate' => 'Candidate Sponsorship',
-            'scholarship'    => 'Scholarship Fund',
-        ]);
+        // dropdowns
+        $descriptions = [];
+        if (Str::contains(config('site.payments_accepts_donations', ''), 'donations')) {
+            $descriptions['donation'] = 'Donation to ' . config('site.community_long_name');
+        }
+        if (Str::contains(config('site.payments_accepts_donations', ''), 'fees')) {
+            $descriptions['fees-team'] = 'Team Fees';
+            $descriptions['fees-candidate'] = 'Candidate Sponsorship';
+        }
+        if (Str::contains(config('site.payments_accepts_donations', ''), 'donations')) {
+            $descriptions['scholarship'] = 'Scholarship Fund';
+        }
+
+        $descriptions = collect($descriptions);
+
 
         $designation = $request->get('designation', 'donation');
         if (!$descriptions->has($designation)) {

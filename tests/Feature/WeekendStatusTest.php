@@ -40,6 +40,8 @@ class WeekendStatusTest extends TestCase
     {
         parent::setUp();
 
+        config(['site.payments_accepts_donations' => 'fees and donations']);
+
         $this->seed();
     }
 

@@ -81,7 +81,7 @@
         </div>
         @endcan
 
-
+        @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
         @if(auth()->user()->can('record candidate fee payments') || auth()->user()->can('record team fees paid'))
         <div class="card mb-2">
           <div class="card-header card-title">Financial</div>
@@ -101,6 +101,7 @@
 
           </div>
         </div>
+        @endif
         @endif
 
       </div>

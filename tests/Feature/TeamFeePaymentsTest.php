@@ -24,6 +24,8 @@ class TeamFeePaymentsTest extends TestCase
     {
         parent::setUp();
 
+        config(['site.payments_accepts_donations' => 'fees']);
+
         $this->seed(DatabaseSeeder::class);
 
         $this->member_attributes = [

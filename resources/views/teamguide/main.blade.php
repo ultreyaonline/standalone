@@ -19,7 +19,9 @@
 <p><a href="https://drive.google.com/open?id=insertShareLinkHere"><button class="btn btn-lg btn-primary"><i class="fa fa-graduation-cap"></i> Tres Dias Essentials</button></a></p>
 <p><a href="https://drive.google.com/open?id=insertShareLinkHere"><button class="btn btn-lg btn-primary"><i class="fa fa-suitcase"></i> Packing List for the Weekend</button></a></p>
 <p><a href="/vocabulary"><button class="btn btn-lg btn-primary"><i class="fa fa-file-word-o"></i> Vocabulary of Tres Dias</button></a></p>
+@if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
 <p><a href="{{route('fees')}}"><button class="btn btn-lg btn-primary"><i class="fa fa-dollar"></i> Team Fees</button></a></p>
+@endif
                     </div>
                 </div>
                 <div class="card">

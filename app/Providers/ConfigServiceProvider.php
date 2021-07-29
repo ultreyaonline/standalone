@@ -87,9 +87,9 @@ class ConfigServiceProvider extends ServiceProvider
                     ],
                     'site.payments_accepts_donations' => [
                         'id' => 'payments_accepts_donations',
-                        'label' => 'Finance: Do you accept donations?',
-                        'hint' => 'On the Fees page, do you want it to talk about [Fees] or both [Fees and Donations]?',
-                        'rules' => ['in:fees,fees and donations'],
+                        'label' => 'Finance: Do you accept Fees, Donations, or Both?',
+                        'hint' => 'On the Fees page, do you want it to talk about [Fees] or [Donations] or both [Fees and Donations]?',
+                        'rules' => ['in:fees,fees and donations,donations'],
                     ],
                     'site.facebook_page' => [
                         'id' => 'facebook_page',
@@ -121,7 +121,7 @@ class ConfigServiceProvider extends ServiceProvider
                         'id' => 'candidate_fee_text_for_emails',
                         'label' => 'Candidate Fee to display on emails',
                         'hint' => 'eg: "$250 per person". This displays on Email reminders to Sponsors.',
-                        'rules' => ['string'],
+                        'rules' => ['string', 'nullable'],
                     ],
                     'site.candidate_application_url' => [
                         'id' => 'candidate_application_url',

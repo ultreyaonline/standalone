@@ -21,10 +21,16 @@
             <input type="hidden" name="currency" value="{{ $currencies->first() }}">
         @endif
         <select class="form-control mx-2" name="designation">
+            @if(Str::contains(config('site.payments_accepts_donations', ''), 'donations'))
             <option value="donation" selected>Donation</option>
+            @endif
+            @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
             <option value="fees-team">Fees: Team</option>
             <option value="fees-candidate">Fees: Candidate</option>
+            @endif
+            @if(Str::contains(config('site.payments_accepts_donations', ''), 'donations'))
             <option value="scholarship">Scholarship Fund</option>
+            @endif
         </select>
         <input name="stripeToken" id="stripeToken" type="hidden">
         <input name="stripeEmail" id="stripeEmail" type="hidden">

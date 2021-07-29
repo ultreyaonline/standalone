@@ -139,24 +139,30 @@
         @endcan
 
 
+      @if(!empty(config('site.payments_accepts_donations', '')))
       @can('view members')
         <div class="card my-2">
-          <div class="card-header card-title">Fees {{ config('site.payments_accepts_donations', false) === 'fees and donations' ? 'and Donations' : '' }}</div>
+          <div class="card-header card-title">{{ Str::title(config('site.payments_accepts_donations', 'donations')) }}</div>
           <div class="card-body">
-            <p><a href="{{ url('/donate') }}"><i class="fa fa-usd"></i> Pay Fees {{ config('site.payments_accepts_donations', false) === 'fees and donations' ? 'or Donate to' : 'for' }} {{ config('site.community_acronym') }}</a></p>
-            @can('record team fees paid')
-            <p><a href="/finance/team">
-                <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-usd" aria-hidden="true"></i> Record Team Fee Payments</button>
-              </a></p>
-            @endcan
-            @can('record candidate fee payments')
-              <p><a href="/finance/candidates">
-                  <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-usd" aria-hidden="true"></i> Record Candidate Payments</button>
-                </a></p>
-            @endcan
+            @if(Str::contains(config('site.payments_accepts_donations', ''), 'donations'))
+                <p><a href="{{ url('/donate') }}"><i class="fa fa-usd"></i> Submit {{ Str::title(config('site.payments_accepts_donations', 'donations')) }} to {{ config('site.community_acronym') }}</a></p>
+            @endif
+            @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
+                @can('record team fees paid')
+                <p><a href="/finance/team">
+                    <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-usd" aria-hidden="true"></i> Record Team Fee Payments</button>
+                  </a></p>
+                @endcan
+                @can('record candidate fee payments')
+                  <p><a href="/finance/candidates">
+                      <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-usd" aria-hidden="true"></i> Record Candidate Payments</button>
+                    </a></p>
+                @endcan
+            @endif
           </div>
         </div>
       @endcan
+      @endif
 
 
       </div>
