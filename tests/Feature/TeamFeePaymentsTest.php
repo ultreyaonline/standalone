@@ -26,7 +26,7 @@ class TeamFeePaymentsTest extends TestCase
 
         config(['site.payments_accepts_donations' => 'fees']);
 
-        $this->seed(DatabaseSeeder::class);
+        $this->seed();
 
         $this->member_attributes = [
             'email'    => 'john@example.com',

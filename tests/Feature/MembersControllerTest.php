@@ -15,7 +15,7 @@ class MembersControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed(DatabaseSeeder::class);
+        $this->seed();
 
         $this->admin = User::factory()->active()
             ->create(['first' => 'admin', 'last' => 'user'])

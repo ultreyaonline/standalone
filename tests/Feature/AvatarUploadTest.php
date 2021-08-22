@@ -17,7 +17,7 @@ class AvatarUploadTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed(DatabaseSeeder::class);
+        $this->seed();
     }
 
     /** @ test */

@@ -19,7 +19,7 @@ class CommunityEmailsTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed(DatabaseSeeder::class);
+        $this->seed();
     }
 
     /** @test */
