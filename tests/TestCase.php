@@ -31,7 +31,7 @@ abstract class TestCase extends BaseTestCase
                 \App\Events\UserDeleted::class
             ]);
 
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        // note: permissions cache is reset in the roles/permissions seeder
 
         $this->duringSetup();
     }
@@ -47,18 +47,6 @@ abstract class TestCase extends BaseTestCase
     }
 
 
-//
-
-
-
-    public function clearPermissionsCache()
-    {
-        // re-register all the roles and permissions
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
-
-        return $this;
-    }
 
     protected function signInAsGuest($user = null)
     {

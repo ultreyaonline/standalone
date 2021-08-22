@@ -27,6 +27,15 @@ class WhosOnlineTest extends TestCase
         Cache::forget('user-is-online-4');
     }
 
+    public function clearPermissionsCache()
+    {
+        // re-register all the roles and permissions
+        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
+
+        return $this;
+    }
+
     /** @test */
     public function unloggedin_users_should_not_show_online()
     {
