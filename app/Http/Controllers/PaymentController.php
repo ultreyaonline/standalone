@@ -7,6 +7,7 @@ use App\Models\Secretariat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
