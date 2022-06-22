@@ -183,6 +183,13 @@
                                         </label>
                                     </div>
 
+                                    <div class="checkbox">
+                                        <label for="service_history" class="col-form-label">
+                                            <input id="service_history" type="checkbox" name="service_history" value="yes"{{ old('service_history') === 'yes' ? ' checked' : '' }}>
+                                            Weekend Service History
+                                        </label>
+                                    </div>
+
                                 </div>
                             </div>
 

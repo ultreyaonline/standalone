@@ -29,6 +29,12 @@ class DataExportController extends Controller
             // weighted to show local community members first, and then other communities afterward
             ->selectRaw('(community=?) as local_community_first', [config('site.community_acronym')]);
 
+        if ($request->input('service_history', 'no') === 'yes') {
+            $query = $query->with(['weekendAssignments', 'weekendAssignmentsExternal'])
+                ->withCount('weekendAssignments')
+                ->withCount('weekendAssignmentsExternal');
+        }
+
         if ($request->has('filter_gender') && \in_array($request->input('filter_gender'), ['M', 'W'], false)) {
             $gender = strtoupper($request->input('filter_gender'));
             $query = $query->where('gender', $gender);
@@ -109,11 +115,16 @@ class DataExportController extends Controller
             $columns[] = 'interested_in_serving';
         }
 
+        if ($request->input('service_history') === 'yes') {
+            $columns[] = 'service_history';
+        }
+
         if ($request->input('extras') === 'yes') {
             $columns[] = 'allow_address_share';
             $columns[] = 'last_login_at';
             $columns[] = 'spousename';
         }
+
 
         $csvData = [];
         $headings_array = [];
@@ -137,6 +148,16 @@ class DataExportController extends Controller
                         // note: $member->phone combines home/cell/work into one field
                         $data = \str_replace('&nbsp;', ' ', trim($member->phone));
                         $heading = 'Phone Numbers';
+                        break;
+
+                    case 'service_history':
+                        // convert service data to semicolon-delimited data
+                        $service = [];
+                        foreach($member->serving_history as $h) {
+                            $service[] = str_replace("'", '', $h['name']) . ': ' . $h['position'];
+                        }
+                        $data = implode('; ', $service);
+                        $heading = 'Service History';
                         break;
 
                     default:
