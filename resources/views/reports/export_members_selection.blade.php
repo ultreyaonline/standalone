@@ -148,7 +148,7 @@
                                     <div class="checkbox">
                                         <label for="sponsor" class="col-form-label">
                                             <input id="sponsor" type="checkbox" name="sponsor" value="yes"{{ old('sponsor') === 'yes' ? ' checked' : '' }}>
-                                            Sponsor
+                                            Name of Sponsor
                                         </label>
                                     </div>
 
@@ -187,6 +187,13 @@
                                         <label for="service_history" class="col-form-label">
                                             <input id="service_history" type="checkbox" name="service_history" value="yes"{{ old('service_history') === 'yes' ? ' checked' : '' }}>
                                             Weekend Service History
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label for="candidates_sponsored" class="col-form-label">
+                                            <input id="candidates_sponsored" type="checkbox" name="candidates_sponsored" value="yes"{{ old('candidates_sponsored') === 'yes' ? ' checked' : '' }}>
+                                            Candidates Sponsored
                                         </label>
                                     </div>
 

@@ -119,12 +119,15 @@ class DataExportController extends Controller
             $columns[] = 'service_history';
         }
 
+        if ($request->input('candidates_sponsored') === 'yes') {
+            $columns[] = 'candidates_sponsored';
+        }
+
         if ($request->input('extras') === 'yes') {
             $columns[] = 'allow_address_share';
             $columns[] = 'last_login_at';
             $columns[] = 'spousename';
         }
-
 
         $csvData = [];
         $headings_array = [];
@@ -158,6 +161,18 @@ class DataExportController extends Controller
                         }
                         $data = implode('; ', $service);
                         $heading = 'Service History';
+                        break;
+
+                    case 'candidates_sponsored':
+                        $candidates = [];
+                        if ($member->sponsorees->count()) {
+                            foreach ($member->sponsorees as $person) {
+                              $candidates[] = $person->name . ' - ' . $person->weekend;
+                            }
+                        }
+                        $data = implode('; ', $candidates);
+                        $heading = 'Candidates Sponsored';
+
                         break;
 
                     default:
