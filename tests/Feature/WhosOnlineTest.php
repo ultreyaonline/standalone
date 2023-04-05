@@ -29,9 +29,7 @@ class WhosOnlineTest extends TestCase
 
     public function clearPermissionsCache()
     {
-        // re-register all the roles and permissions
         $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
 
         return $this;
     }
