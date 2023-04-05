@@ -142,7 +142,7 @@
           </div>
         @endcan
 
-        @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
+        @if(($weekend->team_fees > 0 || $weekend->candidate_cost > 0) && Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
         <div class="card mb-3">
           <div class="card-body">
             <p class="mb-0">
@@ -215,7 +215,7 @@
               @endif
               <span class="p-2 m-1 badge badge-danger">Total People: {{ $weekend->totalteamandcandidates }}</span>
             </p>
-              @if(Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
+              @if($weekend->team_fees > 0 && Str::contains(config('site.payments_accepts_donations', ''), 'fees'))
               <hr>
               <p><strong>Team fees:</strong>
                   <a class="" href="{{ url('/fees') }}"><span class="p-2 m-1 badge badge-primary">{{ config('site.community_acronym') }} Team Paid: {{ $stats['local_percent'] }}%</span></a>
