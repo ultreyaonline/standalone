@@ -47,8 +47,9 @@ jobs:
         with:
             path: vendor
             key: composer-${{ hashFiles('composer.lock') }}
+
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction --no-suggest --ignore-platform-reqs --prefer-dist --optimize-autoloader --no-ansi --no-scripts
+        run: composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader --no-ansi --no-scripts
         # env:
         #   COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
