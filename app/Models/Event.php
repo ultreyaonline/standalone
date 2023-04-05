@@ -199,9 +199,10 @@ class Event extends Model
 
     public function getShortDateRangeWithTimeAttribute()
     {
-        $startFormat = $endFormat = 'M j, Y g:i a';
-//        if ($this->end_datetime->isSameYear($this->start_datetime)) $startFormat = 'M j g:i a';
-        if ($this->end_datetime->isSameMonth($this->start_datetime)) $endFormat = 'M j Y g:i a';
+        $startFormat = 'M j, Y g:i a';
+        $endFormat = 'M j g:i a';
+//        if ($this->end_datetime->isSameYear($this->start_datetime)) $startFormat = 'M j, Y g:i a';
+//        if ($this->end_datetime->isSameMonth($this->start_datetime)) $endFormat = 'M j g:i a';
         if ($this->end_datetime->isSameDay($this->start_datetime)) $endFormat = 'g:i a';
 
         return $this->start_datetime->format($startFormat)  . ' - ' . $this->end_datetime->format($endFormat);
