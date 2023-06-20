@@ -51,7 +51,10 @@ class ReportsController extends Controller
         // if the limit is set to 0, we show all service and interested-in-serving results
         // if the limit is 1-20 then we filter down the results based on that limitation
         if ($recent_filter > 0) {
-            $recent_weekends = Weekend::ended()->where('weekend_MF', $gender)->get()->take(-1 * $recent_filter);
+            $local_weekends = Weekend::ended()->local()->where('weekend_MF', $gender)->orderBy('end_date')->get()->take(-1 * $recent_filter);
+            $index = $local_weekends->first();
+
+            $recent_weekends = Weekend::ended()->where('id', '>=', $index->id)->where('weekend_MF', $gender)->get();
 
             //  filter down to only where member's service records are related to $recent_weekends, OR they were a candidate on one of those weekends
             $members = $members->filter(function ($member) use ($recent_weekends, $candidate_filter, $served_filter) {
