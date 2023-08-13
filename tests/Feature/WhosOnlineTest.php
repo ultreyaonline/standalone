@@ -64,5 +64,5 @@ class WhosOnlineTest extends TestCase
         $this->assertFalse($this->user->isOnline());
     }
 
-    // @TODO - test the WhosOnlineServiceProvider view-composer
+    // @TODO - test the WhosOnlineProvider view-composer
 }
