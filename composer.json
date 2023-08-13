@@ -9,9 +9,9 @@
     "license": "MIT",
     "authors": [{"name": "Chris Brown"}],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "ext-redis": ">4.3",
-        "bensampo/laravel-enum": "^3.0",
+        "bensampo/laravel-enum": "^4.0",
         "doctrine/dbal": "^3.0",
         "eluceo/ical": "^0.16.0",
         "facade/ignition": "^2.5",
