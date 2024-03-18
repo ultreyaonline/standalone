@@ -47,6 +47,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 // route for quick access to set a password, mainly for new pescadores
 Route::get('pescador', [ForgotPasswordController::class, 'showLinkRequestForm']);
 Route::permanentRedirect('pescadore', 'pescador'); // alias in case of misspelling
+Route::permanentRedirect('.well-known/change-password', '/pescador'); // password-manager assist endpoint
 
 // ===================================================
 
