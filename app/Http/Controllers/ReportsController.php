@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TeamAssignmentStatus;
 use App\Reports\LeadersWorksheet;
 use App\Models\User;
 use App\Models\Weekend;
@@ -299,6 +300,7 @@ class ReportsController extends Controller
         $data = WeekendAssignments::select('weekend_assignments.*', 'weekend_roles.RoleName', 'weekend_roles.sortorder', 'weekends.*')
             ->join('weekend_roles', 'weekend_assignments.roleID', '=', 'weekend_roles.id')
             ->join('weekends', 'weekend_assignments.weekendID', '=', 'weekends.id')
+            ->where('weekend_assignments.confirmed', TeamAssignmentStatus::Accepted)
             ->where('weekend_MF', $gender)
             ->orderBy('weekend_roles.sortorder', 'asc')
             ->orderBy('weekend_roles.id', 'asc')

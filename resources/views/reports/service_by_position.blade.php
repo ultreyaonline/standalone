@@ -60,7 +60,7 @@
               <td style="padding-left:2em">{{ $role }}</td>
               <td>
               @foreach($service as $assignment)
-                {{ $assignment->user->name . ' on ' . $assignment->weekend_full_name }}<br>
+                {{ ($assignment->user->name ?? '(Unknown/Deleted)') . ' on ' . $assignment->weekend_full_name }}<br>
               @endforeach
             </tr>
           @endforeach
