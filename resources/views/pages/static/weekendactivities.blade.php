@@ -23,9 +23,9 @@
                     <ul>
                         <li>Supplies Purchasing, Inventory Replenishment</li>
                         <li>Inventory Tallying, and Storage Review</li>
-                        <li>Weekend Set-up (Wed evening / Thurs morning-afternoon)</li>
-                        <li>Weekend Take-down (Sunday afternoons, around 3pm usually)</li>
-                        <li>Weekend Photo (Friday morning, immediately after breakfast)</li>
+                        <li>Weekend Set-up (Thurs morning-afternoon)</li>
+                        <li>Weekend Take-down (Sunday afternoons, around 1pm usually)</li>
+                        <li>Weekend Photo (Friday morning, usually immediately before or after breakfast)</li>
                     </ul>
 
                     </div>

@@ -36,7 +36,7 @@
       <li>Gathering Palanca letters</li>
       <li>Other responsibilities of a Sponsor</li>
   </ul>
-  More information about sponsoring (eg. The specifics of where to send a cheque, sample letter templates, etc),
+  More information about sponsoring (eg. The specifics of where to send payments, sample letter templates, etc),
   can be found on the {{ config('site.community_acronym') }} website at: <a href="{{ config('app.url') }}/sponsoring">How Do I Sponsor Someone?</a><br>
   <br>
   The website also has a <a href="{{ config('site.candidate_application_url') }}">candidate sponsorship application </a> for download.<br>

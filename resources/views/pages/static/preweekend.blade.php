@@ -23,7 +23,7 @@
 
                     <h3>Candidate Application</h3>
                             <p>Each candidate sponsored to attend a Tres Dias weekend must complete and sign a weekend application.
-                              Completed applications should be submitted to the Pre-Weekend Committee by the SPONSOR, along with the associated candidate fees.</p>
+                              Completed applications should be submitted to the Pre-Weekend Committee by the SPONSOR, along with the associated candidate fees (where applicable).</p>
                             <button><a href="{{ config('site.candidate_application_url') }}" target="_blank">Candidate Application in PDF Format</a></button>
                         <br>
                         <br>
