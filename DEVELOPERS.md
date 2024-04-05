@@ -53,6 +53,9 @@ You can find full documentation on using Sail at: https://laravel.com/docs/8.x/s
 
 Sail is probably the fastest/easiest setup option.
 
+### Herd
+
+For Mac and Windows, a super-straightforward tool [Laravel Herd](https://herd.laravel.com) handles all your local development requirements. You can be up and running in under 5 minutes.
 
 ### Valet
 For Mac users a lightweight tool called "Valet" uses Homebrew to configure local PHP/MySQL/Webserver apps and provide 90% of the same environment as the live server. In 5 minutes you can have a dev environment up and running with Valet. Instructions for setting up Valet can be found at: https://laravel.com/docs/valet

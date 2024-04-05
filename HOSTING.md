@@ -20,14 +20,14 @@ To run the Ultreya application, you will need the following:
 - DNS: best if this is API-accessible via your hosting provider, to allow for LetsEncrypt certificate automation
 - CI/Build Pipeline - Laravel Forge is recommended. Their "Hobby" plan would suffice.
 - DevOps person who groks deploy scripts, security patching and monthly server OS patching, certbot for LetsEncrypt, and the following software components:
-- Server Software will include: Ubuntu 20, Nginx, PHP 8, MySQL/MariaDB, Redis.
+- Server Software will include: Ubuntu 22, Nginx, PHP 8, MySQL/MariaDB, Redis.
 
 
 # Hosting
 Your website needs a server to run on. There are 2 considerations: fully-managed, or self-managed.
 
 ## Fully Managed VPS
-A fully-managed VPS provider, such as the services offered by Cloudways, gives an excellent balance between having the power of a server under your own control, but with a technical team taking care of regular server maintenance, and available for tech support when you run into issues.
+A fully-managed VPS provider gives an excellent balance between having the power of a server under your own control, but with a technical team taking care of regular server maintenance, and available for tech support when you run into issues.
 
 The cost here is slightly higher than a self-managed VPS because you're paying a small fee for the Managed services.
 
@@ -35,7 +35,7 @@ The cost here is slightly higher than a self-managed VPS because you're paying a
 ## Self-managed VPS
 If your technical team has skills related to self-managing a VPS server such as a Digital Ocean droplet or AWS instance, then you will appreciate the automation and simplicity offered by using Laravel Forge to handle server provisioning and automated deployments; this way your server techs can simply do periodic server-software updates to keep it patched against security issues, etc.
 
-This is the optimal setup, as it automates the majority of the Laravel-related infrastructure with almost seamless convenience. The annual cost of the Forge service is not much different than the Managed-Server fees charged by Cloudways.
+This is the optimal setup, as it automates the majority of the Laravel-related infrastructure with almost seamless convenience. The annual cost of the Forge service is not much different than the Managed-Server fees charged by many providers.
 
 Alternatively, if you wish to self-manage a Digital Ocean VPS without the deployment features of Forge, you might consider the preconfigured [Laravel install](https://marketplace.digitalocean.com/apps/laravel) option in the Digital Ocean marketplace. Remember: by using this approach you will need to MANUALLY handle all deployment of code updates yourself, as well as software patching and updates.
 
@@ -105,7 +105,7 @@ To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the 
 
 You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUP_ARCHIVE_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
 
-If you are hosting with Cloudways or another provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
+If you are hosting with a provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
 
 
 ---
@@ -146,13 +146,16 @@ Using this approach you will use Github Secrets to store the URL.
 - Add a new Secret, named `DEPLOY_WEBHOOK_URL`
 - For the value, choose one of the following:
 
-If you are using Cloudways hosting, you will give Github the following URL: `https://your_site_domain.com/deploy-webhook.php&key=foo` where `foo` matches the `DEPLOY_SECRET_KEY` in your `.env` file.
-
 If you are using Laravel Forge, you will give Github the token URL from Forge, in the `Deployment Trigger URL` section of your Site Details page. It will look like: `https://forge.laravel.com/servers/0123123/sites/0789789/deploy/http?token=abc123456def`
+
+If you are using another hosting platform, you will give Github the following URL: `https://your_site_domain.com/deploy-webhook.php&key=foo` where `foo` matches the `DEPLOY_SECRET_KEY` in your `.env` file.
 
 ## Alternate Workflow
 If you are using multiple servers and want to explore a zero-downtime-deploy approach, see:
 https://philo.dev/how-to-use-github-actions-build-matrix-to-deploy-artifacts-to-multiple-servers/
+
+## Using the "Deployer" package for zero-down-time deployments
+See https://christalks.dev/post/deploying-a-laravel-application-with-deployer-and-github-actions-718ece72 for another great way to handle deployment.
 
 ---
 
@@ -204,35 +207,8 @@ After provisioning, in Forge set up Site for your domain name, add the github ap
 If you are continuing to use Forge with your server, set up LetsEncrypt via Forge.  If you're disconnecting Forge, then set up Certbot on the server via the command line and set a cron job for it to run weekly to check for updates to your SSL certificate.
 
 
-## Cloudways
-- Provision a new server
-- Tell it you're installing a Laravel app
-- Use github to link the repository and do a deploy. Leave the deployment path set to `public_html/`, with no subdirectory.
-- Enable the API Key, so that deploys can be automated:
-  - Convert/upgrade to a Paid Account if not already
-  - Open the API menu (or go to `platform.cloudways.com/api`), and get the API Secret Key
-  - In your `.env` file set the Cloudways settings:
-  
-		`CLOUDWAYS_EMAIL=` (your account email address)
-		
-		`CLOUDWAYS_API_KEY=` (the API Secret Key)
-		
-		`CLOUDWAYS_SERVER_ID=` (found in the platform URL when looking at the server details)
-		
-		`CLOUDWAYS_APP_ID=` (found from the URL in Application Settings screen)
-		
-		`CLOUDWAYS_GIT_URL=` (the SSH URL to your github repo; see Clone To Desktop dropdown)
-		
-		`CLOUDWAYS_GIT_BRANCH=master`
-	
-  - Then enable deployment as described in the Deployment section above.
-- Optionally enable backups
-- Tweaks; under Application Settings, the Webroot should be: `public_html/public`
-- Enable a CRON job: `artisan schedule:run >> /dev/null 2>&1` (type: `PHP`, runs every minute, ie: all `*`s)
-- Set an actual Domain, and enable SSL
-
 ## Other Hosting Options
-There are several other VPS offerings that can work well with Laravel. Some include:
+There are several VPS offerings that can work well with Laravel. Some include:
 - https://moss.sh/manage-your-websites-and-servers-with-moss-free-plan/
 - https://runcloud.io/docs/guide/atomic-deployment/deployment-script
 
