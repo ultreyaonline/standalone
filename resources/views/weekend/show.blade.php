@@ -74,7 +74,7 @@
               @endif
             </p>
             <p><strong>Candidate Arrival Time:</strong> {{$weekend->candidate_arrival_time->format('g:i') . '-' . $weekend->candidate_arrival_time->addMinutes(30)->format('g:i a')}}<br>
-            <strong>Sendoff Location:</strong> {!! $weekend->sendoff_location !!}</p>
+            <strong>Sendoff Location:</strong> <em class="text-danger"> {!! $weekend->sendoff_location !!}</em></p>
             <p><strong>Serenade Arrival Time:</strong> {{$weekend->serenade_arrival_time->format('g:i a')}}<br>
               <strong>Serenade Practice Location:</strong> {{$weekend->serenade_practice_location }}</p>
             <p><strong>Closing Arrival Time:</strong> {{$weekend->closing_arrival_time->format('g:i a')}}, Starts: {{$weekend->closing_scheduled_start_time->format('g:i a')}}</p>
