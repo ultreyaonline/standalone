@@ -6,21 +6,21 @@
 # Requirements
 To run the Ultreya application, you will need the following:
 - an understanding of Laravel applications
-- understanding of domains and DNS and website hosting
-- hosting service - preferably a VPS (Virtual Private Server)
-- email delivery service
-- backups location (optional)
+- an understanding of domains and DNS and website hosting
+- a hosting service - preferably a VPS (Virtual Private Server)
+- an email delivery service
+- an external backups location (optional)
 
 
 # Tech Stack Summary
 - Server: minimum 1 GB RAM, 20 GB SSD
-- Git: private repo for software version-control
-- AWS S3 for backups - 4GB, used for DB backups; Optionally, profile and team-photo and banner images can be hosted on S3 as well.
-- SMTP provider. Recommend Mailgun's pay-as-you-go plan. Tres Dias communities of 300-3000 members average $2-7/mo in Mailgun fees
+- Git: private repository for software version-control
+- AWS S3 for backups - 4-5GB, used for DB backups; Optionally, profile and team-photo and banner images can be hosted on S3 as well along with their increased storage requirements.
+- SMTP provider. Recommended Mailgun's base pay-as-you-go plan. Tres Dias communities of 300-3000 members average $2-7/mo in Mailgun fees, depending on number of community-wide emails that are sent. Seasonal bursts of busier activity, too.
 - DNS: best if this is API-accessible via your hosting provider, to allow for LetsEncrypt certificate automation
 - CI/Build Pipeline - Laravel Forge is recommended. Their "Hobby" plan would suffice.
-- DevOps person who groks deploy scripts, security patching and monthly server OS patching, certbot for LetsEncrypt, and the following software components:
-- Server Software will include: Ubuntu 22, Nginx, PHP 8, MySQL/MariaDB, Redis.
+- DevOps person who understands deploy scripts, security patching and monthly server OS patching, certbot for LetsEncrypt, and the following software components:
+- Server Software will include: Ubuntu, Nginx, PHP 8, MySQL/MariaDB, Redis.
 
 ## PHP Requirements
 PHP will require the following extensions installed. Many are already installed by default with most hosts:
@@ -35,6 +35,8 @@ Your website needs a server to run on. There are 2 considerations: fully-managed
 A fully-managed VPS provider gives an excellent balance between having the power of a server under your own control, but with a technical team taking care of regular server maintenance, and available for tech support when you run into issues.
 
 The cost here is slightly higher than a self-managed VPS because you're paying a small fee for the Managed services.
+
+Suggested: Laravel offers their fully-managed Cloud Server service as part of their Laravel Forge product.
 
 
 ## Self-managed VPS
@@ -68,11 +70,9 @@ The Ultreya Application is ready-built for you to use Mailgun for the email-deli
 ## Mailgun
 You can create a Mailgun account in just a couple minutes online at https://mailgun.com
 
-Mailgun offers 5K emails free per month for the first 3 months.
-
 Once you've created the account and configured the Domain and DNS, you will need your Mailgun Domain and your Mailgun Private API Key.
 
-On your server, in the Ultreya Laravel app directory, in the `.env` file you will need to enter these details:
+On your server, in the Laravel application directory, in the `.env` file you will need to enter these details:
 
 ```text
 MAIL_DRIVER=mailgun
@@ -80,7 +80,7 @@ MAILGUN_DOMAIN=your_mailgun_domain_here
 MAILGUN_SECRET=key-abc12345678901234567890
 ```
 
-It is wise to occasionally monitor the Mailgun account for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
+It is wise to occasionally monitor the Mailgun account (using your browser) for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
 
 In Mailgun you can optionally (with a paid upgrade) set up "receiving" email addresses which forward emails to certain community members. This is a convenient way to set up some vanity emails for things like Palanca and Pre-Weekend, etc.
 
@@ -100,8 +100,10 @@ You could also use the SMTP Relay features of GSuite or Office365 if your accoun
 
 # Backups
 
+### Scheduling backups
 You may enable timed backups within the application: You can configure the timing of the backups in the `/App/Console/Kernal.php`, which is set to 3am by default.
 
+### Configuring backups
 If you are having the application do its own backups, you must first specify where you want those backups stored. 
 
 Out-of-the-box it is ready to use AWS for storing your backups. (You can get your first year free with a new AWS account.)
@@ -109,6 +111,9 @@ Out-of-the-box it is ready to use AWS for storing your backups. (You can get you
 To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the other 3 AWS keys for your AWS credentials.
 
 You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUP_ARCHIVE_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
+
+
+### Alternatives
 
 If you are hosting with a provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
 
