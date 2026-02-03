@@ -443,6 +443,11 @@ class Weekend extends Model implements HasMedia
         return $this->team_all_visibility->where('roleID', 5)->pluck('memberID')->first();
     }
 
+    public function getBackupRectorAttribute()
+    {
+        return $this->team_all_visibility->where('roleID', 4)->pluck('memberID');
+    }
+
     public function getWeekendLeadersAttribute()
     {
         // note: this returns a collection; search using contains() or each()
@@ -567,6 +572,10 @@ class Weekend extends Model implements HasMedia
         }
 
         if ($this->visibility_flag >= WeekendVisibleTo::HeadChas && $this->head_cha->contains($user->id)) {
+            return true;
+        }
+
+        if ($this->visibility_flag >= WeekendVisibleTo::HeadChas && $this->backup_rector->contains($user->id)) {
             return true;
         }
 

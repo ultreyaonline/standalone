@@ -106,12 +106,14 @@ class WeekendController extends Controller
             $auth_user->id == $weekend->sendoff_couple_id2 ||
             $auth_user->hasAnyRole('Pre-Weekend', 'Admin') ||
             $auth_user->id == $weekend->rectorID ||
-            $weekend->head_cha->contains($auth_user->id);
+            $weekend->head_cha->contains($auth_user->id) ||
+            $weekend->backup_rector->contains($auth_user->id);
 
         $can_see_sendoff_point_of_contact_report =
             $auth_user->hasAnyRole('Pre-Weekend', 'Admin', 'Secretariat') ||
             $auth_user->id == $weekend->rectorID ||
-            $weekend->head_cha->contains($auth_user->id);
+            $weekend->head_cha->contains($auth_user->id) ||
+            $weekend->backup_rector->contains($auth_user->id);
 
         $location = Location::where('location_name', strip_tags($weekend->weekend_location))->firstOrNew([]);
         $stats = $weekend->feePaymentStatistics();

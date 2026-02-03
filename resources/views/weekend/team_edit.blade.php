@@ -19,6 +19,7 @@ Edit Team: {{ $weekend->weekend_full_name }}
               && (auth()->user()->can('edit team member assignments')
               || auth()->user()->id === $weekend->rectorID
               || $weekend->head_cha->contains(auth()->user()->id)
+              || $weekend->backup_rector->contains(auth()->user()->id)
               || auth()->user()->can('make SD assignments')))
               <a href="/team/{{ $weekend->id }}/add"><button class="btn btn-sm btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i> <strong>Add Person</strong></button></a>
               @endif
@@ -33,6 +34,7 @@ Edit Team: {{ $weekend->weekend_full_name }}
                 && (auth()->user()->can('edit team member assignments')
                 || auth()->user()->id === $weekend->rectorID
                 || $weekend->head_cha->contains(auth()->user()->id)
+                || $weekend->backup_rector->contains(auth()->user()->id)
                 || auth()->user()->can('make SD assignments')))
                 <th class="d-print-none">Action </th>
                 @endif
@@ -52,6 +54,7 @@ Edit Team: {{ $weekend->weekend_full_name }}
                 && (auth()->user()->can('edit team member assignments')
                 || auth()->user()->id === $weekend->rectorID
                 || $weekend->head_cha->contains(auth()->user()->id)
+                || $weekend->backup_rector->contains(auth()->user()->id)
                 || auth()->user()->can('make SD assignments')))
                 <td class="{{ $a->confirmed === \App\Enums\TeamAssignmentStatus::Accepted ? 'bg-success' : ($a->confirmed < \App\Enums\TeamAssignmentStatus::Accepted ? 'bg-danger' : 'bg-secondary') }} d-print-none" style="width: 120px">
                   @if($positions->contains('RoleName', $a->role->RoleName))

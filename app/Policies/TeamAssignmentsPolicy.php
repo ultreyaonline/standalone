@@ -78,6 +78,10 @@ class TeamAssignmentsPolicy
             return true;
         }
 
+        if ($weekend->visibility_flag >= WeekendVisibleTo::HeadChas && $weekend->backup_rector->contains($user->id)) {
+            return true;
+        }
+
         if ($user->can('edit team member assignments')) {
             if ($user->gender === $weekend->weekend_MF || $user->hasRole('Admin') || $user->hasRole('President')) {
                 return true;

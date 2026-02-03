@@ -76,7 +76,7 @@
                 </div>
               </div>
 
-            @if($weekend->head_cha->contains(auth()->user()->id))
+            @if($weekend->head_cha->contains(auth()->user()->id) || $weekend->backup_rector->contains(auth()->user()->id))
               <div class="row">
                 <div class="col-md-9 offset-md-3">
                   <div class="checkbox">

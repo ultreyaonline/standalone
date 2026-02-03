@@ -349,6 +349,7 @@ class TeamAssignmentController extends Controller
 
         if ($weekend->rectorID == auth()->id()
             || $weekend->head_cha->contains(auth()->id())
+            || $weekend->backup_rector->contains(auth()->id())
         ) {
             return WeekendRoles::rolesRectorCanAssign()->get();
         }
