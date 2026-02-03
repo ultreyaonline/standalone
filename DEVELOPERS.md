@@ -2,6 +2,41 @@
 
 ## Self-hosted PHP application built on the Laravel Framework
 
+# Customization Reference
+
+Key areas where most people want to customize things:
+
+- home landing page: /resources/views/pages/public/home.blade.php
+- dashboard page (for logged-in members): /resources/views/members/dashboard.blade.php
+- emails: /resources/views/emails/*.blade.php
+- sponsor email attachments: /app/Mail/SponsorAcknowledgeCandidate*.php
+- team guidebook: /resources/views/teamguide/main.blade.php
+- meditation: /resources/views/teamguide/meditation.blade.php
+- payment method wording: /resources/views/payments/page.blade.php
+- pre-weekend page: /resources/views/pages/static/preweekend.blade.php
+- palanca page: /resources/views/pages/static/palanca.blade.php
+- post-weekend page: /resources/views/pages/static/postweekend.blade.php
+- prayer-wheel invitation email default: app/Http/Controllers/PrayerWheelNotificationsController.php
+- secretariat main page: /resources/views/pages/static/secretariat.blade.php
+- secretariat org chart: /resources/views/pages/static/secretariat_org_chart.blade.php
+- secuelas description page: /resources/views/pages/static/secuelas.blade.php
+- sponsoring page: /resources/views/pages/static/sponsoring.blade.php
+- analytics tracking: /resources/views/system/tenant_analytics.php (put your tracking js snippet here)
+
+
+Common graphic customizations:
+- /public/logo/logo.jpg
+- /public/logo/favicon.png
+- /public/favicon,ico
+
+
+# Exports
+
+If you're using the data-export features, files are typically directly downloaded to the browser, but may also be temporarily stored in the /storage/app/export/ directory, in case you need to find them again later.
+
+# Backups
+
+Configure the /config/backups.php file to send backups to either the local drive (default), or to an S3 drive (configurable in /config/filesystems.php). Also update the notification email address to receive failure notifications if backups run into errors.
 
 # Developer Reference
 
@@ -34,6 +69,10 @@ Handy training for Laravel can be obtained at [Laracasts.com](https://laracasts.
 For quick-start convenience the default template is based on Bootstrap, and leverages a few jQuery plugins.
 
 Templating Syntax: See Blade template docs: https://laravel.com/docs/views
+
+### Building front-end assets:
+
+This app is currently based on Laravel 8 with Laravel-Mix which uses webpack to compile front-end assets:
 
 Webpack: To compile **Front-End Assets** See Laravel-Mix docs: https://laravel.com/docs/mix
 
