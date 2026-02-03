@@ -79,7 +79,8 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo('email secretariat members');
         $role->givePermissionTo('email entire community');
         $role->givePermissionTo('edit community roster');
-        $role->givePermissionTo('add community member');
+// Many communities leave this one off:
+//        $role->givePermissionTo('add community member');
         $role->givePermissionTo('view past community service');
         $role->givePermissionTo('view SD history');
 
