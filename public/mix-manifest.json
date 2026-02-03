@@ -1,4 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=36da8769c5afb43e955619f516ab6468",
-    "/css/app.css": "/css/app.css?id=fdd95932e471ef6d8d32a70661521b2a"
+    "/js/app.js": "/js/app.js?id=8dfa142d8e545ce6584eba9137ae51ea",
+    "/css/app.css": "/css/app.css?id=63bc7eb85899fb83cde1e5af62d7885e",
+    "/fonts/vendor/font-awesome/fontawesome-webfont.eot?8b43027f47b20503057dfbbaa9401fef": "/fonts/vendor/font-awesome/fontawesome-webfont.eot?8b43027f47b20503057dfbbaa9401fef?id=016fa45033a942ffecadc970f22fe41b",
+    "/fonts/vendor/font-awesome/fontawesome-webfont.woff2?20fd1704ea223900efa9fd4e869efb08": "/fonts/vendor/font-awesome/fontawesome-webfont.woff2?20fd1704ea223900efa9fd4e869efb08?id=d829b32251e423806ca9c8aa640b7dcf",
+    "/fonts/vendor/font-awesome/fontawesome-webfont.woff?f691f37e57f04c152e2315ab7dbad881": "/fonts/vendor/font-awesome/fontawesome-webfont.woff?f691f37e57f04c152e2315ab7dbad881?id=5e0388aeae16469773b8cf74e2d6304b",
+    "/fonts/vendor/font-awesome/fontawesome-webfont.ttf?1e59d2330b4c6deb84b340635ed36249": "/fonts/vendor/font-awesome/fontawesome-webfont.ttf?1e59d2330b4c6deb84b340635ed36249?id=ecebce3ab95b6640919b6b2f66b44bf8",
+    "/fonts/vendor/font-awesome/fontawesome-webfont.svg?c1e38fd9e0e74ba58f7a2b77ef29fdd3": "/fonts/vendor/font-awesome/fontawesome-webfont.svg?c1e38fd9e0e74ba58f7a2b77ef29fdd3?id=912ec66d7572ff821749319396470bde"
 }
