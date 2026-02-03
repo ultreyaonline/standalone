@@ -22,6 +22,11 @@ To run the Ultreya application, you will need the following:
 - DevOps person who groks deploy scripts, security patching and monthly server OS patching, certbot for LetsEncrypt, and the following software components:
 - Server Software will include: Ubuntu 22, Nginx, PHP 8, MySQL/MariaDB, Redis.
 
+## PHP Requirements
+PHP will require the following extensions installed. Many are already installed by default with most hosts:
+- ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre
+- pdo, pdo_mysql, pdo_sqlite, session, sqlite3, tokenizer, xml
+
 
 # Hosting
 Your website needs a server to run on. There are 2 considerations: fully-managed, or self-managed.
