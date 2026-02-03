@@ -85,6 +85,9 @@ class SponsorAcknowledgeCandidate extends Mailable
     }
 
     /**
+     * NOTE: EDIT THE ATTACHMENTS HERE TO SUIT THE COMMUNITY NEEDS
+     *       or even comment-out to avoid sending them.
+     *
      * Build the message.
      *
      * @return $this
