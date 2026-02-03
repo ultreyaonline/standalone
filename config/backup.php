@@ -121,6 +121,7 @@ return [
              */
             'disks' => [
                 'local',
+                //'s3-backups',
             ],
         ],
 
@@ -155,6 +156,8 @@ return [
             \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
+
+            // In production the "success" notifications can probably be left as an empty array:
             \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
@@ -198,7 +201,7 @@ return [
     'monitor_backups' => [
         [
             'name' => env('APP_NAME', 'laravel-backup'),
-            'disks' => ['local'],
+            'disks' => ['local'], // ['s3-backups']
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,
