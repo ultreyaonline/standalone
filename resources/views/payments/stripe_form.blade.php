@@ -4,7 +4,7 @@
     $key = config('services.stripe.key');
 @endphp
 @if(!empty($key))
-<li class="pb-3"><strong>Credit Card: </strong>
+<li class="pb-3"><strong>Credit Card (one-time payments): </strong>
     <form action="{{route('stripe-payment')}}" method="POST" id="donateForm" class="form-inline row">
         @csrf
         <label for="amount">Payment Amount: &nbsp;$</label>
