@@ -26,6 +26,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Newsletter\Facades\Newsletter;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
@@ -257,8 +258,8 @@ class User extends Authenticatable implements HasMedia
 
     public function getInMailchimpAttribute()
     {
-        if (!empty($this->attributes['email']) && config('newsletter.apiKey')) {
-            return \Spatie\Newsletter\NewsletterFacade::isSubscribed($this->attributes['email'], config('newsletter.defaultListName'));
+        if (!empty($this->attributes['email']) && config('newsletter.driver') && config('newsletter.driver_arguments.apiKey')) {
+            return Newsletter::isSubscribed($this->attributes['email'], config('newsletter.default_list_name'));
         }
         return null;
     }

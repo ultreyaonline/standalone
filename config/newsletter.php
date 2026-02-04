@@ -1,28 +1,28 @@
 <?php
+// https://github.com/spatie/laravel-newsletter
 
 return [
-
     /*
      * The driver to use to interact with MailChimp API.
      * You may use "log" or "null" to prevent calling the
      * API directly from your environment.
      */
-    'driver' => env('MAILCHIMP_DRIVER', 'api'),
+    'driver' => env('NEWSLETTER_DRIVER', Spatie\Newsletter\Drivers\MailChimpDriver::class),
+
+    /**
+     * These arguments will be given to the driver.
+     */
+    'driver_arguments' => [
+        'api_key' => env('NEWSLETTER_API_KEY'), // get it from https://mailchimp.com/help/about-api-keys/ or https://us10.admin.mailchimp.com/account/api-key-popup/
+
+        'endpoint' => env('NEWSLETTER_ENDPOINT'), // leave null for Mailchimp
+    ],
 
     /*
-     * The API key of a MailChimp account. You can find yours at
-     * https://us10.admin.mailchimp.com/account/api-key-popup/.
+     * The list name to use when no list name is specified in a method.
      */
-    'apiKey' => env('MAILCHIMP_APIKEY'),
+    'default_list_name' => 'subscribers',
 
-    /*
-     * The listName to use when no listName has been specified in a method.
-     */
-    'defaultListName' => 'subscribers',
-
-    /*
-     * Here you can define properties of the lists.
-     */
     'lists' => [
 
         /*
@@ -35,17 +35,13 @@ return [
         'subscribers' => [
 
             /*
-             * A MailChimp list id. Check the MailChimp docs if you don't know
-             * how to get this value:
+             * When using the Mailcoach driver, this should be Email list UUID
+             * which is displayed in the Mailcoach UI
+             *
+             * When using the MailChimp driver, this should be a MailChimp list id.
              * http://kb.mailchimp.com/lists/managing-subscribers/find-your-list-id.
              */
-            'id' => env('MAILCHIMP_LIST_ID'),
+            'id' => env('NEWSLETTER_LIST_ID'),
         ],
     ],
-
-    /*
-     * If you're having trouble with https connections, set this to false.
-     */
-    'ssl' => true,
-
 ];

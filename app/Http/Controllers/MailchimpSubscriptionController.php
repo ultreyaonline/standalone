@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Spatie\Newsletter\NewsletterFacade as Mailchimp;
+use Spatie\Newsletter\Facades\Newsletter as Mailchimp;
 
 class MailchimpSubscriptionController extends Controller
 {
@@ -15,7 +15,7 @@ class MailchimpSubscriptionController extends Controller
         $this->middleware('auth');
         $this->middleware('password.confirm')->except(['index', 'checkStatus']);
 
-        $this->mailchimp_master_list_name = config('newsletter.defaultListName');
+        $this->mailchimp_master_list_name = config('newsletter.default_list_name');
     }
 
     public function index()
@@ -43,7 +43,7 @@ class MailchimpSubscriptionController extends Controller
         );
 
         if ($result !== false) {
-            Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
+            //Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
             flash()->success('Subscriber: ' . $user->name . ' added.');
             event('MailchimpSubscriberAdded', ['user' => $user, 'by' => auth()->user()]);
         } else {
@@ -89,6 +89,9 @@ class MailchimpSubscriptionController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @not-implemented due to deletePermanently method not being included in updated spatie/laravel-newsletter package
+     */
     public function deletePermanently(User $user)
     {
         if (!auth()->user()->hasAnyRole(['Pre-Weekend', 'Admin'])) {
@@ -134,23 +137,29 @@ class MailchimpSubscriptionController extends Controller
         return response('Missing', 410);
     }
 
+    /**
+     * @not-implemented due to addTags method not being included in updated spatie/laravel-newsletter package
+     */
     public function subscribeEveryone(): void
     {
         $users = User::onlyLocal()->active()->notUnsubscribed()->where('receive_email_community_news', 1)->get();
         foreach($users as $user) {
             // @TODO -- combine spouse first-names if sharing an email address
             Mailchimp::subscribe($user->email, ['FNAME'=>$user->first, 'LNAME'=>$user->last]);
-            Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
+            //Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
         }
 
     }
 
+    /**
+     * @not-implemented due to addTags method not being included in updated spatie/laravel-newsletter package
+     */
     public function updateTagsForEveryone(): void
     {
         $users = User::onlyLocal()->active()->notUnsubscribed()->where('receive_email_community_news', 1)->get();
         foreach($users as $user) {
             if (Mailchimp::hasMember($user->email, $this->mailchimp_master_list_name)) {
-                Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
+                //Mailchimp::addTags([$user->weekend, $user->gender === 'M' ? 'Men' : 'Women'], $user->email);
             }
         }
     }

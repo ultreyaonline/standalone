@@ -74,7 +74,7 @@ Route::get('/members/{user}/mailchimp/check', [MailchimpSubscriptionController::
 Route::put('/members/{user}/mailchimp/add', [MailchimpSubscriptionController::class, 'addToMailchimp']);
 Route::delete('/members/{user}/mailchimp/unsubscribe', [MailchimpSubscriptionController::class, 'unsubscribe']);
 Route::delete('/members/{user}/mailchimp/archive', [MailchimpSubscriptionController::class, 'archive']);
-Route::delete('/members/{user}/mailchimp/deletePermanently', [MailchimpSubscriptionController::class, 'deletePermanently']);
+//Route::delete('/members/{user}/mailchimp/deletePermanently', [MailchimpSubscriptionController::class, 'deletePermanently']);
 
 Route::resource('/members', MembersController::class);
 Route::get('/directory', [MembersController::class, 'index'])->name('directory'); // alias

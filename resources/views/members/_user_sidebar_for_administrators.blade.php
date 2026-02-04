@@ -21,7 +21,7 @@
         </form>
         <hr>
       @endif
-@if(config('newsletter.apiKey'))
+@if(config('newsletter.driver') && config('newsletter.driver_arguments.apiKey'))
       @if($member->inMailchimp === true)
         @can('mailchimp admin')
           <form action="/members/{{ $member->id }}/mailchimp/unsubscribe" method="POST">

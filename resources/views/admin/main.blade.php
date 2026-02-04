@@ -131,7 +131,7 @@
         <div class="card mb-2">
           <div class="card-header card-title">Site Reports</div>
           <div class="card-body">
-@if(config('newsletter.apiKey'))
+@if(config('newsletter.driver') && config('newsletter.driver_arguments.apiKey'))
             <p><a href="/admin/mailchimpaudit">
                 <button class="btn btn-primary"><i class="fa fa-calculator" aria-hidden="true"></i> Mailchimp Subscription Audit</button>
               </a></p>
