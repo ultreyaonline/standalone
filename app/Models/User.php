@@ -39,6 +39,12 @@ class User extends Authenticatable implements HasMedia
     use LogsActivity;
     use InteractsWithMedia;
 
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
       'email','password', 'first', 'last', 'address1', 'address2', 'city', 'state', 'postalcode', 'country',
       'homephone', 'cellphone', 'workphone', 'spouseID', 'church', 'weekend',

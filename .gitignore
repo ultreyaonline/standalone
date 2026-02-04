@@ -1,3 +1,4 @@
+/.phpunit.cache
 /node_modules
 /public/build
 /public/hot
@@ -8,13 +9,13 @@
 .env.backup
 .env.production
 .phpunit.result.cache
-docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
 /.fleet
+docker-compose.override.yml
 
 # MacOS
 .DS_Store

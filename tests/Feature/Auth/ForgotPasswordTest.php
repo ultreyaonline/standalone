@@ -45,7 +45,7 @@ class ForgotPasswordTest extends TestCase {
             'username' => 'john@example.com',
         ]);
 
-        $this->assertNotNull($token = DB::table('password_resets')->first());
+        $this->assertNotNull($token = DB::table('password_reset_tokens')->first());
         Notification::assertSentTo($user, \Illuminate\Auth\Notifications\ResetPassword::class, function ($notification, $channels) use ($token) {
             return Hash::check($notification->token, $token->token) === true;
         });
