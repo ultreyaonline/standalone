@@ -3,13 +3,13 @@
         <div class="col h4"><strong>Members List</strong></div>
 
         <div class="col btn-group">
-            <input wire:model="q" class="form-control" type="text" placeholder="Search Members..." autofocus>
+            <input wire:model.live="q" class="form-control" type="text" placeholder="Search Members..." autofocus>
             <span wire:click="searchClear()" id="searchClear"><i class="fa fa-times-circle"></i></span>
         </div>
 
         <div class="col form-inline justify-content-end">
             Per Page: &nbsp;
-            <select wire:model="perPage" class="form-control">
+            <select wire:model.live="perPage" class="form-control">
                 <option>10</option>
                 <option>15</option>
                 <option>25</option>

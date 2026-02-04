@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -8,28 +8,31 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class MembersDirectory extends Component
+class MembersAudit extends Component
 {
     use AuthorizesRequests;
     use WithPagination;
 
     public $perPage;
-    public $q; // query string for search
-    public $sortBy = 'first'; // initial sort field
+    public $q = ''; // query string for search
+    public $sortBy = 'last';
     public $sortAsc = true; // used for query and icons
 
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = ['q', 'perPage', 'sortBy', 'sortAsc'];
 
+    public function mount(): void
+    {
+        $this->perPage = request('perPage', config('site.pagination_threshold', 25));
+    }
+
     public function render()
     {
-        abort_unless(Auth::check() && Auth::user()->can('view members'), '403', 'Unauthorized.');
+        abort_unless(Auth::check() && Auth::user()->can('edit members'), '403', 'Unauthorized.');
 
-        return view('livewire.members-directory', [
+        return view('livewire.members-audit', [
             'users' => User::datatableSearch($this->q)
-                ->active()
-                //->onlyLocal()
                 ->select($this->getColumns())
                 ->orderBy($this->sortBy, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage),
@@ -64,6 +67,9 @@ class MembersDirectory extends Component
             'last',
             'email',
             'weekend',
+            'cellphone',
+            'homephone',
+            'church',
             'community',
 
             // include more columns below if needed
