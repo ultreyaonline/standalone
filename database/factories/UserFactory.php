@@ -10,7 +10,9 @@ use Illuminate\Support\Str;
 // @TODO - afterCreatingState can be incorporated only if Roles have been seeded
 //    $user->assignRole('Member');
 
-
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
 class UserFactory extends Factory
 {
     /**
@@ -23,7 +25,7 @@ class UserFactory extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function definition()
     {

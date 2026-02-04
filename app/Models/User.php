@@ -48,7 +48,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'active'                         => 'boolean',
@@ -66,6 +66,7 @@ class User extends Authenticatable implements HasMedia
 
     /**
      * The attributes that should be hidden from json arrays
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',

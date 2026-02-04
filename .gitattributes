@@ -8,6 +8,7 @@
 
 /.github export-ignore
 CHANGELOG.md export-ignore
+.styleci.yml export-ignore
 /.env* export-ignore
 /tests export-ignore
 /.gitattributes export-ignore
