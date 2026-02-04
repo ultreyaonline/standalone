@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class TeamFeePayments extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'teamfees';
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
 
     protected $table = 'team_fees';
 
@@ -42,5 +39,13 @@ class TeamFeePayments extends Model
     public function weekend()
     {
         return $this->belongsTo(Weekend::class, 'weekendID')->withDefault();
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('teamfees')
+            ->logAll()
+            ->logOnlyDirty();
     }
 }

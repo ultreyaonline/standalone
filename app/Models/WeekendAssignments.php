@@ -8,16 +8,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class WeekendAssignments extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'team-assignments';
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
 
 //integer('weekendID')->unsigned()->references('id')->on('weekends')->index('byweekendid');
 //integer('memberID')->unsigned()->references('id')->on('users')->index('bymember');
@@ -72,5 +69,13 @@ class WeekendAssignments extends Model
     public function getModifiedInLastThreeWeeksAttribute()
     {
         return $this->attributes['updated_at'] > Carbon::now()->addDays(-21);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('team-assignments')
+            ->logAll()
+            ->logOnlyDirty();
     }
 }

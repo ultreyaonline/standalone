@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Image\Manipulations;
@@ -70,13 +71,6 @@ class User extends Authenticatable implements HasMedia
         'password',
         'remember_token',
     ];
-
-    protected static $logName = 'members';
-    protected static $logAttributes = ['*'];
-    protected static $logAttributesToIgnore = [ 'password', 'remember_token'];
-    protected static $logOnlyDirty = true;
-    protected static $submitEmptyLogs = false;
-
 
     public function isOnline(): bool
     {
@@ -672,5 +666,15 @@ class User extends Authenticatable implements HasMedia
         static::deleted(function (User $user) {
             event(UserDeleted::class, ['who' => $user->name, 'by'=> optional(Auth::user())->name ?? 'System' ]);
         });
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('members')
+            ->logAll()
+            ->dontLogIfAttributesChangedOnly(['password', 'remember_token'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

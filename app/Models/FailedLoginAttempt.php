@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class FailedLoginAttempt extends Model
@@ -15,9 +16,6 @@ class FailedLoginAttempt extends Model
         'user_id', 'username', 'ip_address',
     ];
 
-    protected static $logName = 'login-failures';
-    protected static $logFillable = true;
-
     public static function record($username, $ip, $user = null)
     {
         return static::create([
@@ -25,5 +23,12 @@ class FailedLoginAttempt extends Model
             'ip_address' => $ip,
             'user_id' => is_null($user) ? null : $user->id,
         ]);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('login-failures')
+            ->logFillable();
     }
 }

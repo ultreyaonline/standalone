@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -20,10 +21,6 @@ class Weekend extends Model implements HasMedia
     use InteractsWithMedia;
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'weekends';
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
 
     protected $fillable = [
         'weekend_full_name',
@@ -726,5 +723,13 @@ class Weekend extends Model implements HasMedia
 
             return $weekend;
         });
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('weekends')
+            ->logAll()
+            ->logOnlyDirty();
     }
 }

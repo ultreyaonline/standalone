@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class WeekendRoles extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'config-weekend-roles';
-    protected static $logAttributes = ['*'];
 
     protected $casts = [
         'isDeptHead'            => 'boolean',
@@ -87,5 +85,12 @@ class WeekendRoles extends Model
     public function section()
     {
         return $this->belongsTo(Section::class, 'section_id');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('config-weekend-roles')
+            ->logAll();
     }
 }

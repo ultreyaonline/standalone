@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class PrayerWheelSignup extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'prayer-wheels';
-    protected static $logAttributes = ['*'];
 
     protected $table = 'prayer_wheel_signups';
     protected $touches = ['wheel'];
@@ -156,5 +154,12 @@ class PrayerWheelSignup extends Model
     {
         return $this->user->receive_prayer_wheel_reminders;
 //        return $this->member->receive_prayer_wheel_reminders;
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('prayer-wheels')
+            ->logAll();
     }
 }

@@ -4,16 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class WeekendAssignmentsExternal extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'team-assignments';
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
 
     // memberID
     // WeekendName
@@ -31,4 +28,13 @@ class WeekendAssignmentsExternal extends Model
     {
         return trim(preg_replace('/(Men|Women)[:\'s\s]*/', '', $this->attributes['WeekendName']));
     }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('team-assignments')
+            ->logAll()
+            ->logOnlyDirty();
+    }
+
 }

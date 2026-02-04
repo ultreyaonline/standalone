@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Secretariat extends Model
@@ -11,8 +12,12 @@ class Secretariat extends Model
     use LogsActivity;
     use HasFactory;
 
-    protected static $logName = 'secretariat';
-    protected static $logAttributes = ['*'];
-
     protected $table = 'secretariat';
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('secretariat')
+            ->logAll();
+    }
 }

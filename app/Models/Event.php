@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Event extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'calendar';
 
     protected $casts = [
         'is_enabled' => 'boolean',
@@ -229,5 +228,11 @@ class Event extends Model
         if (auth()->check() && auth()->user()->hasRole('Member')) {
             return true;
         }
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('calendar');
     }
 }

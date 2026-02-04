@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Candidate extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'pre-weekend';
-    protected static $logAttributes = ['*'];
-    protected static $logOnlyDirty = true;
 
     protected $casts = [
         'married'                   => 'boolean',
@@ -130,7 +127,6 @@ class Candidate extends Model
         return $query->where('m_user_id', $id)->orWhere('w_user_id', $id);
     }
 
-
     public function getAddressFormattedAttribute()
     {
         if (!$this->attributes['m_user_id'] && !$this->attributes['w_user_id']) {
@@ -200,5 +196,13 @@ class Candidate extends Model
     public function woman(): BelongsTo
     {
         return $this->belongsTo(User::class, 'w_user_id');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('pre-weekend')
+            ->logAll()
+            ->logOnlyDirty();
     }
 }

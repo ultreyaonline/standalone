@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class PrayerWheel extends Model
 {
     use LogsActivity;
     use HasFactory;
-
-    protected static $logName = 'prayer-wheels';
-    protected static $logAttributes = ['*'];
 
     protected $table = 'prayer_wheels';
 
@@ -109,5 +107,12 @@ class PrayerWheel extends Model
             ['position' => 71, 'index' => 'u16', 'day' => 'Sunday', 'hour' => '4:00pm', 'hour_to' => '4pm-5pm'],
             ['position' => 72, 'index' => 'u17', 'day' => 'Sunday', 'hour' => '5:00pm', 'hour_to' => '5pm-6pm'],
         ]);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('prayer-wheels')
+            ->logAll();
     }
 }
