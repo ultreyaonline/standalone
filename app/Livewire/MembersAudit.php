@@ -15,7 +15,7 @@ class MembersAudit extends Component
 
     public $perPage;
     public $q = ''; // query string for search
-    public $sortBy = 'last';
+    public $sort_key = 'last';
     public $sortAsc = true; // used for query and icons
 
     protected $paginationTheme = 'bootstrap';
@@ -34,7 +34,7 @@ class MembersAudit extends Component
         return view('livewire.members-audit', [
             'users' => User::datatableSearch($this->q)
                 ->select($this->getColumns())
-                ->orderBy($this->sortBy, $this->sortAsc ? 'asc' : 'desc')
+                ->orderBy($this->sort_key, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage),
         ]);
     }
@@ -46,13 +46,13 @@ class MembersAudit extends Component
 
     public function sortBy($field): void
     {
-        if ($this->sortBy === $field) {
+        if ($this->sort_key === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
 
-        $this->sortBy = $field;
+        $this->sort_key = $field;
     }
 
     /**
