@@ -32,7 +32,7 @@
         "spatie/laravel-activitylog": "^4.0",
         "spatie/laravel-medialibrary": "^9.4",
         "spatie/laravel-newsletter": "^4.8",
-        "spatie/laravel-permission": "^5.0",
+        "spatie/laravel-permission": "^6.0",
         "stripe/stripe-php": "^7.50"
     },
     "require-dev": {
