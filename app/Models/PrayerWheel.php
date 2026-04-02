@@ -6,6 +6,33 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * Class PrayerWheel
+ *
+ * Represents the prayer schedule for a retreat weekend. Each weekend has one PrayerWheel,
+ * and community members sign up for specific one-hour prayer slots via PrayerWheelSignup.
+ *
+ * ## Timeslot system
+ * A full weekend covers 72 one-hour slots: Thursday 6pm (slot 1) through Sunday 5pm (slot 72).
+ * The base time is Thursday 5:00pm of the weekend's start_date.
+ * Slot integers map to hours: slot 1 = start + 1hr = Thu 6pm, slot 24 = Fri 5pm, etc.
+ *
+ * The static getTimeSlots() method returns the complete slot definition list as a Collection.
+ * Each entry has: position (int), index (string key like 'f8'), day (string), hour, hour_to.
+ *
+ * PrayerWheelSignup stores only the integer position; slot details are always looked up
+ * from this static list. Do not change slot numbering without migrating existing signup records.
+ *
+ * ## Custom vs. weekend-linked wheels
+ * A wheel can be linked to a specific Weekend (weekendID) or created as a standalone custom
+ * wheel (customwheel_name with no weekendID). Both types are supported by the system.
+ *
+ * @property int         $id
+ * @property int|null    $weekendID       FK → weekends.id; null for standalone custom wheels
+ * @property string|null $customwheel_name  Name for standalone wheels not tied to a weekend
+ *
+ * @package App
+ */
 class PrayerWheel extends Model
 {
     use LogsActivity;
@@ -22,17 +49,42 @@ class PrayerWheel extends Model
 //$table->unsignedInteger('weekendID')->nullable();
 //$table->string('customwheel_name')->nullable();
 
+    /**
+     * The retreat weekend this prayer wheel belongs to.
+     * May be null for standalone custom wheels. (In practice, we haven't used standalone custom wheels.)
+     */
     public function weekend(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Weekend::class, 'weekendID', 'id');
     }
 
+    /**
+     * All sign-up records for this wheel, ordered by timeslot ascending.
+     *
+     */
     public function signups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(PrayerWheelSignup::class, 'wheel_id', 'id')->orderBy('timeslot');
     }
 
-
+    /**
+     * The complete static list of prayer slot definitions for a full retreat weekend.
+     *
+     * A weekend runs from Thursday 6pm (position 1) to Sunday 5pm (position 72).
+     * The base time is Thursday 5:00pm; each slot is 1 hour offset from that base.
+     *
+     * Each entry contains:
+     * - position (int): the slot integer stored in prayer_wheel_signups.timeslot
+     * - index   (string): a unique string key (e.g. 'f8' = Friday 8am slot)
+     * - day     (string): the day name (Thursday, Friday, Saturday, Sunday)
+     * - hour    (string): the start time (e.g. '8:00am')
+     * - hour_to (string): the time range (e.g. '8am-9am')
+     *
+     * ⚠️ Do NOT reorder or change position values — existing PrayerWheelSignup records
+     * reference these integers directly. Any change requires a data migration.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public static function getTimeSlots(): \Illuminate\Support\Collection
     {
         return collect([

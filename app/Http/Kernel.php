@@ -4,6 +4,23 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+/**
+ * HTTP Kernel
+ *
+ * Defines all middleware stacks and route middleware aliases.
+ *
+ * ## Custom Web middleware group (applied to all routes in routes/web.php)
+ * The following 2 middleware are not part of Laravel default middleware groups:
+ * - LogLastUserActivity    — updates users.last_login_at and Redis online-presence key
+ *
+ * ## Custom Route middleware aliases
+ * | Alias        | Class                          | Purpose                              |
+ * |--------------|-------------------------------|--------------------------------------|
+ * | permission   | PermissionMiddleware          | Spatie permission gate (string)      |
+ * | role         | RoleMiddleware                | Spatie role gate (string)            |
+ *
+ * @package App\Http
+ */
 class Kernel extends HttpKernel
 {
     /**
