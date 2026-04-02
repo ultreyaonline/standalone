@@ -29,8 +29,8 @@ return new class extends Migration {
             $table->string('candidate_arrival_time')->nullable();
             $table->string('sendoff_start_time')->nullable();
             $table->integer('maximum_candidates')->nullable();
-            $table->double('candidate_cost', 6, 2)->nullable();
-            $table->double('team_fees', 6, 2)->nullable();
+            $table->decimal('candidate_cost', total: 6, places: 2)->nullable();
+            $table->decimal('team_fees', total: 6, places: 2)->nullable();
             $table->unsignedBigInteger('rectorID')->nullable();
             $table->text('weekend_verse_text')->nullable();
             $table->string('weekend_verse_reference', 255)->nullable();

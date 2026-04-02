@@ -34,7 +34,7 @@ class WhosOnlineProvider extends ServiceProvider
                  * Reduces server load by limiting to recently-logged-in users
                  * Requires a timestamp field called 'last_login_at' on the Users table+model
                  */
-                $users = User::where('last_login_at', '>', Carbon::now()->addDays('-3'))
+                $users = User::where('last_login_at', '>', Carbon::now()->addDays(-3))
 //                ->remember(15)// cache for 15 minutes
                     ->get();
 

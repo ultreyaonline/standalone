@@ -1,20 +1,18 @@
 <?php
 
-// Spatie MediaLibrary schema for v9
-
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-
-    public function up()
+return new class extends Migration
+{
+    public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
 
             $table->morphs('model');
-            $table->uuid('uuid')->nullable()->unique();
+            $table->uuid()->nullable()->unique();
             $table->string('collection_name');
             $table->string('name');
             $table->string('file_name');
@@ -26,7 +24,7 @@ return new class extends Migration {
             $table->json('custom_properties');
             $table->json('generated_conversions');
             $table->json('responsive_images');
-            $table->unsignedInteger('order_column')->nullable();
+            $table->unsignedInteger('order_column')->nullable()->index();
 
             $table->nullableTimestamps();
         });

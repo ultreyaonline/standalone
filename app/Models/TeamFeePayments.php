@@ -24,7 +24,7 @@ class TeamFeePayments extends Model
     /**
      * $table->unsignedInteger('weekendID')->references('id')->on('weekends')->index('feesforweekendid');
      * $table->unsignedInteger('memberID')->references('id')->on('users')->index('feesformember');
-     * $table->double('total_paid', 4, 2)->nullable();
+     * $table->decimal('total_paid', total: 4, places: 2)->nullable();
      * $table->date('date_paid')->nullable();
      * $table->integer('complete')->nullable()->index('bycomplete');
      * $table->string('recorded_by', 60);

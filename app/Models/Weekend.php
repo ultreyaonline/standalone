@@ -974,8 +974,6 @@ class Weekend extends Model implements HasMedia
     }
 
 
-
-
     /**
      * Register Spatie Media-Library collections
      */

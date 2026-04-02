@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->increments('id');
             $table->unsignedInteger('weekendID')->index('feesforweekendid');
             $table->unsignedBigInteger('memberID')->nullable()->index('feesformember');
-            $table->double('total_paid', 10, 2)->nullable();
+            $table->decimal('total_paid', total: 10, places: 2)->nullable();
             $table->date('date_paid')->nullable();
             $table->integer('complete')->nullable()->index('bycomplete');
             $table->text('comments')->nullable();

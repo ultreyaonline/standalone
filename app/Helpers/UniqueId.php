@@ -17,7 +17,7 @@ class UniqueId
      *
      * @return string $token random unique string of specified length
      */
-    public static function generate($length = 64, $modelClass = null, ?string $fieldName = null)
+    public static function generate($length = 64, $modelClass = null, ?string $fieldName = null): string
     {
         $token = substr(Password::getRepository()->createNewToken(), 0, $length);
 
