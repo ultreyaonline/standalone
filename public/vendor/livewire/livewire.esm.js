@@ -3006,7 +3006,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       get transaction() {
         return transaction;
       },
-      version: "3.15.9",
+      version: "3.15.11",
       flushAndStopDeferringMutations,
       dontAutoEvaluateFunctions,
       disableEffectScheduling,
@@ -3859,6 +3859,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               }
               return;
             }
+            if (templateEl.content.children.length > 1)
+              warn("x-for templates require a single root element, additional elements will be ignored.", templateEl);
             let clone2 = document.importNode(templateEl.content, true).firstElementChild;
             let reactiveScope = reactive(scope2);
             addScopeToNode(clone2, reactiveScope, templateEl);
@@ -3923,13 +3925,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     function handler3() {
     }
-    handler3.inline = skipDuringClone((el, { expression }, { cleanup }) => {
+    handler3.inline = (el, { expression }, { cleanup }) => {
       let root = closestRoot(el);
+      if (!root)
+        return;
       if (!root._x_refs)
         root._x_refs = {};
       root._x_refs[expression] = el;
       cleanup(() => delete root._x_refs[expression]);
-    });
+    };
     directive2("ref", handler3);
     directive2("if", (el, { expression }, { effect: effect3, cleanup }) => {
       if (el.tagName.toLowerCase() !== "template")
@@ -5729,7 +5733,13 @@ var require_module_cjs3 = __commonJS({
       let overflow = document.documentElement.style.overflow;
       let paddingRight = document.documentElement.style.paddingRight;
       let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      let scrollbarGutter = window.getComputedStyle(document.documentElement).scrollbarGutter;
       document.documentElement.style.overflow = "hidden";
+      if (scrollbarGutter && scrollbarGutter !== "auto") {
+        return () => {
+          document.documentElement.style.overflow = overflow;
+        };
+      }
       document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
       return () => {
         document.documentElement.style.overflow = overflow;
@@ -6844,9 +6854,10 @@ var require_module_cjs5 = __commonJS({
           el._x_sort_key = evaluate(expression);
           return;
         }
+        let handleSelector = "[x-sort\\:handle],[wire\\:sort\\:handle]";
         let preferences = {
           hideGhost: !modifiers.includes("ghost"),
-          useHandles: !!el.querySelector("[x-sort\\:handle],[wire\\:sort\\:handle]"),
+          useHandles: !!el.querySelector(handleSelector) || Array.from(el.querySelectorAll("template")).some((tmpl) => tmpl.content.querySelector(handleSelector)),
           group: getGroupName(el, modifiers)
         };
         let handleSort = generateSortHandler(expression, evaluate);
@@ -8244,14 +8255,14 @@ var require_module_cjs7 = __commonJS({
       });
       Alpine25.directive("anchor", Alpine25.skipDuringClone(
         (el, { expression, modifiers, value }, { evaluate: evaluate2, effect, cleanup }) => {
-          let { placement, offsetValue, unstyled } = getOptions(modifiers);
+          let { placement, offsetValue, unstyled, allowFlip } = getOptions(modifiers);
           el._x_anchor = Alpine25.reactive({ x: 0, y: 0 });
           let previousReference = null;
           let release = null;
-          let effector = effect(() => {
+          effect(() => {
             let reference = evaluate2(expression);
             if (!reference)
-              throw "Alpine: no element provided to x-anchor...";
+              return;
             if (previousReference !== reference) {
               if (release)
                 release();
@@ -8260,7 +8271,7 @@ var require_module_cjs7 = __commonJS({
                 let previousValue;
                 computePosition2(reference, el, {
                   placement,
-                  middleware: [flip(), shift({ padding: 5 }), offset(offsetValue)]
+                  middleware: [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)]
                 }).then(({ x, y }) => {
                   unstyled || setStyles(el, x, y);
                   if (JSON.stringify({ x, y }) !== previousValue) {
@@ -8274,7 +8285,6 @@ var require_module_cjs7 = __commonJS({
             }
           });
           cleanup(() => {
-            effector();
             if (release)
               release();
           });
@@ -8303,7 +8313,8 @@ var require_module_cjs7 = __commonJS({
         offsetValue = modifiers[idx + 1] !== void 0 ? Number(modifiers[idx + 1]) : offsetValue;
       }
       let unstyled = modifiers.includes("no-style");
-      return { placement, offsetValue, unstyled };
+      let allowFlip = !modifiers.includes("noflip");
+      return { placement, offsetValue, unstyled, allowFlip };
     }
     var module_default2 = src_default2;
   }
@@ -10748,6 +10759,10 @@ var interceptors = new InterceptorRegistry();
 var messageBus = new MessageBus();
 var actionInterceptors = [];
 var partitionInterceptors = [];
+var sessionExpired = false;
+function sessionIsExpired() {
+  return sessionExpired;
+}
 function setNextActionOrigin(origin) {
   outstandingActionOrigin = origin;
 }
@@ -11014,6 +11029,9 @@ function sendMessages() {
         if (preventDefault)
           return;
         if (response.status === 419) {
+          if (sessionExpired)
+            return;
+          sessionExpired = true;
           confirm(
             "This page has expired.\nWould you like to refresh the page?"
           ) && window.location.reload();
@@ -11693,7 +11711,7 @@ wireProperty("$js", (component) => {
   let fn = component.addJsAction.bind(component);
   let jsActions = component.getJsActions();
   Object.keys(jsActions).forEach((name) => {
-    fn[name] = component.getJsAction(name);
+    fn[name] = jsActions[name];
   });
   return new Proxy(fn, {
     set(target, property, value) {
@@ -12031,7 +12049,11 @@ var Component = class {
     return this.jsActions[name].bind(this.$wire);
   }
   getJsActions() {
-    return this.jsActions;
+    let actions = {};
+    for (let key of Object.keys(this.jsActions)) {
+      actions[key] = this.getJsAction(key);
+    }
+    return actions;
   }
   toJSON() {
     return {
@@ -13790,7 +13812,7 @@ on("effect", ({ component, effects }) => {
   if (xjs) {
     xjs.forEach(({ expression, params }) => {
       params = Object.values(params);
-      evaluateExpression(component.el, expression, { scope: component.jsActions, params });
+      evaluateExpression(component.el, expression, { scope: component.getJsActions(), params });
     });
   }
 });
@@ -14714,8 +14736,13 @@ import_alpinejs16.default.interceptInit((el) => {
       import_alpinejs16.default.bind(el, {
         [attribute]() {
           setNextActionOrigin({ el, directive: directive2 });
-          let params = [this.$item, this.$position];
-          let scope = { $item: this.$item, $position: this.$position };
+          let sortableChildren = Array.from(el.children).filter(
+            (child) => child.hasAttribute("x-sort:item") || child.hasAttribute("wire:sort:item")
+          );
+          let itemPosition = sortableChildren.findIndex((child) => child._x_sort_key === this.$item);
+          let position = itemPosition !== -1 ? itemPosition : this.$position;
+          let params = [this.$item, position];
+          let scope = { $item: this.$item, $position: position };
           let sortId = el.getAttribute("wire:sort:group-id");
           if (sortId !== null) {
             params.push(sortId);
@@ -15233,6 +15260,7 @@ directive("poll", ({ el, directive: directive2, component }) => {
   pauseWhile(() => theDirectiveHasVisible(directive2) && theElementIsNotInTheViewport(el));
   pauseWhile(() => theDirectiveIsOffTheElement(el));
   pauseWhile(() => livewireIsOffline());
+  pauseWhile(() => sessionIsExpired());
   stopWhen(() => theElementIsDisconnected(el));
 });
 function triggerComponentRequest(el, directive2, component) {
