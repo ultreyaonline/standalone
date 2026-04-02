@@ -9,7 +9,7 @@
     "license": "MIT",
     "authors": [{"name": "Chris Brown"}],
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "ext-redis": ">4.3",
         "ext-zip": "*",
         "bensampo/laravel-enum": "^6.0",
@@ -21,7 +21,7 @@
         "intervention/image": "^2.5",
         "lab404/laravel-impersonate": "^1.7",
         "laracasts/flash": "^3.2",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/horizon": "^5.7",
         "laravel/slack-notification-channel": "^3.0",
         "laravel/tinker": "^2.8",
@@ -33,7 +33,7 @@
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-medialibrary": "^11.0",
         "spatie/laravel-newsletter": "^5.0",
-        "spatie/laravel-permission": "^6.0",
+        "spatie/laravel-permission": "^7.0",
         "stripe/stripe-php": "^7.50",
         "symfony/http-client": "^8.0",
         "symfony/mailgun-mailer": "^7.1|^8.0"
