@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\WeekendVisibleTo;
 use App\Models\WeekendAssignments;
 use App\Models\WeekendRoles;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -45,7 +46,7 @@ class WeekendStatusTest extends TestCase
         $this->seed();
     }
 
-    /** @test */
+    #[Test]
     public function a_new_weekend_is_visible_to_admin()
     {
         $weekend = \App\Models\Weekend::factory()->womens()->create(['visibility_flag' => WeekendVisibleTo::AdminOnly]);
@@ -62,7 +63,7 @@ class WeekendStatusTest extends TestCase
             ->get('/weekend/'.$weekend->id)->assertSee($weekend->weekend_full_name);
     }
 
-    /** @test */
+    #[Test]
     public function a_calendar_only_weekend_is_visible_on_calendar_and_for_admins_but_not_other_dropdowns()
     {
         $weekend = \App\Models\Weekend::factory()->womens()->create(['visibility_flag' => WeekendVisibleTo::Calendar]);
@@ -82,7 +83,7 @@ class WeekendStatusTest extends TestCase
 //        $this->actingAs($user)->get('/prayerwheel')->assertSee($weekend->weekend_full_name);
     }
 
-    /** @test */
+    #[Test]
     public function a_hidden_weekends_theme_details_are_only_visible_to_rector()
     {
         // assign a rector to a weekend
@@ -107,7 +108,7 @@ class WeekendStatusTest extends TestCase
         $this->signIn($rector)->get('/weekend/' . $weekend->id . '/edit')->assertSee($weekend->weekend_theme);
     }
 
-    /** @test */
+    #[Test]
     public function a_hidden_weekends_team_assignments_are_only_visible_to_rector()
     {
         // assign a rector to a weekend
@@ -142,7 +143,7 @@ class WeekendStatusTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function a_weekends_team_assignments_are_only_visible_to_headchas_when_status_is_headchas()
     {
         // assign a rector to a weekend
@@ -193,7 +194,7 @@ class WeekendStatusTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function a_weekends_team_assignments_are_only_visible_to_section_heads_when_status_is_sectionheads()
     {
         // assign a rector to a weekend
@@ -243,7 +244,7 @@ class WeekendStatusTest extends TestCase
         $this->signIn($rector)->get('/team/' . $weekend->id . '/edit')->assertSee($user2->name);
     }
 
-    /** @test */
+    #[Test]
     public function the_team_of_a_weekend_set_to_community_visible_status_can_be_seen_by_members()
     {
         // assign a rector to a weekend

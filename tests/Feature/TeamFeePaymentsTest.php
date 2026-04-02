@@ -9,6 +9,7 @@ use App\Models\TeamFeePayments;
 use App\Models\WeekendAssignments;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -81,7 +82,7 @@ class TeamFeePaymentsTest extends TestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_a_list_of_team_assignments()
     {
         $url = route('list_team_fees', $this->weekend->id);
@@ -93,7 +94,7 @@ class TeamFeePaymentsTest extends TestCase
         $response->assertSee($this->member->last);
     }
 
-    /** @test */
+    #[Test]
     public function a_payment_can_be_recorded()
     {
         Mail::fake();

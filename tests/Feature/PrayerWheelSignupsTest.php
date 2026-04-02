@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Models\Weekend;
 use App\Models\PrayerWheel;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use App\Models\PrayerWheelSignup;
 use Illuminate\Support\Facades\Mail;
@@ -27,7 +28,7 @@ class PrayerWheelSignupsTest extends TestCase
         $this->wheel   = PrayerWheel::factory()->create(['weekendID' => $this->weekend->id]);
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_prayerwheel_page()
     {
         $response = $this->signIn()
@@ -38,7 +39,7 @@ class PrayerWheelSignupsTest extends TestCase
             ->assertSee('#'.$this->weekend->weekend_number);
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_a_specific_wheel()
     {
         $response = $this->signIn()
@@ -47,7 +48,7 @@ class PrayerWheelSignupsTest extends TestCase
         $response->assertSee('choose an hour to pray for');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_sign_up_for_a_timeslot()
     {
         Mail::fake();
@@ -62,7 +63,7 @@ class PrayerWheelSignupsTest extends TestCase
         $response->assertSee('span id="spot-' . '18' . '-' . $this->user->id . '">' . e($this->user->name), false);
     }
 
-    /** @test */
+    #[Test]
     public function a_members_prayer_wheel_signups_can_be_seen_on_own_profile_page()
     {
         Mail::fake();
@@ -77,7 +78,7 @@ class PrayerWheelSignupsTest extends TestCase
         $response->assertSee('Prayer Wheel Signups for ' . e($this->user->name), false);
     }
 
-    /** @test */
+    #[Test]
     public function members_can_delete_their_signup()
     {
         Mail::fake();
@@ -99,7 +100,7 @@ class PrayerWheelSignupsTest extends TestCase
         $response->assertDontSee('span id="' . '18' . '-' . $this->user->id . '">' . e($this->user->name), false);
     }
 
-    /** @test */
+    #[Test]
     public function if_someone_else_has_already_signed_up_for_a_spot_then_it_is_properly_indicated()
     {
         Mail::fake();

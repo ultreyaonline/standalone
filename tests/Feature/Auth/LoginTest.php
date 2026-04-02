@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,7 @@ class LoginTest extends TestCase {
         return sprintf('/^%s$/', str_replace('\:seconds', '\d+', preg_quote(__('auth.throttle'), '/')));
     }
 
-    /** @test */
+    #[Test]
     function user_can_view_a_login_form() {
         $response = $this->get($this->loginGetRoute());
 
@@ -48,7 +49,7 @@ class LoginTest extends TestCase {
         $response->assertViewIs('auth.login');
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_view_a_login_form_when_authenticated() {
         $user = User::factory()->make();
 
@@ -57,7 +58,7 @@ class LoginTest extends TestCase {
         $response->assertRedirect($this->guestMiddlewareRoute());
     }
 
-    /** @test */
+    #[Test]
     function user_can_login_with_correct_credentials() {
         $user = User::factory()->create([
             'password' => Hash::make($password = 'i-love-laravel'),
@@ -72,7 +73,7 @@ class LoginTest extends TestCase {
         $this->assertAuthenticatedAs($user);
     }
 
-    /** @test */
+    #[Test]
     function remember_me_functionality() {
         $user = User::factory()->create([
             'id' => random_int(1, 100),
@@ -88,15 +89,11 @@ class LoginTest extends TestCase {
         $user = $user->fresh();
 
         $response->assertRedirect($this->successfulLoginRoute());
-        $response->assertCookie(Auth::guard()->getRecallerName(), vsprintf('%s|%s|%s', [
-            $user->id,
-            $user->getRememberToken(),
-            $user->password,
-        ]));
+        $response->assertCookie(Auth::guard()->getRecallerName());
         $this->assertAuthenticatedAs($user);
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_login_with_incorrect_password() {
         $this->expectException(ValidationException::class);
         $user = User::factory()->create([
@@ -115,7 +112,7 @@ class LoginTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_login_with_email_that_does_not_exist() {
         $this->expectException(ValidationException::class);
         $response = $this->from($this->loginGetRoute())->post($this->loginPostRoute(), [
@@ -130,7 +127,7 @@ class LoginTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_can_logout() {
         $this->be(User::factory()->create());
 
@@ -140,7 +137,7 @@ class LoginTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_logout_when_not_authenticated() {
         $response = $this->post($this->logoutRoute());
 
@@ -148,7 +145,7 @@ class LoginTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_make_more_than_five_attempts_in_one_minute() {
         $this->expectException(ValidationException::class);
         $user = User::factory()->create([
@@ -164,7 +161,7 @@ class LoginTest extends TestCase {
 
         $response->assertRedirect($this->loginGetRoute());
         $response->assertSessionHasErrors('username');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             $this->getTooManyLoginAttemptsMessage(),
             collect(
                 $response

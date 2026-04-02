@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Weekend;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,7 +14,7 @@ class WeekendTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function weekend_has_ended_attribute_tests_false_for_an_active_weekend()
     {
         $weekend = Weekend::factory()->create([
@@ -23,7 +24,7 @@ class WeekendTest extends TestCase
         $this->assertFalse(Weekend::find($weekend->id)->has_ended);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_has_ended_attribute_tests_false_for_unstarted_weekend()
     {
         $weekend = Weekend::factory()->create([
@@ -33,7 +34,7 @@ class WeekendTest extends TestCase
         $this->assertFalse(Weekend::find($weekend->id)->has_ended);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_has_ended_attribute_tests_true_for_finished_weekend()
     {
         $weekend = Weekend::factory()->create([
@@ -43,7 +44,7 @@ class WeekendTest extends TestCase
         $this->assertTrue(Weekend::find($weekend->id)->has_ended);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_over_a_month_ago_attribute_tests_true_for_two_months_ago()
     {
         $weekend = Weekend::factory()->create([
@@ -53,7 +54,7 @@ class WeekendTest extends TestCase
         $this->assertTrue(Weekend::find($weekend->id)->ended_over_a_month_ago);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_over_a_month_ago_attribute_tests_false_for_three_days_ago()
     {
         $weekend = Weekend::factory()->create([
@@ -63,7 +64,7 @@ class WeekendTest extends TestCase
         $this->assertFalse(Weekend::find($weekend->id)->ended_over_a_month_ago);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_over_a_month_ago_attribute_tests_false_for_future()
     {
         $weekend = Weekend::factory()->create([
@@ -73,7 +74,7 @@ class WeekendTest extends TestCase
         $this->assertFalse(Weekend::find($weekend->id)->ended_over_a_month_ago);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_this_month_attribute_is_true_within_20_days()
     {
         $weekend = Weekend::factory()->create([
@@ -83,7 +84,7 @@ class WeekendTest extends TestCase
         $this->assertTrue(Weekend::find($weekend->id)->ended_this_month);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_this_month_attribute_is_false_after_35_days()
     {
         $weekend = Weekend::factory()->create([
@@ -93,7 +94,7 @@ class WeekendTest extends TestCase
         $this->assertFalse(Weekend::find($weekend->id)->ended_this_month);
     }
 
-    /** @test */
+    #[Test]
     public function weekend_ended_this_month_attribute_is_false_for_future()
     {
         $weekend = Weekend::factory()->create([

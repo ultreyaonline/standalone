@@ -7,6 +7,7 @@ use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -22,7 +23,7 @@ class MemberNoticesTest extends TestCase
         $this->seed();
     }
 
-    /** @test */
+    #[Test]
     public function a_members_candidate_verifications_can_be_seen_on_own_profile_page()
     {
         // @TODO: both husband AND wife should be able to see this

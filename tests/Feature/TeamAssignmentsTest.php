@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\WeekendVisibleTo;
 use App\Models\WeekendAssignments;
 use App\Models\WeekendRoles;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -30,7 +31,7 @@ class TeamAssignmentsTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function rector_can_make_team_assignments()
     {
         $rector = \App\Models\User::factory()->female()->create();
@@ -61,7 +62,7 @@ class TeamAssignmentsTest extends TestCase
     }
 
     // @TODO - add another test for when weekend "status" is lower than 'HeadChas'
-    /** @test */
+    #[Test]
     public function head_cha_can_make_team_assignments()
     {
         $rector = \App\Models\User::factory()->female()->create();
@@ -103,7 +104,7 @@ class TeamAssignmentsTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function an_unconfirmed_assignment_is_only_visible_to_the_rector_and_headcha_and_rover()
     {
         // assign a rector to a weekend
@@ -168,7 +169,7 @@ class TeamAssignmentsTest extends TestCase
             ->assertDontSee(e($user->name) . '</a></td>', false);
     }
 
-    /** @test */
+    #[Test]
     public function a_confirmed_assignment_is_visible_to_all_if_the_weekend_is_visible_to_community()
     {
         // assign a rector to a weekend

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class MembersControllerTest extends TestCase
@@ -22,7 +23,7 @@ class MembersControllerTest extends TestCase
             ->assignRole('Admin');
     }
 
-    /** @test */
+    #[Test]
     public function a_new_member_can_be_created_when_required_validations_pass()
     {
         User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']); // generic
@@ -43,7 +44,7 @@ class MembersControllerTest extends TestCase
             ->assertRedirect('/members/' . $member->id);
     }
 
-    /** @test */
+    #[Test]
     public function a_member_with_no_candidate_record_can_be_deleted()
     {
         $user = User::factory()->male()->create();
@@ -52,7 +53,7 @@ class MembersControllerTest extends TestCase
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $user->id]);
 
         $this->signIn($this->admin)
-            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $user->id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['member' => $user->id]));
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
     }

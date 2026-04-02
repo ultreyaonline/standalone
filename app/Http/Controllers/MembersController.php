@@ -323,13 +323,13 @@ class MembersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified member record.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $member)
     {
         if ($request->user()->cannot('delete members')) {
             flash()->error('ERROR: Not authorized to delete members.');
@@ -337,11 +337,14 @@ class MembersController extends Controller
 //            abort(403, 'Not authorized to delete members.');
         }
 
-        $this->validate($request, [
-            'memberID' => 'required|numeric|exists:users,id',
-        ]);
+        if (! is_numeric($member)) {
+            //flash()->error('Unable to determine which record to delete.');
+            return redirect()->route('home');
+        }
 
-        $user = User::find($request->input('memberID'));
+        $memberID = (int) $member;
+
+        $user = User::find($memberID);
 
         if (! $user) {
             flash()->error('Unable to determine which record to delete.');
@@ -352,7 +355,7 @@ class MembersController extends Controller
 
 
         // fetch corresponding candidate record that would be left blank after the user is deleted (foreign keys will set to null)
-        $candidateRecord = Candidate::where('m_user_id', $request->input('memberID'))->orWhere('w_user_id', $request->input('memberID'))->first();
+        $candidateRecord = Candidate::where('m_user_id', $memberID)->orWhere('w_user_id', $memberID)->first();
 
         $user->delete();
 

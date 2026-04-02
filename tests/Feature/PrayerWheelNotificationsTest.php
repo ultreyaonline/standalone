@@ -15,6 +15,7 @@ use App\Mail\PrayerWheelReminderEmail;
 use App\Jobs\SendPrayerWheelReminderEmails;
 use App\Jobs\SendPrayerWheelAcknowledgements;
 use App\Mail\PrayerWheelAcknowledgementEmail;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,7 +41,7 @@ class PrayerWheelNotificationsTest extends TestCase
         ];
     }
 
-    /** @test */
+    #[Test]
     public function invitations_can_be_emailed()
     {
         $this->withoutExceptionHandling();
@@ -88,7 +89,7 @@ class PrayerWheelNotificationsTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function acknowledgement_emails_can_be_sent()
     {
         Mail::fake();
@@ -124,7 +125,7 @@ class PrayerWheelNotificationsTest extends TestCase
 //        ['index' => 'f15', 'day' => 'Friday', 'hour' => '3:00pm', 'hour_to' => '3pm-4pm'],
     }
 
-    /** @test */
+    #[Test]
     public function members_with_unacknowledged_signups_get_emails()
     {
         Mail::fake();
@@ -159,7 +160,7 @@ class PrayerWheelNotificationsTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function members_with_unacknowledged_signups_get_emails_once_and_not_again()
     {
         Mail::fake();
@@ -207,7 +208,7 @@ class PrayerWheelNotificationsTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function reminder_emails_can_be_sent()
     {
         Mail::fake();

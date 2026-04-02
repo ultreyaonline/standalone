@@ -8,6 +8,7 @@ use App\Models\WeekendAssignments;
 use App\Enums\WeekendVisibleTo;
 use App\Mail\MessageToTeamMembers;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,7 +24,7 @@ class TeamEmailsTest extends TestCase
         $this->seed();
     }
 
-    /** @test */
+    #[Test]
     public function section_head_of_open_weekend_can_email_entire_team()
     {
         Mail::fake();
@@ -107,7 +108,7 @@ class TeamEmailsTest extends TestCase
     }
 
 
-    /** @test */
+    #[Test]
     public function section_head_of_open_weekend_can_email_a_section()
     {
         Mail::fake();
@@ -192,7 +193,7 @@ class TeamEmailsTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function an_email_to_the_team_can_include_candidates_if_selected()
     {
         Mail::fake();

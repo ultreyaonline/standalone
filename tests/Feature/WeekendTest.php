@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\WeekendVisibleTo;
 use App\Models\User;
 use App\Models\Weekend;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use App\Models\PrayerWheel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -22,7 +23,7 @@ class WeekendTest extends TestCase
         $this->seed();
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_weekend_page()
     {
         $weekend = Weekend::factory([
@@ -41,7 +42,7 @@ class WeekendTest extends TestCase
         $response->assertViewIs('weekend.show');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_weekend_candidate_list()
     {
         $weekend = Weekend::factory([

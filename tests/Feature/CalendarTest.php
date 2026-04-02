@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Event;
 use Illuminate\Support\Carbon;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,7 +14,7 @@ class CalendarTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_can_display_public_calendar_without_showing_private_entries(): void
     {
         $this->withoutExceptionHandling();
@@ -34,7 +35,7 @@ class CalendarTest extends TestCase
         $response->assertDontSee('Secretariat Meeting');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_member_events(): void
     {
         $this->seed();
@@ -48,7 +49,7 @@ class CalendarTest extends TestCase
         $response->assertViewIs('events.index');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_secretariat_meetings(): void
     {
         $this->seed();
@@ -70,7 +71,7 @@ class CalendarTest extends TestCase
         $response->assertViewIs('events.index');
     }
 
-    /** @test */
+    #[Test]
     public function authorized_members_can_create_calendar_events(): void
     {
         $this->seed();

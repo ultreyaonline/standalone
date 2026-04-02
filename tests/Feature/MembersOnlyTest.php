@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Auth\AuthenticationException;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -13,7 +14,7 @@ class MembersOnlyTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function it_requires_login_for_members_area()
     {
         $response = $this->withExceptionHandling()
@@ -23,7 +24,7 @@ class MembersOnlyTest extends TestCase
         PhpUnit::assertTrue(auth()->guest());
     }
 
-    /** @test */
+    #[Test]
     public function members_must_login()
     {
 //        $this->expectException(AuthenticationException::class);
@@ -35,7 +36,7 @@ class MembersOnlyTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function nonmembers_cannot_see_restricted_content()
     {
         $this->seed();
@@ -48,7 +49,7 @@ class MembersOnlyTest extends TestCase
         $response->assertDontSee('Community Directory');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_restricted_content()
     {
         $this->seed();
@@ -63,7 +64,7 @@ class MembersOnlyTest extends TestCase
         $response->assertSee('Palanca');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_vocabulary()
     {
         $this->seed();
@@ -76,7 +77,7 @@ class MembersOnlyTest extends TestCase
         $response->assertSee('ABRAZO');
     }
 
-    /** @test */
+    #[Test]
     public function members_can_see_profile_page()
     {
         $this->seed();
@@ -88,7 +89,7 @@ class MembersOnlyTest extends TestCase
             ->assertSee('bobby@example.com');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_show_secretariat_page()
     {
         $this->seed();

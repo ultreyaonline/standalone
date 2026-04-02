@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class WhosOnlineTest extends TestCase
@@ -34,14 +35,14 @@ class WhosOnlineTest extends TestCase
         return $this;
     }
 
-    /** @test */
+    #[Test]
     public function unloggedin_users_should_not_show_online()
     {
         $user = \App\Models\User::factory()->create(['first'=>'Bob', 'last'=>'Smith','email'=>'bobby@example.com']);
         $this->assertFalse($user->isOnline());
     }
 
-    /** @test */
+    #[Test]
     public function login_makes_so_the_cache_key_can_be_retrieved_and_user_is_marked_as_online()
     {
         $response = $this->withoutExceptionHandling()
@@ -52,7 +53,7 @@ class WhosOnlineTest extends TestCase
         $this->assertTrue($this->user->isOnline());
     }
 
-    /** @test */
+    #[Test]
     public function should_clear_cache_when_user_does_logout()
     {
         $response = $this->withoutExceptionHandling()

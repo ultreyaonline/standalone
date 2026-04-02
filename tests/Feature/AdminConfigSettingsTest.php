@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AdminConfigSettingsTest extends TestCase
@@ -23,7 +24,7 @@ class AdminConfigSettingsTest extends TestCase
             ->assignRole('Admin');
     }
 
-    /** @test */
+    #[Test]
     public function feature_flag_config_settings_can_be_displayed_in_admin()
     {
         $response = $this->signIn($this->admin)
@@ -34,7 +35,7 @@ class AdminConfigSettingsTest extends TestCase
         $response->assertSee(config('site.retreat_name_for_email_subject', 'FAILED'));
     }
 
-    /** @test */
+    #[Test]
     public function an_edited_feature_flag_setting_is_persisted()
     {
         $settings = app()->get('config');

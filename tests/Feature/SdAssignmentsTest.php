@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\WeekendAssignments;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -22,7 +23,7 @@ class SdAssignmentsTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     public function rector_can_make_sd_assignments()
     {
         $this->seed(); // mainly to get the Roles and Permissions defined

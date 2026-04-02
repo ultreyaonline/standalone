@@ -217,9 +217,6 @@ Route::group(['middleware' => ['permission:delete candidates']], function () {
 });
 
 
-Route::group(['middleware' => ['permission:delete members']], function () {
-    Route::delete('members', [MembersController::class, 'destroy']);
-});
 
 /***********************************************/
 

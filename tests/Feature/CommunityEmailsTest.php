@@ -7,6 +7,7 @@ use Database\Seeders\DatabaseSeeder;
 use Tests\TestCase;
 use App\Mail\MessageToTeamMembers;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +23,7 @@ class CommunityEmailsTest extends TestCase
         $this->seed();
     }
 
-    /** @test */
+    #[Test]
     public function secretariat_member_can_see_button_and_form_to_email_entire_community(): void
     {
         Mail::fake();
@@ -39,7 +40,7 @@ class CommunityEmailsTest extends TestCase
             ->assertViewIs('emails.community_message_compose');
     }
 
-    /** @test */
+    #[Test]
     public function secretariat_member_can_send_email_to_email_entire_community(): void
     {
         Mail::fake();
@@ -64,7 +65,7 @@ class CommunityEmailsTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function emails_to_entire_community_exclude_non_members_and_unsubscribes(): void
     {
         Mail::fake();

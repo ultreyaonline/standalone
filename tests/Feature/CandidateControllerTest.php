@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CandidateControllerTest extends TestCase
@@ -27,9 +28,8 @@ class CandidateControllerTest extends TestCase
     /**
      * Enforce cleanup
      * Foreign keys will set things to null, but need to manually clean up the empty null record (where both spouses are now null)
-     *
-     * @test
      */
+    #[Test]
     public function deleting_single_candidate_as_member_also_cleans_up_empty_records()
     {
         // A. Single, deleted via Member Delete
@@ -40,13 +40,14 @@ class CandidateControllerTest extends TestCase
         $this->assertDatabaseHas('candidates', ['m_user_id' => $candidate->m_user_id]);
 
         $this->signIn($this->admin)
-            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->m_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['member' => $candidate->m_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('candidates', ['m_user_id' => $candidate->m_user_id]);
 
     }
 
+    #[Test]
     public function deleting_single_candidate_also_cleans_up_empty_records()
     {
         // B. Single, deleted via Candidate Delete
@@ -64,6 +65,7 @@ class CandidateControllerTest extends TestCase
 
     }
 
+    #[Test]
     public function deleting_candidate_couple_also_cleans_up_empty_records()
     {
         // C. Couple - deleted as a pair via Candidate Delete
@@ -87,6 +89,7 @@ class CandidateControllerTest extends TestCase
 
     }
 
+    #[Test]
     public function deleting_candidate_couple_via_member_also_cleans_up_empty_records()
     {
         // D. Couple - deleted individually via Member Delete
@@ -101,7 +104,7 @@ class CandidateControllerTest extends TestCase
 
         // delete man only
         $this->signIn($this->admin)
-            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->m_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['member' => $candidate->m_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseHas('users', ['id' => $candidate->w_user_id]);
@@ -111,7 +114,7 @@ class CandidateControllerTest extends TestCase
 
         // and now delete woman too
         $this->signIn($this->admin)
-            ->delete(action('App\Http\Controllers\MembersController@destroy', ['memberID' => $candidate->w_user_id]));
+            ->delete(action('App\Http\Controllers\MembersController@destroy', ['member' => $candidate->w_user_id]));
 
         $this->assertDatabaseMissing('users', ['id' => $candidate->m_user_id]);
         $this->assertDatabaseMissing('users', ['id' => $candidate->w_user_id]);

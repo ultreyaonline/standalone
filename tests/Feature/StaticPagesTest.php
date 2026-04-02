@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StaticPagesTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_displays_home_page()
     {
         $response = $this->get('/');
@@ -19,7 +20,7 @@ class StaticPagesTest extends TestCase
         $response->assertSee(config('site.community_acronym'));
     }
 
-    /** @test */
+    #[Test]
     public function it_displays_about_page()
     {
         $response = $this->get('/about');
@@ -29,7 +30,7 @@ class StaticPagesTest extends TestCase
         $response->assertSee('What is Tres Dias?');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_beliefs_page()
     {
         $response = $this->get('/believe');
@@ -39,7 +40,7 @@ class StaticPagesTest extends TestCase
         $response->assertSee('What we believe');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_display_history_page()
     {
         $response = $this->get('/history');

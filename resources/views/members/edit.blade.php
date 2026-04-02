@@ -53,7 +53,7 @@
                     <div class="card-body">
                         Warning: Deletion is irreversible!<br>
                         <p class="small">The member will INSTANTLY be removed from ALL weekend assignments, prayer wheels, history, etc.</p>
-                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@destroy', ['memberID' => $member->id]) }}" onsubmit="return ConfirmDelete();">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ action('App\Http\Controllers\MembersController@destroy', ['member' => $member->id]) }}" onsubmit="return ConfirmDelete();">
                             @csrf @method('delete')
                             <div class="form-group row">
                                 <div class="col-md-12">

@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -26,7 +27,8 @@ class GuestOnlyRestrictionsTest extends DuskTestCase
      *
      * @return void
      */
-    public function test_guest_access_to_profile_page_redirects_to_login()
+    #[Test]
+    public function guest_access_to_profile_page_redirects_to_login()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/profile')
@@ -45,7 +47,8 @@ class GuestOnlyRestrictionsTest extends DuskTestCase
      *
      * @return void
      */
-    public function test_guest_may_not_access_members_only_home_dashboard()
+    #[Test]
+    public function guest_may_not_access_members_only_home_dashboard()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/home')

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tests\TestCase;
 
@@ -12,7 +13,7 @@ class MembersDirectorySearchTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     function membersdirectory_table_is_unreachable_if_not_a_member()
     {
         User::factory()->active()->create(['first' => 'foo', 'last' => 'bar']);
@@ -24,7 +25,7 @@ class MembersDirectorySearchTest extends TestCase
             ->assertDontSee('fizz');
     }
 
-    /** @test */
+    #[Test]
     function membersdirectory_table_is_searchable_by_members()
     {
         $this->seed();
@@ -46,7 +47,7 @@ class MembersDirectorySearchTest extends TestCase
 
 
 
-    /** @test */
+    #[Test]
     function membersaudit_table_is_unreachable_if_not_authorized()
     {
         $this->seed();
@@ -64,7 +65,7 @@ class MembersDirectorySearchTest extends TestCase
             ->assertDontSee('fizz');
     }
 
-    /** @test */
+    #[Test]
     function membersaudit_table_is_reachable_if_authorized()
     {
         $this->seed();

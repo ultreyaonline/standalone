@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
@@ -34,7 +35,7 @@ class ResetPasswordTest extends TestCase {
         return '/';
     }
 
-    /** @test */
+    #[Test]
     function user_can_view_a_password_reset_form() {
         $user = User::factory()->create();
 
@@ -45,7 +46,7 @@ class ResetPasswordTest extends TestCase {
         $response->assertViewHas('token', $token);
     }
 
-    /** @test */
+    #[Test]
     function user_can_reset_password_with_valid_token() {
         Event::fake();
         $user = User::factory()->create();
@@ -66,7 +67,7 @@ class ResetPasswordTest extends TestCase {
         });
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_reset_password_with_invalid_token() {
         $user = User::factory()->create([
             'password' => Hash::make('old-password'),
@@ -85,7 +86,7 @@ class ResetPasswordTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_reset_password_without_providing_a_new_password() {
         $user = User::factory()->create([
             'password' => Hash::make('old-password'),
@@ -109,7 +110,7 @@ class ResetPasswordTest extends TestCase {
         $this->assertGuest();
     }
 
-    /** @test */
+    #[Test]
     function user_cannot_reset_password_without_providing_a_username() {
         $user = User::factory()->create([
             'password' => Hash::make('old-password'),
