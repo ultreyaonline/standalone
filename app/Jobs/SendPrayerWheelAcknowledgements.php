@@ -13,10 +13,48 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
+/**
+ * Job: SendPrayerWheelAcknowledgements
+ *
+ * Dispatched every 10 minutes by the scheduler (Console/Kernel.php).
+ *
+ * PURPOSE
+ * -------
+ * For every community member who has prayer-wheel sign-ups that have NOT yet been
+ * acknowledged, send them ONE consolidated email listing all their upcoming slots.
+ * After a successful send, each slot is stamped with `acknowledged_at = now()` so the
+ * member is not emailed again for those slots.
+ *
+ * FLOW
+ * ----
+ * 1. Find all PrayerWheelSignup rows where acknowledged_at IS NULL.
+ * 2. Collect all sign-ups for those members (not just unacknowledged — full picture).
+ * 3. Filter out: past timeslots, weekends that ended > 28 days ago, blank email addresses.
+ * 4. Group by member; send one PrayerWheelAcknowledgementEmail per member.
+ * 5. On success: stamp acknowledged_at on each slot in that batch.
+ *
+ * TIMING NOTE
+ * -----------
+ * $cutoffTime is captured at dispatch time (constructor), not at execution time.
+ * If the job sits in the Redis queue for several minutes, "future slot" filtering
+ * uses the original dispatch timestamp. Under the 10-minute schedule cadence this is
+ * inconsequential, but worth knowing if the queue falls behind.
+ *
+ * ERROR HANDLING
+ * --------------
+ * Exceptions during a single member's email are caught and logged; other members
+ * in the same job run are not affected.
+ */
 class SendPrayerWheelAcknowledgements implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * The timestamp captured at dispatch time, used as the "now" reference for
+     * filtering to future prayer slots only.
+     *
+     * @var Carbon
+     */
     public $cutoffTime;
 
     public function __construct()
