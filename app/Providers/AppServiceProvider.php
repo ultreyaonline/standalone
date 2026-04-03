@@ -87,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
          *
          * Reference: https://stefanzweifel.io/posts/convert-a-collection-to-a-downloadable-csv
          */
-        Collection::macro('toInlineCsv', function (array $headers) {
+        Collection::macro('toInlineCsv', function (array $headers = []) {
             $csvString = $this->map(function ($value, $key) {
                 return is_array($value) ? implode(',', $value) : implode(',', [$key, $value]);
             })
