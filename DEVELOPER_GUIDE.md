@@ -2,7 +2,7 @@
 
 **Application:** Tres Dias Community Management Platform
 
-**Stack:** Laravel · MySQL · Redis · Bootstrap 4 · Laravel Horizon
+**Stack:** Laravel 13 · MySQL · Redis · Bootstrap 4 · Laravel Horizon
 
 **Last documented:** March 2026 
 
@@ -103,7 +103,7 @@ Laravel
     ├── app/Policies/           ← Authorization policies
     ├── app/Enums/              ← Type-safe integer enums
     ├── app/Reports/            ← Report-generation classes
-    └── app/Console/Kernel.php  ← Scheduled task definitions
+    └── bootstrap/app.php       ← Scheduled task definitions
     │
     ▼
 Redis (phpredis) (queue driver + Horizon monitoring)
@@ -192,21 +192,20 @@ The full list of roles and permissions is seeded in `database/seeds/RolesAndPerm
 - **Queue driver:** Redis (configured in `.env` as `QUEUE_CONNECTION=redis`)
 - **Queue monitoring:** Laravel Horizon at `/horizon` (requires `manage queues` permission)
 - **Horizon config:** `config/horizon.php` — 3 worker processes in production, 1 locally; `memory_limit` is 64MB per worker
-- **Redis connection:** phpredis
+- **Redis connection:** `phpredis`
 
 > ⚠️ In local/test environments, `QUEUE_CONNECTION` defaults to `sync` (jobs run immediately, inline). Only in production does Redis/Horizon actually queue jobs asynchronously.
 
-### Scheduled tasks (`app/Console/Kernel.php`)
+### Scheduled tasks (`bootstrap/app.php`)
 
 | Schedule | Task | Notes |
 |---|---|---|
+| Every 10 minutes | `SendPrayerWheelAcknowledgements::dispatch()` | Emails members acknowledging their prayer sign-ups |
+| Daily @ 16:00 | `SendPrayerWheelReminderEmails::dispatch()` | Emails members reminding them of upcoming prayer slots |
 | Daily @ 03:40 | `backup:clean` | Removes old backups (spatie/laravel-backup) |
 | Daily @ 03:50 | `backup:run` | Creates DB + file backup |
 | Daily | `activitylog:clean` | Prunes old activity log records |
-| Every 10 minutes | `SendPrayerWheelAcknowledgements::dispatch()` | Emails members acknowledging their prayer sign-ups |
-| Daily @ 16:00 | `SendPrayerWheelReminderEmails::dispatch()` | Emails members reminding them of upcoming prayer slots |
-
-> ℹ️ `horizon:snapshot` is commented out. If Horizon metrics are desired in the dashboard, uncomment that line. It is safe to re-enable.
+(Horizon metrics can also be enabled as a scheduled task.)
 
 ### Job: `SendPrayerWheelAcknowledgements`
 
@@ -243,7 +242,7 @@ The current behaviour is intentional.
 
 ### Transport
 
-Mailgun (configured in `.env` and `config/mail.php`). The `MAIL_DRIVER` env key should be `mailgun`.
+Mailgun (configured in `.env` and `config/mail.php`). The `MAIL_MAILER` env key should be `mailgun`.
 
 ### Mailable classes (`app/Mail/`)
 
@@ -340,13 +339,10 @@ When upgrading, here are some key breaking-change areas to watch:
 - **Note:** The comment in the code says "Bootstrap 3" but the front-end actually uses Bootstrap 4. The method call still works fine; it just means pagination uses the B3 markup which is compatible with B4 styling.
 
 ### `bensampo/laravel-enum`
-- The custom enum classes (`WeekendVisibleTo`, `TeamAssignmentStatus`) extend this package's `Enum` base class. In PHP 8.1+, native enums exist. After upgrading, consider migrating to native PHP enums and removing this package.
+- The custom enum classes (`WeekendVisibleTo`, `TeamAssignmentStatus`) extend this package's `Enum` base class. In PHP 8.1+, native enums exist. One can consider migrating to native PHP enums and removing this package.
 
 ### `Collection::macro('toInlineCsv', ...)`
 - This custom macro is registered in `AppServiceProvider`. It will survive upgrades unchanged but is worth noting for developers unfamiliar with Collection macros.
-
-### Removed helpers
-- Laravel 7+ removed some string/array helper functions in favor of the `Str::` and `Arr::` facades. Do a project-wide search for calls to deprecated helpers like `str_contains()`, `array_first()` etc. before upgrading.
 
 ---
 

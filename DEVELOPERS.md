@@ -27,7 +27,7 @@ Key areas where most people want to customize things:
 Common graphic customizations:
 - /public/logo/logo.jpg
 - /public/logo/favicon.png
-- /public/favicon,ico
+- /public/favicon.ico
 
 
 # Exports
@@ -44,7 +44,7 @@ Configure the /config/backups.php file to send backups to either the local drive
 
 Be sure to configure the application using `.env` and set any special needs in the `/config/*.php` files where no `.env` settings are available. Of critical note are mysql db credentials, smtp credentials, backup-notifications-email-address, backup passwords, AWS buckets if used.
 
-For a production server, be sure to set up a cron job to fire the `artisan schedule:run` and enable any desired jobs in `/app/Console/Kernel.php` so that things like backups and prayer-wheel notifications are automatically sent.
+For a production server, be sure to set up a cron job to fire the `artisan schedule:run` and enable any desired jobs in `/bootstrap/app.php` or `/routes/console.php` so that things like backups and prayer-wheel notifications are automatically sent.
 
 ## Demo Data
 
@@ -72,7 +72,7 @@ Templating Syntax: See Blade template docs: https://laravel.com/docs/views
 
 ### Building front-end assets:
 
-This app is currently based on Laravel 8 with Laravel-Mix which uses webpack to compile front-end assets:
+This app is currently based on Laravel 13, but the front-end is compiled via webpack with Laravel-Mix:
 
 Webpack: To compile **Front-End Assets** See Laravel-Mix docs: https://laravel.com/docs/mix
 
@@ -88,7 +88,7 @@ With Laravel there are three standard options:
 
 For Windows/Mac/Linux, you can use Sail to quickly set up a dev environment and work with the application. You don't need to be a Docker expert to use Sail! 
 
-You can find full documentation on using Sail at: https://laravel.com/docs/8.x/sail
+You can find full documentation on using Sail at: https://laravel.com/docs/sail
 
 Sail is probably the fastest/easiest setup option.
 
