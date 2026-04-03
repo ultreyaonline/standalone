@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Event;
@@ -40,13 +40,6 @@ abstract class TestCase extends BaseTestCase
     {
         //
     }
-
-    protected function withoutVerifyCSRFMiddleware()
-    {
-        return $this->withoutMiddleware(VerifyCsrfToken::class);
-    }
-
-
 
     protected function signInAsGuest($user = null)
     {

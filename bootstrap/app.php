@@ -31,6 +31,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'roleOrPermission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
+
+        // URIs that should be excluded from CSRF verification:
+        $middleware->preventRequestForgery(except: [
+            'stripe/*',
+            'webhooks/*',
+        ]);
     })
     ->withCommands([
         __DIR__ . '/../app/Console/Commands',
