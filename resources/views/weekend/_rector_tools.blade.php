@@ -11,7 +11,7 @@
     @if($weekend->teamCanBeViewedBy(auth()->user()) || auth()->user()->can('use leaders worksheet') || auth()->user()->can('use rectors tools'))
       <a href="/reports/leaders-worksheet?mw={{ $weekend->weekend_MF }}"><button class="btn btn-lg btn-info m-1"><i class="fa fa-list"></i> Leaders Worksheet</button></a>
     @endif
-    <a href="http://www.tresdias.org/wp-content/uploads/2017/05/Rectors-Guide-1985.pdf" target="_blank"><button class="btn btn-lg btn-info m-1"><i class="fa fa-book"></i> Rector Guide from TDI</button></a>
+    <a href="https://web.archive.org/web/20220430051148/http://www.tresdias.org/wp-content/uploads/2017/05/Rectors-Guide-1985.pdf" target="_blank"><button class="btn btn-lg btn-info m-1"><i class="fa fa-book"></i> Rector Guide from TDI</button></a>
     <br>
     {{--<a href="/reports/persons-positions"><button class="disabled btn btn-lg btn-primary"><i class="fa fa-list"></i> Alpha with Service ("The Rector List")</button></a><br>--}}
     {{--"Rector List" (Active and part of the 'local' community)<br>--}}
