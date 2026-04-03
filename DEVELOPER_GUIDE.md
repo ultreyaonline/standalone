@@ -106,7 +106,7 @@ Laravel
     └── app/Console/Kernel.php  ← Scheduled task definitions
     │
     ▼
-Redis (queue driver + Horizon monitoring)
+Redis (phpredis) (queue driver + Horizon monitoring)
 MySQL (primary database)
 AWS S3 (file storage — avatars, photos)
 Mailgun (transactional email delivery)
@@ -192,7 +192,7 @@ The full list of roles and permissions is seeded in `database/seeds/RolesAndPerm
 - **Queue driver:** Redis (configured in `.env` as `QUEUE_CONNECTION=redis`)
 - **Queue monitoring:** Laravel Horizon at `/horizon` (requires `manage queues` permission)
 - **Horizon config:** `config/horizon.php` — 3 worker processes in production, 1 locally; `memory_limit` is 64MB per worker
-- **Redis connection:** Laravel's usual client
+- **Redis connection:** phpredis
 
 > ⚠️ In local/test environments, `QUEUE_CONNECTION` defaults to `sync` (jobs run immediately, inline). Only in production does Redis/Horizon actually queue jobs asynchronously.
 
