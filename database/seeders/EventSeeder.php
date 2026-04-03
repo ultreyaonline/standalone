@@ -14,7 +14,7 @@ class EventSeeder extends Seeder
             'name'             => 'Fall Secuela',
             'description'      => 'Join us for a time of food (pot luck), fellowship, testimonies, and updates about the TD community.',
             'location_name'    => 'First Baptist Church',
-            'location_url'     => 'http://example.com/firstchurch/',
+            'location_url'     => 'https://example.com/firstchurch/',
             'address_street'   => '123 Church Street',
             'address_city'     => 'Somewhere',
             'address_province' => 'FL',

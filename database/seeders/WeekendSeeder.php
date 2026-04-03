@@ -31,7 +31,7 @@ class WeekendSeeder extends Seeder
             'weekend_verse_text' => 'Blessed are the meek for they shall inherit the earth',
             'weekend_verse_reference' => 'Matthew 5:5',
             'weekend_theme' => 'In quietness and confidence we are strengthened',
-            'banner_url' => 'http://lorempixel.com/600/400/sports/1',
+            'banner_url' => 'https://lorempixel.com/600/400/sports/1',
             'visibility_flag' => 6,
         ];
         \App\Models\Weekend::create($data);
@@ -82,7 +82,7 @@ class WeekendSeeder extends Seeder
             'weekend_verse_text' => 'I am the vine, you are the branches; abide in me and you will bear much fruit',
             'weekend_verse_reference' => 'John 15:15',
             'weekend_theme' => 'Fruitful in Abiding',
-            'banner_url' => 'http://lorempixel.com/600/400/sports/3',
+            'banner_url' => 'https://lorempixel.com/600/400/sports/3',
             'visibility_flag' => 6,
         ];
         \App\Models\Weekend::create($data);

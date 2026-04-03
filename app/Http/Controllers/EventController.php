@@ -147,10 +147,10 @@ class EventController extends Controller
         }
 
         if ($event->location_url && !Str::startsWith($event->location_url, 'http')) {
-            $event->location_url = 'http://' . $event->location_url;
+            $event->location_url = 'https://' . $event->location_url;
         }
         if ($event->map_url_link && !Str::startsWith($event->map_url_link, 'http')) {
-            $event->map_url_link = 'http://' . $event->map_url_link;
+            $event->map_url_link = 'https://' . $event->map_url_link;
         }
 
         $event->posted_by = $request->user()->id;

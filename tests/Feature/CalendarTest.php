@@ -90,7 +90,7 @@ class CalendarTest extends TestCase
                 'is_enabled' => '1',
                 'is_public' => '0',
                 'contact_email' => 'test@example.com',
-                'location_url' => 'http://location.example.com',
+                'location_url' => 'https://location.example.com',
                 'location_name' => 'EventLocation',
             ]);
 

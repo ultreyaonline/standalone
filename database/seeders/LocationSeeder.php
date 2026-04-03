@@ -16,7 +16,7 @@ class LocationSeeder extends Seeder
         \App\Models\Location::factory()->create([
             'location_name'    => 'First Baptist Church',
             'slug'             => 'first-baptist',
-            'location_url'     => 'http://example.com/firstchurch/',
+            'location_url'     => 'https://example.com/firstchurch/',
             'address_street'   => '123 Church Street',
             'address_city'     => 'Somewhere',
             'address_province' => 'FL',
