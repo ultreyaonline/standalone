@@ -60,6 +60,9 @@ jobs:
           php artisan migrate:fresh --seed --force
 
       - name: Clear Any Cached Artisan Resources
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/testing.sqlite
         run: php artisan optimize:clear
 
       - name: Run phpunit suite (unit tests and feature tests)
