@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Provides a list of online users to the members dashboard view.
+ *
+ * Inspired by comments in article: https://erikbelusic.com/tracking-if-a-user-is-online-in-laravel/
+ *
+ * Depends on \App\Http\Middleware\LogLastUserActivity
+ */
 class WhosOnlineProvider extends ServiceProvider
 {
     public function boot()
@@ -25,7 +32,7 @@ class WhosOnlineProvider extends ServiceProvider
      *
      * See also \App\Http\Middleware\LogLastUserActivity
      */
-    private function getOnlineUsersCount()
+    private function getOnlineUsersCount(): void
     {
 //        if (Auth::check() && Auth::user()->can('view whosonline statistics')) {
             // register to a specific view
