@@ -90,7 +90,7 @@ class User extends Authenticatable implements HasMedia
 {
     use Impersonate;
     use Notifiable;
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasRoles;
     use CausesActivity;
@@ -129,6 +129,7 @@ class User extends Authenticatable implements HasMedia
         'unsubscribe'      => 'boolean',
         'last_login_at'    => 'datetime',
         'unsubscribe_date' => 'datetime',
+        //'password' => 'hashed',
         ];
     }
 

@@ -1,5 +1,16 @@
 <?php
 
+use Spatie\Backup\Notifications\Notifiable;
+use Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification;
+use Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification;
+use Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification;
+use Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification;
+use Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification;
+use Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification;
+use Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy;
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
+
 return [
 
     'backup' => [
@@ -16,6 +27,7 @@ return [
                  */
                 'include' => [
                     base_path(),
+                    // storage_path(),  // Include if you use zero downtime deployments and don't follow symlinks
                 ],
 
                 /*
@@ -24,12 +36,12 @@ return [
                  * Directories used by the backup process will automatically be excluded.
                  */
                 'exclude' => [
-                    storage_path('framework'),
                     storage_path('debugbar'),
                     base_path('vendor'),
                     base_path('node_modules'),
                     base_path('.git'),
                     base_path('.idea'),
+                    storage_path('framework'),
                 ],
 
                 /*
@@ -158,6 +170,11 @@ return [
                 'local',
                 //'s3-backups',
             ],
+
+            /*
+             * Determines whether to allow backups to continue when some targets fail instead of failing completely.
+             */
+            'continue_on_failure' => true,
         ],
 
         /*
@@ -173,12 +190,19 @@ return [
 
         /*
          * The encryption algorithm to be used for archive encryption.
-         * You can set it to `null` or `false` to disable encryption.
+         * Set to 'none' to disable encryption.
          *
-         * When set to 'default', we'll use ZipArchive::EM_AES_256 if it is
-         * available on your system.
+         * Supported: 'none', 'default', 'aes128', 'aes192', 'aes256'
+         *
+         * When set to 'default', we'll use AES-256 if available on your system.
          */
         'encryption' => 'default',
+
+        /*
+         * After creating the zip, verify it can be opened and contains files.
+         * Recommended for critical backups but adds a small overhead.
+         */
+        'verify_backup' => false,
 
         /*
          * The number of attempts, in case the backup command encounters an exception
@@ -201,21 +225,20 @@ return [
      */
     'notifications' => [
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['mail'],
-
             // In production the "success" notifications can probably be left as an empty array, instead of their default 'mail' channel:
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['mail'],
+            BackupHasFailedNotification::class => ['mail'],
+            UnhealthyBackupWasFoundNotification::class => ['mail'],
+            CleanupHasFailedNotification::class => ['mail'],
+            BackupWasSuccessfulNotification::class => ['mail'],
+            HealthyBackupWasFoundNotification::class => ['mail'],
+            CleanupWasSuccessfulNotification::class => ['mail'],
         ],
 
         /*
          * Here you can specify the notifiable to which the notifications should be sent. The default
          * notifiable will use the variables specified in this config file.
          */
-        'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
+        'notifiable' => Notifiable::class,
 
         'mail' => [
             'to' => 'your@example.com',
@@ -252,7 +275,24 @@ return [
              */
             'avatar_url' => '',
         ],
+
+        /*
+         * A generic webhook channel that POSTs JSON to a URL.
+         * Useful for Mattermost, Microsoft Teams, or custom integrations.
+         */
+        'webhook' => [
+            'url' => '',
+        ],
     ],
+
+    /*
+     * The log channel used for backup activity messages.
+     *
+     * Set to a channel name defined in config/logging.php to use that channel.
+     * Set to false to disable backup logging entirely.
+     * Set to null to use the default log channel.
+     */
+    'log_channel' => null,
 
     /*
      * Here you can specify which backups should be monitored.
@@ -264,8 +304,8 @@ return [
             'name' => env('APP_NAME', 'laravel-backup'),
             'disks' => ['local'], // ['s3-backups']
             'health_checks' => [
-                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
-                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,
+                MaximumAgeInDays::class => 1,
+                MaximumStorageInMegabytes::class => 5000,
             ],
         ],
 
@@ -291,7 +331,7 @@ return [
          * No matter how you configure it the default strategy will never
          * delete the newest backup.
          */
-        'strategy' => \Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy::class,
+        'strategy' => DefaultStrategy::class,
 
         'default_strategy' => [
             /*
