@@ -16,7 +16,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 /**
  * Job: SendPrayerWheelAcknowledgements
  *
- * Dispatched every 10 minutes by the scheduler (Console/Kernel.php).
+ * Dispatched every 10 minutes by the scheduler.
  *
  * PURPOSE
  * -------

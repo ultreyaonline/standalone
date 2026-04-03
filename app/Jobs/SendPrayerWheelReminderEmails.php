@@ -16,7 +16,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 /**
  * Job: SendPrayerWheelReminderEmails
  *
- * Dispatched once daily at 16:00 by the scheduler (Console/Kernel.php).
+ * Dispatched once daily at 16:00 by the scheduler.
  *
  * PURPOSE
  * -------
