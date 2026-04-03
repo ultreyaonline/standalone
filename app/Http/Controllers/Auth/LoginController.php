@@ -30,7 +30,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * The field used to treat as the username when authenticating logins
+     * The field used to treat as the username when authenticating logins. See "username()" method below.
      * @var string
      */
     protected $username = 'username';
@@ -63,6 +63,8 @@ class LoginController extends Controller
 
     /**
      * Get the login username to be used by the controller.
+     *
+     * THIS APPLICATION USES "username" INSTEAD OF "email" TO LOGIN, INSTEAD OF DEFAULT "email"
      *
      * @return string
      */

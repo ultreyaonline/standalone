@@ -163,6 +163,8 @@ Stripe/PayPal (offsite payment processing)
 
 Standard Laravel Auth with username/password. Registration is disabled (`Auth::routes(['register' => false])`). New members are created by authorized users through the `/member/add` route.
 
+Username is a string field, not an email address. The system does not enforce email uniqueness, so multiple users can share the same email (e.g., spouses). Authentication is done via username.
+
 New pescadores who have never set a password use the "pescador" route (`/pescador`) which shows the forgot-password form — this is the standard onboarding flow for new members.
 
 ### Authorization layers

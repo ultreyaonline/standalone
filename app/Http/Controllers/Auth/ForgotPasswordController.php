@@ -23,6 +23,9 @@ class ForgotPasswordController extends Controller
 
     /**
      * The field used to treat as the username when authenticating logins
+     *
+     * This application uses "username" instead of "email" to identify users.
+     *
      * @var string
      */
     protected $username = 'username';

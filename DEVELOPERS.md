@@ -50,7 +50,9 @@ For a production server, be sure to set up a cron job to fire the `artisan sched
 
 Initial setup requires running `php artisan migrate --seed` to do db table creation and generate the required Roles and Permissions.
 
-You may optionally also run `php artisan db:seed --class=DemoSeeder` to install some users and weekends for demo purposes.
+You may optionally also run `php artisan db:seed --class=DemoSeeder` to install some users and weekends for demo purposes. 
+
+Sample users in the demo data include: john@example.com, james@example.com, jane@example.com. All have the same password: "password" (without quotes).
 
 ## ERD
 A database relations diagram can be found in the `/technical` folder.
