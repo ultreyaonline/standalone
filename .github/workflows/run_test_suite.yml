@@ -50,15 +50,17 @@ jobs:
 
 
       - name: Prepare the application
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/testing.sqlite
         run: |
           cp .env.acceptance .env
           # php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
+          php artisan migrate:fresh --seed --force
 
       - name: Clear Any Cached Artisan Resources
         run: php artisan optimize:clear
-
-      # - run: php artisan migrate:fresh --seed --force
 
       - name: Run phpunit suite (unit tests and feature tests)
         env:
