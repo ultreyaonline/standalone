@@ -1,4 +1,4 @@
-![](https://github.com/ultreyaonline/standalone/workflows/Laravel%20Test%20Suite/badge.svg?branch=master)
+[![Laravel Test Suite](https://github.com/ultreyaonline/standalone/actions/workflows/run_test_suite.yml/badge.svg)](https://github.com/ultreyaonline/standalone/actions/workflows/run_test_suite.yml)
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 # Tres Dias Community Website
@@ -65,7 +65,9 @@ Email blasts can go to everyone or to just individual teams, groups, roles, etc 
 
 See the [HOSTING.md](HOSTING.md) file for guidance on server requirements and how to install on a server and to automate deployments.
 
-See the [DEVELOPERS.md](DEVELOPERS.md) file for Developer guidance and recommendations.
+See the [DEVELOPERS.md](DEVELOPERS.md) file for Developer guidance and recommendations on handling templates, content-updates, mailables.
+
+See the [DEVELOPERS_GUIDE.md](DEVELOPERS_GUIDE.md) file for more detailed tech docs, TODO's, upgrade advice, and AI guidance.
 
 
 ---
