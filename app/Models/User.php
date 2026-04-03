@@ -90,6 +90,7 @@ class User extends Authenticatable implements HasMedia
 {
     use Impersonate;
     use Notifiable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasRoles;
     use CausesActivity;
@@ -100,7 +101,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
       'email','password', 'first', 'last', 'address1', 'address2', 'city', 'state', 'postalcode', 'country',
@@ -110,11 +111,13 @@ class User extends Authenticatable implements HasMedia
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
+    protected function casts(): array
+    {
+        return [
         'active'                         => 'boolean',
         'qualified_sd'                   => 'boolean',
         'interested_in_serving'          => 'boolean',
@@ -126,11 +129,13 @@ class User extends Authenticatable implements HasMedia
         'unsubscribe'      => 'boolean',
         'last_login_at'    => 'datetime',
         'unsubscribe_date' => 'datetime',
-    ];
+        ];
+    }
 
     /**
-     * The attributes that should be hidden from json arrays
-     * @var array<int, string>
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
      */
     protected $hidden = [
         'password',
