@@ -29,19 +29,16 @@ php artisan optimize:clear
 
 if [ -d .git ]; then
     git pull origin master --force
-else
-    php artisan deploy:cloudways_git
 fi
 
 composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader --no-suggest
 php artisan migrate --force
 
 #reset opcache by reloading php (usually requires sudo enabled for this user); update this command to suit the server's software
-#sudo -S service php7.3-fpm reload
+#sudo -S service php8.4-fpm reload
 
-php artisan config:cache
+php artisan optimize
 php artisan event:cache
-#  php artisan route:cache
 php artisan up
 
 # optionally restart horizon or queue workers
