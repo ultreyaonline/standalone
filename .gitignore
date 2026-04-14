@@ -5,7 +5,7 @@
 .env.production
 .phpactor.json
 .phpunit.result.cache
-/.fleet
+/.cursor/
 /.idea
 /.nova
 /.phpunit.cache
@@ -13,7 +13,8 @@
 /.zed
 /auth.json
 /node_modules
-/public/build
+#uncomment public/build if building assets on the server with every deploy
+#/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -33,7 +34,7 @@ docker-compose.override.yml
 # Dusk quirk
 :memory:
 
-# don't really need to have package-lock.json in VCS unless generating front-end assets on every build
+# uncomment if generating front-end assets on every build
 package-lock.json
 
 # in your deployed app you SHOULD commit composer.lock to VCS according to dependencies consistent with your server; so comment-out the following line for your own repo
