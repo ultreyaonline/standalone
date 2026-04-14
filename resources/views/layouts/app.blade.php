@@ -15,7 +15,7 @@
 @section('bootstrap-css')
 @show
 
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('extra_css')
 
     @if(isset($robots_rules) && $robots_rules == 'noindex')
@@ -56,7 +56,6 @@
 
 
     <!-- JavaScripts -->
-    <script src="{{ mix('/js/app.js') }}"></script>
 @yield('page-js')
 
 {{--Google Analytics--}}

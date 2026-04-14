@@ -8,8 +8,8 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>@yield('title', config('site.community_long_name'))</title>
-	<link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 	@yield('extra_css')
 
 
@@ -40,7 +40,6 @@
 </div>
 
 
-<script src="{{ mix('/js/app.js') }}"></script>
 @yield('page-js')
 
 @includeWhen(config('google_analytics.google'), 'partials.analytics')
