@@ -22,10 +22,15 @@ class MembersDirectory extends Component
 
     protected $queryString = ['q', 'perPage', 'sortBy', 'sortAsc'];
 
+    private array $allowedSorts = ['first', 'last', 'email', 'weekend', 'community', 'active'];
+
     public function render()
     {
         abort_unless(Auth::check() && Auth::user()->can('view members'), '403', 'Unauthorized.');
 
+        if (!in_array($this->sort_key, $this->allowedSorts, true)) {
+            $this->sort_key = 'last';
+        }
         return view('livewire.members-directory', [
             'users' => User::datatableSearch($this->q)
                 ->active()
@@ -43,6 +48,10 @@ class MembersDirectory extends Component
 
     public function sortBy($field): void
     {
+        if (!in_array($field, $this->allowedSorts, true)) {
+            return; // silently reject invalid sort fields
+        }
+
         if ($this->sort_key === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
@@ -53,7 +62,7 @@ class MembersDirectory extends Component
     }
 
     /**
-     * Get the columns which should be allowed to be returned to the ajax query.
+     * Get the columns which should be allowed to be returned to the page.
      * (This is to avoid exposing unnecessary information.)
      */
     protected function getColumns(): array

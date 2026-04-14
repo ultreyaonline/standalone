@@ -22,6 +22,8 @@ class MembersAudit extends Component
 
     protected $queryString = ['q', 'perPage', 'sortBy', 'sortAsc'];
 
+    private array $allowedSorts = ['first', 'last', 'email', 'weekend', 'community', 'active', 'cellphone', 'homephone', 'church'];
+
     public function mount(): void
     {
         $this->perPage = request('perPage', config('site.pagination_threshold', 25));
@@ -31,6 +33,9 @@ class MembersAudit extends Component
     {
         abort_unless(Auth::check() && Auth::user()->can('edit members'), '403', 'Unauthorized.');
 
+        if (!in_array($this->sort_key, $this->allowedSorts, true)) {
+            $this->sort_key = 'last';
+        }
         return view('livewire.members-audit', [
             'users' => User::datatableSearch($this->q)
                 ->select($this->getColumns())
@@ -46,6 +51,10 @@ class MembersAudit extends Component
 
     public function sortBy($field): void
     {
+        if (!in_array($field, $this->allowedSorts, true)) {
+            return; // silently reject invalid sort fields
+        }
+
         if ($this->sort_key === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
@@ -56,7 +65,7 @@ class MembersAudit extends Component
     }
 
     /**
-     * Get the columns which should be allowed to be returned to the ajax query.
+     * Get the columns which should be allowed to be returned to the page.
      * (This is to avoid exposing unnecessary information.)
      */
     protected function getColumns(): array
