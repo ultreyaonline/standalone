@@ -6,8 +6,9 @@
     },
     "devDependencies": {
         "bootstrap": "^4.6.2",
+        "flatpickr": "^4.6.13",
         "font-awesome": "^4",
-        "jquery": "^3.5.1",
+        "jquery": "^3.7.1",
         "laravel-vite-plugin": "^1.0",
         "lodash": "^4.17.19",
         "mousetrap": "^1.6.5",

@@ -186,9 +186,9 @@
   <div class="col-md-7">
 
     <div class="form-group row">
-      <div class="input-group date" data-target-input="nearest" id="start_datetime">
-        <input type="text" name="start_datetime" id="input_start_datetime" data-target="#start_datetime" value="{{ old('start_datetime') ?: $event->start_datetime }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" required>
-        <div class="input-group-append" data-target="#start_datetime" data-toggle="datetimepicker">
+      <div class="input-group date" id="start_datetime">
+        <input type="text" name="start_datetime" id="input_start_datetime" value="{{ old('start_datetime') ?: $event->start_datetime }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" required>
+        <div class="input-group-append">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
       </div>
@@ -202,9 +202,9 @@
   <div class="col-md-7">
 
     <div class="form-group row">
-      <div class="input-group date" data-target-input="nearest" id="end_datetime">
-        <input type="text" name="end_datetime" id="input_end_datetime" data-target="#end_datetime" value="{{ old('end_datetime') ?: $event->end_datetime }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" required>
-        <div class="input-group-append" data-target="#end_datetime" data-toggle="datetimepicker">
+      <div class="input-group date" id="end_datetime">
+        <input type="text" name="end_datetime" id="input_end_datetime" value="{{ old('end_datetime') ?: $event->end_datetime }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" required>
+        <div class="input-group-append">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
       </div>
@@ -242,8 +242,8 @@
   <div class="col-md-7">
 
     <div class="form-group row">
-      <div class="input-group date" data-target-input="nearest" id="expirationdate">
-        <input type="text" name="expiration_date" id="input_expiration_date" data-target="#expiration_date" value="{{ old('expiration_date') ?: $event->expiration_date }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD" />
+      <div class="input-group date" id="expirationdate">
+        <input type="text" name="expiration_date" id="input_expiration_date" value="{{ old('expiration_date') ?: $event->expiration_date }}" class="form-control" placeholder="YYYY-MM-DD" />
         <span class="input-group-append"><i class="fa fa-calendar" aria-hidden="true"></i></span>
       </div>
     </div>
@@ -268,8 +268,8 @@
   <div class="col-md-7">
 
     <div class="form-group row">
-      <div class="input-group date" data-target-input="nearest" id="recurringdatetime">
-        <input type="text" name="recurring_end_datetime" id="input_recurring_end_datetime" data-target="#recurring_end_datetime" value="{{ old('recurring_end_datetime') ?: $event->recurring_end_datetime }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:mm:ss" />
+      <div class="input-group date" id="recurringdatetime">
+        <input type="text" name="recurring_end_datetime" id="input_recurring_end_datetime" value="{{ old('recurring_end_datetime') ?: $event->recurring_end_datetime }}" class="form-control" placeholder="YYYY-MM-DD HH:mm:ss" />
         <span class="input-group-append"><i class="fa fa-calendar" aria-hidden="true"></i></span>
       </div>
     </div>
@@ -279,34 +279,8 @@
 </div>
 
 
-
-@section('extra_css')
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-@endsection
+@section('extra_css')@endsection
 
 @section('page-js')
-  {{-- https://tempusdominus.github.io/bootstrap-4/ --}}
-  {{-- http://momentjs.com/ --}}
-  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>--}}
-  <script src="/js/moment-with-locales.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-  <script>
-    $(function () {
-      $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-        format: 'YYYY-MM-DD HH:mm',
-        disabledHours: [1, 2, 3, 4, 5, 6],
-        sideBySide: true,
-        allowInputToggle: true,
-        useCurrent: false
-      });
-    });
-    $('#start_datetime').datetimepicker(defaultDate, "{{ old('start_datetime') ?: $event->start_datetime }}");
-    $('#end_datetime').datetimepicker(defaultDate, "{{ old('end_date') ?: $event->end_datetime }}");
-    $("#start_datetime").on("dp.change", function (e) {
-      $('#end_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#end_datetime").on("dp.change", function (e) {
-      $('#start_datetime').data("DateTimePicker").maxDate(e.date);
-    });
-  </script>
+    @vite('resources/js/datepicker.js')
 @endsection

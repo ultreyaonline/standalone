@@ -25,8 +25,14 @@
     "src": "resources/js/app.js",
     "isEntry": true
   },
+  "resources/js/datepicker.js": {
+    "file": "assets/datepicker-CWAV-Eri.js",
+    "name": "datepicker",
+    "src": "resources/js/datepicker.js",
+    "isEntry": true
+  },
   "resources/sass/app.scss": {
-    "file": "assets/app-DBIDU4qv.css",
+    "file": "assets/app-CU0Ej-PA.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }

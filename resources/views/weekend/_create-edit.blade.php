@@ -50,11 +50,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="start_date">
-        <div class="input-group-prepend" data-target="#start_date" data-toggle="datetimepicker">
+      <div class="input-group date" id="start_date">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="start_date" id="input_start_date" data-target="#start_date" value="{{ old('start_date') ?: $weekend->start_date }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="start_date" id="input_start_date" value="{{ old('start_date') ?: $weekend->start_date }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
     </div>
   </div>
@@ -65,11 +65,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="end_date">
-        <div class="input-group-prepend" data-target="#end_date" data-toggle="datetimepicker">
+      <div class="input-group date" id="end_date">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="end_date" id="input_end_date" data-target="#end_date" value="{{ old('end_date') ?: $weekend->end_date }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="end_date" id="input_end_date" value="{{ old('end_date') ?: $weekend->end_date }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
     </div>
   </div>
@@ -80,11 +80,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="candidate_arrival_time">
-        <div class="input-group-prepend" data-target="#candidate_arrival_time" data-toggle="datetimepicker">
+      <div class="input-group date" id="candidate_arrival_time">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="candidate_arrival_time" id="input_candidate_arrival_time" data-target="#candidate_arrival_time" value="{{ old('candidate_arrival_time') ?: $weekend->candidate_arrival_time }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="candidate_arrival_time" id="input_candidate_arrival_time" value="{{ old('candidate_arrival_time') ?: $weekend->candidate_arrival_time }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
       <span class="small">(will be shown as this time plus 30 minutes<br>ie: 6:00 would mean 6:00-6:30pm )</span>
     </div>
@@ -96,11 +96,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="sendoff_start_time">
-        <div class="input-group-prepend" data-target="#sendoff_start_time" data-toggle="datetimepicker">
+      <div class="input-group date" id="sendoff_start_time">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="sendoff_start_time" id="input_sendoff_start_time" data-target="#sendoff_start_time" value="{{ old('sendoff_start_time') ?: $weekend->sendoff_start_time }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="sendoff_start_time" id="input_sendoff_start_time" value="{{ old('sendoff_start_time') ?: $weekend->sendoff_start_time }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
     </div>
   </div>
@@ -111,11 +111,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="serenade_arrival_time">
-        <div class="input-group-prepend" data-target="#serenade_arrival_time" data-toggle="datetimepicker">
+      <div class="input-group date" id="serenade_arrival_time">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="serenade_arrival_time" id="input_serenade_arrival_time" data-target="#serenade_arrival_time" value="{{ old('serenade_arrival_time') ?: $weekend->serenade_arrival_time }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="serenade_arrival_time" id="input_serenade_arrival_time" value="{{ old('serenade_arrival_time') ?: $weekend->serenade_arrival_time }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
     </div>
   </div>
@@ -138,11 +138,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="closing_arrival_time">
-        <div class="input-group-prepend" data-target="#closing_arrival_time" data-toggle="datetimepicker">
+      <div class="input-group date" id="closing_arrival_time">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="closing_arrival_time" id="input_closing_arrival_time" data-target="#closing_arrival_time" value="{{ old('closing_arrival_time') ?: $weekend->closing_arrival_time }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="closing_arrival_time" id="input_closing_arrival_time" value="{{ old('closing_arrival_time') ?: $weekend->closing_arrival_time }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
       <span class="small">(will be displayed to the community)</span>
     </div>
@@ -154,11 +154,11 @@
   <div class="col-md-6">
 
     <div class="form-group row ml-0">
-      <div class="input-group date" data-target-input="nearest" id="closing_scheduled_start_time">
-        <div class="input-group-prepend" data-target="#closing_scheduled_start_time" data-toggle="datetimepicker">
+      <div class="input-group date" id="closing_scheduled_start_time">
+        <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
-        <input type="text" name="closing_scheduled_start_time" id="input_closing_scheduled_start_time" data-target="#closing_scheduled_start_time" value="{{ old('closing_scheduled_start_time') ?: $weekend->closing_scheduled_start_time }}" class="form-control datetimepicker-input" placeholder="YYYY-MM-DD HH:MM" />
+        <input type="text" name="closing_scheduled_start_time" id="input_closing_scheduled_start_time" value="{{ old('closing_scheduled_start_time') ?: $weekend->closing_scheduled_start_time }}" class="form-control" placeholder="YYYY-MM-DD HH:MM" />
       </div>
       <span class="small">(scheduled)</span>
     </div>
@@ -432,42 +432,8 @@
 </div>
 
 
-
-
-@section('extra_css')
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-@endsection
+@section('extra_css')@endsection
 
 @section('page-js')
-{{-- https://tempusdominus.github.io/bootstrap-4/ --}}
-{{-- http://momentjs.com/ --}}
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>--}}
-  <script src="/js/moment-with-locales.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-  <script>
-    $(function () {
-      $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-        format: 'YYYY-MM-DD HH:mm',
-        disabledHours: [1, 2, 3, 4, 5, 6],
-        sideBySide: true,
-        allowInputToggle: true,
-        useCurrent: false
-      });
-    });
-  </script>
-  <script>
-    $('#start_date').datetimepicker(defaultDate, "{{ old('start_datetime') ?: $weekend->start_date }}");
-    $('#end_date').datetimepicker(defaultDate, "{{ old('end_date') ?: $weekend->end_date }}");
-    $("#start_date").on("dp.change", function (e) {
-      $('#end_date').data("DateTimePicker").minDate(e.date);
-    });
-    $("#end_date").on("dp.change", function (e) {
-      $('#start_date').data("DateTimePicker").maxDate(e.date);
-    });
-    $('#candidate_arrival_time').datetimepicker(defaultDate, "{{ old('candidate_arrival_time') ?: $weekend->candidate_arrival_time }}");
-    $('#sendoff_start_time').datetimepicker(defaultDate, "{{ old('sendoff_start_time') ?: $weekend->sendoff_start_time }}");
-    $('#serenade_arrival_time').datetimepicker(defaultDate, "{{ old('serenade_arrival_time') ?: $weekend->serenade_arrival_time }}");
-    $('#closing_arrival_time').datetimepicker(defaultDate, "{{ old('closing_arrival_time') ?: $weekend->closing_arrival_time }}");
-    $('#closing_scheduled_start_time').datetimepicker(defaultDate, "{{ old('closing_scheduled_start_time') ?: $weekend->closing_scheduled_start_time }}");
-  </script>
+    @vite('resources/js/datepicker.js')
 @endsection

@@ -368,6 +368,9 @@ These are flagged with `@TODO` in the source or are patterns a future developer 
 
 **`config/app.php` timezone:** Verify this matches the server timezone, especially for Prayer Wheel slot calculations which depend on `Carbon::now()` matching local time.
 
+### Javascript
+- Vite is used for asset bundling, but the front-end is mostly vanilla JS and jQuery. There are 2 Livewire pages. 
+
 ---
 
 ## 12. AI-assisted development guidance
