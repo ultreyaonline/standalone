@@ -60,6 +60,12 @@
   </div>
 </div>
 
+<div class="form-group row">
+    <div class="col-md-8 offset-md-2">
+        <div id="date-validation-message" class="alert alert-warning" style="display:none"></div>
+    </div>
+</div>
+
 <div class="form-group row{{ $errors->has('end_date') ? ' is-invalid' : '' }}">
   <label class="col-md-5 col-form-label" for="input_end_date">End Date/Time</label>
   <div class="col-md-6">

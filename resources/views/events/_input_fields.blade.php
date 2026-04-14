@@ -5,7 +5,7 @@
   <label class="col-md-4 control-label" for="event_key">Event Abbreviation *</label>
 
   <div class="col-md-8 col-lg-7">
-    <input type="text" class="form-control" name="event_key" id="event_key" value="{{ old('event_key') ?: $event->event_key }}" placeholder="a random unique key like [secuelaMay2015]" autofocus required>
+    <input type="text" class="form-control" name="event_key" id="event_key" value="{{ old('event_key') ?: $event->event_key }}" placeholder="a random unique key like [secuelaMay{{ date('Y') }}]" autofocus required>
     @if ($errors->has('event_key'))
       <span class="form-text"> <strong>{{ $errors->first('event_key') }}</strong> </span>
     @endif
@@ -196,6 +196,11 @@
   </div>
 </div>
 
+<div class="form-group row">
+    <div class="col-md-9 offset-md-2">
+        <div id="date-validation-message" class="alert alert-warning" style="display:none"></div>
+    </div>
+</div>
 
 <div class="form-group row{{ $errors->has('end_datetime') ? ' is-invalid' : '' }}">
   <label class="col-md-4 control-label" for="input_end_datetime">End Date/Time *</label>

@@ -25,6 +25,11 @@ if (startEl) {
         onChange: function(selectedDates) {
             if (endPicker && selectedDates[0]) {
                 endPicker.set('minDate', selectedDates[0]);
+                if (endPicker.selectedDates[0] && endPicker.selectedDates[0] < selectedDates[0]) {
+                    showDateError('End date/time must be after the start date/time.');
+                } else {
+                    clearDateError();
+                }
             }
         },
     });
@@ -35,10 +40,22 @@ if (endEl) {
         ...config,
         onChange: function(selectedDates) {
             if (startPicker && selectedDates[0]) {
-                startPicker.set('maxDate', selectedDates[0]);
+                if (selectedDates[0] < startPicker.selectedDates[0]) {
+                    showDateError('End date/time must be after the start date/time.');
+                } else {
+                    clearDateError();
+                }
             }
         },
     });
+}
+
+// Apply constraints from existing values on page load
+if (startPicker && endPicker) {
+    const existingStart = startPicker.selectedDates[0];
+
+    // Only constrain end to be after start, not enforcing the other way around
+    if (existingStart) endPicker.set('minDate', existingStart);
 }
 
 // Standalone pickers (weekend form only — no cross-field constraints)
@@ -52,3 +69,31 @@ if (endEl) {
     const el = document.getElementById(id);
     if (el) flatpickr(el, config);
 });
+
+function showDateError(message) {
+    const el = document.getElementById('date-validation-message');
+    if (el) {
+        el.textContent = message;
+        el.style.display = 'block';
+    }
+}
+
+function clearDateError() {
+    const el = document.getElementById('date-validation-message');
+    if (el) {
+        el.textContent = '';
+        el.style.display = 'none';
+    }
+}
+
+const form = startEl ? startEl.closest('form') : null;
+if (form) {
+    form.addEventListener('submit', function(e) {
+        if (startPicker.selectedDates[0] && endPicker.selectedDates[0] &&
+            endPicker.selectedDates[0] < startPicker.selectedDates[0]) {
+            e.preventDefault();
+            showDateError('Please correct the end date/time before saving — it must be after the start date/time.');
+            endEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    });
+}
