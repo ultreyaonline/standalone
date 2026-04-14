@@ -2,66 +2,67 @@
 
 namespace App\Http\Controllers\Webhooks;
 
+use Stripe\Stripe;
+use Stripe\Webhook;
+use Stripe\Exception\SignatureVerificationException;
 use Symfony\Component\HttpFoundation\Response;
 
 class StripeWebhooksController
 {
     public function __invoke()
     {
-        $payload = request()->all();
+        $payload   = request()->getContent();
+        $sigHeader = request()->header('Stripe-Signature');
+        $secret    = config('services.stripe.webhook_secret');
 
-        if (!isset($payload['type'])) {
-            return response('Webhook Malformed', Response::HTTP_BAD_REQUEST);
+        if (empty($secret)) {
+            info('Stripe webhook secret not configured — ignoring webhook.');
+            return response('Webhook secret not configured', Response::HTTP_OK);
         }
 
-        $method = 'when' . \Str::studly(str_replace('.', '_', $payload['type']));
+        try {
+            $event = Webhook::constructEvent($payload, $sigHeader, $secret);
+        } catch (SignatureVerificationException $e) {
+            return response('Invalid signature', Response::HTTP_UNAUTHORIZED);
+        } catch (\UnexpectedValueException $e) {
+            return response('Invalid payload', Response::HTTP_BAD_REQUEST);
+        }
+
+        $method = 'when' . \Str::studly(str_replace('.', '_', $event->type));
 
         if (method_exists($this, $method)) {
-            $this->$method($payload);
+            $this->$method($event->data->object);
             return response('Webhook Received', Response::HTTP_CREATED);
         }
 
-        info('hook [' . $payload['type'] . '] not found', $payload);
+        info('Stripe hook [' . $event->type . '] not handled');
         return response('Webhook Received', Response::HTTP_ACCEPTED);
     }
 
     /**
      * Handle when a successful charge has gone through on Stripe's end.
-     *
-     * @param object $payload
-     * @return void
      */
-    public function whenChargeSucceeded($payload)
+    public function whenChargeSucceeded($object)
     {
-        if (!isset($payload['data']['object']['id'])) {
-            return response('Webhook Malformed', Response::HTTP_BAD_REQUEST);
-        }
-
         $details = [
-            'charge_id' => $payload['data']['object']['id'],
-            'amount' => $payload['data']['object']['amount'],
+            'charge_id' => $object->id,
+            'amount'    => $object->amount,
         ];
         info('Stripe Charge Succeeded: ' . json_encode($details));
     }
 
     /**
      * Record that a refund occurred
-     *
-     * @param object $payload
-     * @return void
      */
-    public function whenChargeRefunded($payload)
+    public function whenChargeRefunded($object)
     {
-        if (!isset($payload['data']['object']['id'])) {
-            return response('Webhook Malformed', Response::HTTP_BAD_REQUEST);
-        }
-
         $details = [
-            'charge_id' => $payload['data']['object']['id'],
-            'amount' => $payload['data']['object']['amount'],
-            'last4' => $payload['data']['object']['source']['last4'],
-            'name' => $payload['data']['object']['source']['name'],
+            'charge_id' => $object->id,
+            'amount'    => $object->amount,
+            'last4'     => $object->source->last4 ?? null,
+            'name'      => $object->source->name ?? null,
         ];
         info('Stripe Refund: ' . json_encode($details));
     }
+
 }

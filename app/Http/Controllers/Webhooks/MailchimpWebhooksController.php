@@ -32,9 +32,9 @@ class MailchimpWebhooksController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $event = $request->get('type');
-        $fired_at = $request->get('fired_at'); // UTC timestamp string eg: "2009-03-26 21:35:57",
-        $data = $request->get('data');
+        $event = $request->input('type');
+        $fired_at = $request->input('fired_at'); // UTC timestamp string eg: "2009-03-26 21:35:57",
+        $data = $request->input('data');
 
         switch ($event) {
             case 'subscribe':
