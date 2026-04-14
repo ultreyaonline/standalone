@@ -373,6 +373,10 @@ class MembersController extends Controller
 
     public function updateAvatar(Request $request, $id)
     {
+        if (! $request->user()->canEditUser($id)) {
+            abort(403);
+        }
+
         $member = $this->user->find($id);
 
         if (!$member) {
