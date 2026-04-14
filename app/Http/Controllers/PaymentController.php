@@ -33,11 +33,12 @@ class PaymentController extends Controller
         $this->validate($request, [
             'stripeToken' => 'required',
             'stripeEmail' => 'email',
+            'amount'      => 'required|numeric|min:5|max:10000',
         ]);
 
         // Get the credit card details submitted by the form
-        $token       = $request->get('stripeToken');
-        $stripeEmail = $request->get('stripeEmail', optional(auth()->user())->email);
+        $token       = $request->input('stripeToken');
+        $stripeEmail = $request->input('stripeEmail', optional(auth()->user())->email);
 // request fields available::
 //        stripeCardBrand
 //        stripeCardCvcCheck
@@ -55,13 +56,13 @@ class PaymentController extends Controller
 //        stripeBillingAddressCountryCode
 
         // read selected currency, and make sure it's one we support
-        $currency = $request->get('currency');
+        $currency = $request->input('currency');
         if (!$currencies->contains($currency)) {
             $currency = 'USD';
         }
 
         // amount must be in cents
-        $amount = $request->get('amount') * 100;
+        $amount = $request->input('amount') * 100;
 
         // dropdowns
         $descriptions = [];
@@ -79,7 +80,7 @@ class PaymentController extends Controller
         $descriptions = collect($descriptions);
 
 
-        $designation = $request->get('designation', 'donation');
+        $designation = $request->input('designation', 'donation');
         if (!$descriptions->has($designation)) {
             $designation = 'donation';
         }
@@ -100,7 +101,7 @@ class PaymentController extends Controller
             );
         }
 
-        $name = $request->get('stripeBillingName', $stripeEmail);
+        $name = $request->input('stripeBillingName', $stripeEmail);
 
         $payer = auth()->user();
         if (!$payer) {
