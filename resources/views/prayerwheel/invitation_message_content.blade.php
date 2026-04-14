@@ -1,6 +1,6 @@
 @extends('emails.layout_textonly')
 
-{!! $message_text !!}
+{!! nl2br(e($message_text)) !!}
 
 ---
 
