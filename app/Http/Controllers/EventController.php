@@ -19,6 +19,7 @@ class EventController extends Controller
     public function __construct()
     {
         parent::__construct();
+        // The calendar is public, but all other actions require auth. (Some calendar entries will not display for guests, handled via public() scope.)
         $this->middleware('auth', ['except' => ['index', 'show']]);
         $this->middleware('password.confirm')->except(['index', 'show']);
 
