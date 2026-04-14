@@ -16,6 +16,7 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 quietDeps: true,  // suppresses the node_modules deprecation noise output by bootstrap4/fontawesome4
+                silenceDeprecations: ['import'],
             }
         }
     },
