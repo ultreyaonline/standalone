@@ -29,7 +29,7 @@ class MembersDirectory extends Component
         abort_unless(Auth::check() && Auth::user()->can('view members'), '403', 'Unauthorized.');
 
         if (!in_array($this->sort_key, $this->allowedSorts, true)) {
-            $this->sort_key = 'last';
+            $this->sort_key = 'first';
         }
         return view('livewire.members-directory', [
             'users' => User::datatableSearch($this->q)
