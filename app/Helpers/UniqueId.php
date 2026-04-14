@@ -24,13 +24,13 @@ class UniqueId
         if ($modelClass && $fieldName) {
             if ($modelClass::where($fieldName, '=', $token)->exists()) {
                 //Model Found -- call self.
-                self::generate($length, $modelClass, $fieldName);
-            } else {
-                //Model Not found. is unique
-                return $token;
+                return self::generate($length, $modelClass, $fieldName);
             }
-        } else {
+
+            //Model Not found. is unique
             return $token;
         }
+
+        return $token;
     }
 }
