@@ -697,6 +697,11 @@ class User extends Authenticatable implements HasMedia
      */
     public function canBeImpersonated(): bool
     {
+        // Prevent impersonating Admins or Super-Admins, to avoid confusion and potential lockout scenarios. Admins can impersonate other Admins if needed, but not themselves.
+        // Uncomment the following line to disable impersonation of other super-admins/admins.
+        //return ! $this->hasAnyRole(['Admin', 'Super-Admin']);
+
+        // prevent pointless self-impersonation, which can create a loop.
         return $this->id != Auth::id();
     }
 
