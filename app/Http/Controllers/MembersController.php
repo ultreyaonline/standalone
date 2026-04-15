@@ -269,6 +269,10 @@ class MembersController extends Controller
 
         $excluded_fields = $fields_checkboxes;
 
+        $excluded_fields[] = 'password';
+        $excluded_fields[] = 'avatar';
+        //$excluded_fields[] = 'receive_prayer_wheel_reminders';
+
         if (! $request->user()->can('edit members')) {
             if (!config('site.members_may_edit_own_spouse') && $request->user()->id === $member->id) {
                 $excluded_fields [] = 'spouseID';
