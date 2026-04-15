@@ -41,7 +41,7 @@ class PrayerWheel extends Model
 
     protected $table = 'prayer_wheels';
 
-    protected $guarded = [];
+    protected $fillable = ['weekendID', 'customwheel_name'];
 
 //$table->increments('id');
 //$table->unsignedInteger('weekendID')->nullable();

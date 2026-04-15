@@ -139,9 +139,9 @@ class PrayerWheelNotificationsTest extends TestCase
         $memberB->assignRole('Member');
 
         // sign the person up for a timeslot
-        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 5, 'acknowledged_at' => Carbon::now()]);
+        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 5])->forceFill(['acknowledged_at' => Carbon::now()])->saveQuietly();
         PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 11]);
-        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberB->id, 'timeslot' => 25, 'acknowledged_at' => Carbon::now()]);
+        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberB->id, 'timeslot' => 25])->forceFill(['acknowledged_at' => Carbon::now()])->saveQuietly();
 
         SendPrayerWheelAcknowledgements::dispatch();
 
@@ -174,9 +174,9 @@ class PrayerWheelNotificationsTest extends TestCase
         $memberB->assignRole('Member');
 
         // sign up 2 people for combos of acknowledged timeslots
-        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 5, 'acknowledged_at' => Carbon::now()]);
+        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 5])->forceFill(['acknowledged_at' => Carbon::now()])->saveQuietly();
         PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberA->id, 'timeslot' => 11]);
-        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberB->id, 'timeslot' => 25, 'acknowledged_at' => Carbon::now()]);
+        PrayerWheelSignup::create(['wheel_id' => $wheel->id, 'memberID' => $memberB->id, 'timeslot' => 25])->forceFill(['acknowledged_at' => Carbon::now()])->saveQuietly();
 
         SendPrayerWheelAcknowledgements::dispatch();
 

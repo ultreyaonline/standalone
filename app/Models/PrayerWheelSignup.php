@@ -59,7 +59,7 @@ class PrayerWheelSignup extends Model
      */
     protected $touches = ['wheel'];
 
-    protected $guarded = [];
+    protected $fillable = ['wheel_id', 'timeslot', 'memberID', 'weekendID'];
 
     /**
      * Eager-load these relationships on every query.
