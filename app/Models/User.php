@@ -568,7 +568,8 @@ class User extends Authenticatable implements HasMedia
 
     public function canEditUser($userIDToEdit): bool
     {
-        if ($userIDToEdit === $this->id) {
+        // using loose-comparison here in case ULID is used in future.
+        if ($userIDToEdit == $this->id) {
             return true;
         }
         if ($this->can('edit members')) {
