@@ -139,10 +139,10 @@ If you have configured a Github Secret for `DEPLOY_WEBHOOK_URL` then after the t
 For security, there need to be some secret keys set up so that unauthorized deploys cannot be triggered. There are 2 secret values involved: `DEPLOY_SECRET_KEY` and `DEPLOY_WEBHOOK_URL`
 
 #### Setting `DEPLOY_SECRET_KEY`
-On your server, in the `.env` file, set a value for `DEPLOY_SECRET_KEY`. A 12-20 character random string is recommended.
+On your server, in the `.env` file, set a value for `DEPLOY_SECRET_KEY`. A **12-20 character random string** is recommended.
 
 #### Setting up the Github Webhook to Trigger Deployment
-The preferred, most secure, way to trigger deployment is by using Github Webhooks. This requires a bit of configuration:
+The preferred, most secure, way to trigger deployment is by using Github Actions Webhooks. This requires a bit of configuration:
 - Login to your Github account, and open your project repository. Click on the Settings tab, and then the Webhooks tab.
 - Add a Webhook, pointing to this URL: `https://your_domain.com/api/deploy`
 - Content type: `application/json`
@@ -158,7 +158,7 @@ Using this approach you will use Github Secrets to store the URL.
 
 If you are using Laravel Forge, you will give Github the token URL from Forge, in the `Deployment Trigger URL` section of your Site Details page. It will look like: `https://forge.laravel.com/servers/0123123/sites/0789789/deploy/http?token=abc123456def`
 
-If you are using another hosting platform, you will give Github the following URL: `https://your_site_domain.com/deploy-webhook.php&key=foo` where `foo` matches the `DEPLOY_SECRET_KEY` in your `.env` file.
+If you are using another hosting platform, you can copy the `/technical/deploy-webhook.php` file to your `/public/` directory. Then give Github the following URL: `https://your_site_domain.com/deploy-webhook.php&key=foo` where `foo` matches the `DEPLOY_SECRET_KEY` in your `.env` file.
 
 ## Alternate Workflow
 If you are using multiple servers and want to explore a zero-downtime-deploy approach, see:
