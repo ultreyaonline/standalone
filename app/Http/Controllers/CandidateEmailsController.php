@@ -231,7 +231,11 @@ class CandidateEmailsController extends Controller
 
             if ($file->isValid()) {
                 $original_filename = $file->getClientOriginalName();
-                $stored_filename = $file->storeAs('attachments', $original_filename, 'local');
+                $stored_filename = $file->storeAs(
+                    'attachments',
+                    date('YmdHis') . '-' . \Str::random(15) . '-' . $original_filename,
+                    'local'
+                );
                 $attachment = [
                     'file' => $stored_filename,
                     'name' => $original_filename,
