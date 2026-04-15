@@ -66,10 +66,14 @@ class CommunicationController extends Controller
             return redirect('/weekend/' . $weekend->id);
         }
 
+        // Note: the template says "PDFs only", but in practice we're allowing doc/xls/png/etc for convenience.
+        // Note: for .HEIC files, users will need to pre-convert them (set phone to "most compatible"). Else ext-imagick would need to be leveraged to convert (requires heic feature flag compiled in)
         $this->validate($request, [
             'subject' => 'required',
             'message' => 'required',
             'section' => 'numeric|gte:-2|lt:99',
+            'attachment'  => 'nullable|file|mimes:pdf,doc,docx,xlsx,csv,png,jpg,jpeg,gif|max:5120',
+            'attachment2' => 'nullable|file|mimes:pdf,doc,docx,xlsx,csv,png,jpg,jpeg,gif|max:5120',
         ]);
 
 
@@ -219,10 +223,12 @@ class CommunicationController extends Controller
             return redirect('/home');
         }
 
+        // Note: for .HEIC files, users will need to pre-convert them (set phone to "most compatible"). Else ext-imagick would need to be leveraged to convert (requires heic feature flag compiled in)
         $this->validate($request, [
             'subject' => 'required',
             'message' => 'required',
-            // @TODO validate attachment filetypes if we want to be more specific
+            'attachment'  => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,csv,jpg,jpeg,png,gif|max:5120',
+            'attachment2' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,csv,jpg,jpeg,png,gif|max:5120',
         ]);
 
         $sender = auth()->user();

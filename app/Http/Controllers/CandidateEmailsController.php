@@ -217,6 +217,8 @@ class CandidateEmailsController extends Controller
         $this->validate($request, [
             'subject' => 'required',
             'message' => 'required',
+            'attachment'  => 'nullable|file|mimes:pdf,doc,docx,xlsx,csv,png,jpg,jpeg|max:5120',
+            'attachment2' => 'nullable|file|mimes:pdf,doc,docx,xlsx,csv,png,jpg,jpeg|max:5120',
         ]);
 
         $flash_messages = [];

@@ -56,7 +56,8 @@
               <div class="form-group row">
                 <label for="attachment" class="col-md-4 control-label">Optional Attachment?<br>(PDFs only)</label>
                 <div class="col-md-6">
-                  <input id="attachment" type="file" class="form-control" name="attachment">
+                  <input id="attachment" type="file" class="form-control" name="attachment" aria-label="file attachment" accept=".pdf,.doc,.docx,.xlsx,.csv,.png,.jpg,.jpeg">
+
                 </div>
               </div>
 
