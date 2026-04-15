@@ -25,7 +25,20 @@ class DataExportController extends Controller
     {
         abort_unless($request->user()->can('export member data'), '403', 'ERROR: Not authorized to export data.');
 
-        $query = User::select('*')
+        // These columns (except 'id' which is needed for relations) are all explicit in output $columns array below.
+        // The list is long, but is explicit to avoid pulling unnecessary or sensitive data that is not needed for the export, and not to clutter memory demands.
+        $query = User::select(
+            'id', 'first', 'last', 'email', 'username', 'weekend', 'gender',
+            'address1', 'address2', 'city', 'state', 'postalcode', 'country',
+            'homephone', 'cellphone', 'workphone', 'church', 'community',
+            'sponsor', 'sponsorID', 'spouseID', 'active', 'inactive_comments',
+            'unsubscribe', 'unsubscribe_date', 'allow_address_share',
+            'receive_email_weekend_general', 'receive_email_community_news',
+            'receive_email_sequela', 'receive_email_reunion',
+            'receive_prayer_wheel_invites', 'receive_prayer_wheel_reminders',
+            'interested_in_serving', 'qualified_sd', 'skills', 'last_login_at',
+            'created_at'
+            )
             // weighted to show local community members first, and then other communities afterward
             ->selectRaw('(community=?) as local_community_first', [config('site.community_acronym')]);
 
