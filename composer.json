@@ -16,6 +16,7 @@
         "doctrine/dbal": "^3.0",
         "drewm/mailchimp-api": "^2.5",
         "eluceo/ical": "^0.16.0",
+        "emailit/emailit-laravel": "^2.0",
         "guzzlehttp/guzzle": "^7.10",
         "illuminatech/config": "^1.3",
         "intervention/image": "^2.5",

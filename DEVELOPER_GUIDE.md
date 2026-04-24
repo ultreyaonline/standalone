@@ -109,7 +109,7 @@ Laravel
 Redis (phpredis) (queue driver + Horizon monitoring)
 MySQL (primary database)
 AWS S3 (file storage — avatars, photos)
-Mailgun (transactional email delivery)
+Mailgun or Emailit (transactional email delivery)
 Mailchimp (newsletter list management)
 Stripe/PayPal (offsite payment processing)
 ```
@@ -246,6 +246,12 @@ The current behaviour is intentional.
 
 Mailgun (configured in `.env` and `config/mail.php`). The `MAIL_MAILER` env key should be `mailgun`.
 
+or
+
+Emailit (configured in `.env` and `config/mail.php`). The `MAIL_MAILER` env key should be `emailit`.
+
+Corresponding API keys need to be set in .env for either provider.
+
 ### Mailable classes (`app/Mail/`)
 
 Each email type has its own Mailable class. All emails queue themselves (use `Mail::to(...)->queue(...)` rather than `send()`).
@@ -269,9 +275,6 @@ Each email type has its own Mailable class. All emails queue themselves (use `Ma
 | `PaymentOnline_Confirmation` | After Stripe payment | Payer |
 | `WebsiteLoginInstructions` | Manually triggered | Member |
 
-### Mailgun webhook
-
-`routes/webhooks.php` and `app/Http/Middleware/MailgunWebhookMiddleware.php` handle inbound Mailgun event callbacks (e.g., email bounces/failures). The middleware verifies the Mailgun webhook signature before processing.
 
 ### Mailchimp integration
 
@@ -281,19 +284,21 @@ Each email type has its own Mailable class. All emails queue themselves (use `Ma
 
 ## 8. Key packages and why they're here
 
-| Package | Purpose | Notes |
-|---|---|---|
-| `spatie/laravel-permission` | Roles & permissions | 
+| Package | Purpose                                  | Notes |
+|---|------------------------------------------|---|
+| `spatie/laravel-permission` | Roles & permissions  | |
 | `spatie/laravel-activitylog` | Audit log of model changes | Enabled on User, Weekend, Candidate, PrayerWheel, WeekendAssignments via `LogsActivity` trait |
 | `spatie/laravel-backup` | DB + file backups to S3 | Scheduled daily at 3:50am |
 | `spatie/laravel-newsletter` | Mailchimp API wrapper | |
 | `laravel/horizon` | Redis queue monitoring dashboard | Access at `/horizon`, requires `manage queues` permission |
 | `bensampo/laravel-enum` | Type-safe PHP enums | Used for `WeekendVisibleTo` and `TeamAssignmentStatus` (Could go to native enums) |
-| `lab404/laravel-impersonate` | Admin user impersonation | |
+| `lab404/laravel-impersonate` | Admin user-impersonation/troubleshooting | |
 | `intervention/image` | Image resizing | Used for avatar upload processing |
 | `league/flysystem-aws-s3-v3` | AWS S3 filesystem driver | For avatar and photo storage |
 | `eluceo/ical` | iCal file generation | For events calendar download |
 | `illuminatech/config` | DB-stored config overrides | Allows runtime config changes |
+| `symfony/mailgun-mailer` | Mailgun transactional email provider |  |
+| `emailit/emailit-laravel` | Emailit transactional email provider |  |
 
 ---
 

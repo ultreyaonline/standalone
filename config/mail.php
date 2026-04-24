@@ -53,11 +53,17 @@ return [
             'transport' => 'ses',
         ],
 
+        // Mailgun is provided by the symfony/mailgun-mailer composer package
         'mailgun' => [
             'transport' => 'mailgun',
             // 'client' => [
             //     'timeout' => 5,
             // ],
+        ],
+
+        // Emailit is provided via the emailit/emailit-laravel composer package:
+        'emailit' => [
+            'transport' => 'emailit',
         ],
 
         'postmark' => [

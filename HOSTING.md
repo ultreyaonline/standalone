@@ -54,7 +54,7 @@ We do NOT recommend using a common "shared hosting" plan which runs cPanel or Pl
 ---
 
 # Server Technical Requirements
-For this simple application, the smallest VPS instance size will do. 
+Since Ultreya is a very simple application, the smallest VPS instance size will do. 
 
 For example, on Digital Ocean this would be the 1GB-RAM droplet (which comes with 20+ GB of disk space, which is way more than required).
 
@@ -65,7 +65,7 @@ Most modern VPS servers do not run an email-delivery process. This is to avoid t
 
 Community size affects the number of emails processed. During the months leading up to when you are hosting a Weekend you will use an increased amount of email correspondence. (For example, a community of 800 local members might typically use 5K emails/mo in most months, but could use 13-15K emails in a month where they host a TD Weekend.)
 
-The Ultreya Application is ready-built for you to use Mailgun for the email-delivery service. But you can use any SMTP service that Laravel supports. 
+The Ultreya Application is ready-built for you to use Mailgun or Emailit for the email-delivery service. But you can use any SMTP service that Laravel supports. 
 
 ## Mailgun
 You can create a Mailgun account in just a couple minutes online at https://mailgun.com
@@ -75,24 +75,32 @@ Once you've created the account and configured the Domain and DNS, you will need
 On your server, in the Laravel application directory, in the `.env` file you will need to enter these details:
 
 ```text
-MAIL_DRIVER=mailgun
+MAIL_MAILER=mailgun
 MAILGUN_DOMAIN=your_mailgun_domain_here
 MAILGUN_SECRET=key-abc12345678901234567890
 ```
 
-It is wise to occasionally monitor the Mailgun account (using your browser) for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
+## Emailit
+You can create an Emailit account easily at https://emailit.com/
 
-In Mailgun you can optionally (with a paid upgrade) set up "receiving" email addresses which forward emails to certain community members. This is a convenient way to set up some vanity emails for things like Palanca and Pre-Weekend, etc.
+After you've created the account and configured the Domain and DNS, you will need to set an API Key.
+
+On your server, in the Laravel application directory, in the `.env` file you will need to enter these details:
+
+```text
+MAIL_MAILER=emailit
+EMAILIT_API_KEY=secret_api_key_here
+```
+Once you've verified the domain and workspace in your Emailit account, you'll be all set!
+
+## Email Notes
+It is wise to occasionally monitor the outgoing mail-sender account (using your browser) for reports of Bounced or Suppressed emails which it could not deliver, in case you have members with bad email addresses in your database.
+
+In Mailgun and Emailit you can optionally set up "receiving" email addresses which forward emails to certain community members. This is a convenient way to set up some vanity emails for things like Palanca and Pre-Weekend, etc.
 
 ## Alternate Email Providers
 
 You can use any SMTP service supported by Laravel. Consult the Laravel documentation for details.
-
-Some services which you might consider if your volume is low, include the following (but you may have to be more hands-on from a technical level):
-
-https://kingmailer.co/
-
-https://sendgrid.com/solutions/email-api/smtp-service/
 
 You could also use the SMTP Relay features of GSuite or Office365 if your account has them enabled and is allowed to set application-specific passwords for a specific mailbox, in which case use those credentials in your .env file for MAIL configs.
 
@@ -110,11 +118,12 @@ Out-of-the-box it is ready to use AWS for storing your backups. (You can get you
 
 To do this, simply set `AWS_BUCKET_BACKUPS` in your `.env` file, as well as the other 3 AWS keys for your AWS credentials.
 
-You may want to encrypt your backups with a password before transmitting them to external storage. To do this, set `BACKUP_ARCHIVE_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
+### Encrypting Backups
+You may want to encrypt your backups with a password before transmitting them to external storage. 
 
+To do this, set `BACKUP_ARCHIVE_PASSWORD` in your `.env` file, and remember this password someplace so that you can use that password if you need to unzip a backup in order to use it for a restore. You may want to change this password from time to time.
 
 ### Alternatives
-
 If you are hosting with a provider who handles backups for you, you can use their automated daily backup service to take a copy of your site files and database instead of, or in addition to, the above steps.
 
 
