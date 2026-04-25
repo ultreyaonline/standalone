@@ -77,20 +77,20 @@ Browser (Bootstrap 4 + vanilla JS + jQuery)
     ▼
 Laravel
     ├── routes/web.php          ← all main routes
-    ├── routes/webhooks.php     ← Stripe & Mailgun webhook routes
-    ├── routes/api.php          ← minimal JSON API (DataTables)
+    ├── routes/api.php          ← optional deployer hook endpoint
     ├── app/Http/Controllers/   ← standard MVC controllers
-    ├── app/Http/Middleware/    ← auth, permission, webhook verification
+    ├── app/Http/Middleware/    ← user activity logging middleware
     ├── resources/views/        ← Blade templates
     │
     ├── app/ (models)
-    │   ├── User.php            ← community members + candidates
+    │   ├── User.php            ← community members + candidates + admins
     │   ├── Weekend.php         ← retreat weekends
     │   ├── WeekendAssignments.php ← team roles per weekend
     │   ├── WeekendRoles.php    ← role definitions (Rector, Cha, SD, etc.)
     │   ├── Candidate.php       ← pre-weekend couple/individual record
     │   ├── PrayerWheel.php     ← prayer slot schedule per weekend
     │   ├── PrayerWheelSignup.php ← individual prayer slot sign-ups
+    │   ├── Location.php        ← event/weekend locations
     │   ├── Event.php           ← community events calendar
     │   ├── TeamFeePayments.php ← fee payment tracking (accountant aid)
     │   └── ...
@@ -103,7 +103,7 @@ Laravel
     ├── app/Policies/           ← Authorization policies
     ├── app/Enums/              ← Type-safe integer enums
     ├── app/Reports/            ← Report-generation classes
-    └── bootstrap/app.php       ← Scheduled task definitions
+    └── bootstrap/app.php       ← Scheduled tasks, middleware, etc.
     │
     ▼
 Redis (phpredis) (queue driver + Horizon monitoring)
@@ -117,7 +117,7 @@ Stripe/PayPal (offsite payment processing)
 ### Request lifecycle notes
 
 - All web routes pass through the `web` middleware group, which includes `LogLastUserActivity` (updates `users.last_login_at`).
-- Route-level authorization uses two middleware: `role:RoleName` (checks Spatie roles) and `permission:permission-name` (checks Spatie permissions). Both are in `app/Http/Middleware/`.
+- Route-level authorization uses two middleware: `role:RoleName` (checks Spatie roles) and `permission:permission-name` (checks Spatie permissions). Both are provided by the Spatie package directly.
 - There is a global scope on `WeekendAssignments` that filters to only `Community`-visible weekends by default. Many places in the code use `->withoutGlobalScope('visibleWeekendsOnly')` to bypass this — pay attention to this when working with team data queries.
 
 ---
@@ -169,7 +169,7 @@ New pescadores who have never set a password use the "pescador" route (`/pescado
 
 ### Authorization layers
 
-There are two parallel systems, both from the `spatie/laravel-permission` package:
+There are two parallel RBAC layers, both from the `spatie/laravel-permission` package:
 
 **Roles** (coarse-grained): `Super-Admin`, `Admin`, `President`, `Mens Leader`, `Womens Leader`, `Rector Selection`, `Member`. Applied in routes using the `role:` middleware.
 
@@ -177,9 +177,9 @@ There are two parallel systems, both from the `spatie/laravel-permission` packag
 
 The full list of roles and permissions is seeded in `database/seeds/RolesAndPermissionsSeeder.php` — read this file to understand the full permission matrix.
 
-**Impersonation:** The `lab404/laravel-impersonate` package is installed. Admins can impersonate other users via the UI. Impersonation login/logout events are also fed into the audit log.
+**Impersonation:** The `lab404/laravel-impersonate` package is used by Admins to impersonate other users via the UI for support purposes. Impersonation login/logout events are also fed into the audit log.
 
-**Horizon access:** Defined in `App\Providers\HorizonServiceProvider::gate()`. Only users with the `"manage queues"` permission can access the `/horizon` dashboard.
+**Horizon access:** Defined in `App\Providers\HorizonServiceProvider::gate()`. Only admin roles with the `"manage queues"` permission can access the `/horizon` dashboard.
 
 ### Policy class
 
