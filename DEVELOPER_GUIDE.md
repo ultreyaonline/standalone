@@ -341,9 +341,9 @@ This is the most important application-specific config file. It contains the com
 
 When upgrading, here are some key breaking-change areas to watch:
 
-### Pagination — Bootstrap 3 override
-- `AppServiceProvider::boot()` calls `Paginator::useBootstrapThree()`. In Laravel 9+, this method was renamed to `useBootstrapThree()` (stays the same) but Bootstrap 4/5 themes became default. If Bootstrap 4 is kept, this line is still needed; if you upgrade to Bootstrap 5, remove it and update the pagination views.
-- **Note:** The comment in the code says "Bootstrap 3" but the front-end actually uses Bootstrap 4. The method call still works fine; it just means pagination uses the B3 markup which is compatible with B4 styling.
+### Pagination — Bootstrap CSS styling is set
+- The controllers which use pagination set the pagination scheme to 'bootstrap'.
+- `AppServiceProvider::boot()` calls `Paginator::useBootstrapFour()`, to set the version of BS used.
 
 ### `bensampo/laravel-enum`
 - The custom enum classes (`WeekendVisibleTo`, `TeamAssignmentStatus`) extend this package's `Enum` base class. In PHP 8.1+, native enums exist. One can consider migrating to native PHP enums and removing this package.

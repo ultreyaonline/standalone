@@ -42,14 +42,8 @@ class AppServiceProvider extends ServiceProvider
      * Registered here:
      * - 'currency' validator: accepts digits, commas, and periods (e.g. "1,250.00")
      * - 'slug' validator: lowercase alphanumeric with hyphens
-     * - Bootstrap 3 pagination (required for Bootstrap 4 compatibility — see note below)
+     * - Bootstrap 4 pagination
      * - Collection::toInlineCsv() macro for generating data-URI CSV download links
-     *
-     * NOTE on Paginator::useBootstrapThree():
-     * Despite the comment saying "Bootstrap 3", the front-end actually uses Bootstrap 4.
-     * The Bootstrap 3 pagination markup is backward-compatible with Bootstrap 4 styling,
-     * so this call is still correct. When upgrading to Bootstrap 5, change to
-     * Paginator::useBootstrapFive() and update pagination views accordingly.
      *
      */
     public function boot(): void
@@ -69,9 +63,9 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)$/', $value);
         });
 
-        // Use Bootstrap 3 pagination markup (compatible with Bootstrap 4)
+        // Use Bootstrap pagination markup
         // @TODO: Switch to useBootstrapFive() when upgrading to Bootstrap 5
-        Paginator::useBootstrapThree();
+        Paginator::useBootstrapFour();
 
         /**
          * Collection macro: toInlineCsv
